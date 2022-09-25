@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaisesTable extends Migration
+class CreateCredencialesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreatePaisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paises', function (Blueprint $table) {
-            $table->id("IdPais");
-            $table->string('NombrePais',30);
-            $table->string('CodigoPais',4);
+        Schema::create('credenciales', function (Blueprint $table) {
+            $table->id("IdCredencial");
+            $table->unsignedBigInteger("IdPersona");
+            $table->string("CodigoQR");
             $table->timestamps();
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
+
         });
     }
 
@@ -28,6 +30,6 @@ class CreatePaisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paises');
+        Schema::dropIfExists('credenciales');
     }
 }
