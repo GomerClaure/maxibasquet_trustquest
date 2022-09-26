@@ -22,7 +22,7 @@ class CreateAplicacionesTable extends Migration
             $table->string("NumeroTelefono",20);
             $table->string("NombreEquipo");
             $table->string("Categorias");
-            $table->enum("EstadoAplicacion",["aceptado","rechazado","en revision"]);
+            $table->enum("EstadoAplicacion",["aceptado","rechazado","Pendiente"]);
             $table->text("observaciones");
             $table->timestamps();
             $table->foreign("IdPreinscripcion")->references("IdPreinscripcion")->on('preinscripciones');
