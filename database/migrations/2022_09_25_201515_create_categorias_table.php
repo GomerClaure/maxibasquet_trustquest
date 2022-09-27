@@ -17,7 +17,7 @@ class CreateCategoriasTable extends Migration
             $table->id("IdCategoria");
             $table->string("NombreCategoria",30);
             $table->integer("EdadMinima");
-            $table->integer("EdadMaxiam");
+            $table->integer("EdadMaxima");
             $table->timestamps();
         });
     }
