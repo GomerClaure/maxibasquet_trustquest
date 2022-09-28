@@ -26,17 +26,17 @@
            <h3>3er Torneo Internacional de Maxi Basquet</h3>
            <table>
                 <tr> 
-                    <th>Nombre de Equipo</th>
+                    <th>Nombre de Equipo </th>
                     <th>Monto a Pagar</th>
-                    <th>Estado de preinscripcion</th>
+                    <th>Estado</th>
                     <th>Detalles</th>
                 </tr>
                 @foreach ($aplicaciones as $aplicacion)
-                <tr>
-                    <td>{{$aplicacion->NombreEquipo}}</td>
-                    <td>{{$aplicacion->NumeroTelefono}}</td>
-                    <td>{{$aplicacion->EstadoAplicacion}}</td>
-                </tr>
+                    <tr>
+                        <td>{{$aplicacion->NombreEquipo}}</td>
+                        <td>{{$aplicacion->Total}}</td>
+                        <td>{{$aplicacion->EstadoAplicacion}}</td>
+                    </tr>
                 @endforeach
            </table>
         </div>
