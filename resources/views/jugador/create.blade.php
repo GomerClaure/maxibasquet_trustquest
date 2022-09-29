@@ -20,17 +20,10 @@
             }
         </style>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-
-        <!-- Popper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="{{asset('css/styleJugador.css')}}">
 
     </head>
     <body class="antialiased">
@@ -53,39 +46,38 @@
                 </ul>
             </nav>
         </header>
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <div class="col-6 bg-secondary">
+            <div class="col-6 bg-secondary p-4 mt-5 mx-auto">
                 <form action="{{ url('/jugador')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="">
-                        <h1 class="">INSCRIPCION DE JUGADOR</h1>
+                    <div class="d-flex justify-content-center">
+                        <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
                     </div>
                     <div class="row">
                         <div class="col-7" id="columna1">
-                            <div class="form-group">
-                                <label for="" class="">Nombre:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Nombre:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">Apellido Paterno:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Apellido Paterno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">Apellido Materno:</label>
+                            <div class="form-group mb-3 ">
+                                <label for="" class="form-label">Apellido Materno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno">
                             </div>
-                            <div class="form-group">
-                                <label for="sel1">Posicion:</label>
-                                <select class="form-control" id="select1" name="select1">
+                            <div class="form-group mb-3">
+                                <label for="sel1" class="form-label">Posicion:</label>
+                                <select class="form-select" id="select1" name="select1">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="sel1">Categoria:</label>
-                                <select class="form-control" id="select2" name="select2">
+                            <div class="form-group mb-3">
+                                <label for="sel1" class="form-label">Categoria:</label>
+                                <select class="form-select" id="select2" name="select2">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -94,38 +86,38 @@
                             </div>
                         </div>
                         <div class="col-5" id="columna2">
-                            <div class="form-group">
-                                <label for="" class="">CI:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">CI:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">Nacionalidad:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Nacionalidad:</label>
                                 <input type="text" class="form-control" placeholder="Ingrese su nacionalidad" id="nacionalidad" name="nacionalidad">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">N° Camiseta:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">N° Camiseta:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese su numero de camiseta" id="nCamiseta" name="nCamiseta">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">Estatura:</label>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Estatura:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group col-6">
-                        <label for="" class="">Foto del jugador:</label>
+                    <div class="form-group col-6 mb-3">
+                        <label for="" class="form-label">Foto del jugador:</label>
                         <input type="file" class="form-control" id="fotoJugador" name="fotoJugador">
                     </div>
 
-                    <div class="form-group col-6">
-                        <label for="" class="">Foto del carnet:</label>
+                    <div class="form-group col-6 mb-3">
+                        <label for="" class="form-label">Foto del carnet:</label>
                         <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet">
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Inscribir</button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btnFomulario">Inscribir</button>
+                    </div>
                 </form>
             </div>
-        </div>
     </body>
 </html>
