@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/preinscripcion', function () {
     return view('preinscripcion');
 });
+Route::get('/preinscripcion1', function () {
+    return view('preinscripcio');
+});
