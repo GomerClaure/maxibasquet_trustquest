@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
-                            <input type="password" class="form-control" id="inputPassword4">
+                            <input type="date" class="form-control" id="inputPassword4">
                         </div>
                     </div>
                     <div class="col-md-12 text-center">
