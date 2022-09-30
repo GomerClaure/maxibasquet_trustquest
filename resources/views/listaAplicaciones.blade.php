@@ -39,8 +39,8 @@
                                     <h4>Lista Detallada</h4>
                                 </div>
                             <div class="card-body  pt-0 ps-3 ">
-                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                <table class="table table-striped table-borderless border-dark rounded-0 mb-0 text-center align-middle">
+                                <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                                <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
                                     <thead style="background-color: #002d72;">
                                     <tr>
                                         <th>Nombre de Equipo </th>
@@ -58,7 +58,7 @@
                                             <td class="d-grid gap-2"><button type="button" class="btn btn-primary btn-sm rounded-0">
                                                 Detalles
                                                 <!-- enlace para mostrar los detalles del formulario de preinscripcion
-                                                <a href="{{url('ruta de verificar datos del formulario'/.$aplicacion->IdAplicacion )}}">Detalles</a>
+                                                
                                                 -->
                                             </button></td>
                                         </tr>
