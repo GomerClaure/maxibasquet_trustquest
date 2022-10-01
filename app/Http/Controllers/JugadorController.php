@@ -35,11 +35,27 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
-        //$datosJugador = request()->all();
-        $datosJugador = request()->except('_token');
-        Jugador::insert($datosJugador);
+        //$datosJugador = request()->except('_token');
+        //Jugador::insert($datosJugador);
 
-        return response()->json($datosJugador);
+        //return response()->json($datosJugador);
+        $jugador = new Jugador;
+        //$jugador -> IdEquipo = $request -> IdEquipo;
+        //$jugador -> IdCategoria = $request -> IdCategoria;
+        //$jugador -> IdPersona = $request -> IdPersona;
+        //$jugador -> IdJugador = 1;
+        $jugador -> IdEquipo = 2;
+        $jugador -> IdCategoria = 3;
+        $jugador -> IdPersona = 4;
+        $jugador -> PesoJugador = 120;
+        $jugador -> AlturaJugador = $request -> estatura;
+        $jugador -> FotosCarnet = $request -> fotoCarnet;
+        $jugador -> PosicionJugador = $request -> select1;
+        $jugador -> NumeroCamiseta = $request -> nCamiseta;
+        $jugador -> HabilitacionJugador = true;
+
+        $jugador -> save();
+        return $this -> create();
     }
 
     /**
