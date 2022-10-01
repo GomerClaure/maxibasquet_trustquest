@@ -46,8 +46,9 @@ class JugadorController extends Controller
         $persona -> NombrePersona = $request -> nombre;
         $persona -> ApellidoPaterno = $request -> apellidoPaterno;
         $persona -> ApellidoMaterno = $request -> apellidoMaterno;
-        $persona -> SexoPersona = "hombre";
-        $persona -> Edad = 23;
+        $persona -> FechaNacimiento = $request -> fechaNacimiento;
+        $persona -> SexoPersona = $request -> selectSexo;
+        $persona -> Edad = $request -> edad;
         $persona -> Foto = $request -> fotoJugador;
         $persona -> save();
 
@@ -57,7 +58,6 @@ class JugadorController extends Controller
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;
         $jugador -> FotoCarnet = $request -> fotoCarnet;
-        $jugador -> FotoJugador = $request -> fotoJugador;
         $jugador -> PosicionJugador = $request -> selectPosicion;
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
 
