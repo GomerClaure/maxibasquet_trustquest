@@ -46,35 +46,76 @@
                 </ul>
             </nav>
         </header>
-            <div class="col-6 bg-secondary p-4 mt-5 mx-auto">
+            <div class="col-7 bg-secondary p-4 mt-5 mx-auto">
                 <form action="{{ url('/jugador')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mb-4">
                         <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
                     </div>
                     <div class="row">
-                        <div class="col-7" id="columna1">
+                        <div class="col-4" id="columna1">
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nombre:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre">
                             </div>
+
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">CI:</label>
+                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Fecha de nacimiento:</label>
+                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="sel1" class="form-label">Posicion:</label>
+                                <select class="form-select" id="selectPosicion" name="selectPosicion">
+                                    <option>Base</option>
+                                    <option>Escolta</option>
+                                    <option>Alero</option>
+                                    <option>Ala-Pívot</option>
+                                    <option>Pívot</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4" id="columna2">
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Apellido Paterno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno">
                             </div>
+
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Nacionalidad:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Edad:</label>
+                                <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Estatura:</label>
+                                <input type="number" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
+                            </div>
+                        </div>
+
+                        <div class="col-4" id="columna3">
                             <div class="form-group mb-3 ">
                                 <label for="" class="form-label">Apellido Materno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno">
                             </div>
+
                             <div class="form-group mb-3">
-                                <label for="sel1" class="form-label">Posicion:</label>
-                                <select class="form-select" id="selectPosicion" name="selectPosicion">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                <label for="" class="form-label">Sexo:</label>
+                                <select class="form-select" id="selectSexo" name="selectSexo">
+                                    <option>Maculino</option>
+                                    <option>Femenino</option>
                                 </select>
                             </div>
+
                             <div class="form-group mb-3">
                                 <label for="sel1" class="form-label">Categoria:</label>
                                 <select class="form-select" id="selectCategoria" name="selectCategoria">
@@ -83,37 +124,28 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-5" id="columna2">
-                            <div class="form-group mb-3">
-                                <label for="" class="form-label">CI:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="" class="form-label">Nacionalidad:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese su nacionalidad" id="nacionalidad" name="nacionalidad">
-                            </div>
+
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">N° Camiseta:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su numero de camiseta" id="nCamiseta" name="nCamiseta">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="" class="form-label">Estatura:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
+                                <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta">
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group col-6 mb-3">
-                        <label for="" class="form-label">Foto del jugador:</label>
-                        <input type="file" class="form-control" id="fotoJugador" name="fotoJugador">
+                    <div class="row">
+
+                        <div class="form-group mb-6 col-6">
+                            <label for="" class="form-label">Foto del jugador:</label>
+                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador">
+                        </div>
+
+                        <div class="form-group mb-6 col-6">
+                            <label for="" class="form-label">Foto del carnet:</label>
+                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet">
+                        </div>
                     </div>
 
-                    <div class="form-group col-6 mb-3">
-                        <label for="" class="form-label">Foto del carnet:</label>
-                        <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet">
-                    </div>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mt-4 mb-4">
                         <button type="submit" class="btn btn-primary btnFomulario">Inscribir</button>
                     </div>
                 </form>
