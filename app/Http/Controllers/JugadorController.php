@@ -29,7 +29,8 @@ class JugadorController extends Controller
      */
     public function create()
     {
-        return view('jugador.create');
+        $categorias = Categoria::all();
+        return view('jugador.create',compact('categorias'));
     }
 
     /**

@@ -11,8 +11,7 @@ class Categoria extends Model
     protected $table = 'categorias';
     protected $primaryKey = 'IdCategoria';
 
-    //public function jugador(){
-        //return $this->belongsTo('App\Models\Categoria', 'IdCategoria');
-        //return $this->hasMany(Jugador::class, 'IdJugador');
-    //}
+    public function jugador(){
+        return $this->hasMany(Jugador::class, 'IdJugador');
+    }
 }

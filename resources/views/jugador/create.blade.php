@@ -78,10 +78,9 @@
                             <div class="form-group mb-3">
                                 <label for="sel1" class="form-label">Categoria:</label>
                                 <select class="form-select" id="select2" name="select2">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    @foreach ($categorias as $categoria)
+                                        <option>{{$categoria->NombreCategoria}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
