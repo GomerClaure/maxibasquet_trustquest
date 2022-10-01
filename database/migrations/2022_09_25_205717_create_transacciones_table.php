@@ -17,7 +17,7 @@ class CreateTransaccionesTable extends Migration
             $table->id("IdTransaccion");
             $table->unsignedBigInteger("IdAplicacion");
             $table->bigInteger("NumeroTransaccion");
-            $table->string("NombreBanco")->nullable();
+            $table->string("NumeroCuenta")->nullable();
             $table->integer("MontoTransaccion");
             $table->date("FechaTransaccion");
             $table->string("FotoVaucher");
