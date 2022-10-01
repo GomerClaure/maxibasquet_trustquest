@@ -41,7 +41,7 @@
                             <div class="card-body  pt-0 ps-3 ">
                                 <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
                                 <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
-                                    <thead style="background-color: #002d72;">
+                                    <thead>
                                     <tr>
                                         <th>Nombre de Equipo </th>
                                         <th>Monto a Pagar</th>

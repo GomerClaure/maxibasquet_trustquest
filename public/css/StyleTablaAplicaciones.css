@@ -1,5 +1,7 @@
 html,
-body,
+body{
+  background-color: #D9D9D9;
+}
 .intro {
   height: 100%;
 }
@@ -12,12 +14,12 @@ table th {
 }
 
 thead th {
-  color: #fff;
+  color: black;
 }
 
 .card {
   border-radius: .0rem;
-  background-color: gray;
+  background-color: #ABA9A9;
 }
 
 .table-scroll {
@@ -30,11 +32,17 @@ thead th {
 thead {
   top: 0;
   position: sticky;
+  background-color: #7B7979;
+ 
   
 }
-tbody{
-    background-color: rgba(255, 255, 255, 0.849);
-}
+
 .table{
     border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+.btn{
+  background-color: #074963;
+  font-size: 14;
 }
