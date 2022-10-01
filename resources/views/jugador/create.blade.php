@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="sel1" class="form-label">Posicion:</label>
-                                <select class="form-select" id="select1" name="select1">
+                                <select class="form-select" id="selectPosicion" name="selectPosicion">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="sel1" class="form-label">Categoria:</label>
-                                <select class="form-select" id="select2" name="select2">
+                                <select class="form-select" id="selectCategoria" name="selectCategoria">
                                     @foreach ($categorias as $categoria)
                                         <option value="{{$categoria->IdCategoria}}">{{$categoria->NombreCategoria}}</option>
                                     @endforeach

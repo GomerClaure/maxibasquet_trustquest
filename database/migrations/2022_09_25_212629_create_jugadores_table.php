@@ -15,7 +15,7 @@ class CreateJugadoresTable extends Migration
     {
         Schema::create('jugadores', function (Blueprint $table) {
             $table->id("IdJugador");
-            $table->unsignedBigInteger("IdEquipo");
+            //$table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedInteger("IdPersona");
             $table->integer("EstaturaJugador");
@@ -26,7 +26,7 @@ class CreateJugadoresTable extends Migration
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
-            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
+            //$table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
 
         });
     }

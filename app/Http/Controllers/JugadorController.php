@@ -41,24 +41,25 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
-        //$datosJugador = request()->except('_token');
-        //Jugador::insert($datosJugador);
+        $persona = new Persona;
+        $persona -> CiPersona = $request -> ci;
+        $persona -> NombrePersona = $request -> nombre;
+        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
+        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
+        $persona -> SexoPersona = "hombre";
+        $persona -> Edad = 23;
+        $persona -> Foto = $request -> fotoJugador;
+        $persona -> save();
 
-        //return response()->json($datosJugador);
         $jugador = new Jugador;
         //$jugador -> IdEquipo = $request -> IdEquipo;
-        //$jugador -> IdCategoria = $request -> IdCategoria;
-        //$jugador -> IdPersona = $request -> IdPersona;
-        //$jugador -> IdJugador = 1;
-        $jugador -> IdEquipo = $request -> IdEquipo;
-        $jugador -> IdCategoria = $request -> IdCategoria;
-        $jugador -> IdPersona = $request -> IdPersona;
-        $jugador -> PesoJugador = 120;
-        $jugador -> AlturaJugador = $request -> estatura;
-        $jugador -> FotosCarnet = $request -> fotoCarnet;
-        $jugador -> PosicionJugador = $request -> select1;
+        $jugador -> IdCategoria = $request -> selectCategoria;
+        $jugador -> IdPersona = $persona -> IdPersona;
+        $jugador -> EstaturaJugador = $request -> estatura;
+        $jugador -> FotoCarnet = $request -> fotoCarnet;
+        $jugador -> FotoJugador = $request -> fotoJugador;
+        $jugador -> PosicionJugador = $request -> selectPosicion;
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
-        $jugador -> HabilitacionJugador = true;
 
         $jugador -> save();
         return $this -> create();
