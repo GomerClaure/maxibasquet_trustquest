@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jugador;
+
+use App\Models\Equipo;
+use App\Models\Categoria;
+use App\Models\Persona;
+
 use Illuminate\Http\Request;
 
 class JugadorController extends Controller
@@ -44,9 +49,9 @@ class JugadorController extends Controller
         //$jugador -> IdCategoria = $request -> IdCategoria;
         //$jugador -> IdPersona = $request -> IdPersona;
         //$jugador -> IdJugador = 1;
-        $jugador -> IdEquipo = 2;
-        $jugador -> IdCategoria = 3;
-        $jugador -> IdPersona = 4;
+        $jugador -> IdEquipo = $request -> IdEquipo;
+        $jugador -> IdCategoria = $request -> IdCategoria;
+        $jugador -> IdPersona = $request -> IdPersona;
         $jugador -> PesoJugador = 120;
         $jugador -> AlturaJugador = $request -> estatura;
         $jugador -> FotosCarnet = $request -> fotoCarnet;
