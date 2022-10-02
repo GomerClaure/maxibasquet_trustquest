@@ -26,7 +26,7 @@ class CreateAplicacionesTable extends Migration
             $table->text("observaciones")->nullable();
             $table->timestamps();
             $table->foreign("IdPreinscripcion")->references("IdPreinscripcion")->on('preinscripciones');
-            $table->foreign("IdPais")->references("IdPais")->on('paises');            
+            $table->foreign("IdPais")->references("IdPais")->on('paises');
 
         });
     }

@@ -18,7 +18,7 @@ class FormularioController extends Controller
      */
     public function index()
     {
-
+        return view('formulario.form');
     }
 
     /**
@@ -48,9 +48,8 @@ class FormularioController extends Controller
      * @param  \App\Models\Formulario  $formulario
      * @return \Illuminate\Http\Response
      */
-    public function show(Delegado $formulario)
-    {
-        return view('formulario.form');
+    public function show($id)
+    {   
         
     }
 
