@@ -136,12 +136,12 @@
 
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del jugador:</label>
-                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador">
+                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*">
                         </div>
 
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del carnet:</label>
-                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet">
+                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*">
                         </div>
                     </div>
 

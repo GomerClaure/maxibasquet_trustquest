@@ -10,6 +10,8 @@ use App\Models\Persona;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class JugadorController extends Controller
 {
     /**
@@ -41,6 +43,17 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
+        $request -> validate([
+            'fotoJugador'=>'required|image',
+            'fotoCarnet'=>'required|image'
+        ]);
+
+        $imagenJucador = $request->file('fotoJugador')->store('public/imagenes');
+        $imagenCarnet = $request->file('fotoCarnet')->store('public/imagenes');
+
+        $direccionImgJugador = Storage::url($imagenJucador);
+        $direccionImgCarnet = Storage::url($imagenCarnet);
+
         $persona = new Persona;
         $persona -> CiPersona = $request -> ci;
         $persona -> NombrePersona = $request -> nombre;
@@ -49,15 +62,15 @@ class JugadorController extends Controller
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
-        $persona -> Foto = $request -> fotoJugador;
+        $persona -> Foto = $direccionImgJugador;
         $persona -> save();
 
         $jugador = new Jugador;
-        $jugador -> IdEquipo = 10;
+        $jugador -> IdEquipo = 7;
         $jugador -> IdCategoria = $request -> selectCategoria;
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;
-        $jugador -> FotoCarnet = $request -> fotoCarnet;
+        $jugador -> FotoCarnet = $direccionImgCarnet;
         $jugador -> PosicionJugador = $request -> selectPosicion;
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
 
