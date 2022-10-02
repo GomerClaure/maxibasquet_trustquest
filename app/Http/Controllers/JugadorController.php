@@ -53,7 +53,7 @@ class JugadorController extends Controller
         $persona -> save();
 
         $jugador = new Jugador;
-        //$jugador -> IdEquipo = $request -> IdEquipo;
+        $jugador -> IdEquipo = 10;
         $jugador -> IdCategoria = $request -> selectCategoria;
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;

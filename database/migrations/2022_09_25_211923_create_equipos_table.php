@@ -15,14 +15,14 @@ class CreateEquiposTable extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id("IdEquipo");
-            $table->unsignedBigInteger("IdDelegado");
+            //$table->unsignedBigInteger("IdDelegado");
             $table->unsignedBigInteger("IdAplicacion");
             $table->string("NombreEquipo");
             $table->string("LogoEquipo");
             $table->timestamps();
             $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');
-            $table->foreign("IdDelegado")->references("IdDelegado")->on('delegados');            
-            
+            //$table->foreign("IdDelegado")->references("IdDelegado")->on('delegados');
+
 
         });
     }

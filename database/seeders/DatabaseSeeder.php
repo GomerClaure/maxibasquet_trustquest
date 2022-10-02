@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PreinscripcionSeeder::class,
             CategoriaSeeder::class,
             AplicacioneSeeder::class,
+            EquipoSeeder::class,
         ]);
     }
 }
