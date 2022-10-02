@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use App\Models\Jugadores;
 
 class EquipoController extends Controller
 {
@@ -11,8 +12,14 @@ class EquipoController extends Controller
         //Consultar informacion
         //$datos= Equipo::select('jugadores.IdJugador','jugadores.PesoJugador');
         //$datos['jugadores']=Equipo::paginate(5);
+        /*
         $datos=Equipo::get();
         return view('equipo.Equipos',compact('datos'));
+        */
+        $datos=Equipo::get();
+        $datosjugador=Jugadores::get();
+        return view('equipo.Equipos',compact('datos'),compact('datosjugador'));
+        
     }
     public function create()
     {
