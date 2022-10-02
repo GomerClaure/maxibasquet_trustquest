@@ -18,7 +18,7 @@ class FormularioController extends Controller
      */
     public function index()
     {
-        return view('formulario.form');
+
     }
 
     /**
@@ -50,6 +50,7 @@ class FormularioController extends Controller
      */
     public function show(Delegado $formulario)
     {
+        return view('formulario.form');
         
     }
 
