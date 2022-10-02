@@ -11,5 +11,27 @@
 </head>
 <body>
     <h1>Nombre del equipo</h1>
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>idEquipo</th>
+                <th>ideDelegado</th>
+                <th>idAplicacion</th>
+                <th>Nombre</th>
+                <th>Logo</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($datos as $dato)
+            <tr>
+                <td>{{$dato->idEquipo}}</td>
+                <td>{{$dato->idDelegado}}</td>
+                <td>{{$dato->idAplicacion}}</td>
+                <td>{{$dato->NombreEquipo}}</td>
+                <td>{{$dato->LogoEquipo}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 </body>
 </html>

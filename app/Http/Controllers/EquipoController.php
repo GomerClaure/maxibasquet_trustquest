@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
 {
     public function index()
     {
-        return view('equipo.Equipos');
+        //Consultar informacion
+        //$datos= Equipo::select('jugadores.IdJugador','jugadores.PesoJugador');
+        //$datos['jugadores']=Equipo::paginate(5);
+        $datos=Equipo::get();
+        return view('equipo.Equipos',compact('datos'));
     }
     public function create()
     {
