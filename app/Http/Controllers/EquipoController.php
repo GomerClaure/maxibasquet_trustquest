@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Models\Jugadores;
+use App\Models\Personas;
 
 class EquipoController extends Controller
 {
@@ -17,8 +18,14 @@ class EquipoController extends Controller
         return view('equipo.Equipos',compact('datos'));
         */
         $datos=Equipo::get();
-        $datosjugador=Jugadores::get();
-        return view('equipo.Equipos',compact('datos'),compact('datosjugador'));
+        //$datosjugador=Jugadores::get();
+         
+        $informacion=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
+             ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
+             ->get();
+
+        return view('equipo.Equipos',compact('datos'),compact('informacion'));
+        //return $informacion;
         
     }
     public function create()

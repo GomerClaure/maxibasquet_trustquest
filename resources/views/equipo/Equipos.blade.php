@@ -16,7 +16,8 @@
     <h1>{{$dato->NombreEquipo}}</h1>
 </div>
 @endforeach
-{{$datosjugador}}
+
+
 <div>
   <h1 class="TituloPais">Pais:</h1>
 </div>
@@ -24,24 +25,17 @@
 <div class="listaEquipo">
 <div class="listaJugadores">
     <h2>Jugadores</h2>
-    <div class="card" style="width: 18rem;" >
-  <img src="imagenes/foto.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Nombre del Jugador</h5>
-    <p class="card-text">En que pocision juega</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-  <br>
+    @foreach($informacion as $jugado)
+
 <div class="card" style="width: 18rem;" >
   <img src="imagenes/foto.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Nombre del Jugador2</h5>
-    <p class="card-text">En que pocision juega2</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">{{$jugado->NombrePersona}} {{$jugado->ApellidoPaterno}} {{$jugado->ApellidoMaterno}}</h5>
+    <a href="#" class="btn btn-primary">Detalles</a>
   </div>
 </div>
-
+<br>
+@endforeach
 </div>
 
 <div class="listaCuerpoT">
@@ -58,7 +52,7 @@
 <div class="card" style="width: 18rem;" >
   <img src="imagenes/foto.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Nombre del Cuerpo Tecnico2</h5>
+    <h5 class="card-title">Nombre del Cuerpo Tecnico</h5>
     <p class="card-text">Cargo dentro del cuerpo tecnico2</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
