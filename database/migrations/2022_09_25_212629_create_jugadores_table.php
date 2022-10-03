@@ -23,6 +23,7 @@ class CreateJugadoresTable extends Migration
             $table->string("FotosCarnet");
             $table->string("PosicionJugador");
             $table->integer("NumeroCamiseta");
+            $table->string("Nacionalidad",25);
             $table->boolean("HabilitacionJugador");
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');            

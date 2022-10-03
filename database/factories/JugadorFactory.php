@@ -24,6 +24,7 @@ class JugadorFactory extends Factory
             'FotosCarnet' => $this->faker->imageUrl(360,360,'people',true),
             'PosicionJugador' => $this->faker->randomElement(["BASE","ESCOLTA","ALERO","ALA-PIVOT","PIVOT"]),
             'NumeroCamiseta' => $this->faker->numberBetween(0,99),
+            "Nacionalidad" => $this->faker->text(15),
             'HabilitacionJugador' => true,
             'created_at' => now(),
             'updated_at' => now()
