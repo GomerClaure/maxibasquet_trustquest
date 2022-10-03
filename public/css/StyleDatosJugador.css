@@ -1,0 +1,53 @@
+html,
+body{
+  background-color: #d9d9d9;
+}
+.intro {
+  height: 100%;
+}
+p{
+    font-size:large;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  color: black;
+}
+
+.card {
+  border-radius: .0rem;
+  background-color: #ABA9A9;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+}
+tbody{
+    background-color: #D3D3D3;
+}
+.table{
+    border-radius: 0;
+    
+}
+.btn{
+  background-color: #074963;
+  font-size: 14;
+}
+.transformacion2 { 
+    text-transform: uppercase;
+    color: white;
+}
