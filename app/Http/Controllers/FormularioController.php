@@ -53,7 +53,7 @@ class FormularioController extends Controller
     public function show($id)
     {   
         $formulario = Aplicacion::findOrFail($id);
-        return view('formulario.form',$formulario);
+        return view('formulario.show',$formulario);
     }
 
     /**
