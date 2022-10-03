@@ -52,9 +52,9 @@ class FormularioController extends Controller
      */
     public function show($id)
     {   
-        $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion','aplicaciones.NombreEquipo','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
-                    ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')      
-                    ->where("aplicaciones.IdAplicacion","=",$id) 
+       $aplicaciones = Aplicacion::select('preinscripciones.IdPreinscripcion','aplicaciones.NombreEquipo','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
+                 ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')      
+                  ->where("aplicaciones.IdAplicacion","=",$id) 
                     ->get();
         //$aplicaciones = Aplicacion::find($id);
         return view('formulario.show',compact('aplicaciones'));
