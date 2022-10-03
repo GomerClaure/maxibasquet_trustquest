@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PreinscripcionesController;
+use App\Http\Controllers\PaisesController;
+use App\Http\Controllers\AplicacionesController;
+use App\Models\Preinscripcion;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +25,15 @@ Route::get('/preinscripcion', function () {
     return view('preinscripcion');
 });
 Route::get('/preinscripcion1', function () {
-    return view('preinscripcio');
+    return view('preinscripcion');
 });
+
+Route::post('/preinscripcion', [PreinscripcionesController::class,'store'])->name('preinscripcion');
+Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
+
+Route::resource('preinscripcionController',PreinscripcionesController::class);
+Route::resource('pais',PaisesController::class);
+Route::resource('aplicacionPreinscripccion',AplicacionesController::class);
+Route::resource('pais',PreinscripcionesController::class);
+Route::resource('pais',PaisesController::class);
+Route::resource('pais',PaisesController::class);

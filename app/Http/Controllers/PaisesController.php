@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Aplicacion;
+use App\Models\Pais;
 use App\Models\Preinscripcion;
+use App\Models\Transaccion;
 
-class PreinscripcionesController extends Controller
+class PaisesController extends Controller
 {
-    /*
-     * Show a list of all of the application's users.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    //mostrar todos los elementos
-        public function index()
+    public function index()
         {
             echo "Holaaaaaaaaaaaaaaaaaaaa";
-            $preinscripcion = Preinscripcion::find(2);
+            $preinscripcion = Aplicacion::find(2);
             echo $preinscripcion;
             return view('preinscripcion');
         }
@@ -44,5 +40,4 @@ class PreinscripcionesController extends Controller
         {
 
         }
-
 }

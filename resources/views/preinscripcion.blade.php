@@ -7,72 +7,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
     <link href="../css/preinscripcion.css" rel="stylesheet">
     <title>Preinscripcion</title>
 </head>
 
-<body>
-    <div style="background: #e9e9e9;">
+<body style="background: #e9e9e9;">
+    <div >
         <div class="container justify-content-center"">
-		<section class=" main-title text-center">
-            <h1 class="display-6 mb-0" style="color:#37474f">Formulario de preinscripción de equipos</h1>
-            <p>3er Torneo Internacional de Maxi Basquet</p>
+		    <section class=" main-title text-center">
+                <h1 class="display-6 mb-0" style="color:#37474f">Formulario de preinscripción de equipos</h1>
+                <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
-            <section class="form">
-                <form class="row g-3">
+            <section class="form mx-5">
+                <form class="row g-3" action="{{route('aplicacion')}}" method="POST">
+                    @csrf    
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success">
                         <h5>Datos del equipo</h5>
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
-                            <input type="email" class="form-control" id="inputEmail4">
+                            <label for="nombreEquipo" class="form-label">Nombre de equipo:</label>
+                            <input name="nombreEquipo" type="text" class="form-control" id="nombreEquipo">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
-                            <input type="password" class="form-control" id="inputPassword4">
+                            <label for="nombreEncargado" class="form-label">Nombre del encargado:</label>
+                            <input name="nombreEncargado" type="text" class="form-control" id="nombreEncargado">
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Categorias:</label>
+                                <label for="categorias" class="form-label">Categorias:</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">+30</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria30" value="+30">
+                                <label class="form-check-label" for="categoria30">+30</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">+35</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria35" value="+35">
+                                <label class="form-check-label" for="categoria35">+35</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">+40</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria40" value="+40">
+                                <label class="form-check-label" for="categoria40">+40</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">+45</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria45" value="+45">
+                                <label class="form-check-label" for="categoria45">+45</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">+50</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria50" value="+50">
+                                <label class="form-check-label" for="categoria50">+50</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">+55</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria55" value="+55">
+                                <label class="form-check-label" for="categoria55">+55</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">+60</label>
+                                <input name="option[]" class="form-check-input" type="checkbox" id="categoria60" value="+60">
+                                <label class="form-check-label" for="categoria60">+60</label>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Correo Electronico:</label>
-                            <input type="password" class="form-control" id="inputPassword4">
+                            <label for="correo" class="form-label">Correo Electronico:</label>
+                            <input name="correo" type="email" class="form-control" id="correo">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Pais:</label>
-                            <select class="form-select" id="exampleFormControlSelect1">
+                            <label  for="pais" class="form-label">Pais:</label>
+                            <select name="pais" class="form-select" id="pais">
                                 <option>Argentina</option>
                                 <option>Bolivia</option>
                                 <option>Brasil</option>
@@ -87,11 +88,11 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
+                            <label for="telefono" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">+591</span>
                                 <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
-                                <input type="text" class="form-control" id="specificSizeInputGroupUsername">
+                                <input name="telefono" type="text" class="form-control" id="telefono">
                             </div>
                         </div>
                     </div>
@@ -100,30 +101,39 @@
                         <h5>Datos de pago</h5>
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nro de Transcción:</label>
-                            <input type="email" class="form-control" id="inputEmail4">
+                            <label for="numComprobante" class="form-label">Numero de comprobante de pago:</label>
+                            <input name="numComprobante" type="text" class="form-control" id="numComprobante">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Monto a pagar:</label>
-                            <input type="password" class="form-control" id="inputPassword4">
+                            <label for="montoPagar" class="form-label">Monto a pagar:</label>
+                            <input name="montoPagar" type="text" class="form-control" id="montoPagar">
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Voucher de pago:</label>
+                                <label for="numCuenta" class="form-label">Numero de cuenta:</label>
                             </div>
                             <div class="input-group">
-                                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                <input name="numCuenta" type="text" class="form-control" id="numCuenta" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
-                            <input type="date" class="form-control" id="inputPassword4">
+                            <label for="fecDeposito" class="form-label">Fecha de depósito:</label>
+                            <input name="fecDeposito" type="date" class="form-control" id="fecDeposito">
                         </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="vaucher" class="form-label">Voucher de Pago:</label>
+                            </div>
+                            <div class="input-group">
+                                <input name="vaucher" type="file" class="form-control" id="vaucher" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Preinscribir Equipo</button>
                     </div>
-                </form>
+               </form>
             </section>
         </div>
     </div>
