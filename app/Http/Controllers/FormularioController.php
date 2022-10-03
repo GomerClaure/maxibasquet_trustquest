@@ -7,6 +7,7 @@ use App\Models\Persona;
 use App\Models\Equipo;
 use App\Models\Transaccion;
 use App\Models\Preinscripcion;
+use App\Models\Aplicaciones;
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller
@@ -50,7 +51,7 @@ class FormularioController extends Controller
      */
     public function show($id)
     {   
-        
+        //$formulario = Aplicaciones::findOrFail($id);
     }
 
     /**
