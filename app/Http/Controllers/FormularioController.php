@@ -52,8 +52,8 @@ class FormularioController extends Controller
      */
     public function show($id)
     {   
-        $formulario = Aplicacion::findOrFail($id);
-        return view('formulario.show',$formulario);
+        $aplicaciones = Aplicacion::find($id);
+        return view('formulario.show',compact('aplicaciones'));
     }
 
     /**
