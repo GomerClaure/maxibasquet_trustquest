@@ -11,7 +11,8 @@ class EquipoController extends Controller
 {
     public function index()
     {
-        $datos=Equipo::get();
+        $datos=Equipo::select('equipos.NombreEquipo')
+                    ->get();
 
         $informaciontecnicos=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
         ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
@@ -22,7 +23,7 @@ class EquipoController extends Controller
              ->get();
 
              return view('equipo.Equipos',compact('informaciontecnicos','informacion','datos'));
-        
+              //return $datos;
     }
     public function create()
     {
