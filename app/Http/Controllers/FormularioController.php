@@ -7,7 +7,7 @@ use App\Models\Persona;
 use App\Models\Equipo;
 use App\Models\Transaccion;
 use App\Models\Preinscripcion;
-use App\Models\Aplicaciones;
+use App\Models\Aplicacion;
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller
@@ -19,7 +19,8 @@ class FormularioController extends Controller
      */
     public function index()
     {
-        return view('formulario.form');
+        $datos['aplicaciones'] = Aplicacion::paginate(5);
+        return view('formulario.index',$datos);
     }
 
     /**
@@ -51,7 +52,8 @@ class FormularioController extends Controller
      */
     public function show($id)
     {   
-        //$formulario = Aplicaciones::findOrFail($id);
+        $formulario = Aplicacion::findOrFail($id);
+        return view('formulario.form',$formulario);
     }
 
     /**

@@ -12,6 +12,7 @@
         </tr>
     </thead>
     <tbody>
+        @foreach( $aplicaciones as $aplicacion )
         <tr>
             <td>{{ $aplicacion->IdAplicacion }}</td>
             
@@ -24,9 +25,15 @@
             <td>{{ $aplicacion->EstadoAplicacion }}</td>
             <td>
             
+            <form action="{{url('/formulario/'.$aplicacion->IdAplicacion)}}" method="post">
+            @csrf
+            {{ method_field('GET')}}    
+            <input type="submit" value="Mostrar">
+
+            </form>
 
             </td>
         </tr>
-       
+        @endforeach
     </tbody>
 </table>
