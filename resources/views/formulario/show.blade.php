@@ -13,10 +13,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($aplicaciones as $aplicacion)
             <tr>
-                <td>{{$aplicacion->IdPreinscripcion}}</td>
+                <td>{{$aplicaciones}}</td>
             </tr>
-            @endforeach
         </tbody>
     </table>
