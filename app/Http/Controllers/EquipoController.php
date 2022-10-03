@@ -5,27 +5,23 @@ use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Models\Jugadores;
 use App\Models\Personas;
+use App\Models\Tecnicos;
 
 class EquipoController extends Controller
 {
     public function index()
     {
-        //Consultar informacion
-        //$datos= Equipo::select('jugadores.IdJugador','jugadores.PesoJugador');
-        //$datos['jugadores']=Equipo::paginate(5);
-        /*
         $datos=Equipo::get();
-        return view('equipo.Equipos',compact('datos'));
-        */
-        $datos=Equipo::get();
-        //$datosjugador=Jugadores::get();
-         
+
+        $informaciontecnicos=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
+        ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
+        ->get();
+       
         $informacion=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
              ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
              ->get();
 
-        return view('equipo.Equipos',compact('datos'),compact('informacion'));
-        //return $informacion;
+             return view('equipo.Equipos',compact('informaciontecnicos','informacion','datos'));
         
     }
     public function create()
