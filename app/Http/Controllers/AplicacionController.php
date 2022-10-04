@@ -30,11 +30,13 @@ class AplicacionController extends Controller
     */
      private function ingresarMonto($aplicaciones){
         $arreglo=array();
-        foreach($aplicaciones as $aplicacion){
-            $categorias = explode(",",$aplicacion->Categorias);
-            $total = sizeof($categorias) * $aplicacion-> Monto;
-            $aplicacion->Total=$total;
-            array_push($arreglo,$aplicacion);
+        if (!$aplicaciones->isEmpty()) {
+            foreach($aplicaciones as $aplicacion){
+                $categorias = explode(",",$aplicacion->Categorias);
+                $total = sizeof($categorias) * $aplicacion-> Monto;
+                $aplicacion->Total=$total;
+                array_push($arreglo,$aplicacion);
+            }
         }
         return $arreglo;
      }
