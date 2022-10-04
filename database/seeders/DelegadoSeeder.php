@@ -14,9 +14,10 @@ class DelegadoSeeder extends Seeder
     public function run()
     {
         DB::table("delegados")->insert([
-            'NombreCampeonato'=>'MAXI BASQUET',
-            'FechaInicio'=>date("2023-01-05"),
-            'FechaFin'=>date("2023-01-08"),
+            'IdDelegado'=>1,
+            'IdPersona'=>1,
+            'IdUsuario'=>1,
+            'NombreDelegado' => '+591 4567895',
             'created_at'=>now()
         ]);
     }
