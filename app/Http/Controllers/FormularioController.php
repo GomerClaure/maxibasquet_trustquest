@@ -20,7 +20,7 @@ class FormularioController extends Controller
     public function index()
     {
         $datos['aplicaciones'] = Aplicacion::paginate(5);
-        return view('formulario.index',$datos);
+        return view('formulario.index', $datos);
     }
 
     /**
@@ -51,25 +51,36 @@ class FormularioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-       $aplicaciones = Aplicacion::select('transacciones.NumeroTransaccion','transacciones.NumeroCuenta',
-                'transacciones.MontoTransaccion','transacciones.FechaTransaccion','transacciones.FotoVaucher'
-                ,'equipos.NombreEquipo',
-                )
-                 ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion',)
-                 ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')
-                 ->join('campeonatos','preinscripciones.IdCampeonato','=','campeonatos.IdCampeonato')
-                 ->join('categorias_por_equipo','campeonatos.IdCampeonato','=','categorias_por_equipo.IdCampeonato')
-                 ->join('equipos','categorias_por_equipo.IdEquipo','=','equipos.IdEquipo')
-                 ->join('delegados','equipos.IdDelegado','=','delegados.IdDelegado')
-                 ->join('personas','delegados.IdPersona','=','personas.IdPersona')
-                 ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
-                 ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+    {
+        $aplicaciones = Aplicacion::select(
+            'transacciones.NumeroTransaccion',
+            'transacciones.NumeroCuenta',
+            'transacciones.MontoTransaccion',
+            'transacciones.FechaTransaccion',
+            'transacciones.FotoVaucher',
+            'equipos.NombreEquipo',
+            'paises.NombrePais',
+            'categorias.NombreCategoria',
+            'personas.NombrePersona',
+            'personas.ApellidoPaterno',
+            'users.email',
+            'delegados.NumeroDelegado'
+        )
+            ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
+            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
+            ->join('campeonatos', 'preinscripciones.IdCampeonato', '=', 'campeonatos.IdCampeonato')
+            ->join('categorias_por_equipo', 'campeonatos.IdCampeonato', '=', 'categorias_por_equipo.IdCampeonato')
+            ->join('equipos', 'categorias_por_equipo.IdEquipo', '=', 'equipos.IdEquipo')
+            ->join('delegados', 'equipos.IdDelegado', '=', 'delegados.IdDelegado')
+            ->join('personas', 'delegados.IdPersona', '=', 'personas.IdPersona')
+            ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
+            ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
+            ->join('users', 'delegados.IdUsuario', '=', 'users.id')
 
-                  ->where("aplicaciones.IdAplicacion","=",$id) 
-                    ->get();
+            ->where("aplicaciones.IdAplicacion", "=", $id)
+            ->get();
         $datos = $aplicaciones[0];
-        return view('formulario.show',compact('datos'));
+        return view('formulario.show', compact('datos'));
     }
 
     /**
