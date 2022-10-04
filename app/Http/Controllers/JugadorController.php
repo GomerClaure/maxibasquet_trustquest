@@ -46,6 +46,7 @@ class JugadorController extends Controller
      */
     public function show($id)
     {
+
         $jugador = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.FechaNacimiento',
                                 'personas.Edad','personas.Foto','jugadores.PesoJugador','jugadores.AlturaJugador',
                                 'jugadores.PosicionJugador','jugadores.NumeroCamiseta','jugadores.Nacionalidad',
@@ -55,9 +56,26 @@ class JugadorController extends Controller
                                 ->join('categorias','categorias.IdCategoria','=','jugadores.IdCategoria')
                                 ->where('IdJugador','=',$id) 
                                 ->get();
+
+        $jugador = $this->formatoFecha($jugador);
+        if ($id <= 0 || $id >= 9000000000000000000 || $jugador->isEmpty()) {
+                $mensaje ="No encontrado";
+                return $mensaje;
+                                }                        
         return view('datosJugador',compact('jugador'));
     }
+    /**
+     * Cambia el formato de la fecha de A-M-D a D/M/A
+     */
+    public function formatoFecha($jugador){
 
+        foreach($jugador as $jug){
+            $fechas=explode( "-",$jug->FechaNacimiento);
+            $formato=$fechas[2]."/".$fechas[1]."/".$fechas[0];
+            $jug->FechaNacimiento=$formato;
+        }
+        return $jugador; 
+    }
     /**
      * Show the form for editing the specified resource.
      *

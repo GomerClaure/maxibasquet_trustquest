@@ -43,7 +43,8 @@
                                     <div class="col-4">
                                         <div class="card">
                                             <div class="card-body  pt-0 ps-3 ">
-                                                <div >
+                                                <div class="img">
+                                                    
                                                 </div>
                                             </div>
                                         </div>
