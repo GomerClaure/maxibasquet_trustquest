@@ -63,6 +63,8 @@ class FormularioController extends Controller
                  ->join('equipos','categorias_por_equipo.IdEquipo','=','equipos.IdEquipo')
                  ->join('delegados','equipos.IdDelegado','=','delegados.IdDelegado')
                  ->join('personas','delegados.IdPersona','=','personas.IdPersona')
+                 ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
+                 ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
 
                   ->where("aplicaciones.IdAplicacion","=",$id) 
                     ->get();
