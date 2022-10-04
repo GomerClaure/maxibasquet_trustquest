@@ -82,16 +82,6 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="sel1" class="form-label">Posicion:</label>
-                                <select class="form-select" id="selectPosicion" name="selectPosicion">
-                                    <option value="Base" {{ old('selectPosicion') == 'Base' ? 'selected' : '' }}>Base</option>
-                                    <option value="Escolta" {{ old('selectPosicion') == 'Escolta' ? 'selected' : '' }}>Escolta</option>
-                                    <option value="Alero" {{ old('selectPosicion') == 'Alero' ? 'selected' : '' }}>Alero</option>
-                                    <option value="Ala-Pívot" {{ old('selectPosicion') == 'Ala-Pívot' ? 'selected' : '' }}>Ala-Pívot</option>
-                                    <option value="Pívot" {{ old('selectPosicion') == 'Pívot' ? 'selected' : '' }}>Pívot</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="col-4" id="columna2">
                             <div class="form-group mb-3">
@@ -114,14 +104,6 @@
                                 <label for="" class="form-label">Edad:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
                                 @error('edad')
-                                    <p class="error-message">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="" class="form-label">Estatura:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura" value="{{ old('estatura') }}">
-                                @error('estatura')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -153,13 +135,43 @@
                                 </select>
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="" class="form-label">N° Camiseta:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
-                                @error('nCamiseta')
-                                    <p class="error-message">{{ $message }}</p>
-                                @enderror
-                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group mb-3 col-3">
+                            <label for="" class="form-label">Estatura:</label>
+                            <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura" value="{{ old('estatura') }}">
+                            @error('estatura')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3 col-3">
+                            <label for="" class="form-label">Peso:</label>
+                            <input type="text" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
+                            @error('peso')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3 col-3">
+                            <label for="" class="form-label">N° Camiseta:</label>
+                            <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
+                            @error('nCamiseta')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3 col-3">
+                            <label for="sel1" class="form-label">Posicion:</label>
+                            <select class="form-select" id="selectPosicion" name="selectPosicion">
+                                <option value="Base" {{ old('selectPosicion') == 'Base' ? 'selected' : '' }}>Base</option>
+                                <option value="Escolta" {{ old('selectPosicion') == 'Escolta' ? 'selected' : '' }}>Escolta</option>
+                                <option value="Alero" {{ old('selectPosicion') == 'Alero' ? 'selected' : '' }}>Alero</option>
+                                <option value="Ala-Pívot" {{ old('selectPosicion') == 'Ala-Pívot' ? 'selected' : '' }}>Ala-Pívot</option>
+                                <option value="Pívot" {{ old('selectPosicion') == 'Pívot' ? 'selected' : '' }}>Pívot</option>
+                            </select>
                         </div>
                     </div>
 
