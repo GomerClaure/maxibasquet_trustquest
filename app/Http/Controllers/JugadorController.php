@@ -48,8 +48,20 @@ class JugadorController extends Controller
         //return response()->json($datos);
 
         $request -> validate([
-            'fotoJugador'=>'required|image',
-            'fotoCarnet'=>'required|image'
+            'ci'=>'required|numeric',
+            'nombre'=>'required|alpha',
+            'apellidoPaterno'=>'required|alpha',
+            'apellidoMaterno'=>'required|alpha',
+            'fechaNacimiento'=>'required|date',
+            'nacionalidad'=>'required|alpha',
+            'selectSexo'=>'required',
+            'edad'=>'required|numeric',
+            'fotoJugador'=>'required|image|dimensions:width=472, height=472',
+            'selectCategoria'=>'required',
+            'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
+            'fotoCarnet'=>'required|image|dimensions:width=472, height=472',
+            'selectPosicion'=>'required',
+            'nCamiseta'=>'required|numeric'
         ]);
 
         $imagenJucador = $request->file('fotoJugador')->store('uploads');
@@ -64,6 +76,7 @@ class JugadorController extends Controller
         $persona -> ApellidoPaterno = $request -> apellidoPaterno;
         $persona -> ApellidoMaterno = $request -> apellidoMaterno;
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
+        $persona -> NacionalidadPersona = $request -> nacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenJucador;

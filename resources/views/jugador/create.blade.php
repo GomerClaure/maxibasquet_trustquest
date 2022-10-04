@@ -61,16 +61,25 @@
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nombre:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre">
+                                @error('nombre')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">CI:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci">
+                                @error('ci')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
                                 <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento">
+                                @error('fechaNacimiento')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
@@ -88,21 +97,33 @@
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Apellido Paterno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno">
+                                @error('apellidoPaterno')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nacionalidad:</label>
                                 <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad">
+                                @error('nacionalidad')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Edad:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad">
+                                @error('edad')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Estatura:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
+                                <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
+                                @error('estatura')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -110,6 +131,9 @@
                             <div class="form-group mb-3 ">
                                 <label for="" class="form-label">Apellido Materno:</label>
                                 <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno">
+                                @error('apellidoMaterno')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
@@ -121,7 +145,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="sel1" class="form-label">Categoria:</label>
+                                <label for="" class="form-label">Categoria:</label>
                                 <select class="form-select" id="selectCategoria" name="selectCategoria">
                                     @foreach ($categorias as $categoria)
                                         <option value="{{$categoria->IdCategoria}}">{{$categoria->NombreCategoria}}</option>
@@ -132,6 +156,9 @@
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">N° Camiseta:</label>
                                 <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta">
+                                @error('nCamiseta')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -141,11 +168,17 @@
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del jugador:</label>
                             <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*">
+                            @error('fotoJugador')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del carnet:</label>
                             <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*">
+                            @error('fotoCarnet')
+                                <p class="error-message">{{ $message }}</p>
+                             @enderror
                         </div>
                     </div>
 
