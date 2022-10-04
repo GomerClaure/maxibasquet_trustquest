@@ -19,4 +19,6 @@ Route::get('/', function () {
 });
 
 //Route::get('/jugador/create',[JugadorController::class,'create']);
-Route::resource('jugador',JugadorController::class);
+//Route::resource('jugador',JugadorController::class);
+Route::get('jugador/create/{id}', [JugadorController::class,'create']);
+Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);

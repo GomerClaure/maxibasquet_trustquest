@@ -29,10 +29,11 @@ class JugadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
+        $idEquipo = $id;
         $categorias = Categoria::all();
-        return view('jugador.create',compact('categorias'));
+        return view('jugador.create',compact('categorias','idEquipo'));
     }
 
     /**
@@ -43,16 +44,19 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
+        //$datos = recuest() -> all();
+        //return response()->json($datos);
+
         $request -> validate([
             'fotoJugador'=>'required|image',
             'fotoCarnet'=>'required|image'
         ]);
 
-        $imagenJucador = $request->file('fotoJugador')->store('public/imagenes');
-        $imagenCarnet = $request->file('fotoCarnet')->store('public/imagenes');
+        $imagenJucador = $request->file('fotoJugador')->store('uploads');
+        $imagenCarnet = $request->file('fotoCarnet')->store('uploads');
 
-        $direccionImgJugador = Storage::url($imagenJucador);
-        $direccionImgCarnet = Storage::url($imagenCarnet);
+        //$direccionImgJugador = Storage::url($imagenJucador);
+        //$direccionImgCarnet = Storage::url($imagenCarnet);
 
         $persona = new Persona;
         $persona -> CiPersona = $request -> ci;
@@ -62,20 +66,20 @@ class JugadorController extends Controller
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
-        $persona -> Foto = $direccionImgJugador;
+        $persona -> Foto = $imagenJucador;
         $persona -> save();
 
         $jugador = new Jugador;
-        $jugador -> IdEquipo = 7;
+        $jugador -> IdEquipo = $request -> idEquipo;
         $jugador -> IdCategoria = $request -> selectCategoria;
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;
-        $jugador -> FotoCarnet = $direccionImgCarnet;
+        $jugador -> FotoCarnet = $imagenCarnet;
         $jugador -> PosicionJugador = $request -> selectPosicion;
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
 
         $jugador -> save();
-        return $this -> create();
+        return $this -> create($request -> idEquipo);
     }
 
     /**
