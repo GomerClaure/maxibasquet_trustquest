@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre">
+                                <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre" value="{{ old('nombre') }}">
                                 @error('nombre')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -68,7 +68,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">CI:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci">
+                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
                                 @error('ci')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -76,7 +76,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
-                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento">
+                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}">
                                 @error('fechaNacimiento')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -85,18 +85,18 @@
                             <div class="form-group mb-3">
                                 <label for="sel1" class="form-label">Posicion:</label>
                                 <select class="form-select" id="selectPosicion" name="selectPosicion">
-                                    <option>Base</option>
-                                    <option>Escolta</option>
-                                    <option>Alero</option>
-                                    <option>Ala-Pívot</option>
-                                    <option>Pívot</option>
+                                    <option value="Base" {{ old('selectPosicion') == 'Base' ? 'selected' : '' }}>Base</option>
+                                    <option value="Escolta" {{ old('selectPosicion') == 'Escolta' ? 'selected' : '' }}>Escolta</option>
+                                    <option value="Alero" {{ old('selectPosicion') == 'Alero' ? 'selected' : '' }}>Alero</option>
+                                    <option value="Ala-Pívot" {{ old('selectPosicion') == 'Ala-Pívot' ? 'selected' : '' }}>Ala-Pívot</option>
+                                    <option value="Pívot" {{ old('selectPosicion') == 'Pívot' ? 'selected' : '' }}>Pívot</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-4" id="columna2">
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Apellido Paterno:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno">
+                                <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno" value="{{ old('apellidoPaterno') }}">
                                 @error('apellidoPaterno')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -104,7 +104,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nacionalidad:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad">
+                                <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad" value="{{ old('nacionalidad') }}">
                                 @error('nacionalidad')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -112,7 +112,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Edad:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad">
+                                <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
                                 @error('edad')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -120,7 +120,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Estatura:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura">
+                                <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura" value="{{ old('estatura') }}">
                                 @error('estatura')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -130,7 +130,7 @@
                         <div class="col-4" id="columna3">
                             <div class="form-group mb-3 ">
                                 <label for="" class="form-label">Apellido Materno:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno">
+                                <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}">
                                 @error('apellidoMaterno')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -138,24 +138,24 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Sexo:</label>
-                                <select class="form-select" id="selectSexo" name="selectSexo">
-                                    <option>Maculino</option>
-                                    <option>Femenino</option>
+                                <select class="form-select" id="selectSexo" name="selectSexo" value="{{ old('selectSexo') }}">
+                                    <option value="Maculino" {{ old('selectSexo') == 'Maculino' ? 'selected' : '' }}>Maculino</option>
+                                    <option value="Femenino" {{ old('selectSexo') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Categoria:</label>
-                                <select class="form-select" id="selectCategoria" name="selectCategoria">
+                                <select class="form-select" id="selectCategoria" name="selectCategoria" value="{{ old('selectCategoria') }}">
                                     @foreach ($categorias as $categoria)
-                                        <option value="{{$categoria->IdCategoria}}">{{$categoria->NombreCategoria}}</option>
+                                        <option value="{{$categoria->IdCategoria}}" {{ old('selectCategoria') == "$categoria->IdCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">N° Camiseta:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta">
+                                <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
                                 @error('nCamiseta')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -167,7 +167,7 @@
 
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del jugador:</label>
-                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*">
+                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*" value="{{ old('fotoJugador') }}">
                             @error('fotoJugador')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -175,7 +175,7 @@
 
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del carnet:</label>
-                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*">
+                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*" value="{{ old('fotoCarnet') }}">
                             @error('fotoCarnet')
                                 <p class="error-message">{{ $message }}</p>
                              @enderror
