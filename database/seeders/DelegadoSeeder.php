@@ -17,7 +17,7 @@ class DelegadoSeeder extends Seeder
             'IdDelegado'=>1,
             'IdPersona'=>1,
             'IdUsuario'=>1,
-            'NombreDelegado' => '+591 4567895',
+            'NumeroDelegado' => '+591 4567895',
             'created_at'=>now()
         ]);
     }

@@ -52,12 +52,22 @@ class FormularioController extends Controller
      */
     public function show($id)
     {   
-       $aplicaciones = Aplicacion::select('transacciones.NumeroTransaccion')
-                 ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion')      
+       $aplicaciones = Aplicacion::select('transacciones.NumeroTransaccion','transacciones.NumeroCuenta',
+                'transacciones.MontoTransaccion','transacciones.FechaTransaccion','transacciones.FotoVaucher'
+                ,'equipos.NombreEquipo',
+                )
+                 ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion',)
+                 ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')
+                 ->join('campeonatos','preinscripciones.IdCampeonato','=','campeonatos.IdCampeonato')
+                 ->join('categorias_por_equipo','campeonatos.IdCampeonato','=','categorias_por_equipo.IdCampeonato')
+                 ->join('equipos','categorias_por_equipo.IdEquipo','=','equipos.IdEquipo')
+                 ->join('delegados','equipos.IdDelegado','=','delegados.IdDelegado')
+                 ->join('personas','delegados.IdPersona','=','personas.IdPersona')
+
                   ->where("aplicaciones.IdAplicacion","=",$id) 
                     ->get();
-        //$aplicaciones = Aplicacion::find($id);
-        return view('formulario.show',compact('aplicaciones'));
+        $datos = $aplicaciones[0];
+        return view('formulario.show',compact('datos'));
     }
 
     /**
