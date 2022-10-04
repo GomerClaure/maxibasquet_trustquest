@@ -68,12 +68,14 @@ class JugadorController extends Controller
      * Cambia el formato de la fecha de A-M-D a D/M/A
      */
     public function formatoFecha($jugador){
-
-        foreach($jugador as $jug){
-            $fechas=explode( "-",$jug->FechaNacimiento);
-            $formato=$fechas[2]."/".$fechas[1]."/".$fechas[0];
-            $jug->FechaNacimiento=$formato;
+        if (!$jugador->isEmpty()) {
+            foreach($jugador as $jug){
+                $fechas=explode( "-",$jug->FechaNacimiento);
+                $formato=$fechas[2]."/".$fechas[1]."/".$fechas[0];
+                $jug->FechaNacimiento=$formato;
+            }
         }
+ 
         return $jugador; 
     }
     /**
