@@ -24,11 +24,9 @@
         <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
     </head>
     <body class="antialiased">
-        <div class=" bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-
-           <section class="intro">
-                <div class="bg-image h-100" style="background-color: #f5f7fa;">
-                    <div class="mask d-flex align-items-center h-100">
+        <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
+                <div class="bg-image w-100" >
+                    <div class="mask d-flex align-items-center w-100">
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
@@ -73,8 +71,8 @@
                     </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        
 
     </body>
 </html>

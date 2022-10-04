@@ -5,7 +5,9 @@ body{
 .intro {
   height: 100%;
 }
-
+.fondo{
+  background-color: #D9D9D9;
+}
 table td,
 table th {
   text-overflow: ellipsis;
