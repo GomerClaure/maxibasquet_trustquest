@@ -14,7 +14,7 @@ class CreateAplicacionesTable extends Migration
     public function up()
     {
         Schema::create('aplicaciones', function (Blueprint $table) {
-            $table->id("IdAplicacion");
+            $table->bigIncrements("IdAplicacion");
             $table->unsignedBigInteger("IdPreinscripcion");
             $table->unsignedBigInteger("IdPais");
             $table->string("NombreUsuario",100);
