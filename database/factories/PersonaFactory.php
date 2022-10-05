@@ -13,7 +13,7 @@ class PersonaFactory extends Factory
      *
      * @return array
      */
-    
+
     public function definition()
     {
         return [
@@ -25,7 +25,8 @@ class PersonaFactory extends Factory
             'SexoPersona' => $this->faker->randomElement(["Masculino","Femenino"]),
             'Edad' => $this->faker-> numberBetween(30,75),
             'Foto' => "uploads\de416aacc92bb9080e1befa4614ba35b.jpg",
-            "Nacionalidad" => $this->faker->text(15),
+            //"Nacionalidad" => $this->faker->text(15),
+            "NacionalidadPersona" => $this->faker->text(15),
             'created_at' => now(),
             'updated_at' => now()
         ];

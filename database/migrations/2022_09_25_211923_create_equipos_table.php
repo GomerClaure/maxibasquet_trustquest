@@ -21,8 +21,8 @@ class CreateEquiposTable extends Migration
             $table->string("LogoEquipo");
             $table->timestamps();
             $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');
-           // $table->foreign("IdDelegado")->references("IdDelegado")->on('delegados');            
-            
+            //$table->foreign("IdDelegado")->references("IdDelegado")->on('delegados');
+
 
         });
     }

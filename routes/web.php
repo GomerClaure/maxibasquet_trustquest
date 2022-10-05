@@ -18,5 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/jugador/create',[JugadorController::class,'create']);
+//Route::resource('jugador',JugadorController::class);
+Route::get('jugador/create/{id}', [JugadorController::class,'create']);
+Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
 Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/aplicaciones',[AplicacionController::class,'index']);

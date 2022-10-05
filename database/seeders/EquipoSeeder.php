@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 
