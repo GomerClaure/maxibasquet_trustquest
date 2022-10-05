@@ -94,7 +94,7 @@ class JugadorController extends Controller
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
 
         $jugador -> save();
-        return $this -> create($request -> idEquipo);
+        return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
     }
 
     /**

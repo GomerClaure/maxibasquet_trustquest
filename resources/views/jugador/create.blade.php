@@ -32,21 +32,28 @@
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Active</a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                        <a class="nav-link disabled" href="#"></a>
                     </li>
                 </ul>
             </nav>
         </header>
-            <div class="col-7 bg-secondary p-4 mt-5 mx-auto">
+            @if (Session::has('mensaje'))
+                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>¡Éxito!</strong> {{Session::get('mensaje')}}.
+                </div>
+            @endif
+
+            <div class="col-7 bg-secondary p-4 mt-3 mx-auto">
                 <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex justify-content-center mb-4">
@@ -146,7 +153,7 @@
 
                     <div class="row">
                         <div class="form-group mb-3 col-3">
-                            <label for="" class="form-label">Estatura:</label>
+                            <label for="" class="form-label">Estatura (Ejm 1.70):</label>
                             <input type="text" class="form-control" placeholder="Ingrese su estatura" id="estatura" name="estatura" value="{{ old('estatura') }}">
                             @error('estatura')
                                 <p class="error-message">{{ $message }}</p>
@@ -184,7 +191,7 @@
                     <div class="row">
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del jugador:</label>
+                            <label for="" class="form-label">Foto del jugador (Resolucion 472x472):</label>
                             <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*" value="{{ old('fotoJugador') }}">
                             @error('fotoJugador')
                                 <p class="error-message">{{ $message }}</p>
@@ -192,7 +199,7 @@
                         </div>
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del carnet:</label>
+                            <label for="" class="form-label">Foto del carnet (Resolucion 472x472):</label>
                             <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*" value="{{ old('fotoCarnet') }}">
                             @error('fotoCarnet')
                                 <p class="error-message">{{ $message }}</p>
