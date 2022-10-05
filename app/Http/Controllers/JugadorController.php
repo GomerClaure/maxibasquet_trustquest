@@ -81,6 +81,23 @@ class JugadorController extends Controller
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenJucador;
+
+        $fecha = $request -> fechaNacimiento;
+        $anio = substr($fecha, 0, 4);
+        $edadReal = date('Y')-$anio;
+        $edadActual = $request -> edad;
+        if($edadReal != $edadActual){
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorEdad',' La edad no coincide con la fecha de nacimiento');
+        }
+
+        $categoria = $request -> selectCategoria;
+        $consulta = Categoria::where('IdCategoria',$categoria)->get();
+        $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
+
+        if($edadActual < $categoriaNum){
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorCategoria',' La edad del jugador es inferior a la categoria elegida');
+        }
+
         $persona -> save();
 
         $jugador = new Jugador;

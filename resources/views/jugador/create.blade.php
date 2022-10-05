@@ -49,7 +49,21 @@
             @if (Session::has('mensaje'))
                 <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡Éxito!</strong> {{Session::get('mensaje')}}.
+                    <strong>¡Éxito! </strong> {{Session::get('mensaje')}}.
+                </div>
+            @endif
+
+            @if (Session::has('mensajeErrorEdad'))
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorEdad')}}.
+                </div>
+            @endif
+
+            @if (Session::has('mensajeErrorCategoria'))
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorCategoria')}}.
                 </div>
             @endif
 
