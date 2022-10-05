@@ -17,7 +17,6 @@
 </div>
 @endforeach
 
-
 @foreach($c as $pais)
 <div class="TituloPais">
     <h1>Pais:{{$pais->NombrePais}}</h1>

@@ -15,16 +15,14 @@ class EquipoController extends Controller
 {
     public function index()
     {   
-<<<<<<< HEAD
         $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo')
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                   ->where('IdEquipo','=',1)
-=======
+                  ->get();
         //Sobre la Categoria de un equipo
         $categoria=Categorias::select('categorias.NombreCategoria')->distinct()
                   ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
->>>>>>> 50c945158bad4d39e7e3ba5e9a6ee21afb664de4
                   ->get();
 
         //Sobre la Categoria de un equipo
@@ -39,22 +37,10 @@ class EquipoController extends Controller
         $informacion=Persona::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
              ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
              ->get();
-<<<<<<< HEAD
              
              return view('equipo.Equipos',compact('informaciontecnicos','informacion','categoria','c'));
              
     }                            
-=======
-        //Informacion del nombre de un equipo y su id pais 
-        $EquipoPais=Aplicaciones::select('aplicaciones.IdPais','aplicaciones.NombreEquipo')
-             ->join('equipos','aplicaciones.IdAplicacion','=','equipos.IdAplicacion')
-             ->get();
-        
-            
-             return view('equipo.Equipos',compact('informaciontecnicos','informacion','EquipoPais','categoria'));
-             //return $equipoPais;
-    }
->>>>>>> 50c945158bad4d39e7e3ba5e9a6ee21afb664de4
     public function create()
     {
         //
