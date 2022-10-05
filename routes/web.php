@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::resource('formulario',FormularioController::class);
 
+Route::put('/formulario/{id}',[FormularioController::class,'update']);

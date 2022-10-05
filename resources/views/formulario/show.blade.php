@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Preinscripcion</title>
     <style>
-        .mause-nulo{
+        .mause-nulo {
             pointer-events: none;
         }
     </style>
@@ -23,7 +23,9 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 " >
+                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -73,23 +75,24 @@
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->MontoTransaccion}}">
                         </div>
+                        
                         <div class="col-md-6">
                             <div>
                                 <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
                             </div>
                             <div class="input-group">
-                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="200" height="200">
+                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="362" height="203">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                         </div>
+
+                        
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <button type="submit" class="btn btn-primary" action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
-                            @csrf
-                            {{method_field('PATCH')}}
+                        <button type="submit" class="btn btn-primary" >
                             aceptar
                         </button>
                         <button type="submit" class="btn btn-primary">rechazar</button>
@@ -102,5 +105,5 @@
 
 </html>
 @else
-        <h1>no existe formulario</h1>
+<h1>no existe formulario</h1>
 @endif

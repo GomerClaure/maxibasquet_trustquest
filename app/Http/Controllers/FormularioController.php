@@ -82,7 +82,7 @@ class FormularioController extends Controller
      */
     public function edit(Delegado $formulario)
     {
-        //
+        return ('hola');
     }
 
     /**
