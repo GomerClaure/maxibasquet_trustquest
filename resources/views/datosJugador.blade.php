@@ -40,13 +40,13 @@
                         <div class="card ">
                             <div class="card-body  pt-3 ps-3 ">
                                 <div class="row ">
-                                    <div class="col-4">
+                                    <div class="col-4 ">
                                         <div class="card">
-                                            <div class="card-body  pt-0 ps-3 ">
-                                                <div class="img">
-                                                    
-                                                </div>
-                                            </div>
+                                            
+                                                @foreach ($jugador as $jug)
+                                                <img class="card-img-top"src="{{asset($jug->Foto)}}" alt="">
+                                                @endforeach
+                                            
                                         </div>
                                     </div>
                                     <div class="col">
