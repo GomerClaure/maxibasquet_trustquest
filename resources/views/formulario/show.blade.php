@@ -29,11 +29,11 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
-                            <input type="email" class="form-control" id="inputEmail4" value="{{$datos->NombreEquipo}}">
+                            <input class="form-control" id="inputEmail4" value="{{$datos->NombreEquipo}}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->NombrePersona}}">
+                            <input class="form-control" id="inputPassword4" value="{{$datos->NombreUsuario}}">
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->email}}">
+                            <input class="form-control" id="inputPassword4" value="{{$datos->CorreoElectronico}}">
                         </div>
                         <div class="col-md-6">
                             <label for="pais" class="form-label">Pais:</label>
@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="specificSizeInputGroupUsername" value="{{$datos->NumeroDelegado}}">
+                                <input type="text" class="form-control" id="specificSizeInputGroupUsername" value="{{$datos->NumeroTelefono}}">
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nro de Transcción:</label>
-                            <input type="email" class="form-control" id="inputEmail4" value="{{$datos->NumeroTransaccion}}">
+                            <input class="form-control" id="inputEmail4" value="{{$datos->NumeroTransaccion}}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <button type="submit" class="btn btn-primary">aceptar</button>
+                        <button type="submit" class="btn btn-primary" action="{{url('formulario/')}}">aceptar</button>
                         <button type="submit" class="btn btn-primary">rechazar</button>
                     </div>
 

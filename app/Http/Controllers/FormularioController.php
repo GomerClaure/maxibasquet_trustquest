@@ -49,29 +49,20 @@ class FormularioController extends Controller
     public function show($id)
     {
         $aplicaciones = Aplicacion::select(
+           'aplicaciones.NombreUsuario',
+           'aplicaciones.CorreoElectronico',
+           'aplicaciones.NumeroTelefono',
+           'aplicaciones.NombreEquipo',
+           'aplicaciones.Categorias',
             'transacciones.NumeroTransaccion',
             'transacciones.NumeroCuenta',
             'transacciones.MontoTransaccion',
             'transacciones.FechaTransaccion',
             'transacciones.FotoVaucher',
-            'equipos.NombreEquipo',
-            'paises.NombrePais',
-            'aplicaciones.Categorias',
-            'personas.NombrePersona',
-            'personas.ApellidoPaterno',
-            'users.email',
-            'delegados.NumeroDelegado'
+            'paises.NombrePais'
         )
             ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
-            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->join('campeonatos', 'preinscripciones.IdCampeonato', '=', 'campeonatos.IdCampeonato')
-            ->join('categorias_por_equipo', 'campeonatos.IdCampeonato', '=', 'categorias_por_equipo.IdCampeonato')
-            ->join('equipos', 'categorias_por_equipo.IdEquipo', '=', 'equipos.IdEquipo')
-            ->join('delegados', 'equipos.IdDelegado', '=', 'delegados.IdDelegado')
-            ->join('personas', 'delegados.IdPersona', '=', 'personas.IdPersona')
             ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
-            ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
-            ->join('users', 'delegados.IdUsuario', '=', 'users.id')
             ->where("aplicaciones.IdAplicacion", "=", $id)
             ->get();
         if (sizeof($aplicaciones) > 0) {
