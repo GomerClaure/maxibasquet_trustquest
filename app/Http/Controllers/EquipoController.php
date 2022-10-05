@@ -34,7 +34,7 @@ class EquipoController extends Controller
         ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
         ->get();
        //Informacion de una persona que es un jugador
-        $informacion=Persona::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
+        $informacion=Persona::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
              ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
              ->get();
              

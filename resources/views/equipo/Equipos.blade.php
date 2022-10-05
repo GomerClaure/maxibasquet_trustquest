@@ -38,7 +38,11 @@
 <img class="card-img-top"src="{{asset('storage').'/'.$jugado->Foto}}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{$jugado->NombrePersona}} {{$jugado->ApellidoPaterno}} {{$jugado->ApellidoMaterno}}</h5>
+<<<<<<< HEAD
     <a href="#" class="btn">Detalles</a>
+=======
+    <a href="{{url('jugador'.'/'.$jugado->IdJugador)}}" class="btn btn-primary">Detalles</a>
+>>>>>>> Develop
   </div>
 </div>
 <br>
