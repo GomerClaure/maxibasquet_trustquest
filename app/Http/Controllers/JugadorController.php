@@ -11,6 +11,8 @@ use App\Models\Persona;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class JugadorController extends Controller
 {
@@ -60,7 +62,7 @@ class JugadorController extends Controller
             'selectCategoria'=>'required',
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
             'peso'=>'required|numeric|min:1|max:99',
-            'fotoCarnet'=>'required|image|dimensions:width=472, height=472',
+            'fotoCarnet'=>'required|image',
             'selectPosicion'=>'required',
             'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
@@ -81,6 +83,17 @@ class JugadorController extends Controller
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenJucador;
+
+        $carnetId = $request -> ci;
+        //$consulta2 = DB::select("select * from personas where personas.CiPersona = '$carnetId'");
+        $consulta2 = DB::table('personas')
+                        ->select('CiPersona')
+                        ->where('CiPersona', $carnetId, 1)
+                        ->get();
+        //return $consulta2;
+        if(!$consulta2 ->isEmpty()){
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorExiste',' El Ci esta registrado');
+        }
 
         $fecha = $request -> fechaNacimiento;
         $anio = substr($fecha, 0, 4);
