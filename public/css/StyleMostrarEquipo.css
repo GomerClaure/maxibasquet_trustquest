@@ -1,7 +1,7 @@
-
 .card-img-top{
-    width: 90px;
-    height: 90px;
+    margin: 15px;
+    width: 100px;
+    height: 100px;
 }
 .card{
     align-items: center;
@@ -10,6 +10,9 @@
 .TituloPais{
  margin: 30px;
 }
+.TituloCategoria{
+    margin: 30px;
+   }
 .listaJugadores{
     display: flex;
     flex-direction: column;

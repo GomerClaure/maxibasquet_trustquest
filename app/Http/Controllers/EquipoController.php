@@ -7,13 +7,18 @@ use App\Models\Jugadores;
 use App\Models\Personas;
 use App\Models\Tecnicos;
 use App\Models\Aplicaciones;
+use App\Models\Categorias;
 
 class EquipoController extends Controller
 {
     public function index()
-    {
+    {   
+        //Sobre la Categoria de un equipo
+        $categoria=Categorias::select('categorias.NombreCategoria')
+                  ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
+                  ->get();
         //informacion de una persona que es un tecnico 
-        $informaciontecnicos=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
+        $informaciontecnicos=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
         ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
         ->get();
        //Informacion de una persona que es un jugador
@@ -23,11 +28,10 @@ class EquipoController extends Controller
         //Informacion del nombre de un equipo y su id pais 
         $EquipoPais=Aplicaciones::select('aplicaciones.IdPais','aplicaciones.NombreEquipo')
              ->join('equipos','aplicaciones.IdAplicacion','=','equipos.IdAplicacion')
-             
              ->get();
         
-
-             return view('equipo.Equipos',compact('informaciontecnicos','informacion','EquipoPais'));
+      
+             return view('equipo.Equipos',compact('informaciontecnicos','informacion','EquipoPais','categoria'));
              //return $equipoPais;
     }
     public function create()

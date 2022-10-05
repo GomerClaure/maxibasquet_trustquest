@@ -21,6 +21,9 @@
 <div>
   <h1 class="TituloPais">Pais:</h1>
 </div>
+<div>
+  <h1 class="TituloCategoria">Categoria:{{$categoria->NombreCategoria}}</h1>
+</div>
 
 <div class="listaEquipo">
 
@@ -44,9 +47,9 @@
 <h2>Cuerpo Tecnico</h2>
 
 @foreach($informaciontecnicos as $tec)
-{{$tec->Foto}}
+
 <div class="card" style="width: 18rem;" >
-<img class="card-img-top"src="{{asset('storage').'/'.$tec->Foto}}" alt="">
+<img class="card-img-top" src="{{asset('storage').'/'.$tec->Foto}}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{$tec->NombrePersona}} {{$tec->ApellidoPaterno}} {{$tec->ApellidoMaterno}}</h5>
     <a href="#" class="btn btn-primary">Detalles</a>
