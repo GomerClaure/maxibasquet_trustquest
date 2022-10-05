@@ -49,7 +49,7 @@ class JugadorController extends Controller
 
         $jugador = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.FechaNacimiento',
                                 'personas.Edad','personas.Foto','jugadores.PesoJugador','jugadores.AlturaJugador',
-                                'jugadores.PosicionJugador','jugadores.NumeroCamiseta','jugadores.Nacionalidad',
+                                'jugadores.PosicionJugador','jugadores.NumeroCamiseta','personas.Nacionalidad',
                                 'categorias.NombreCategoria','equipos.NombreEquipo')
                                 ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
                                 ->join('equipos','equipos.IdEquipo','=','jugadores.IdEquipo')

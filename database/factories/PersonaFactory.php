@@ -25,6 +25,7 @@ class PersonaFactory extends Factory
             'SexoPersona' => $this->faker->randomElement(["Masculino","Femenino"]),
             'Edad' => $this->faker-> numberBetween(30,75),
             'Foto' => $this->faker->imageUrl(360,360,'people',true),
+            "Nacionalidad" => $this->faker->text(15),
             'created_at' => now(),
             'updated_at' => now()
         ];
