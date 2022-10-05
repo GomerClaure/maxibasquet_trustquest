@@ -65,7 +65,7 @@
                                                     <tr>
                                                         <td class="border border-dark"> 
                                                             <div> <p><b>Altura</b></p> </div>
-                                                            <div><p>{{$jug->AlturaJugador}} m</p></div>
+                                                            <div><p>{{$jug->EstaturaJugador}} m</p></div>
                                                         </td>
                                                         <td class="border border-dark"> 
                                                             <div> <p><b>Peso</b></p> </div>
@@ -73,7 +73,7 @@
                                                         </td>
                                                         <td class="border border-dark"> 
                                                             <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$jug->Nacionalidad}}</p></div>
+                                                            <div><p>{{$jug->NacionalidadPersona}}</p></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
