@@ -24,6 +24,25 @@
         <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
     </head>
     <body class="antialiased">
+    <header >
+            <!-- Grey with black text -->
+            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
         <div class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
            
                 <div class="">
