@@ -12,10 +12,10 @@ class AplicacionesController extends Controller
 {
     public function index()
         {
-            echo "Holaaaaaaaaaaaaaaaaaaaa";
+            $paises = Pais::all();
             $preinscripcion = Aplicacion::find(2);
-            echo $preinscripcion;
-            return view('preinscripcion');
+            // echo $preinscripcion;
+            return view('preinscripcion', compact('paises'));
         }
         //  para guardar una preinscripcion
         public function store(Request $request)

@@ -8,21 +8,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-    <link href="../css/preinscripcion.css" rel="stylesheet">
+    {{-- <link href="../css/preinscripcion.css" rel="stylesheet"> --}}
     <title>Preinscripcion</title>
 </head>
 
 <body style="background: #e9e9e9;">
     <div >
         <div class="container justify-content-center"">
+        {{-- @section('scripts')
+                <script src="/public/js/admin/users/preinscripcion.js"></script>
+            @endsection --}}
 		    <section class=" main-title text-center">
-                <h1 class="display-6 mb-0" style="color:#37474f">Formulario de preinscripción de equipos</h1>
+                <h1 class="display-6 mb-0" ">Formulario de preinscripción de equipos</h1>
                 <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form mx-5">
                 <form class="row g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
                     @csrf    
-                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success">
+                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5">
                         <h5>Datos del equipo</h5>
                         <hr>
                         <div class="col-md-6">
@@ -86,23 +89,14 @@
                         <div class="col-md-6">
                             <label  for="pais" class="form-label">Pais:</label>
                             <select name="pais" class="form-select" id="pais">
-                                <option>Argentina</option>
-                                <option>Bolivia</option>
-                                <option>Brasil</option>
-                                <option>Chile</option>
-                                <option>Colombia</option>
-                                <option>Ecuador</option>
-                                <option>Guyana</option>
-                                <option>Paraguay</option>
-                                <option>Peru</option>
-                                <option>Uruguay</option>
-                                <option>Venezuela</option>
+                            @foreach ($paises as $pais)
+                                <option value="{{ $pais->CodigoPais }}">{{$pais->NombrePais}}</option>
+                            @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="telefono" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">+591</span>
                                 <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
                                 <input name="telefono" min="1"type="number" class="form-control" id="telefono">
                                 
@@ -113,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 border-success">
+                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 ">
                         <h5>Datos de pago</h5>
                         <hr>
                         <div class="col-md-6">
@@ -167,6 +161,12 @@
                     </div>
                </form>
             </section>
+            <section>
+                <script src="{{asset('js/admin/users/preinscripcion.js')}}"></script>
+            </section>
+            {{-- @section('scripts')
+                
+            @endsection --}}
         </div>
     </div>
 </body>

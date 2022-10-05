@@ -21,8 +21,11 @@ use App\Models\Preinscripcion;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/preinscripcion', function () {
-    return view('preinscripcion');
-});
+// Route::get('/preinscripcion', function () {
+//     return view('preinscripcion');
+// });
+
+Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
+
 
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
