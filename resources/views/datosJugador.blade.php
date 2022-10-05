@@ -44,7 +44,7 @@
                                         <div class="card">
                                             
                                                 @foreach ($jugador as $jug)
-                                                <img class="card-img-top"src="{{asset($jug->Foto)}}" alt="">
+                                                <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
                                                 @endforeach
                                             
                                         </div>
