@@ -40,7 +40,7 @@ class EquipoController extends Controller
              
              return view('equipo.Equipos',compact('informaciontecnicos','informacion','categoria','c'));
              
-    }                            
+    }                             
     public function create()
     {
         //
