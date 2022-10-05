@@ -74,9 +74,15 @@
                                 @enderror
                             </div>
 
+                            @php
+                                date_default_timezone_set('America/La_Paz');
+                                $fechaActual = date('Y-m-d');
+                                $anio = date('Y')-100;
+                                $fecha = $anio."-01-01"
+                            @endphp
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
-                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}">
+                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
                                 @error('fechaNacimiento')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
