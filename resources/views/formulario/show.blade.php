@@ -41,7 +41,7 @@
 
                             <div class="form-check form-check-inline">
 
-                                <label class="form-check-label" for="inlineCheckbox1">{{$datos->NombreCategoria}}</label>
+                                <label class="form-check-label" for="inlineCheckbox1">{{$datos->Categorias}}</label>
                             </div>
 
                         </div>

@@ -56,7 +56,7 @@ class FormularioController extends Controller
             'transacciones.FotoVaucher',
             'equipos.NombreEquipo',
             'paises.NombrePais',
-            'categorias.NombreCategoria',
+            'aplicaciones.Categorias',
             'personas.NombrePersona',
             'personas.ApellidoPaterno',
             'users.email',
