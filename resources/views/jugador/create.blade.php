@@ -67,6 +67,13 @@
                 </div>
             @endif
 
+            @if (Session::has('mensajeErrorExiste'))
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorExiste')}}.
+                </div>
+            @endif
+
             <div class="col-7 p-4 mt-3 mx-auto contenedorForm" >
                 <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data">
                     @csrf
