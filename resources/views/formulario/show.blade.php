@@ -12,9 +12,13 @@
         .mause-nulo {
             pointer-events: none;
         }
+<<<<<<< HEAD
         .mover{
 
         }
+=======
+        
+>>>>>>> Develop
     </style>
 </head>
 
