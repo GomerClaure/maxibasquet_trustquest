@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <button type="submit" class="btn btn-primary" action="{{url('formulario/'.$datos->IdAplicacion)}}" method="post">
+                        <button type="submit" class="btn btn-primary" action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
                             @csrf
                             {{method_field('PATCH')}}
                             aceptar

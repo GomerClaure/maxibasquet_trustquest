@@ -92,9 +92,14 @@ class FormularioController extends Controller
      * @param  \App\Models\Formulario  $formulario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Delegado $formulario)
+    public function update(Request $request, $id)
     {
-        //
+        $datosEmpleado = request() -> except(['_token','_method']);
+        
+       /* $fila = Aplicacion::find($id);
+        $fila->EstadoAplicacion = 'aceptado';
+        $fila->save();*/
+        return ('hola');
     }
 
     /**

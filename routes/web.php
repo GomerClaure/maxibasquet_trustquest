@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::resource('formulario',FormularioController::class);
+
