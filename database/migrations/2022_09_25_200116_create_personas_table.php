@@ -20,10 +20,11 @@ class CreatePersonasTable extends Migration
             $table->string("ApellidoPaterno",30);
             $table->string("ApellidoMaterno",30)->nullable();
             $table->date("FechaNacimiento");
-            $table->string("NacionalidadPersona");
+            $table->string("NacionalidadPersona",25);
             $table->string("SexoPersona",10);
             $table->integer("Edad");
             $table->string("Foto");
+            //$table->string("Nacionalidad",25);
             $table->timestamps();
         });
     }

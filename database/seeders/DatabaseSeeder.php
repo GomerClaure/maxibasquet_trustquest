@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Aplicacione;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             PreinscripcionSeeder::class,
             CategoriaSeeder::class,
             AplicacioneSeeder::class,
+            PersonaSeeder::class,
             EquipoSeeder::class,
+            JugadorSeeder::class
         ]);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
-use App\Models\Equipo;
+use App\Models\Jugador;
 use Illuminate\Database\Seeder;
 
-class EquipoSeeder extends Seeder
+class JugadorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class EquipoSeeder extends Seeder
      */
     public function run()
     {
-        Equipo::factory(10)->create();
+        Jugador::factory(10)->create();
     }
 }

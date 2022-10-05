@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Jugador extends Model
 {
     use HasFactory;
-    protected $table = 'jugadores';
+    protected $table = "jugadores";
     protected $primaryKey = 'IdJugador';
+    protected $fillable = ["IdEquipo","IdCategoria","IdPais","IdPersona","PesoJugador","AlturaJugador","FotoCarnet","PosicionJugador","NumeroCamiseta"];
+    protected $hidden = ["IdJugador"];
 
     public function equipo(){
         //return $this->belongsTo('App\Models\Equipo', 'IdEquipo');
@@ -25,4 +27,5 @@ class Jugador extends Model
         //return $this->belongsTo('App\Models\Persona', 'IdPersona');
         return $this->belongsTo(Persona::class, 'IdPersona');
     }
+
 }

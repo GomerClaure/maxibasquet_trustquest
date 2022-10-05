@@ -117,21 +117,50 @@ class JugadorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Jugador  $jugador
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Jugador $jugador)
+    public function show($id)
     {
-        //
-    }
 
+        $jugador = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.FechaNacimiento',
+                                'personas.Edad','personas.Foto','jugadores.PesoJugador','jugadores.AlturaJugador',
+                                'jugadores.PosicionJugador','jugadores.NumeroCamiseta','personas.Nacionalidad',
+                                'categorias.NombreCategoria','equipos.NombreEquipo')
+                                ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
+                                ->join('equipos','equipos.IdEquipo','=','jugadores.IdEquipo')
+                                ->join('categorias','categorias.IdCategoria','=','jugadores.IdCategoria')
+                                ->where('IdJugador','=',$id)
+                                ->get();
+
+        $jugador = $this->formatoFecha($jugador);
+        if ($id <= 0 || $id >= 9000000000000000000 || $jugador->isEmpty()) {
+                $mensaje ="No encontrado";
+                return $mensaje;
+                                }
+        return view('datosJugador',compact('jugador'));
+    }
+    /**
+     * Cambia el formato de la fecha de A-M-D a D/M/A
+     */
+    public function formatoFecha($jugador){
+        if (!$jugador->isEmpty()) {
+            foreach($jugador as $jug){
+                $fechas=explode( "-",$jug->FechaNacimiento);
+                $formato=$fechas[2]."/".$fechas[1]."/".$fechas[0];
+                $jug->FechaNacimiento=$formato;
+            }
+        }
+
+        return $jugador;
+    }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Jugador  $jugador
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jugador $jugador)
+    public function edit($id)
     {
         //
     }
@@ -140,10 +169,10 @@ class JugadorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Jugador  $jugador
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jugador $jugador)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -151,10 +180,10 @@ class JugadorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Jugador  $jugador
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jugador $jugador)
+    public function destroy($id)
     {
         //
     }
