@@ -53,12 +53,9 @@
                                             <td>{{$aplicacion->NombreEquipo}}</td>
                                             <td >{{$aplicacion->Total}} $</td>
                                             <td>{{$aplicacion->EstadoAplicacion}}</td>
-                                            <td class="d-grid gap-2"><button type="button" class="btn btn-primary btn-sm rounded-0">
-                                                Detalles
-                                                <!-- enlace para mostrar los detalles del formulario de preinscripcion
-                                                
-                                                -->
-                                            </button></td>
+                                            <td class="d-grid gap-2">
+                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
