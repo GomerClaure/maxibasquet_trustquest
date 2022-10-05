@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/aplicaciones',[AplicacionController::class,'index']);
