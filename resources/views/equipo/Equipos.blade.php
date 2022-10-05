@@ -12,20 +12,20 @@
 <body>
 
 @foreach($c as $dato)
-<div style="text-align:center">
+<div style="text-align:center" class="tituloequipo">
     <h1>{{$dato->NombreEquipo}}</h1>
 </div>
 @endforeach
 
 @foreach($c as $pais)
 <div class="TituloPais">
-    <h1>Pais:{{$pais->NombrePais}}</h1>
+    <h1>Pais: {{$pais->NombrePais}}</h1>
 </div>
 @endforeach
 
 @foreach($categoria as $cats)
 <div class="TituloCategoria">
-    <h1>Categorias:{{$cats->NombreCategoria}}</h1>
+    <h1>Categoria: {{$cats->NombreCategoria}}</h1>
 </div>
 @endforeach
 <div class="listaEquipo">
@@ -38,7 +38,7 @@
 <img class="card-img-top"src="{{asset('storage').'/'.$jugado->Foto}}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{$jugado->NombrePersona}} {{$jugado->ApellidoPaterno}} {{$jugado->ApellidoMaterno}}</h5>
-    <a href="#" class="btn btn-primary">Detalles</a>
+    <a href="#" class="btn">Detalles</a>
   </div>
 </div>
 <br>
@@ -55,7 +55,7 @@
 <img class="card-img-top" src="{{asset('storage').'/'.$tec->Foto}}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{$tec->NombrePersona}} {{$tec->ApellidoPaterno}} {{$tec->ApellidoMaterno}}</h5>
-    <br><br>
+    <br>
   </div>
 </div>
 <br>

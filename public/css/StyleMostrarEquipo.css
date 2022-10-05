@@ -1,24 +1,37 @@
-html{
+html,
+body{
+  background-color: #c2c2c2;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.tituloequipo{
     background-color: #ABA9A9;
+    padding: 10px;
 }
 .card-img-top{
     margin: 10px;
     width: 100px;
     height: 100px;
+    border-radius: 20px;
 }
 .card{
     align-items: center;
+    flex-direction: row;
     background-color: #ABA9A9 ;
+    padding: auto;
 }
 .TituloPais{
- margin: 30px;
+    margin: 30px;
+    padding: 5px;
+    border-radius: 15px;
 }
 .TituloCategoria{
     margin: 30px;
+    padding: 5px;
+    border-radius: 15px;
    }
 .listaJugadores{
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     margin: auto;
     padding: 20px;
 }
@@ -30,6 +43,12 @@ html{
 }
 .listaEquipo{
     display: flex;
-    padding: 10px;
+    flex-direction:row;
     text-align: center;
+    padding: 0;
 }
+.btn{
+    background-color: #074963;
+    font-size: 14;
+    color: #ABA9A9;
+  }
