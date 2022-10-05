@@ -16,8 +16,13 @@ class CreateTransaccionesTable extends Migration
         Schema::create('transacciones', function (Blueprint $table) {
             $table->bigIncrements("IdTransaccion");
             $table->unsignedBigInteger("IdAplicacion");
+<<<<<<< HEAD
+            $table->bigInteger("NumeroTransaccion");
+            $table->string("NumeroCuenta")->nullable();
+=======
             $table->string("NumeroTransaccion");
             $table->bigInteger("NumeroCuenta");
+>>>>>>> Develop
             $table->integer("MontoTransaccion");
             $table->date("FechaTransaccion");
             $table->string("FotoVaucher");

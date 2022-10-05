@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ use App\Http\Controllers\AplicacionesController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('formulario',FormularioController::class);
+
 
 Route::get('/Equipo',[EquipoController::class,'index']);
 
