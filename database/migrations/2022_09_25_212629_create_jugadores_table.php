@@ -19,6 +19,7 @@ class CreateJugadoresTable extends Migration
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedInteger("IdPersona");
             $table->float("EstaturaJugador",3,2);
+            $table->integer("PesoJugador");
             $table->string("FotoCarnet");
             $table->string("PosicionJugador");
             $table->integer("NumeroCamiseta");

@@ -149,7 +149,7 @@
 
                         <div class="form-group mb-3 col-3">
                             <label for="" class="form-label">Peso:</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
+                            <input type="number" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
                             @error('peso')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror

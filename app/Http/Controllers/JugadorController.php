@@ -48,20 +48,21 @@ class JugadorController extends Controller
         //return response()->json($datos);
 
         $request -> validate([
-            'ci'=>'required|numeric',
+            'ci'=>'required|numeric|digits_between:6,9',
             'nombre'=>'required|alpha',
             'apellidoPaterno'=>'required|alpha',
             'apellidoMaterno'=>'required|alpha',
             'fechaNacimiento'=>'required|date',
             'nacionalidad'=>'required|alpha',
             'selectSexo'=>'required',
-            'edad'=>'required|numeric',
+            'edad'=>'required|numeric|min:1|max:120',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
             'selectCategoria'=>'required',
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
+            'peso'=>'required|numeric|min:1|max:99',
             'fotoCarnet'=>'required|image|dimensions:width=472, height=472',
             'selectPosicion'=>'required',
-            'nCamiseta'=>'required|numeric'
+            'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
 
         $imagenJucador = $request->file('fotoJugador')->store('uploads');
@@ -87,6 +88,7 @@ class JugadorController extends Controller
         $jugador -> IdCategoria = $request -> selectCategoria;
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;
+        $jugador -> PesoJugador = $request -> peso;
         $jugador -> FotoCarnet = $imagenCarnet;
         $jugador -> PosicionJugador = $request -> selectPosicion;
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
