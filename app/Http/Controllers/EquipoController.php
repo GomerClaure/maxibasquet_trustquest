@@ -14,7 +14,7 @@ class EquipoController extends Controller
     public function index()
     {   
         //Sobre la Categoria de un equipo
-        $categoria=Categorias::select('categorias.NombreCategoria')
+        $categoria=Categorias::select('categorias.NombreCategoria')->distinct()
                   ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
                   ->get();
         //informacion de una persona que es un tecnico 
@@ -30,7 +30,7 @@ class EquipoController extends Controller
              ->join('equipos','aplicaciones.IdAplicacion','=','equipos.IdAplicacion')
              ->get();
         
-      
+            
              return view('equipo.Equipos',compact('informaciontecnicos','informacion','EquipoPais','categoria'));
              //return $equipoPais;
     }
