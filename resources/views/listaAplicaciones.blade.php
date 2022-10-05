@@ -55,9 +55,9 @@
                                             <td>{{$aplicacion->EstadoAplicacion}}</td>
                                             <td class="d-grid gap-2"><button type="button" class="btn btn-primary btn-sm rounded-0">
                                                 Detalles
-                                                <!-- enlace para mostrar los detalles del formulario de preinscripcion
                                                 
-                                                -->
+                                                <a href="{{url('formulario'/.$aplicacion->IdAplicacion )}}">Detalles</a>
+                                                
                                             </button></td>
                                         </tr>
                                         @endforeach
