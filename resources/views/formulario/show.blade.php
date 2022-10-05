@@ -1,3 +1,4 @@
+{{$datos}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,8 +23,8 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 mause-nulo" >
-                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success">
+                <form class="row g-3 " >
+                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
                         <div class="col-md-6">
@@ -56,13 +57,12 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
-                                <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
                                 <input type="text" class="form-control" id="specificSizeInputGroupUsername" value="{{$datos->NumeroDelegado}}">
                             </div>
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 border-success">
+                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos de pago</h5>
                         <hr>
                         <div class="col-md-6">

@@ -74,7 +74,12 @@ class FormularioController extends Controller
             ->join('users', 'delegados.IdUsuario', '=', 'users.id')
             ->where("aplicaciones.IdAplicacion", "=", $id)
             ->get();
-        $datos = $aplicaciones[0];
+        if (sizeof($aplicaciones) > 0) {
+            $datos = $aplicaciones[0];
+        } else {
+            $datos = null;
+        }
+
         return view('formulario.show', compact('datos'));
     }
 
