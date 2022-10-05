@@ -1,4 +1,4 @@
-{{$datos}}
+@if(!empty($datos))
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,3 +97,6 @@
 </body>
 
 </html>
+@else
+        <h1>no existe formulario</h1>
+@endif
