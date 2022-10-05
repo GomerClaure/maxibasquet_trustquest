@@ -23,6 +23,7 @@ class EquipoController extends Controller
         //Informacion del nombre de un equipo y su id pais 
         $EquipoPais=Aplicaciones::select('aplicaciones.IdPais','aplicaciones.NombreEquipo')
              ->join('equipos','aplicaciones.IdAplicacion','=','equipos.IdAplicacion')
+             
              ->get();
         
 

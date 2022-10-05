@@ -29,7 +29,7 @@
     @foreach($informacion as $jugado)
 
 <div class="card" style="width: 18rem;" >
-  <img src="{{ $jugado->Foto }}" class="card-img-top" alt="...">
+  <img class="card-img-top" src="{{asset($jugado->Foto)}}" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{$jugado->NombrePersona}} {{$jugado->ApellidoPaterno}} {{$jugado->ApellidoMaterno}}</h5>
     <a href="#" class="btn btn-primary">Detalles</a>
@@ -42,10 +42,11 @@
 <div class="listaCuerpoT">
 
 <h2>Cuerpo Tecnico</h2>
+
 @foreach($informaciontecnicos as $tec)
 
 <div class="card" style="width: 18rem;" >
-  <img src="{{ $tec->Foto }}" class="card-img-top" alt="...">
+  <img src="{{asset($tec->Foto)}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{$tec->NombrePersona}} {{$tec->ApellidoPaterno}} {{$tec->ApellidoMaterno}}</h5>
     <a href="#" class="btn btn-primary">Detalles</a>
