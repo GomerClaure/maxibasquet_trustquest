@@ -14,7 +14,7 @@ class CreatePreinscripcionesTable extends Migration
     public function up()
     {
         Schema::create('preinscripciones', function (Blueprint $table) {
-            $table->id("IdPreinscripcion");
+            $table->bigIncrements("IdPreinscripcion");
             $table->unsignedBigInteger("IdCampeonato");
             $table->date("FechaIncioPreinscripcion");
             $table->date("FechaFinPreinscripcion");

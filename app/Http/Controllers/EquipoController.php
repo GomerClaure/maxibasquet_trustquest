@@ -1,27 +1,46 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use App\Models\Jugador;
+use App\Models\Persona;
+use App\Models\Tecnicos;
+use App\Models\Aplicaciones;
+use App\Models\Categoria;
+use App\Models\Paises;
+use App\Models\categoria_por_equipo;
 
 class EquipoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        //
-    }
+    {   
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo')
+                  ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
+                  ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
+                  ->where('IdEquipo','=',1)
+                  ->get();
+        //Sobre la Categoria de un equipo
+        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
+                  ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
+                  ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        //Sobre la Categoria de un equipo
+        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
+        ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
+        ->get();
+        //informacion de una persona que es un tecnico 
+        $informaciontecnicos=Persona::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
+        ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
+        ->get();
+       //Informacion de una persona que es un jugador
+        $informacion=Persona::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
+             ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
+             ->get();
+             
+             return view('equipo.Equipos',compact('informaciontecnicos','informacion','categoria','c'));
+             
+    }                            
     public function create()
     {
         //

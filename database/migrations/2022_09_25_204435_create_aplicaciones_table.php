@@ -14,7 +14,7 @@ class CreateAplicacionesTable extends Migration
     public function up()
     {
         Schema::create('aplicaciones', function (Blueprint $table) {
-            $table->id("IdAplicacion");
+            $table->bigIncrements("IdAplicacion");
             $table->unsignedBigInteger("IdPreinscripcion");
             $table->unsignedBigInteger("IdPais");
             $table->string("NombreUsuario",100);
@@ -26,7 +26,7 @@ class CreateAplicacionesTable extends Migration
             $table->text("observaciones")->nullable();
             $table->timestamps();
             $table->foreign("IdPreinscripcion")->references("IdPreinscripcion")->on('preinscripciones');
-            $table->foreign("IdPais")->references("IdPais")->on('paises');            
+            $table->foreign("IdPais")->references("IdPais")->on('paises');
 
         });
     }
