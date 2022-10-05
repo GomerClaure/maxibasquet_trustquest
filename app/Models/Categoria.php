@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Equipo extends Model
+class Categoria extends Model
 {
     use HasFactory;
-    protected $table = "equipos";
-    protected $primaryKey = 'IdEquipo';
-    protected $fillable = ["IdAplicacion","NombreEquipo","LogoEquipo"];
-    protected $hidden = ["IdEquipo"];
+    protected $table = "categorias";
+    protected $primaryKey = 'IdCategoria';
+    protected $fillable = ["NombreCategoria","EdadMaxima","EdadMinima"];
+    public $timestamps = false;
 
     public function jugador(){
         return $this->hasMany(Jugador::class, 'IdJugador');

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\JugadorController;
+use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 
@@ -19,3 +21,9 @@ Route::get('/', function () {
 });
 
 Route::get('/Equipo',[EquipoController::class,'index']);
+//Route::get('/jugador/create',[JugadorController::class,'create']);
+//Route::resource('jugador',JugadorController::class);
+Route::get('jugador/create/{id}', [JugadorController::class,'create']);
+Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
+Route::get('/jugador/{id}',[JugadorController::class,'show']);
+Route::get('/aplicaciones',[AplicacionController::class,'index']);

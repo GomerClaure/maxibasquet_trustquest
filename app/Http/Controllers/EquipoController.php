@@ -7,7 +7,7 @@ use App\Models\Jugador;
 use App\Models\Persona;
 use App\Models\Tecnicos;
 use App\Models\Aplicaciones;
-use App\Models\Categorias;
+use App\Models\Categoria;
 use App\Models\Paises;
 use App\Models\categoria_por_equipo;
 
@@ -21,12 +21,12 @@ class EquipoController extends Controller
                   ->where('IdEquipo','=',1)
                   ->get();
         //Sobre la Categoria de un equipo
-        $categoria=Categorias::select('categorias.NombreCategoria')->distinct()
+        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
                   ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
                   ->get();
 
         //Sobre la Categoria de un equipo
-        $categoria=Categorias::select('categorias.NombreCategoria')->distinct()
+        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
         ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
         ->get();
         //informacion de una persona que es un tecnico 
@@ -60,10 +60,10 @@ class EquipoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Equipo $equipo)
     {
         //
     }
@@ -71,10 +71,10 @@ class EquipoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Equipo $equipo)
     {
         //
     }
@@ -83,10 +83,10 @@ class EquipoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Equipo $equipo)
     {
         //
     }
@@ -94,10 +94,10 @@ class EquipoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Equipo $equipo)
     {
         //
     }
