@@ -95,10 +95,6 @@
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                         </div>
-                        <div class="col-md-6 ">
-                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
-                        </div>
                     </div>
                     <div class="col-md-12 text-center margen">
                         <button type="submit" class="btn btn-primary" >
