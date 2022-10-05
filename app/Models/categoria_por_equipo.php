@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Personas extends Model
+class categoria_por_equipo extends Model
 {
     use HasFactory;
 }

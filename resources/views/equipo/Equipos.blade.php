@@ -7,24 +7,28 @@
     <title>Equipos Maxi Basquet</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link  href="{{asset('/css/StyleMostrarEquipo.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/StyleMostrarEquipo.css')}}">
 </head>
 <body>
 
-@foreach($EquipoPais as $dato)
+@foreach($c as $dato)
 <div style="text-align:center">
     <h1>{{$dato->NombreEquipo}}</h1>
 </div>
 @endforeach
 
 
-<div>
-  <h1 class="TituloPais">Pais:</h1>
+@foreach($c as $pais)
+<div class="TituloPais">
+    <h1>Pais:{{$pais->NombrePais}}</h1>
 </div>
-<div>
-  <h1 class="TituloCategoria">Categoria:</h1>
-</div>
+@endforeach
 
+@foreach($categoria as $cats)
+<div class="TituloCategoria">
+    <h1>Categorias:{{$cats->NombreCategoria}}</h1>
+</div>
+@endforeach
 <div class="listaEquipo">
 
 <div class="listaJugadores">
