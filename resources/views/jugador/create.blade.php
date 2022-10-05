@@ -67,10 +67,10 @@
                 </div>
             @endif
 
-            <div class="col-7 bg-secondary p-4 mt-3 mx-auto">
+            <div class="col-7 p-4 mt-3 mx-auto contenedorForm" >
                 <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="d-flex justify-content-center mb-4">
+                    <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
                     </div>
                     <div class="row">
