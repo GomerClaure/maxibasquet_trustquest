@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Delegado;
-use App\Models\Persona;
-use App\Models\Equipo;
-use App\Models\Transaccion;
-use App\Models\Preinscripcion;
 use App\Models\Aplicacion;
 use Illuminate\Http\Request;
 
@@ -76,7 +72,6 @@ class FormularioController extends Controller
             ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
             ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
             ->join('users', 'delegados.IdUsuario', '=', 'users.id')
-
             ->where("aplicaciones.IdAplicacion", "=", $id)
             ->get();
         $datos = $aplicaciones[0];
