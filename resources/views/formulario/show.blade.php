@@ -12,6 +12,9 @@
         .mause-nulo {
             pointer-events: none;
         }
+        .mover{
+
+        }
     </style>
 </head>
 
@@ -23,9 +26,9 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="POST">
+                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="patch">
                     @csrf
-                    @method('PUT')
+                    
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -88,8 +91,10 @@
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                         </div>
-
-                        
+                        <div class="col-md-6 ">
+                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
+                            <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
+                        </div>
                     </div>
                     <div class="col-md-12 text-center margen">
                         <button type="submit" class="btn btn-primary" >

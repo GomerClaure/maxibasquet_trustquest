@@ -15,6 +15,7 @@ class FormularioController extends Controller
      */
     public function index()
     {
+       
         $datos['aplicaciones'] = Aplicacion::paginate(5);
         return view('formulario.index', $datos);
     }
@@ -37,7 +38,7 @@ class FormularioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ('hola');
     }
 
     /**
@@ -70,8 +71,8 @@ class FormularioController extends Controller
         } else {
             $datos = null;
         }
-
-        return view('formulario.show', compact('datos'));
+        
+        return (view('formulario.show', compact('datos')));
     }
 
     /**
@@ -94,12 +95,13 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosEmpleado = request() -> except(['_token','_method']);
-        
-       /* $fila = Aplicacion::find($id);
+       // $datosEmpleado = request() -> except(['_token','_method']);
+      // Aplicacion::where('id', $id)->update(array('Pendiente' => 'aceptado'));
+        $fila = Aplicacion::find($id);
         $fila->EstadoAplicacion = 'aceptado';
-        $fila->save();*/
-        return ('hola');
+        $fila->update();
+        
+        return $fila;
     }
 
     /**
