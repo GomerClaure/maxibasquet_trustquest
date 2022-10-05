@@ -22,7 +22,7 @@
   <h1 class="TituloPais">Pais:</h1>
 </div>
 <div>
-  <h1 class="TituloCategoria">Categoria:{{$categoria->NombreCategoria}}</h1>
+  <h1 class="TituloCategoria">Categoria:</h1>
 </div>
 
 <div class="listaEquipo">
@@ -52,7 +52,7 @@
 <img class="card-img-top" src="{{asset('storage').'/'.$tec->Foto}}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{$tec->NombrePersona}} {{$tec->ApellidoPaterno}} {{$tec->ApellidoMaterno}}</h5>
-    <a href="#" class="btn btn-primary">Detalles</a>
+    <br><br>
   </div>
 </div>
 <br>
