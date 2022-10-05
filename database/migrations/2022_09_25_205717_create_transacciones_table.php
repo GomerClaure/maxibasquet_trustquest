@@ -14,10 +14,10 @@ class CreateTransaccionesTable extends Migration
     public function up()
     {
         Schema::create('transacciones', function (Blueprint $table) {
-            $table->id("IdTransaccion");
+            $table->bigIncrements("IdTransaccion");
             $table->unsignedBigInteger("IdAplicacion");
-            $table->bigInteger("NumeroTransaccion");
-            $table->string("NombreBanco")->nullable();
+            $table->string("NumeroTransaccion");
+            $table->bigInteger("NumeroCuenta");
             $table->integer("MontoTransaccion");
             $table->date("FechaTransaccion");
             $table->string("FotoVaucher");
