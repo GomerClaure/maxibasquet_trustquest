@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Aplicacione;
 use App\Models\Delegado;
+use App\Models\Transaccion;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,16 +18,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        /* PaisSeeder::class,
+    
+        $this->call([
+        PaisSeeder::class,
          TorneoSeeder::class,
          PreinscripcionSeeder::class,
          CategoriaSeeder::class,
-         AplicacioneSeeder::class,*/ 
-        $this->call([
-           // PersonaSeeder::class,
-           UsuarioSeeder::class,
-           DelegadoSeeder::class,
-           EquipoSeeder::class,
+         AplicacioneSeeder::class,
+         //TransaccionSeeder::class
         ]);
     }
 }

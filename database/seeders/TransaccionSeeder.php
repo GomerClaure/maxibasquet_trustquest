@@ -16,7 +16,7 @@ class TransaccionSeeder extends Seeder
     public function run()
     {
         DB::table("transacciones")->insert([
-            'IdTransaccion'=>45,
+            'IdTransaccion'=>1,
             'NumeroTransaccion'=>1456132,
             'IdAplicacion'=>1,
             'NumeroCuenta'=>'465',
