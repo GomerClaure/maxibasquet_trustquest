@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Equipo;
+use Illuminate\Database\Seeder;
+
 class EquipoSeeder extends Seeder
 {
     /**
@@ -13,13 +15,6 @@ class EquipoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('equipos')->insert([
-            'IdEquipo' => 1,
-            'IdDelegado' => 1,
-            'IdAplicacion' =>1,
-            'NombreEquipo' => 'batman',
-            'LogoEquipo' =>'batman',
-            'created_at'=>now()
-        ]);
+        Equipo::factory(10)->create();
     }
 }

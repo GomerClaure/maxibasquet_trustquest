@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Persona;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
 class PersonaSeeder extends Seeder
 {
     /**
@@ -13,17 +14,6 @@ class PersonaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("personas") -> insert([
-            'IdPersona' =>1,
-            'CiPersona' => '8001234',
-            'NombrePersona'=>'superman',
-            'ApellidoPaterno' => 'teran',
-            'ApellidoMaterno' => 'paco',
-            'FechaNacimiento' => date("2023-09-12"),
-            'SexoPersona' => 'masculino',
-            'Edad' =>23,
-            'Foto' =>'aqui va la foto',
-            'created_at'=>now(),
-        ]);
+        Persona::factory(10)->create();
     }
 }

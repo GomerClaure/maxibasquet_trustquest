@@ -17,7 +17,7 @@ class FormularioController extends Controller
     {
        
         $datos['aplicaciones'] = Aplicacion::paginate(5);
-        return view('formulario.index', $datos);
+        return view('listaAplicaciones', $datos);
     }
 
     /**
