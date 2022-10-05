@@ -6,24 +6,28 @@ use Illuminate\Http\Request;
 use App\Models\Jugadores;
 use App\Models\Personas;
 use App\Models\Tecnicos;
+use App\Models\Aplicaciones;
 
 class EquipoController extends Controller
 {
     public function index()
     {
-        $datos=Equipo::select('equipos.NombreEquipo')
-                    ->get();
-
+        //informacion de una persona que es un tecnico 
         $informaciontecnicos=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
         ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
         ->get();
-       
-        $informacion=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno')
+       //Informacion de una persona que es un jugador
+        $informacion=Personas::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
              ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
              ->get();
+        //Informacion del nombre de un equipo y su id pais 
+        $EquipoPais=Aplicaciones::select('aplicaciones.IdPais','aplicaciones.NombreEquipo')
+             ->join('equipos','aplicaciones.IdAplicacion','=','equipos.IdAplicacion')
+             ->get();
+        
 
-             return view('equipo.Equipos',compact('informaciontecnicos','informacion','datos'));
-              //return $datos;
+             return view('equipo.Equipos',compact('informaciontecnicos','informacion','EquipoPais'));
+             //return $equipoPais;
     }
     public function create()
     {
