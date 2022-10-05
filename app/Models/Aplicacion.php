@@ -11,5 +11,5 @@ class Aplicacion extends Model
     protected $table = "aplicaciones";
     protected $primaryKey = 'IdAplicacion';
     protected $fillable = ["IdPreinscripcion","IdPreinscripcion","IdPais","NombreUsuario","CorreoElectronico","NumeroTelefono","NombreEquipo","Categorias","EstadoAplicacion","observaciones"];
-    protected $hidden = ["IdAplicacion"];
+    public $timestamps = false;
 }

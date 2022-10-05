@@ -1,0 +1,22 @@
+body{
+    background: #D9D9D9;
+}
+
+
+.tituloFomulario{
+    font-weight: bold;
+    color: #7B7979;
+}
+
+.btnFomulario{
+    width: 50%;
+    margin-top: 2%;
+}
+
+.error-message{
+    color: red;
+}
+
+.contenedorForm{
+    background: white;
+}
