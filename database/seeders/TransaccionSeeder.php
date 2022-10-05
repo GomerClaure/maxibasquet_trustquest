@@ -22,7 +22,7 @@ class TransaccionSeeder extends Seeder
             'NumeroCuenta'=>'465',
             'MontoTransaccion'=>350,
             'FechaTransaccion'=>date("2023-01-08"),
-            'FotoVaucher'=>'nuevafoto',
+            'FotoVaucher'=>'uploads/3wLfLvhhuDvoGuwFnD5394kFwQrNJ8saQ23EneWP.jpg',
             'created_at'=>now()
         ]);
     }

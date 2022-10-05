@@ -1,4 +1,3 @@
-{{$datos}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="../css/formulario.css" rel="stylesheet">
     <title>Preinscripcion</title>
+    <style>
+        .mause-nulo{
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,7 +23,7 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3">
+                <form class="row g-3 mause-nulo" >
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -37,10 +41,10 @@
                             </div>
 
                             <div class="form-check form-check-inline">
-                               
+
                                 <label class="form-check-label" for="inlineCheckbox1">{{$datos->NombreCategoria}}</label>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
@@ -72,10 +76,10 @@
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Voucher de pago:</label>
+                                <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value="{{$datos->FotoVaucher}}">
+                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="200" height="200">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -83,11 +87,11 @@
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                         </div>
                     </div>
-                    <div class="col-md-12 text-right ">
+                    <div class="col-md-12 text-center margen">
                         <button type="submit" class="btn btn-primary">aceptar</button>
                         <button type="submit" class="btn btn-primary">rechazar</button>
                     </div>
-                    
+
                 </form>
             </section>
         </div>
