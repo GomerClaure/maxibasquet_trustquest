@@ -48,16 +48,20 @@ class JugadorController extends Controller
     {
         //$datos = recuest() -> all();
         //return response()->json($datos);
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $anio = date('Y')-100;
+        $fecha = $anio."-01-01";
 
         $request -> validate([
             'ci'=>'required|numeric|digits_between:6,9',
             'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
-            'fechaNacimiento'=>'required|date|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
             'nacionalidad'=>'required|regex:/^[A-Z][a-z, ]+$/',
             'selectSexo'=>'required',
-            'edad'=>'required|numeric|min:1|max:120',
+            'edad'=>'required|numeric|min:1|max:100',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
             'selectCategoria'=>'required',
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',

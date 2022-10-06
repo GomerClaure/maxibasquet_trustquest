@@ -79,7 +79,7 @@
             @endif
 
             <div class="col-7 p-4 mt-3 mx-auto contenedorForm" >
-                <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
@@ -100,7 +100,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">CI:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
+                                <input type="text" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
                                 @error('ci')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -112,9 +112,10 @@
                                 $anio = date('Y')-100;
                                 $fecha = $anio."-01-01"
                             @endphp
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 contFecha">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
-                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
+                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento"
+                                    value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
                                 @error('fechaNacimiento')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -140,7 +141,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Edad:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
+                                <input type="text" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
                                 @error('edad')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -187,7 +188,7 @@
 
                         <div class="form-group mb-3 col-3">
                             <label for="" class="form-label">Peso:</label>
-                            <input type="number" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
+                            <input type="text" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
                             @error('peso')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -195,7 +196,7 @@
 
                         <div class="form-group mb-3 col-3">
                             <label for="" class="form-label">N° Camiseta:</label>
-                            <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
+                            <input type="text" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
                             @error('nCamiseta')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
