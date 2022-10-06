@@ -51,11 +51,11 @@ class JugadorController extends Controller
 
         $request -> validate([
             'ci'=>'required|numeric|digits_between:6,9',
-            'nombre'=>'required|alpha',
-            'apellidoPaterno'=>'required|alpha',
-            'apellidoMaterno'=>'required|alpha',
-            'fechaNacimiento'=>'required|date',
-            'nacionalidad'=>'required|alpha',
+            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'fechaNacimiento'=>'required|date|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'nacionalidad'=>'required|regex:/^[A-Z][a-z, ]+$/',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:120',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
