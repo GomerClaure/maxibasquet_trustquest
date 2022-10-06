@@ -46,31 +46,35 @@
                 </ul>
             </nav>
         </header>
+            @php
+                $vadido = "¡Valido!";
+                $noVadido = "¡No valido!";
+            @endphp
             @if (Session::has('mensaje'))
-                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡Éxito! </strong> {{Session::get('mensaje')}}.
+                    <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorEdad'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorEdad')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEdad')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorCategoria'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorCategoria')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorExiste'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorExiste')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorExiste')}}</h4>
                 </div>
             @endif
 
@@ -220,7 +224,7 @@
                         </div>
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del carnet (Resolucion 472x472):</label>
+                            <label for="" class="form-label">Foto del carnet:</label>
                             <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*" value="{{ old('fotoCarnet') }}">
                             @error('fotoCarnet')
                                 <p class="error-message">{{ $message }}</p>
