@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aplicacion;
+
 class AplicacionController extends Controller
 {
 
@@ -70,7 +71,25 @@ class AplicacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $aplicaciones = Aplicacion::select(
+            'aplicaciones.NombreUsuario',
+           'aplicaciones.CorreoElectronico',
+           'aplicaciones.NumeroTelefono',
+           'aplicaciones.NombreEquipo',
+           'aplicaciones.Categorias',
+            'transacciones.NumeroTransaccion',
+            'transacciones.NumeroCuenta',
+            'transacciones.MontoTransaccion',
+            'transacciones.FechaTransaccion',
+            'transacciones.FotoVaucher',
+            'paises.NombrePais'
+        )
+        ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
+        ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
+        ->where('aplicaciones.IdAplicacion','=',$id)
+        ->get();
+
+    return view("detallesAplicacion",compact('aplicaciones'));
     }
 
     /**
@@ -93,7 +112,7 @@ class AplicacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
