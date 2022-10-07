@@ -20,14 +20,13 @@ class CreateJugadoresTable extends Migration
             $table->unsignedInteger("IdPersona");
             $table->float("EstaturaJugador",3,2);
             $table->integer("PesoJugador");
-            $table->string("FotosCarnet");
+            $table->string("FotoCarnet");
             $table->string("PosicionJugador");
             $table->integer("NumeroCamiseta");
-            $table->boolean("HabilitacionJugador");
             $table->timestamps();
-            $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas');
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
-            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');                        
+            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
 
         });
     }

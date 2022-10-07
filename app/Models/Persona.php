@@ -13,4 +13,9 @@ class Persona extends Model
     protected $fillable = ["CiPersona","NombrePersona","ApellidoPaterno","ApellidoMaterno","FechaNacimiento","SexoPersona","Edad","Foto","NacionalidadPersona",];
     protected $hidden = ["IdPersona"];
 
+    public function jugador(){
+        return $this->hasMany(Jugador::class, 'IdJugador');
+    }
+
+
 }

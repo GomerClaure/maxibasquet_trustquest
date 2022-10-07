@@ -12,4 +12,8 @@ class Categoria extends Model
     protected $primaryKey = 'IdCategoria';
     protected $fillable = ["NombreCategoria","EdadMaxima","EdadMinima"];
     public $timestamps = false;
+
+    public function jugador(){
+        return $this->hasMany(Jugador::class, 'IdJugador');
+    }
 }

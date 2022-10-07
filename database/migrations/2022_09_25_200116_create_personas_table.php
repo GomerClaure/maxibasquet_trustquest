@@ -24,7 +24,7 @@ class CreatePersonasTable extends Migration
             $table->string("SexoPersona",10);
             $table->integer("Edad");
             $table->string("Foto");
-            //$table->string("NacionalidadPersona",25);
+            //$table->string("Nacionalidad",25);
             $table->timestamps();
         });
     }

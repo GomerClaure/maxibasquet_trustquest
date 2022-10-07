@@ -13,4 +13,7 @@ class Equipo extends Model
     protected $fillable = ["IdAplicacion","NombreEquipo","LogoEquipo"];
     protected $hidden = ["IdEquipo"];
 
+    public function jugador(){
+        return $this->hasMany(Jugador::class, 'IdJugador');
+    }
 }

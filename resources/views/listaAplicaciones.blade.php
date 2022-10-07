@@ -24,6 +24,25 @@
         <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
     </head>
     <body class="antialiased">
+    <header >
+            <!-- Grey with black text -->
+            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
                 <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
@@ -54,7 +73,7 @@
                                             <td >{{$aplicacion->Total}} $</td>
                                             <td>{{$aplicacion->EstadoAplicacion}}</td>
                                             <td class="d-grid gap-2">
-                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('jugador'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
+                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
                                             </td>
                                         </tr>
                                         @endforeach

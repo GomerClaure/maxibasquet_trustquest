@@ -15,16 +15,16 @@ class AplicacionController extends Controller
     public function index()
     {
         $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion','aplicaciones.NombreEquipo','preinscripciones.Monto','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
-                    ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')      
+                    ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')
                     ->where("EstadoAplicacion","=","Pendiente")
                     ->orWhere("EstadoAplicacion","=","Aceptado") 
                     ->get();
-        
+
         $aplicaciones = $this->ingresarMonto($aplicaciones);
 
         return view("listaAplicaciones",compact('aplicaciones'));
     }
-    /** 
+    /**
      * Crea un nuevo arreglo con los datos de las apliaciones junto con el Total a pagar
      * correpondiente a la cantidad de categorias
     */
@@ -40,7 +40,7 @@ class AplicacionController extends Controller
         }
         return $arreglo;
      }
-    
+
     /**
      * Show the form for creating a new resource.
      *
