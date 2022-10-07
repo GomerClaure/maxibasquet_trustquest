@@ -17,7 +17,7 @@ class AplicacionController extends Controller
         $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion','aplicaciones.NombreEquipo','preinscripciones.Monto','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
                     ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')      
                     ->where("EstadoAplicacion","=","Pendiente")
-                    ->orWhere("EstadoAplicacion","=","aceptado") 
+                    ->orWhere("EstadoAplicacion","=","Aceptado") 
                     ->get();
         
         $aplicaciones = $this->ingresarMonto($aplicaciones);

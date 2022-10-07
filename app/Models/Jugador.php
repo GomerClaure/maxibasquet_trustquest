@@ -10,6 +10,6 @@ class Jugador extends Model
     use HasFactory;
     protected $table = "jugadores";
     protected $primaryKey = 'IdJugador';
-    protected $fillable = ["IdEquipo","IdCategoria","IdPais","IdPersona","PesoJugador","AlturaJugador","FotosCarnet","PosicionJugador","NumeroCamiseta","HabilitacionJugador"];
+    protected $fillable = ["IdEquipo","IdCategoria","IdPais","IdPersona","PesoJugador","EstaturaJugador","FotoCarnet","PosicionJugador","NumeroCamiseta"];
     protected $hidden = ["IdJugador"];
 }

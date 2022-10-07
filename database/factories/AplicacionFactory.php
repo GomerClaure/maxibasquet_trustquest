@@ -21,7 +21,7 @@ class AplicacionFactory extends Factory
             'NumeroTelefono' => $this->faker->text(8),
             'NombreEquipo' => $this->faker->text(20),
             'Categorias' => $this->faker->randomElement(["+30","+30,+35","+35,+40,+45"]),
-            'EstadoAplicacion' => $this->faker->randomElement(["aceptado","rechazado","Pendiente"]),
+            'EstadoAplicacion' => $this->faker->randomElement(["Aceptado","Rechazado","Pendiente"]),
             'created_at' => now(),
             'updated_at' => now()
 
