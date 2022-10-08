@@ -16,7 +16,7 @@ class AplicacionesController extends Controller
             $paises = Pais::all();
             // $preinscripcion = Aplicacion::find(2);
             // echo $preinscripcion;
-            return view('preinscripcion', compact('paises'));
+            return view('preinscripcion.preinscripcionEquipo', compact('paises'));
         }
         //  para guardar una preinscripcion
         public function store(Request $request)
@@ -35,6 +35,7 @@ class AplicacionesController extends Controller
                 'montoPagar' => 'required|max:5',
                 'numCuenta' => 'required|max:255',
                 'fecDeposito' => 'required|date|before:'.$dateToday,
+                'categoria' => ['required','array','min:1'],
             ]);   
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
@@ -78,7 +79,7 @@ class AplicacionesController extends Controller
             $transaccion->FotoVaucher = $formulario['vaucher'];
             $transaccion->save();
             $paises = Pais::all();
-            return view('preinscripcion',compact('paises'));
+            return view('preinscripcion.preinscripcionEquipo',compact('paises'));
             // Empleado::insert($datosEmpleado);
         // return response()->json($datosEmpleado);
         }
