@@ -35,6 +35,6 @@ class AlphaSpaces implements Rule
      */
     public function message()
     {
-        return 'The :attribute may only contain letters and spaces.';
+        return 'El campo :attribute debe contener solo letras y espacios.';
     }
 }

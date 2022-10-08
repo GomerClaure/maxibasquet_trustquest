@@ -27,7 +27,7 @@ class AplicacionesController extends Controller
             $request -> validate([
                 'vaucher'=>'required|image',
                 'nombreDeEquipo'=>['required','max:30',new AlphaSpaces],
-                'nombreDelEncargado' => 'required|max:50|alpha',
+                'nombreDelEncargado' => ['required','max:50',new AlphaSpaces],
                 'option' =>  'required',
                 'correo' => 'required|email|max:255',
                 'telefono' => 'required|max:15',
@@ -35,15 +35,22 @@ class AplicacionesController extends Controller
                 'montoPagar' => 'required|max:5',
                 'numCuenta' => 'required|max:255',
                 'fecDeposito' => 'required|date|before:'.$dateToday,
-            ],$message =['required'=>'el campo :attribute es requerido', 'numeric'=> 'el campo :attribute no es numerico(Este campo necesita ser un numero)']);   
+            ]);   
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
             $formulario['vaucher'] = $request->file('vaucher')->store('upload');
             $aplicacionPreinscripcion->IdPreinscripcion = 1;
             // echo $formulario['pais'];
-            $pais= Pais::where('CodigoPais', '=', $formulario['pais'])->firstOrFail();
+            
             // echo $pais;
-            $aplicacionPreinscripcion->IdPais = $pais->IdPais;
+            try {
+                $pais= Pais::where('NombrePais', '=', $formulario['pais'])->firstOrFail();
+                $aplicacionPreinscripcion->IdPais = $pais->IdPais;
+            } catch (\Throwable $th) {
+                echo 'Paso un error al capturar el país: ',  $th->getMessage(), "\n";
+                return back()->withError('El CodigoPais ' . $formulario['pais']." no es válido")->withInput();;
+            }
+            
             $aplicacionPreinscripcion->NombreUsuario = $formulario['nombreDelEncargado'];
             $aplicacionPreinscripcion->CorreoElectronico = $formulario['correo'];
             $aplicacionPreinscripcion->NumeroTelefono = $formulario['telefono'];

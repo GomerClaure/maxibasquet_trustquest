@@ -23,6 +23,9 @@
                 <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form mx-5">
+                @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
                 <form class="g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
                     @csrf    
                     <div class="row pb-3 mb-4 registro-datos ">
@@ -84,7 +87,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="correo" class="form-label">Correo Electronico:</label>
-                            <input name="correo" type="email" class="form-control" id="correo">
+                            <input name="correo" type="text" class="form-control" id="correo">
                             @error('correo')
                                 <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
