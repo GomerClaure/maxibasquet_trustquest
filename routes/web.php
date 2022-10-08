@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('formulario',FormularioController::class);
+Route::resource('/formulario',FormularioController::class);
 
 
 Route::get('/Equipo',[EquipoController::class,'index']);

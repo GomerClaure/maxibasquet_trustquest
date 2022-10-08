@@ -12,7 +12,6 @@
         .mause-nulo {
             pointer-events: none;
         }
-        
     </style>
 </head>
 
@@ -26,7 +25,7 @@
             <section class="form">
                 <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="patch">
                     @csrf
-                    
+
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -76,7 +75,7 @@
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->MontoTransaccion}}">
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div>
                                 <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
@@ -91,9 +90,11 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <button type="submit" class="btn btn-primary" >
-                            aceptar
-                        </button>
+
+                            <button type="submit" class="btn btn-primary">
+                                aceptar
+                            </button>
+
                         <button type="submit" class="btn btn-primary">rechazar</button>
                     </div>
 

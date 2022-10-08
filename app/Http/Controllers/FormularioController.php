@@ -15,10 +15,33 @@ class FormularioController extends Controller
      */
     public function index()
     {
-       
-        $datos['aplicaciones'] = Aplicacion::paginate(5);
-        return view('listaAplicaciones', $datos);
+
+        /* $datos['aplicaciones'] = Aplicacion::paginate(5);
+        return view('formulario.index',$datos);*/
+        $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion', 'aplicaciones.NombreEquipo', 'preinscripciones.Monto', 'aplicaciones.EstadoAplicacion', 'aplicaciones.Categorias')
+            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
+            ->where("EstadoAplicacion", "=", "Pendiente")
+            ->orWhere("EstadoAplicacion", "=", "aceptado")
+            ->orWhere("EstadoAplicacion", "=", "rechazado")
+            ->get();
+
+        $aplicaciones = $this->ingresarMonto($aplicaciones);
+        echo ('hola desde index');
+        return view("listaAplicaciones", compact('aplicaciones'));
     }
+
+    private function ingresarMonto($aplicaciones){
+        $arreglo=array();
+        if (!$aplicaciones->isEmpty()) {
+            foreach($aplicaciones as $aplicacion){
+                $categorias = explode(",",$aplicacion->Categorias);
+                $total = sizeof($categorias) * $aplicacion-> Monto;
+                $aplicacion->Total=$total;
+                array_push($arreglo,$aplicacion);
+            }
+        }
+        return $arreglo;
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -50,11 +73,11 @@ class FormularioController extends Controller
     public function show($id)
     {
         $aplicaciones = Aplicacion::select(
-           'aplicaciones.NombreUsuario',
-           'aplicaciones.CorreoElectronico',
-           'aplicaciones.NumeroTelefono',
-           'aplicaciones.NombreEquipo',
-           'aplicaciones.Categorias',
+            'aplicaciones.NombreUsuario',
+            'aplicaciones.CorreoElectronico',
+            'aplicaciones.NumeroTelefono',
+            'aplicaciones.NombreEquipo',
+            'aplicaciones.Categorias',
             'transacciones.NumeroTransaccion',
             'transacciones.NumeroCuenta',
             'transacciones.MontoTransaccion',
@@ -71,7 +94,8 @@ class FormularioController extends Controller
         } else {
             $datos = null;
         }
-        
+        echo ('hola desde show');
+
         return (view('formulario.show', compact('datos')));
     }
 
@@ -95,13 +119,13 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // $datosEmpleado = request() -> except(['_token','_method']);
-      // Aplicacion::where('id', $id)->update(array('Pendiente' => 'aceptado'));
+        // $datosEmpleado = request() -> except(['_token','_method']);
+        // Aplicacion::where('id', $id)->update(array('Pendiente' => 'aceptado'));
         $fila = Aplicacion::find($id);
         $fila->EstadoAplicacion = 'aceptado';
         $fila->update();
-        
-        return $fila;
+        echo ('holaa');
+        //return view('listaAplicaciones');
     }
 
     /**
