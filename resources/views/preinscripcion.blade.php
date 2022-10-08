@@ -8,25 +8,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-    {{-- <link href="../css/preinscripcion.css" rel="stylesheet"> --}}
+    <link href="{{asset('css/StylePreinscripcion.css' )}}" rel="stylesheet">
     <title>Preinscripcion</title>
 </head>
 
-<body style="background: #171923;">
+<body>
     <div >
         <div class="container justify-content-center"">
         {{-- @section('scripts')
                 <script src="/public/js/admin/users/preinscripcion.js"></script>
             @endsection --}}
 		    <section class=" main-title text-center">
-                <h1 class="display-6 mb-0" " style="color: white">Formulario de preinscripción de equipos</h1>
-                <p style="color: white">3er Torneo Internacional de Maxi Basquet</p>
+                <h1 class="display-6 mb-0" >Formulario de preinscripción de equipos</h1>
+                <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form mx-5">
-                <form class="row g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
+                <form class="g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
                     @csrf    
-                    <div class=" row pb-3 mb-4 registro-datos border-top border-5" style="background: #dddad8">
-                        <h5>Datos del equipo</h5>
+                    <div class="row pb-3 mb-4 registro-datos ">
+                        <div class="card-title">
+                            <h5>Datos del equipo</h5>
+                            
+                        </div>
                         <hr>
                         <div class="col-md-6">
                             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
@@ -107,8 +110,10 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos border-top border-5" style="background: #dddad8">
-                        <h5>Datos de pago</h5>
+                    <div class="row pb-3 registro-datos" >
+                        <div class="card-title">
+                            <h5>Datos de pago</h5>
+                        </div>
                         <hr>
                         <div class="col-md-6">
                             <label for="numComprobante" class="form-label">Numero de comprobante de pago:</label>
@@ -157,7 +162,7 @@
                         
                     </div>
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn " style="background: #F49D37">Preinscribir Equipo</button>
+                        <button type="submit" class="btn " style="background: #F7B32B">Preinscribir Equipo</button>
                     </div>
                </form>
             </section>
