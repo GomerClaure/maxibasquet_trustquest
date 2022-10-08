@@ -8,12 +8,13 @@ use App\Models\Pais;
 use App\Models\Preinscripcion;
 use App\Models\Transaccion;
 use Illuminate\Validation\Rule;
+use App\Rules\AlphaSpaces;
 class AplicacionesController extends Controller
 {
     public function index()
         {
             $paises = Pais::all();
-            $preinscripcion = Aplicacion::find(2);
+            // $preinscripcion = Aplicacion::find(2);
             // echo $preinscripcion;
             return view('preinscripcion', compact('paises'));
         }
@@ -22,10 +23,10 @@ class AplicacionesController extends Controller
         {
             $dateToday = date('m/d/Y');
             // $dateToday = date(strtotime ('-1 day',strtotime($dateToday)));
-            echo $dateToday;
+            // echo $dateToday;
             $request -> validate([
                 'vaucher'=>'required|image',
-                'nombreDeEquipo'=>'required|max:30|alpha',
+                'nombreDeEquipo'=>['required','max:30',new AlphaSpaces],
                 'nombreDelEncargado' => 'required|max:50|alpha',
                 'option' =>  'required',
                 'correo' => 'required|email|max:255',
@@ -39,7 +40,8 @@ class AplicacionesController extends Controller
             $aplicacionPreinscripcion = new Aplicacion;
             $formulario['vaucher'] = $request->file('vaucher')->store('upload');
             $aplicacionPreinscripcion->IdPreinscripcion = 1;
-            $pais= Pais::where('NombrePais', '=', $formulario['pais'])->firstOrFail();
+            // echo $formulario['pais'];
+            $pais= Pais::where('CodigoPais', '=', $formulario['pais'])->firstOrFail();
             // echo $pais;
             $aplicacionPreinscripcion->IdPais = $pais->IdPais;
             $aplicacionPreinscripcion->NombreUsuario = $formulario['nombreDelEncargado'];
@@ -68,7 +70,8 @@ class AplicacionesController extends Controller
             $transaccion->FechaTransaccion = $formulario['fecDeposito'];
             $transaccion->FotoVaucher = $formulario['vaucher'];
             $transaccion->save();
-            return view('preinscripcion');
+            $paises = Pais::all();
+            return view('preinscripcion',compact('paises'));
             // Empleado::insert($datosEmpleado);
         // return response()->json($datosEmpleado);
         }

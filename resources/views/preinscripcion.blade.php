@@ -12,20 +12,20 @@
     <title>Preinscripcion</title>
 </head>
 
-<body style="background: #e9e9e9;">
+<body style="background: #171923;">
     <div >
         <div class="container justify-content-center"">
         {{-- @section('scripts')
                 <script src="/public/js/admin/users/preinscripcion.js"></script>
             @endsection --}}
 		    <section class=" main-title text-center">
-                <h1 class="display-6 mb-0" ">Formulario de preinscripción de equipos</h1>
-                <p>3er Torneo Internacional de Maxi Basquet</p>
+                <h1 class="display-6 mb-0" " style="color: white">Formulario de preinscripción de equipos</h1>
+                <p style="color: white">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form mx-5">
                 <form class="row g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
                     @csrf    
-                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5">
+                    <div class=" row pb-3 mb-4 registro-datos border-top border-5" style="background: #dddad8">
                         <h5>Datos del equipo</h5>
                         <hr>
                         <div class="col-md-6">
@@ -90,7 +90,7 @@
                             <label  for="pais" class="form-label">Pais:</label>
                             <select name="pais" class="form-select" id="pais">
                             @foreach ($paises as $pais)
-                                <option value="{{ $pais->CodigoPais }}">{{$pais->NombrePais}}</option>
+                                <option >{{$pais->NombrePais}}</option>
                             @endforeach
                             </select>
                         </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 ">
+                    <div class=" row pb-3 registro-datos border-top border-5" style="background: #dddad8">
                         <h5>Datos de pago</h5>
                         <hr>
                         <div class="col-md-6">
@@ -157,7 +157,7 @@
                         
                     </div>
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Preinscribir Equipo</button>
+                        <button type="submit" class="btn " style="background: #F49D37">Preinscribir Equipo</button>
                     </div>
                </form>
             </section>
