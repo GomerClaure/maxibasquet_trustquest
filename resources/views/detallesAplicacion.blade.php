@@ -72,13 +72,16 @@
                             <div>
                                 <label for="inputEmail4" class="form-label">Categorias:</label>
                             </div>
-
-                            <div class="form-check form-check-inline">
-
-                                <label class="form-check-label" for="inlineCheckbox1">{{$aplicacion->Categorias}}</label>
+                         
+                            <div class=" d-inline-block">
+                            @foreach($aplicacion->Categorias as $categoria)
+                                <input name="option[]" class="form-check-input"  type="checkbox" checked disabled>
+                                <label class="form-check-label" for="categoria30">{{$categoria}}</label>
+                            @endforeach
                             </div>
 
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
                             <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->CorreoElectronico}}">

@@ -23,7 +23,7 @@ class AplicacionController extends Controller
                     ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
-
+        
         return view("listaAplicaciones",compact('aplicaciones'));
     }
     /**
@@ -34,7 +34,7 @@ class AplicacionController extends Controller
         $arreglo=array();
         if (!$aplicaciones->isEmpty()) {
             foreach($aplicaciones as $aplicacion){
-                $categorias = explode(",",$aplicacion->Categorias);
+                $categorias = $this->separar($aplicacion->Categorias);
                 $total = sizeof($categorias) * $aplicacion-> Monto;
                 $aplicacion->Total=$total;
                 array_push($arreglo,$aplicacion);
@@ -42,6 +42,13 @@ class AplicacionController extends Controller
         }
         return $arreglo;
      }
+
+    /**
+     * Separa un string con comas
+     */
+    private function separar($categorias){
+        return explode(",",$categorias);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -89,8 +96,12 @@ class AplicacionController extends Controller
         ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
         ->where('aplicaciones.IdAplicacion','=',$id)
         ->get();
+    
+    
     if (! $aplicaciones->isEmpty()) {
         $aplicacion = $aplicaciones[0];
+        $categorias = $this->separar($aplicacion->Categorias);
+        $aplicacion->Categorias=$categorias;
     }else{
         $aplicacion = null;
     }
