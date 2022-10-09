@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class FormularioController extends Controller
 {
@@ -59,7 +60,7 @@ class FormularioController extends Controller
      */
     public function store(Request $request)
     {
-        return ('hola');
+        return ('hola store');
     }
 
     /**
@@ -72,6 +73,7 @@ class FormularioController extends Controller
     {
         $aplicaciones = Aplicacion::select(
             'aplicaciones.NombreUsuario',
+            'aplicaciones.IdAplicacion',
             'aplicaciones.CorreoElectronico',
             'aplicaciones.NumeroTelefono',
             'aplicaciones.NombreEquipo',
@@ -106,7 +108,7 @@ class FormularioController extends Controller
      */
     public function edit(Delegado $formulario)
     {
-        return ('hola');
+        return ('hola edit');
     }
 
     /**
@@ -118,13 +120,9 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $datosEmpleado = request() -> except(['_token','_method']);
-        // Aplicacion::where('id', $id)->update(array('Pendiente' => 'aceptado'));
-        $fila = Aplicacion::find($id);
-        $fila->EstadoAplicacion = 'aceptado';
-        $fila->update();
+        
         echo ('holaa');
-        return view('listaAplicaciones');
+        return ('hola desde update');
     }
 
     /**
@@ -136,5 +134,6 @@ class FormularioController extends Controller
     public function destroy(Delegado $formulario)
     {
         //
+        Return ('hola de sde delete');
     }
 }

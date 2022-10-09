@@ -1,3 +1,4 @@
+{{$datos}}
 @if(!empty($datos))
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 " action="{{route('/formulario/'.$datos->IdAplicacion)}}" method="PATCH">
+                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
                     @csrf
                     {{method_field('PATCH')}}
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
@@ -91,11 +92,13 @@
                     </div>
                     <div class="col-md-12 text-center margen">
 
-                            <button type="submit" class="btn btn-primary">
-                                aceptar
-                            </button>
+                        <button type="submit" class="btn btn-primary" name="validar" id="validar">
+                            validar
+                        </button>
 
-                        <button type="submit" class="btn btn-primary">rechazar</button>
+                        <button type="submit" class="btn btn-primary" name="invalidar" id="invalidar">
+                            invalidar
+                        </button>
                     </div>
 
                 </form>

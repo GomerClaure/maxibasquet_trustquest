@@ -24,7 +24,10 @@ Route::get('/', function () {
 });
 
 Route::resource('/formulario',FormularioController::class);
-
+/*Route::patch('formulario/show/{id}',[FormularioController::class,'update']);
+Route::get('formulario/show/{id}',[FormularioController::class,'show']);
+Route::get('formulario/index/',[FormularioController::class,'index']);
+*/
 
 Route::get('/equipo',[EquipoController::class,'index']);
 
