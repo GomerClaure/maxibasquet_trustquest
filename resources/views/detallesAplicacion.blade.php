@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Detalles de la aplicacion</title>
+        <title>Datos de la Preinscripcion</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
         <div style="background: #e9e9e9;">
             <div class="container justify-content-center">
             <div class="aling-item-rigth py-2">
-            <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
+            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
         </div>
         @if( $aplicacion != null)
 		<section class=" main-title text-center">
