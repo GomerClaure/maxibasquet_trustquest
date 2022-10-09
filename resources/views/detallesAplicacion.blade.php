@@ -21,9 +21,8 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleaplicacionJugador.css')}}">
     </head>
-    <body class="antialiased">
     <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
@@ -43,9 +42,87 @@
                 </ul>
             </nav>
         </header>
-        <div class="aling-item-rigth pb-2">
+    
+        <body >
+        <div style="background: #e9e9e9;">
+            <div class="container justify-content-center">
+            <div class="aling-item-rigth py-2">
             <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
         </div>
+		<section class=" main-title text-center">
+
+            <h1 class="display-6 mb-0" style="color:#37474f">Datos de preinscripción de equipos</h1>
+            <p>3er Torneo Internacional de Maxi Basquet</p>
+            </section>
+            <section class="container pb-5">
+                <div class="row g-3 " >
+                    <div class=" row pb-3 mb-4 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
+                        <h5>Datos del Equipo</h5>
+                        <hr>
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
+                            <input class="form-control" id="inputEmail4" readonly="readonly" value="{{$aplicacion->NombreEquipo}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->NombreUsuario}}">
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="inputEmail4" class="form-label">Categorias:</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+
+                                <label class="form-check-label" for="inlineCheckbox1">{{$aplicacion->Categorias}}</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Correo Electronico:</label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->CorreoElectronico}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pais" class="form-label">Pais:</label>
+                            <input class="form-control" type="text" id="pais" readonly="readonly" value="{{$aplicacion->NombrePais}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" readonly="readonly" id="specificSizeInputGroupUsername" value="{{$aplicacion->NumeroTelefono}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" row pb-3 pt-3 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
+                        <h5>Datos de pago</h5>
+                        <hr>
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Nro de Transcción:</label>
+                            <input class="form-control" id="inputEmail4"  readonly="readonly" value="{{$aplicacion->NumeroTransaccion}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Monto a pagar:</label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->MontoTransaccion}} $">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div>
+                                <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
+                            </div>
+                            <div class="input-group">
+                                <img src="{{asset('storage').'/'.$aplicacion->FotoVaucher}}" width="362" height="203">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->FechaTransaccion}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </body>
+
 
 </html>
