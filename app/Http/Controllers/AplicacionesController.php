@@ -9,6 +9,9 @@ use App\Models\Preinscripcion;
 use App\Models\Transaccion;
 use Illuminate\Validation\Rule;
 use App\Rules\AlphaSpaces;
+use DateTime;
+
+
 class AplicacionesController extends Controller
 {
     public function index()
@@ -22,8 +25,9 @@ class AplicacionesController extends Controller
         public function store(Request $request)
         {
             $dateToday = date('m/d/Y');
-            // $dateToday = date(strtotime ('-1 day',strtotime($dateToday)));
-            // echo $dateToday;
+            // $yesterday = date("m/d/Y", strtotime("yesterday"));
+            // echo $yesterday."           ";
+            // echo $dateToday."           ";
             $request -> validate([
                 'vaucher'=>'required|image',
                 'nombreDeEquipo'=>['required','max:30',new AlphaSpaces],
@@ -35,7 +39,7 @@ class AplicacionesController extends Controller
                 'montoPagar' => 'required|max:5',
                 'numCuenta' => 'required|max:255',
                 'fecDeposito' => 'required|date|before:'.$dateToday,
-                'categoria' => ['required','array','min:1'],
+                // 'categoria' => ['required','array','min:1'],
             ]);   
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
@@ -79,6 +83,7 @@ class AplicacionesController extends Controller
             $transaccion->FotoVaucher = $formulario['vaucher'];
             $transaccion->save();
             $paises = Pais::all();
+            // return $request;
             return view('preinscripcion.preinscripcionEquipo',compact('paises'));
             // Empleado::insert($datosEmpleado);
         // return response()->json($datosEmpleado);

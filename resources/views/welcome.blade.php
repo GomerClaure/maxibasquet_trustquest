@@ -14,6 +14,7 @@
 
     <body >
         <main class="py-4">
+            {{-- @include('flash-message') --}}
             @yield('content')
         </main>
     </body>

@@ -155,9 +155,9 @@
                     </div>
                </form>
             </section>
-            <section>
+            {{-- <section>
                 <script src="{{asset('js/admin/users/preinscripcion.js')}}"></script>
-            </section>
+            </section> --}}
  
         </div>
 @endsection
