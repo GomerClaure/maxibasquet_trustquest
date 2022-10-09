@@ -91,14 +91,9 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
+                        <input type="submit" class="btn btn-primary" name="aceptado" id="aceptado" value="aceptado">
+                        <input type="submit" class="btn btn-primary" name="rechazado" id="rechazado" value="rechazado">
 
-                        <button type="submit" class="btn btn-primary" name="validar" id="validar">
-                            validar
-                        </button>
-
-                        <button type="submit" class="btn btn-primary" name="invalidar" id="invalidar">
-                            invalidar
-                        </button>
                     </div>
 
                 </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Delegado;
 use App\Models\Aplicacion;
+use App\Models\Aplicaciones;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -120,9 +121,12 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        echo ('holaa');
-        return ('hola desde update');
+        $valido = request()->except(['_token','_method']);
+
+        $datos = Aplicaciones::find($id);
+        $datos ->EstadoAplicacion=$valido['aceptado'];
+        $datos->save();
+        //return view($this->index());
     }
 
     /**
