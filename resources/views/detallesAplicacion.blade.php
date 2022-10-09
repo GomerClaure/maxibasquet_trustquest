@@ -49,6 +49,7 @@
             <div class="aling-item-rigth py-2">
             <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
         </div>
+        @if( $aplicacion != null)
 		<section class=" main-title text-center">
 
             <h1 class="display-6 mb-0" style="color:#37474f">Datos de preinscripción de equipos</h1>
@@ -122,6 +123,9 @@
                 </div>
             </section>
         </div>
+        @else
+        <h1>No encontrado</h1>
+        @endif
     </body>
 
 

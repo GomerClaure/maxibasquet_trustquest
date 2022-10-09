@@ -17,6 +17,7 @@ class AplicacionController extends Controller
     {
         $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion','aplicaciones.NombreEquipo','preinscripciones.Monto','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
                     ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')
+                    ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion')
                     ->where("EstadoAplicacion","=","Pendiente")
                     ->orWhere("EstadoAplicacion","=","Aceptado") 
                     ->get();
@@ -88,8 +89,13 @@ class AplicacionController extends Controller
         ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
         ->where('aplicaciones.IdAplicacion','=',$id)
         ->get();
-
-    return view("detallesAplicacion",compact('aplicaciones'));
+    if (! $aplicaciones->isEmpty()) {
+        $aplicacion = $aplicaciones[0];
+    }else{
+        $aplicacion = null;
+    }
+    
+    return view("detallesAplicacion",compact('aplicacion'));
     }
 
     /**
