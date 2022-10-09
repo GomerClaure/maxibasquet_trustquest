@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::resource('/formulario',FormularioController::class);
 
 
-Route::get('/Equipo',[EquipoController::class,'index']);
+Route::get('/equipo',[EquipoController::class,'index']);
 
 //Route::get('/jugador/create',[JugadorController::class,'create']);
 //Route::resource('jugador',JugadorController::class);

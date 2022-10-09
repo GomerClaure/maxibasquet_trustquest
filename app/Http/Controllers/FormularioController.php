@@ -16,8 +16,6 @@ class FormularioController extends Controller
     public function index()
     {
 
-        /* $datos['aplicaciones'] = Aplicacion::paginate(5);
-        return view('formulario.index',$datos);*/
         $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion', 'aplicaciones.NombreEquipo', 'preinscripciones.Monto', 'aplicaciones.EstadoAplicacion', 'aplicaciones.Categorias')
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
             ->where("EstadoAplicacion", "=", "Pendiente")
@@ -83,7 +81,8 @@ class FormularioController extends Controller
             'transacciones.MontoTransaccion',
             'transacciones.FechaTransaccion',
             'transacciones.FotoVaucher',
-            'paises.NombrePais'
+            'paises.NombrePais',
+            'aplicaciones.EstadoAplicacion'
         )
             ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
             ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
@@ -125,7 +124,7 @@ class FormularioController extends Controller
         $fila->EstadoAplicacion = 'aceptado';
         $fila->update();
         echo ('holaa');
-        //return view('listaAplicaciones');
+        return view('listaAplicaciones');
     }
 
     /**

@@ -23,9 +23,9 @@
             <p>3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="patch">
+                <form class="row g-3 " action="{{route('/formulario/'.$datos->IdAplicacion)}}" method="PATCH">
                     @csrf
-
+                    {{method_field('PATCH')}}
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
