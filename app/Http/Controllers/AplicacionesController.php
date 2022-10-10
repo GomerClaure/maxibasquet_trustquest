@@ -34,7 +34,7 @@ class AplicacionesController extends Controller
                 'montoPagar' => 'required|max:5',
                 'numCuenta' => 'required|max:255',
                 'fecDeposito' => 'required|date|before:'.$dateToday,
-            ],$message =['required'=>'el campo :attribute es requerido', 'numeric'=> 'el campo :attribute no es numerico(Este campo necesita ser un numero)']);   
+            ],$message =['required'=>'el campo :attribute es requerido', 'numeric'=> 'el campo :attribute no es numerico(Este campo necesita ser un numero)']);
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
             $formulario['vaucher'] = $request->file('vaucher')->store('upload');
@@ -49,7 +49,7 @@ class AplicacionesController extends Controller
             $aplicacionPreinscripcion->NombreEquipo = $formulario['nombreDeEquipo'];
             $opcionesCategorias = $formulario['option'];
             $categorias = "";
-            for ($i=0; $i < count($opcionesCategorias); $i++) { 
+            for ($i=0; $i < count($opcionesCategorias); $i++) {
                 if ($i==count($opcionesCategorias)-1) {
                     $categorias = $categorias.$opcionesCategorias[$i];
                 }else{
@@ -59,7 +59,7 @@ class AplicacionesController extends Controller
             $aplicacionPreinscripcion->Categorias = $categorias;
             $aplicacionPreinscripcion->save();
             // $aplicacionPreinscripcion->IdAplicacion;
-   
+
             $transaccion = new Transaccion;
             $transaccion->IdAplicacion = $aplicacionPreinscripcion->IdAplicacion;
             $transaccion->NumeroTransaccion = $formulario['numComprobante'];
