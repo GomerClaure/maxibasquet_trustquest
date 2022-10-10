@@ -26,6 +26,8 @@
                 <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
                     @csrf
                     {{method_field('PATCH')}}
+                    <div class="col-md-6">
+                    </div>
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -75,7 +77,7 @@
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->MontoTransaccion}}">
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div>
                                 <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
@@ -87,11 +89,12 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
-                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
+                            <label for="inputPassword4" class="form-label">Nro Cuenta:</label>
+                            <input class="form-control" id="inputPassword4" value="{{$datos->NumeroCuenta}}">
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
+                        <a type="button" class="btn btn-primary" href="/formulario">atras</a>
                         <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
                         <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
                     </div>

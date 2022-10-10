@@ -96,7 +96,6 @@ class FormularioController extends Controller
         } else {
             $datos = null;
         }
-        echo ('hola desde show');
 
         return (view('formulario.show', compact('datos')));
     }
@@ -124,7 +123,6 @@ class FormularioController extends Controller
         $valido = request()->except(['_token', '_method']);
         $valido = $valido['estadoAplicacion'];
         $datos = Aplicaciones::find($id);
-        echo ($valido);
         $datos->EstadoAplicacion = $valido;
 
         $datos->save();
