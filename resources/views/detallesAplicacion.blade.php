@@ -52,25 +52,27 @@
         @if( $aplicacion != null)
 		<section class=" main-title text-center">
 
-            <h1 class="display-6 mb-0" style="color:#37474f">Datos de preinscripción de equipos</h1>
-            <p>3er Torneo Internacional de Maxi Basquet</p>
+            <h1 class="display-6 mb-0" style="color:#37474f"><b>
+                Datos de preinscripción de equipos
+            </b> </h1>
+            <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
             </section>
-            <section class="container pb-5">
+            <section class="container pb-5 pt-3">
                 <div class="row g-3 " >
                     <div class=" row pb-3 mb-4 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
-                        <h5>Datos del Equipo</h5>
+                        <h5><b>Datos del Equipo</b> </h5>
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
+                            <label for="inputEmail4" class="form-label"><b>Nombre de equipo:</b> </label>
                             <input class="form-control" id="inputEmail4" readonly="readonly" value="{{$aplicacion->NombreEquipo}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
+                            <label for="inputPassword4" class="form-label"><b>Nombre del encargado:</b> </label>
                             <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->NombreUsuario}}">
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Categorias:</label>
+                                <label for="inputEmail4" class="form-label"><b>Categorias:</b></label>
                             </div>
                          
                             <div class=" d-inline-block">
@@ -83,15 +85,15 @@
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Correo Electronico:</label>
+                            <label for="inputPassword4" class="form-label"><b>Correo Electrónico:</b> </label>
                             <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->CorreoElectronico}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="pais" class="form-label">Pais:</label>
+                            <label for="pais" class="form-label"><b>Pais:</b> </label>
                             <input class="form-control" type="text" id="pais" readonly="readonly" value="{{$aplicacion->NombrePais}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
+                            <label for="inputPassword4" class="form-label"><b>Telefono de contacto:</b> </label>
                             <div class="input-group">
                                 <input type="text" class="form-control" readonly="readonly" id="specificSizeInputGroupUsername" value="{{$aplicacion->NumeroTelefono}}">
                             </div>
@@ -99,27 +101,27 @@
                     </div>
 
                     <div class=" row pb-3 pt-3 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
-                        <h5>Datos de pago</h5>
+                        <h5><b>Datos de pago</b></h5>
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nro de Transcción:</label>
+                            <label for="inputEmail4" class="form-label"><b>Nro de Transcción:</b></label>
                             <input class="form-control" id="inputEmail4"  readonly="readonly" value="{{$aplicacion->NumeroTransaccion}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Monto a pagar:</label>
+                            <label for="inputPassword4" class="form-label"><b>Monto a pagar:</b></label>
                             <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->MontoTransaccion}} $">
                         </div>
                         
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
+                                <label for="inputEmail4" class="form-label"><b>Foto Vaucher:</b> </label>
                             </div>
                             <div class="input-group">
                                 <img src="{{asset('storage').'/'.$aplicacion->FotoVaucher}}" width="362" height="203">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
+                            <label for="inputPassword4" class="form-label"><b>Fecha de depósito:</b> </label>
                             <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->FechaTransaccion}}">
                         </div>
                     </div>
