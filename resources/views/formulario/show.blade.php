@@ -1,4 +1,3 @@
-{{$datos}}
 @if(!empty($datos))
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +75,7 @@
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->MontoTransaccion}}">
                         </div>
-
+                        
                         <div class="col-md-6">
                             <div>
                                 <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
@@ -88,12 +87,13 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
+                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
+                            <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <input type="submit" class="btn btn-primary" name="aceptado" id="aceptado" value="aceptado">
-                        <input type="submit" class="btn btn-primary" name="rechazado" id="rechazado" value="rechazado">
-
+                        <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
+                        <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
                     </div>
 
                 </form>

@@ -26,22 +26,22 @@ class FormularioController extends Controller
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
-        echo ('hola desde index');
         return view("listaAplicaciones", compact('aplicaciones'));
     }
 
-    private function ingresarMonto($aplicaciones){
-        $arreglo=array();
+    private function ingresarMonto($aplicaciones)
+    {
+        $arreglo = array();
         if (!$aplicaciones->isEmpty()) {
-            foreach($aplicaciones as $aplicacion){
-                $categorias = explode(",",$aplicacion->Categorias);
-                $total = sizeof($categorias) * $aplicacion-> Monto;
-                $aplicacion->Total=$total;
-                array_push($arreglo,$aplicacion);
+            foreach ($aplicaciones as $aplicacion) {
+                $categorias = explode(",", $aplicacion->Categorias);
+                $total = sizeof($categorias) * $aplicacion->Monto;
+                $aplicacion->Total = $total;
+                array_push($arreglo, $aplicacion);
             }
         }
         return $arreglo;
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -121,12 +121,23 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $valido = request()->except(['_token','_method']);
-
+        $valido = request()->except(['_token', '_method']);
+        $valido = $valido['estadoAplicacion'];
         $datos = Aplicaciones::find($id);
-        $datos ->EstadoAplicacion=$valido['aceptado'];
+        echo ($valido);
+        $datos->EstadoAplicacion = $valido;
+
         $datos->save();
-        //return view($this->index());
+
+        $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion', 'aplicaciones.NombreEquipo', 'preinscripciones.Monto', 'aplicaciones.EstadoAplicacion', 'aplicaciones.Categorias')
+            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
+            ->where("EstadoAplicacion", "=", "Pendiente")
+            ->orWhere("EstadoAplicacion", "=", "aceptado")
+            ->orWhere("EstadoAplicacion", "=", "rechazado")
+            ->get();
+
+        $aplicaciones = $this->ingresarMonto($aplicaciones);
+        return view("listaAplicaciones", compact('aplicaciones'));
     }
 
     /**
@@ -138,6 +149,6 @@ class FormularioController extends Controller
     public function destroy(Delegado $formulario)
     {
         //
-        Return ('hola de sde delete');
+        return ('hola de sde delete');
     }
 }
