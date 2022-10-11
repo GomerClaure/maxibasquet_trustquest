@@ -1,3 +1,5 @@
+
+
 @if(!empty($datos))
 <!DOCTYPE html>
 <html lang="en">
@@ -95,10 +97,14 @@
                     </div>
                     <div class="col-md-12 text-center margen">
                         <a type="button" class="btn btn-primary" href="/formulario">atras</a>
+                        @if($datos->EstadoAplicacion == 'Pendiente')
                         <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
                         <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        @else
+                        <input type="submit" class="btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="aceptado">
+                        <input type="submit" class="btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        @endif
                     </div>
-
                 </form>
             </section>
         </div>
