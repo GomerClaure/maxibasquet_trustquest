@@ -59,7 +59,7 @@ class JugadorController extends Controller
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'nacionalidad'=>'required|regex:/^[A-Z][a-z, ]+$/',
+            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:100',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',

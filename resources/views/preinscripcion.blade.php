@@ -24,7 +24,7 @@
             </section>
             <section class="form mx-5">
                 <form class="row g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data">
-                    @csrf    
+                    @csrf
                     <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5">
                         <h5>Datos del equipo</h5>
                         <hr>
@@ -99,7 +99,7 @@
                             <div class="input-group">
                                 <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
                                 <input name="telefono" min="1"type="number" class="form-control" id="telefono">
-                                
+
                             </div>
                             @error('telefono')
                                 <p style="color:#FF0000" class="error-message">{{ $message }}</p>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="input-group">
                                 <input name="numCuenta" type="number" class="form-control" id="numCuenta" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                
+
                             </div>
                             @error('numCuenta')
                                         <p style="color:#FF0000" class="error-message">{{ $message }}</p>
@@ -154,7 +154,7 @@
                                         <p  style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
-                        
+
                     </div>
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Preinscribir Equipo</button>
@@ -165,7 +165,7 @@
                 <script src="{{asset('js/admin/users/preinscripcion.js')}}"></script>
             </section>
             {{-- @section('scripts')
-                
+
             @endsection --}}
         </div>
     </div>

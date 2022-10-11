@@ -29,10 +29,12 @@
     <body class="antialiased">
         <header >
             <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+            <nav class="navbar navbar-expand-sm navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
+                        <a class="nav-link" href="#">
+                            <img src="{{asset('storage/uploads/logo_maxi.png')}}" alt="Avatar Logo" style="width:50px;" class="">
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
@@ -41,7 +43,7 @@
                         <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
             </nav>
@@ -78,7 +80,7 @@
                 </div>
             @endif
 
-            <div class="col-7 p-4 mt-3 mx-auto contenedorForm" >
+            <div class="col-7 p-4 mx-auto contenedorForm" >
                 <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
@@ -234,7 +236,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="btn btn-primary btnFomulario">Inscribir</button>
+                        <button type="submit" class="btn btnFomulario">Inscribir</button>
                     </div>
                 </form>
             </div>

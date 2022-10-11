@@ -1,15 +1,21 @@
 body{
-    background: #D9D9D9;
+    background: #171f27;
 }
 
 .tituloFomulario{
     font-weight: bold;
-    color: #7B7979;
+    color: white;
 }
 
 .btnFomulario{
     width: 50%;
     margin-top: 2%;
+    background: #eb8f32;
+    color: white;
+}
+
+.btn:first-child:hover{
+    background: #fa841a;
 }
 
 .error-message{
@@ -17,5 +23,14 @@ body{
 }
 
 .contenedorForm{
-    background: white;
+    background: #b5b5bd;
+    margin-top: 5%;
+}
+
+.navbar{
+    background: #e1e3e7;
+}
+
+.navbar a {
+    color: black;
 }
