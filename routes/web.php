@@ -6,7 +6,7 @@ use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
-
+use App\Http\Controllers\CuerpoTecnicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +36,4 @@ Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/aplicaciones',[AplicacionController::class,'index']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
+Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create']);
