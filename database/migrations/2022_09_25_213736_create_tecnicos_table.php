@@ -19,10 +19,11 @@ class CreateTecnicosTable extends Migration
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedInteger("IdPersona");
             $table->string("RolesTecnicos");
+            $table->string("FotoCarnet");
             $table->timestamps();
-            $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas');
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
-            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos'); 
+            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
         });
     }
 

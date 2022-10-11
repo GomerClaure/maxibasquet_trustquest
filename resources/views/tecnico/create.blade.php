@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <link rel="stylesheet" href="{{asset('css/styleJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/styleCuerpoTecnico.css')}}">
 
     </head>
     <body class="antialiased">
@@ -79,10 +79,10 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/jugador/create/'.$idTecnico)}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('/tecnico/create/'.$idTecnico)}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
+                        <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
@@ -191,9 +191,9 @@
                     <div class="row">
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del jugador (Resolucion 472x472):</label>
-                            <input type="file" class="form-control" id="fotoJugador" name="fotoJugador" accept="image/*" value="{{ old('fotoJugador') }}">
-                            @error('fotoJugador')
+                            <label for="" class="form-label">Foto del tecnico (Resolucion 472x472):</label>
+                            <input type="file" class="form-control" id="fotoTecnico" name="fotoTecnico" accept="image/*" value="{{ old('fotoTecnico') }}">
+                            @error('fotoTecnico')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>

@@ -37,3 +37,4 @@ Route::get('/aplicaciones',[AplicacionController::class,'index']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
 Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create']);
+Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
