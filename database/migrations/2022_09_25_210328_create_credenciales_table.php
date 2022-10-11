@@ -16,7 +16,7 @@ class CreateCredencialesTable extends Migration
         Schema::create('credenciales', function (Blueprint $table) {
             $table->id("IdCredencial");
             $table->unsignedBigInteger("IdPersona");
-            $table->string("CodigoQR");
+            $table->string("CodigoQR")->unique();
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
 

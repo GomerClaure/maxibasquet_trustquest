@@ -20,7 +20,7 @@ class CreateAplicacionesTable extends Migration
             $table->string("NombreUsuario",100);
             $table->string("CorreoElectronico",100);
             $table->string("NumeroTelefono",20);
-            $table->string("NombreEquipo");
+            $table->string("NombreEquipo")->unique();
             $table->string("Categorias");
             $table->enum("EstadoAplicacion",["Aceptado","Rechazado","Pendiente"]);
             $table->text("observaciones")->nullable();
