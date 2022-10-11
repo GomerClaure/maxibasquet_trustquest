@@ -401,16 +401,38 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
+
+        .boton-color {
+            background-color: #eb8f32;
+        }
+
+        .background-color {
+            background-color: #171f27;
+        }
+
+        .color-navegador {
+            background-color: #2c2a2a;
+        }
+
+        .color-letras {
+            color: white;
+        }
+
+        .celdaAsignado {
+            word-break: break-all !important;
+            white-space: nowrap !important;
+            width: 150px !important;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
 </head>
 
-<body class="antialiased">
+<body class="antialiased background-color">
     <header>
         <!-- Grey with black text -->
-        <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light color-navegador">
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="#"></a>
@@ -433,8 +455,8 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <h3>Equipos Preinscritos</h3>
-                            <h5>3er Torneo Internacional de Maxi Basquet</h5>
+                            <h3 class="color-letras">Equipos Preinscritos</h3>
+                            <h5 class="color-letras">3er Torneo Internacional de Maxi Basquet</h5>
                             <div class="card">
                                 <div class="ps-3 py-2">
                                     <h4>Lista Detallada</h4>
@@ -447,7 +469,6 @@
                                                     <th>Nombre de Equipo </th>
                                                     <th>Monto a Pagar</th>
                                                     <th>Estado de Preinscripcion</th>
-                                                    <th>Observaciones</th>
                                                     <th>Detalles</th>
                                                 </tr>
                                             </thead>
@@ -457,9 +478,8 @@
                                                     <td>{{$aplicacion->NombreEquipo}}</td>
                                                     <td>{{$aplicacion->Total}} $</td>
                                                     <td>{{$aplicacion->EstadoAplicacion}}</td>
-                                                    <td>{{$aplicacion->observaciones}}</td>
                                                     <td class="d-grid gap-2">
-                                                        <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
+                                                        <a type="button" class="boton-color btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

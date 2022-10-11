@@ -14,23 +14,43 @@
         .mause-nulo {
             pointer-events: none;
         }
+
+        .boton-color {
+            background-color: #eb8f32;
+        }
+
+        .background-color{
+            background-color: #171f27;
+        }
+
+        .color-navegador{
+            background-color: #2c2a2a;
+        }
+
+        .color-letras{
+            color: white;
+        }
+
+        .color-form{
+            background-color: #b5b5bd;
+        }
     </style>
 </head>
 
-<body>
-    <div style="background: #e9e9e9;">
+<body class="background-color">
+    <div >
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
-            <h1 class="display-6 mb-0" style="color:#37474f">Formulario de preinscripción de equipos</h1>
-            <p>3er Torneo Internacional de Maxi Basquet</p>
+            <h1 class="display-6 mb-0 color-letras" >Formulario de preinscripción de equipos</h1>
+            <p class="color-letras">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
-                <form class="row g-3 " action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
+                <form class="row g-3" action="{{url('/formulario/'.$datos->IdAplicacion)}}" method="post">
                     @csrf
                     {{method_field('PATCH')}}
                     <div class="col-md-6">
                     </div>
-                    <div class=" row pb-3 mb-4 registro-datos bg-white  border-top border-5 border-success mause-nulo">
+                    <div class=" row pb-3 mb-4 registro-datos  color-form  border-top border-5 border-success mause-nulo">
                         <h5>Datos del equipo</h5>
                         <hr>
                         <div class="col-md-6">
@@ -68,7 +88,7 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos bg-white  border-top border-5 border-success mause-nulo">
+                    <div class=" row pb-3 registro-datos  color-form  border-top border-5 border-success mause-nulo">
                         <h5>Datos de pago</h5>
                         <hr>
                         <div class="col-md-6">
@@ -96,13 +116,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <a type="button" class="btn btn-primary" href="/formulario">atras</a>
+                        <a type="button" class="boton-color btn btn-primary" href="/formulario">atras</a>
                         @if($datos->EstadoAplicacion == 'Pendiente')
-                        <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
-                        <input type="submit" class="btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
+                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
                         @else
-                        <input type="submit" class="btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="aceptado">
-                        <input type="submit" class="btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="aceptado">
+                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="rechazado">
                         @endif
                     </div>
                 </form>

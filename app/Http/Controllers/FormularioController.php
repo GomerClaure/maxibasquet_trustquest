@@ -92,7 +92,8 @@ class FormularioController extends Controller
             'transacciones.FechaTransaccion',
             'transacciones.FotoVaucher',
             'paises.NombrePais',
-            'aplicaciones.EstadoAplicacion'
+            'aplicaciones.EstadoAplicacion',
+            'aplicaciones.observaciones'
         )
             ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
             ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
