@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class AlphaSpaces implements Rule
+class AlphaNumeric implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class AlphaSpaces implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^[\pL\s]+$/u', $value);
+        return preg_match('/^[a-zA-Z0-9]+$/', $value);
     }
 
     /**
@@ -35,6 +35,6 @@ class AlphaSpaces implements Rule
      */
     public function message()
     {
-        return 'El campo :attribute debe contener solo letras.';
+        return 'El campo :attribute debe contener solo letras y numeros.';
     }
 }

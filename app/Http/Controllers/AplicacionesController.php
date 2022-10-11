@@ -9,11 +9,13 @@ use App\Models\Preinscripcion;
 use App\Models\Transaccion;
 use Illuminate\Validation\Rule;
 use App\Rules\AlphaSpaces;
+use App\Rules\AlphaNumeric;
 use DateTime;
 
 
 class AplicacionesController extends Controller
 {
+
     public function index()
         {
             $paises = Pais::all();
@@ -25,43 +27,39 @@ class AplicacionesController extends Controller
         public function store(Request $request)
         {
             $dateToday = date('m/d/Y');
-            // $yesterday = date("m/d/Y", strtotime("yesterday"));
-            // echo $yesterday."           ";
-            // echo $dateToday."           ";
             $request -> validate([
-                'vaucher'=>'required|image',
-                'nombreDeEquipo'=>['required','max:30',new AlphaSpaces],
-                'nombreDelEncargado' => ['required','max:50',new AlphaSpaces],
-                'option' =>  'required',
-                'correo' => 'required|email|max:255',
-                'telefono' => 'required|max:15',
-                'numComprobante' => 'required|max:255',
-                'montoPagar' => 'required|max:5',
-                'numCuenta' => 'required|max:255',
-                'fecDeposito' => 'required|date|before:'.$dateToday,
-                // 'categoria' => ['required','array','min:1'],
+                config('constants.VAUCHER_PAGO')=>'required|image|max:10000',
+                config('constants.NOMBRE_EQUIPO')=>['required','max:30',new AlphaSpaces],
+                config('constants.NOMBRE_ENCARGADO') => ['required','max:50',new AlphaSpaces],
+                config('constants.CATEGORIAS') =>  'required',
+                config('constants.CORREO_ELECTRONICO') => 'required|email|max:255',
+                config('constants.TELEFONO_CONTACTO') => 'required|max:15',
+                config('constants.DATOS_PAGO') => ['required','max:50', new AlphaNumeric],
+                config('constants.MONTO_PAGAR') => 'required|max:6',
+                config('constants.NUM_CUENTA') => 'required|max:255',
+                config('constants.FEC_DEPOSITO') => 'required|date|before:'.$dateToday,
             ]);   
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
-            $formulario['vaucher'] = $request->file('vaucher')->store('upload');
+            $formulario[config('constants.VAUCHER_PAGO')] = $request->file(config('constants.VAUCHER_PAGO'))->store('upload');
             $aplicacionPreinscripcion->IdPreinscripcion = 1;
             // echo $formulario['pais'];
             
             // echo $pais;
             try {
-                $pais= Pais::where('NombrePais', '=', $formulario['pais'])->firstOrFail();
+                $pais= Pais::where('NombrePais', '=', $formulario[config('constants.PAIS')])->firstOrFail();
                 $aplicacionPreinscripcion->IdPais = $pais->IdPais;
             } catch (\Throwable $th) {
                 echo 'Paso un error al capturar el país: ',  $th->getMessage(), "\n";
-                return back()->withError('El CodigoPais ' . $formulario['pais']." no es válido")->withInput();;
+                return back()->withError('El CodigoPais ' . $formulario[config('constants.PAIS')]." no es válido")->withInput();;
             }
             
-            $aplicacionPreinscripcion->NombreUsuario = $formulario['nombreDelEncargado'];
-            $aplicacionPreinscripcion->CorreoElectronico = $formulario['correo'];
-            $aplicacionPreinscripcion->NumeroTelefono = $formulario['telefono'];
+            $aplicacionPreinscripcion->NombreUsuario = $formulario[config('constants.NOMBRE_ENCARGADO')];
+            $aplicacionPreinscripcion->CorreoElectronico = $formulario[config('constants.CORREO_ELECTRONICO')];
+            $aplicacionPreinscripcion->NumeroTelefono = $formulario[config('constants.TELEFONO_CONTACTO')];
             $aplicacionPreinscripcion->EstadoAplicacion= 'Pendiente';
-            $aplicacionPreinscripcion->NombreEquipo = $formulario['nombreDeEquipo'];
-            $opcionesCategorias = $formulario['option'];
+            $aplicacionPreinscripcion->NombreEquipo = $formulario[config('constants.NOMBRE_EQUIPO')];
+            $opcionesCategorias = $formulario[config('constants.CATEGORIAS')];
             $categorias = "";
             for ($i=0; $i < count($opcionesCategorias); $i++) { 
                 if ($i==count($opcionesCategorias)-1) {
@@ -76,11 +74,11 @@ class AplicacionesController extends Controller
    
             $transaccion = new Transaccion;
             $transaccion->IdAplicacion = $aplicacionPreinscripcion->IdAplicacion;
-            $transaccion->NumeroTransaccion = $formulario['numComprobante'];
-            $transaccion->MontoTransaccion = $formulario['montoPagar'];
-            $transaccion->NumeroCuenta = $formulario['numCuenta'];
-            $transaccion->FechaTransaccion = $formulario['fecDeposito'];
-            $transaccion->FotoVaucher = $formulario['vaucher'];
+            $transaccion->NumeroTransaccion = $formulario[config('constants.DATOS_PAGO')];
+            $transaccion->MontoTransaccion = $formulario[config('constants.MONTO_PAGAR')];
+            $transaccion->NumeroCuenta = $formulario[config('constants.NUM_CUENTA')];
+            $transaccion->FechaTransaccion = $formulario[config('constants.FEC_DEPOSITO')];
+            $transaccion->FotoVaucher = $formulario[config('constants.VAUCHER_PAGO')];
             $transaccion->save();
             $paises = Pais::all();
             // return $request;

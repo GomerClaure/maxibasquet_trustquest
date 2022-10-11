@@ -1,20 +1,21 @@
 body{
-    background: #171923;
+    background: #171f27;
 }
 
 .main-title{
     color: white;
 }
 .row{
-    background: #fad56e;
+    background: #b5b5bd;
 }
 
 .btn{
     margin-top: 15px;
+    background: #eb8f32;
     /* color: white; */
 }
 .card-title{
-    background: #872324;
+    background: #2c2a2a;
 }
 h5{
     color: white;

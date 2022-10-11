@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="nombreDelEncargado" class="form-label">Nombre del encargado:</label>
-                            <input name="nombreDelEncargado" type="text" class="form-control" id="nombreDelEncargado">
+                            <input name="nombreDelEncargado" type="text" class="form-control" id="nombreDelEncargado" value="{{ old('nombreDelEncargado') }}">
                             @error('nombreDelEncargado')
                                 <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
@@ -72,28 +72,28 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="correo" class="form-label">Correo Electronico:</label>
-                            <input name="correo" type="text" class="form-control" id="correo">
-                            @error('correo')
+                            <label for="correoElectronico" class="form-label">Correo Electronico:</label>
+                            <input name="correoElectronico" type="text" class="form-control" id="correoElectronico" value={{ old('correoElectronico') }}>
+                            @error('correoElectronico')
                                 <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label  for="pais" class="form-label">Pais:</label>
-                            <select name="pais" class="form-select" id="pais">
+                            <select name="pais" class="form-select" id="pais" value={{ old('pais') }}>
                             @foreach ($paises as $pais)
                                 <option >{{$pais->NombrePais}}</option>
                             @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="telefono" class="form-label">Telefono de contacto:</label>
+                            <label for="telefonoDeContacto" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
                                 <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
-                                <input name="telefono" min="1"type="number" class="form-control" id="telefono">
+                                <input name="telefonoDeContacto" min="1"type="number" class="form-control" id="telefono" value={{ old('telefonoDeContacto') }}>
                                 
                             </div>
-                            @error('telefono')
+                            @error('telefonoDeContacto')
                                 <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
@@ -105,46 +105,46 @@
                         </div>
                         <hr>
                         <div class="col-md-6">
-                            <label for="numComprobante" class="form-label">Numero de comprobante de pago:</label>
-                            <input name="numComprobante" type="text" class="form-control" id="numComprobante">
-                            @error('numComprobante')
+                            <label for="datosDePago" class="form-label">Numero de comprobante de pago:</label>
+                            <input name="datosDePago" type="text" class="form-control" id="numComprobante" value="{{old("datosDePago")}}">
+                            @error('datosDePago')
                                     <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="montoPagar" class="form-label">Monto a pagar:</label>
-                            <input name="montoPagar" type="number" class="form-control" id="montoPagar">
-                            @error('montoPagar')
+                            <label for="montoAPagar" class="form-label">Monto a pagar:</label>
+                            <input name="montoAPagar" type="number" class="form-control" id="montoAPagar" value="{{old("montoAPagar")}}">
+                            @error('montoAPagar')
                                     <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="numCuenta" class="form-label">Numero de cuenta:</label>
+                                <label for="numeroDeCuenta" class="form-label">Numero de cuenta:</label>
                             </div>
                             <div class="input-group">
-                                <input name="numCuenta" type="number" class="form-control" id="numCuenta" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                <input name="numeroDeCuenta" type="number" class="form-control" id="numeroDeCuenta" value="{{old("numeroDeCuenta")}}">
                                 
                             </div>
-                            @error('numCuenta')
+                            @error('numeroDeCuenta')
                                         <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="fecDeposito" class="form-label">Fecha de depósito:</label>
-                            <input name="fecDeposito" type="date" class="form-control" id="fecDeposito">
-                            @error('fecDeposito')
+                            <label for="fechaDeDeposito" class="form-label">Fecha de depósito:</label>
+                            <input name="fechaDeDeposito" type="date" class="form-control" id="fechaDeDeposito" value="{{old("fechaDeDeposito")}}">
+                            @error('fechaDeDeposito')
                                     <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <label for="vaucher" class="form-label">Voucher de Pago:</label>
+                                <label for="vaucherDePago" class="form-label">Vaucher de Pago:</label>
                             </div>
                             <div class="input-group">
-                                <input name="vaucher" type="file" class="form-control" id="vaucher" accept="image/*" aria-label="Upload">
+                                <input name="vaucherDePago" type="file" class="form-control" id="vaucherDePago" accept="image/*" aria-label="Upload" value="{{old("vaucherDePago")}}">
                             </div>
-                            @error('vaucher')
+                            @error('vaucherDePago')
                                         <p  style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
