@@ -17,7 +17,7 @@ class CreateEquiposTable extends Migration
             $table->id("IdEquipo");
             //$table->unsignedBigInteger("IdDelegado");
             $table->unsignedBigInteger("IdAplicacion");
-            $table->string("NombreEquipo");
+            $table->string("NombreEquipo")->unique();
             $table->string("LogoEquipo");
             $table->timestamps();
             $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');
