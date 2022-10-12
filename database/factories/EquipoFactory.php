@@ -17,7 +17,7 @@ class EquipoFactory extends Factory
         return [
             'IdAplicacion' => $this->faker->unique()->numberBetween(51,60),
             'NombreEquipo' => $this->faker->name(),
-            'LogoEquipo' => 'uploads\logo.png',
+            'LogoEquipo' => 'uploads\logo.jpg',
             'created_at' => now(),
             'updated_at' => now()
         ];
