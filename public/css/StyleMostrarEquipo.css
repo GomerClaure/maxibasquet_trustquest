@@ -6,7 +6,6 @@ body{
 .tituloequipo{
     padding: 10px;
     font-size: 45px;
-    background-color: #fca311;
 }
 .card-img-top{
     margin: 10px;
@@ -16,7 +15,7 @@ body{
 .card{
     align-items: center;
     flex-direction: row;
-    background-color: #fca311 ;
+    background-color: #7B7979 ;
     padding: auto;
     color: #272725;
     font-size:20px;
