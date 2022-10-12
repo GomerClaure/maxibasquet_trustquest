@@ -15,7 +15,7 @@ class TransaccionFactory extends Factory
     public function definition()
     {
         return [
-            'IdAplicacion' => Aplicacion::factory(),
+            'IdAplicacion' => $this->faker->unique()->numberBetween(1,50),
             'NumeroTransaccion'=> $this->faker->numberBetween(10000000000,99999999999)."",
             'NumeroCuenta'=> $this->faker->numberBetween(100000000000,999999999999)."",
             'MontoTransaccion' => $this->faker->numberBetween(300,10000),

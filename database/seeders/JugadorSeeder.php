@@ -14,6 +14,8 @@ class JugadorSeeder extends Seeder
      */
     public function run()
     {
-        Jugador::factory(10)->create();
+        Jugador::factory(12)->asignarEquipo(1)->create();
+        Jugador::factory(10)->asignarEquipo(2)->create();
+        Jugador::factory(2)->asignarEquipo(3)->create();
     }
 }
