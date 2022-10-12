@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="sel1" class="form-label">Posicion:</label>
+                                <label for="sel1" class="form-label">Rol:</label>
                                 <select class="form-select" id="selectRol" name="selectRol">
                                     <option value="Entrenador principal" {{ old('selectRol') == 'Entrenador principal' ? 'selected' : '' }}>Entrenador principal</option>
                                     <option value="Entrenador asistente" {{ old('selectRol') == 'Entrenador asistente' ? 'selected' : '' }}>Entrenador asistente</option>
