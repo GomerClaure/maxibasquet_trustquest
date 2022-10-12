@@ -44,7 +44,7 @@
             </nav>
         </header>
         <div class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-           
+
                 <div class="">
                     <div class="mask d-flex  align-items-center w-100">
                     <div class="container  ">
@@ -64,11 +64,11 @@
                                 <div class="row ">
                                     <div class="col-4 ">
                                         <div class="card">
-                                            
+
                                                 @foreach ($jugador as $jug)
                                                 <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
                                                 @endforeach
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col">
@@ -85,29 +85,29 @@
 
                                                 <tbody  >
                                                     <tr>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Altura</b></p> </div>
                                                             <div><p>{{$jug->EstaturaJugador}} m</p></div>
                                                         </td>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Peso</b></p> </div>
                                                             <div><p>{{$jug->PesoJugador}} kg</p></div>
                                                         </td>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Nacionalidad</b></p> </div>
                                                             <div><p>{{$jug->NacionalidadPersona}}</p></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Edad</b></p> </div>
                                                             <div><p>{{$jug->Edad}}</p></div>
                                                         </td>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Nacimiento</b></p> </div>
                                                             <div><p>{{$jug->FechaNacimiento}}</p></div>
                                                         </td>
-                                                        <td class="border border-dark"> 
+                                                        <td class="border border-dark">
                                                             <div> <p><b>Camiseta</b></p> </div>
                                                             <div><p>{{$jug->NumeroCamiseta}}</p></div>
                                                         </td>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-      
+
         </div>
 
     </body>
