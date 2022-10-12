@@ -23,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
     </head>
-    <body class="antialiased">
+    <body>
     <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
@@ -43,7 +43,7 @@
                 </ul>
             </nav>
         </header>
-        <div class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
                 <div class="">
                     <div class="mask d-flex  align-items-center w-100">
@@ -59,7 +59,7 @@
                         <div class="card ">
                             <div class="card-body  pt-3 ps-3 ">
                                 <div class="aling-item-rigth pb-2">
-                                <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
+                                <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col">
                                         @foreach ($jugador as $jug)
-                                        <div> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
+                                        <div class="jugador"> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
                                         <div>
                                             <h4 class="transformacion2"> <b>{{$jug->NombrePersona}}</b></h4>
                                         </div>
