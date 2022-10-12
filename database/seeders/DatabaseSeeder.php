@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             AplicacioneSeeder::class,
             TransaccionesSeeder::class,
             EquipoSeeder::class,
-            JugadorSeeder::class
+            JugadorSeeder::class,
+            TecnicoSeeder::class,
         ]);
     }
 }

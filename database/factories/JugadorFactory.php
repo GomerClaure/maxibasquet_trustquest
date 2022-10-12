@@ -15,18 +15,17 @@ class JugadorFactory extends Factory
      */
     private $idEquipo;
     
-    public function asignarEquipo($idEquipo){
+    public function asignarEquipoCategoria($idEquipo,$categoria){
         $this->idEquipo = $idEquipo;
         return $this->state([
             'IdEquipo' => $idEquipo,
+            'IdCategoria' => $categoria,
         ]);
     }
 
     public function definition()
     {
         return [
-            
-            'IdCategoria' => $this->faker->numberBetween(1,7),
             'IdPersona' => Persona::factory(),
             //'PesoJugador' => $this->faker->randomFloat(2,80,150),
             'PesoJugador' => $this->faker->numberBetween(1,99),
