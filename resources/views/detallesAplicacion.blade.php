@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Jugador Maxi Basquet</title>
+        <title>Datos de la Preinscripcion</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,12 +21,11 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleAplicacion.css')}}">
     </head>
-    <body>
     <header >
             <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+            <nav class="navbar navbar-expand-sm  navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#"></a>
@@ -43,93 +42,98 @@
                 </ul>
             </nav>
         </header>
-        <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    
+        <body >
+       
+        @if( $aplicacion != null)
+		<section class=" main-title text-center">
 
-                <div class="">
-                    <div class="mask d-flex  align-items-center w-100">
-                    <div class="container  ">
-                        <div class="d-flex justify-content-center ">
-                            <h3> <b> DATOS DEL JUGADOR</b> </h3>
+            <h1 class="display-6 mb-0" ><b>
+                Datos de preinscripción de equipos
+            </b> </h1>
+            <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
+            <div >
+            <div class="container justify-content-center">
+            <div class="aling-item-rigth py-2">
+            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
+            </div>
+            </section>
+
+            <section class="container pb-5 pt-3">
+                <div class="row g-3 "  >
+                    <div class=" row pb-3 mb-4 registro-aplicacion formulario border-top border-5 border-success mause-nulo">
+                        <h5><b>Datos del Equipo</b> </h5>
+                        <hr>
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label"><b>Nombre de equipo:</b> </label>
+                            <input class="form-control" id="inputEmail4" readonly="readonly" value="{{$aplicacion->NombreEquipo}}">
                         </div>
-                        <div class="row">
-                        <div class="col-2">
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label"><b>Nombre del encargado:</b> </label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->NombreUsuario}}">
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="inputEmail4" class="form-label"><b>Categorias:</b></label>
+                            </div>
+                         
+                            <div class=" d-inline-block">
+                            @foreach($aplicacion->Categorias as $categoria)
+                                <input name="option[]" class="form-check-input"  type="checkbox" checked disabled>
+                                <label class="form-check-label" for="categoria30">{{$categoria}}</label>
+                            @endforeach
+                            </div>
 
                         </div>
-                        <div class="col">
-                        <div class="card ">
-                            <div class="card-body  pt-3 ps-3 ">
-                                <div class="aling-item-rigth pb-2">
-                                <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
-                                </div>
-                                <div class="row ">
-                                    <div class="col-4 ">
-                                        <div class="card">
-
-                                                @foreach ($jugador as $jug)
-                                                <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
-                                                @endforeach
-
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        @foreach ($jugador as $jug)
-                                        <div class="jugador"> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
-                                        <div>
-                                            <h4 class="transformacion2"> <b>{{$jug->NombrePersona}}</b></h4>
-                                        </div>
-                                        <div>
-                                            <h4 class="transformacion2"><b>{{$jug->ApellidoPaterno}}</b></h4>
-                                        </div>
-                                        <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                            <table class=" table  mb-0 text-center  d-flex justify-content-center">
-
-                                                <tbody  >
-                                                    <tr>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Altura</b></p> </div>
-                                                            <div><p>{{$jug->EstaturaJugador}} m</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Peso</b></p> </div>
-                                                            <div><p>{{$jug->PesoJugador}} kg</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$jug->NacionalidadPersona}}</p></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Edad</b></p> </div>
-                                                            <div><p>{{$jug->Edad}}</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Nacimiento</b></p> </div>
-                                                            <div><p>{{$jug->FechaNacimiento}}</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Camiseta</b></p> </div>
-                                                            <div><p>{{$jug->NumeroCamiseta}}</p></div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+                        
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label"><b>Correo Electrónico:</b> </label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->CorreoElectronico}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pais" class="form-label"><b>Pais:</b> </label>
+                            <input class="form-control" type="text" id="pais" readonly="readonly" value="{{$aplicacion->NombrePais}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label"><b>Telefono de contacto:</b> </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" readonly="readonly" id="specificSizeInputGroupUsername" value="{{$aplicacion->NumeroTelefono}}">
                             </div>
                         </div>
-                        </div>
-                        <div class="col-2   "></div>
-                        </div>
+                    </div>
 
-
+                    <div class=" row pb-3 pt-3 registro-aplicacion formulario  border-top border-5 border-success mause-nulo">
+                        <h5><b>Datos de pago</b></h5>
+                        <hr>
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label"><b>Nro de Transcción:</b></label>
+                            <input class="form-control" id="inputEmail4"  readonly="readonly" value="{{$aplicacion->NumeroTransaccion}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label"><b>Monto a pagar:</b></label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->MontoTransaccion}} $">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div>
+                                <label for="inputEmail4" class="form-label"><b>Foto Vaucher:</b> </label>
+                            </div>
+                            <div class="input-group">
+                                <img src="{{asset('storage').'/'.$aplicacion->FotoVaucher}}" width="362" height="203">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label"><b>Fecha de depósito:</b> </label>
+                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->FechaTransaccion}}">
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            </section>
         </div>
-
+        @else
+        <h1>No encontrado</h1>
+        @endif
     </body>
+
+
 </html>

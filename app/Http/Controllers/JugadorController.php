@@ -11,6 +11,8 @@ use App\Models\Persona;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class JugadorController extends Controller
 {
@@ -46,21 +48,25 @@ class JugadorController extends Controller
     {
         //$datos = recuest() -> all();
         //return response()->json($datos);
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $anio = date('Y')-100;
+        $fecha = $anio."-01-01";
 
         $request -> validate([
             'ci'=>'required|numeric|digits_between:6,9',
-            'nombre'=>'required|alpha',
-            'apellidoPaterno'=>'required|alpha',
-            'apellidoMaterno'=>'required|alpha',
-            'fechaNacimiento'=>'required|date',
-            'nacionalidad'=>'required|alpha',
+            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
             'selectSexo'=>'required',
-            'edad'=>'required|numeric|min:1|max:120',
+            'edad'=>'required|numeric|min:1|max:100',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
             'selectCategoria'=>'required',
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
             'peso'=>'required|numeric|min:1|max:99',
-            'fotoCarnet'=>'required|image|dimensions:width=472, height=472',
+            'fotoCarnet'=>'required|image',
             'selectPosicion'=>'required',
             'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
@@ -82,12 +88,23 @@ class JugadorController extends Controller
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenJucador;
 
+        $carnetId = $request -> ci;
+        //$consulta2 = DB::select("select * from personas where personas.CiPersona = '$carnetId'");
+        $consulta2 = DB::table('personas')
+                        ->select('CiPersona')
+                        ->where('CiPersona', $carnetId, 1)
+                        ->get();
+        //return $consulta2;
+        if(!$consulta2 ->isEmpty()){
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El Ci esta registrado');
+        }
+
         $fecha = $request -> fechaNacimiento;
         $anio = substr($fecha, 0, 4);
         $edadReal = date('Y')-$anio;
         $edadActual = $request -> edad;
         if($edadReal != $edadActual){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorEdad',' La edad no coincide con la fecha de nacimiento');
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
         $categoria = $request -> selectCategoria;
@@ -95,7 +112,7 @@ class JugadorController extends Controller
         $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
 
         if($edadActual < $categoriaNum){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorCategoria',' La edad del jugador es inferior a la categoria elegida');
+            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
         }
 
         $persona -> save();
