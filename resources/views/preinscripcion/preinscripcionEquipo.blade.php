@@ -105,9 +105,9 @@
                         </div>
                         <hr>
                         <div class="col-md-6">
-                            <label for="datosDePago" class="form-label">Numero de comprobante de pago:</label>
-                            <input name="datosDePago" type="text" class="form-control" id="numComprobante" value="{{old("datosDePago")}}">
-                            @error('datosDePago')
+                            <label for="numeroDeComprobanteDePago" class="form-label">Numero de comprobante de pago:</label>
+                            <input name="numeroDeComprobanteDePago" type="text" class="form-control" id="numeroDeComprobanteDePago" value="{{old("numeroDeComprobanteDePago")}}">
+                            @error('numeroDeComprobanteDePago')
                                     <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
@@ -151,7 +151,7 @@
 
                     </div>
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn">Preinscribir Equipo</button>
+                        <button type="submit" class="btn btnFomulario">Preinscribir Equipo</button>
                     </div>
                </form>
             </section>

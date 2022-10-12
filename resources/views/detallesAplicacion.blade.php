@@ -21,11 +21,11 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleaplicacionJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleAplicacion.css')}}">
     </head>
     <header >
             <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+            <nav class="navbar navbar-expand-sm  navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#"></a>
@@ -44,22 +44,24 @@
         </header>
     
         <body >
-        <div style="background: #e9e9e9;">
-            <div class="container justify-content-center">
-            <div class="aling-item-rigth py-2">
-            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
-        </div>
+       
         @if( $aplicacion != null)
 		<section class=" main-title text-center">
 
-            <h1 class="display-6 mb-0" style="color:#37474f"><b>
+            <h1 class="display-6 mb-0" ><b>
                 Datos de preinscripción de equipos
             </b> </h1>
             <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
+            <div >
+            <div class="container justify-content-center">
+            <div class="aling-item-rigth py-2">
+            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
+            </div>
             </section>
+
             <section class="container pb-5 pt-3">
-                <div class="row g-3 " >
-                    <div class=" row pb-3 mb-4 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
+                <div class="row g-3 "  >
+                    <div class=" row pb-3 mb-4 registro-aplicacion formulario border-top border-5 border-success mause-nulo">
                         <h5><b>Datos del Equipo</b> </h5>
                         <hr>
                         <div class="col-md-6">
@@ -100,7 +102,7 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 pt-3 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
+                    <div class=" row pb-3 pt-3 registro-aplicacion formulario  border-top border-5 border-success mause-nulo">
                         <h5><b>Datos de pago</b></h5>
                         <hr>
                         <div class="col-md-6">
