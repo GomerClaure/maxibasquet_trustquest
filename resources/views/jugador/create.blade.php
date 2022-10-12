@@ -29,10 +29,12 @@
     <body class="antialiased">
         <header >
             <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
+            <nav class="navbar navbar-expand-sm navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
+                        <a class="nav-link" href="#">
+                            <img src="{{asset('storage/uploads/logo_maxi.png')}}" alt="Avatar Logo" style="width:50px;" class="">
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
@@ -41,41 +43,45 @@
                         <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
             </nav>
         </header>
+            @php
+                $vadido = "¡Valido!";
+                $noVadido = "¡No valido!";
+            @endphp
             @if (Session::has('mensaje'))
-                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡Éxito! </strong> {{Session::get('mensaje')}}.
+                    <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorEdad'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorEdad')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEdad')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorCategoria'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorCategoria')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorExiste'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto">
+                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>¡No valido! </strong> {{Session::get('mensajeErrorExiste')}}.
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorExiste')}}</h4>
                 </div>
             @endif
 
-            <div class="col-7 p-4 mt-3 mx-auto contenedorForm" >
-                <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data">
+            <div class="col-7 p-4 mx-auto contenedorForm" >
+                <form action="{{ url('/jugador/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
@@ -96,7 +102,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">CI:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
+                                <input type="text" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
                                 @error('ci')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -108,9 +114,10 @@
                                 $anio = date('Y')-100;
                                 $fecha = $anio."-01-01"
                             @endphp
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 contFecha">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
-                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
+                                <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento"
+                                    value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
                                 @error('fechaNacimiento')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -136,7 +143,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Edad:</label>
-                                <input type="number" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
+                                <input type="text" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
                                 @error('edad')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -183,7 +190,7 @@
 
                         <div class="form-group mb-3 col-3">
                             <label for="" class="form-label">Peso:</label>
-                            <input type="number" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
+                            <input type="text" class="form-control" placeholder="Ingrese su peso" id="peso" name="peso" value="{{ old('peso') }}">
                             @error('peso')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -191,7 +198,7 @@
 
                         <div class="form-group mb-3 col-3">
                             <label for="" class="form-label">N° Camiseta:</label>
-                            <input type="number" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
+                            <input type="text" class="form-control" placeholder="Ingrese el numero de camiseta" id="nCamiseta" name="nCamiseta" value="{{ old('nCamiseta') }}">
                             @error('nCamiseta')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -220,7 +227,7 @@
                         </div>
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del carnet (Resolucion 472x472):</label>
+                            <label for="" class="form-label">Foto del carnet:</label>
                             <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*" value="{{ old('fotoCarnet') }}">
                             @error('fotoCarnet')
                                 <p class="error-message">{{ $message }}</p>
@@ -229,7 +236,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="btn btn-primary btnFomulario">Inscribir</button>
+                        <button type="submit" class="btn btnFomulario">Inscribir</button>
                     </div>
                 </form>
             </div>
