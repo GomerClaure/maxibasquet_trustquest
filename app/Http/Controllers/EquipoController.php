@@ -15,32 +15,16 @@ class EquipoController extends Controller
 {
     public function index()
     {   
-        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo')
+        //Nombre y Pais de un equipo
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria')
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
-                  ->where('IdEquipo','=',1)
+                  ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
+                  ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
+    
         //Sobre la Categoria de un equipo
-        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
-                  ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
-                  ->get();
-
-        //Sobre la Categoria de un equipo
-        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
-        ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
-        ->get();
-        //informacion de una persona que es un tecnico 
-        $informaciontecnicos=Persona::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
-        ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
-        ->get();
-       //Informacion de una persona que es un jugador
-        $informacion=Persona::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
-             ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
-             ->get();
-             
-             return view('equipo.Equipos',compact('informaciontecnicos','informacion','categoria','c'));
-             
-    }                             
+    }
     public function create()
     {
         //
