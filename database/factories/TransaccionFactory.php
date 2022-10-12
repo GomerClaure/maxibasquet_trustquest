@@ -20,7 +20,7 @@ class TransaccionFactory extends Factory
             'NumeroCuenta'=> $this->faker->numberBetween(100000000000,999999999999)."",
             'MontoTransaccion' => $this->faker->numberBetween(300,10000),
             'FechaTransaccion' => $this->faker->date("d-m-Y"),
-            'FotoVaucher' => "uploads\MCK7PHKGD5G37LFGZOODBRYLT4.jpg",
+            'FotoVaucher' => 'uploads\vaucher.jpg',
             'created_at' => now()
         ];
     }
