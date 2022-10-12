@@ -27,9 +27,10 @@ class AplicacionesController extends Controller
         public function store(Request $request)
         {
             $dateToday = date('m/d/Y');
+            $dateAfter = new DateTime('2022-07-01');
             $request -> validate([
                 config('constants.VAUCHER_PAGO')=>'required|image|max:10000',
-                config('constants.NOMBRE_EQUIPO')=>['required','max:30',new AlphaSpaces],
+                config('constants.NOMBRE_EQUIPO')=>['required','max:30',new AlphaNumeric],
                 config('constants.NOMBRE_ENCARGADO') => ['required','max:50',new AlphaSpaces],
                 config('constants.CATEGORIAS') =>  'required',
                 config('constants.CORREO_ELECTRONICO') => 'required|email|max:255',
@@ -37,7 +38,7 @@ class AplicacionesController extends Controller
                 config('constants.DATOS_PAGO') => ['required','max:50', new AlphaNumeric],
                 config('constants.MONTO_PAGAR') => 'required|max:6',
                 config('constants.NUM_CUENTA') => 'required|max:255',
-                config('constants.FEC_DEPOSITO') => 'required|date|before:'.$dateToday,
+                config('constants.FEC_DEPOSITO') => ['required','date','before:'.$dateToday,'after:'.date_format($dateAfter, "d/m/Y")],
             ]);   
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
