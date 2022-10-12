@@ -33,7 +33,7 @@ class FormularioController extends Controller
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
-        return view("listaAplicaciones", compact('aplicaciones'));
+        return view("formulario.listaFormulario", compact('aplicaciones'));
     }
 
     private function ingresarMonto($aplicaciones)
@@ -143,7 +143,7 @@ class FormularioController extends Controller
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
-        return view("listaAplicaciones", compact('aplicaciones'));
+        return view("formulario.listaFormulario", compact('aplicaciones'));
     }
 
     /**
