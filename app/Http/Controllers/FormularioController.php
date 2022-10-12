@@ -27,11 +27,8 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->where("EstadoAplicacion", "=", "Pendiente")
-            ->orWhere("EstadoAplicacion", "=", "aceptado")
-            ->orWhere("EstadoAplicacion", "=", "rechazado")
             ->get();
-
+        // $aplicaciones = Aplicaciones::all();
         $aplicaciones = $this->ingresarMonto($aplicaciones);
         return view("formulario.listaFormulario", compact('aplicaciones'));
     }

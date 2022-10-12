@@ -118,11 +118,11 @@
                     <div class="col-md-12 text-center margen">
                         <a type="button" class="boton-color btn btn-primary" href="/formulario">atras</a>
                         @if($datos->EstadoAplicacion == 'Pendiente')
-                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="aceptado">
-                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="Aceptado">
+                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="Rechazado">
                         @else
-                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="aceptado">
-                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="rechazado">
+                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="Aceptado">
+                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="Rechazado">
                         @endif
                     </div>
                 </form>
