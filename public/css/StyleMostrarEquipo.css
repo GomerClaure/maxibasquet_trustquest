@@ -1,11 +1,12 @@
 html,
 body{
-  background: #b9d1ea;;
-  color: #000000;
+  background:#171f27;
+  color: #ffffff;
 }
 .tituloequipo{
     padding: 10px;
     font-size: 45px;
+    background-color: #fca311;
 }
 .card-img-top{
     margin: 10px;
