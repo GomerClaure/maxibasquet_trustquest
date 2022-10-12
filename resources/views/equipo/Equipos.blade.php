@@ -15,7 +15,6 @@
 <body>
 
 @foreach($c as $datosEquipo)
-
 <div class="card" style="width: 18rem;" >
   <div class="card-body">
     <h5 class="card-title">Equipo:{{$datosEquipo->NombreEquipo}}<br> 

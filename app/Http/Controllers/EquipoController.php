@@ -22,9 +22,10 @@ class EquipoController extends Controller
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
-    
-        //Sobre la Categoria de un equipo
-    }
+        
+             return view('equipo.Equipos',compact('c'));
+             
+    }                             
     public function create()
     {
         //
