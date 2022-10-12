@@ -78,7 +78,6 @@ class CuerpoTecnicoController extends Controller
         $persona -> Foto = $imagenTecnico;
 
         $carnetId = $request -> ci;
-        //$consulta2 = DB::select("select * from personas where personas.CiPersona = '$carnetId'");
         $consulta2 = DB::table('personas')
                         ->select('CiPersona')
                         ->where('CiPersona', $carnetId, 1)
@@ -94,6 +93,16 @@ class CuerpoTecnicoController extends Controller
         $edadActual = $request -> edad;
         if($edadReal != $edadActual){
             return redirect('tecnico/create/'.$request -> idEquipo)->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
+        }
+
+        $rol = 'Entrenador principal';
+        $consultaEntrenador = DB::table('tecnicos')
+                            ->select('*')
+                            ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
+                            ->get();
+
+        if(!$consultaEntrenador ->isEmpty()){
+            return redirect('tecnico/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
         }
 
         $persona -> save();
