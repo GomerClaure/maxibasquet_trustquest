@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             TorneoSeeder::class,
             PreinscripcionSeeder::class,
             CategoriaSeeder::class,
-            AplicacioneSeeder::class,
+            TransaccionesSeeder::class,
             PersonaSeeder::class,
             EquipoSeeder::class,
             JugadorSeeder::class

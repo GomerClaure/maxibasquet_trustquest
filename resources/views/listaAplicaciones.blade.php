@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Aplicacines de preinscripcion</title>
+        <title>Equipos Preinscritos</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
                                             <td >{{$aplicacion->Total}} $</td>
                                             <td>{{$aplicacion->EstadoAplicacion}}</td>
                                             <td class="d-grid gap-2">
-                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
+                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('aplicaciones'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
                                             </td>
                                         </tr>
                                         @endforeach
