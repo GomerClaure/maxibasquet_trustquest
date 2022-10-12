@@ -16,7 +16,7 @@ class EquipoController extends Controller
     public function index()
     {   
         //Nombre y Pais de un equipo
-        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria')
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria','equipos.LogoEquipo')
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')

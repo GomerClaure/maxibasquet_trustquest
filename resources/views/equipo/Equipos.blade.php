@@ -13,18 +13,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap" rel="stylesheet">
       </head>
 <body>
-
+  <h1 class="tituloEquipos">Equipos Campeonato Maxi Basquet</h1>
+<div class="equipos-card">
 @foreach($c as $datosEquipo)
-<div class="card" style="width: 18rem;" >
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{asset('storage').'/'.$datosEquipo->LogoEquipo}}">
   <div class="card-body">
-    <h5 class="card-title">Equipo:{{$datosEquipo->NombreEquipo}}<br> 
-                           Pais:{{$datosEquipo->NombrePais}} <br>
-                           Categoria:{{$datosEquipo->NombreCategoria}}</h5>
-    <br>
+    <h5 class="card-title">{{$datosEquipo->NombreEquipo}}</h5>
+    <p class="card-text">Pais: {{$datosEquipo->NombrePais}} <br>
+                           Categoria: {{$datosEquipo->NombreCategoria}}</p>
+    <a href="#" class="btn btn-primary">Jugadores</a>
+    <a href="#" class="btn btn-primary">Cuerpo Tecnico</a>
   </div>
 </div>
-<br>
 @endforeach
+</div>
+<br>
+
 
 </body>
 </html>
