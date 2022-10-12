@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AplicacioneSeeder::class,
             TransaccionesSeeder::class,
             EquipoSeeder::class,
+            CategoriasPorEquipoSeeder::class,
             JugadorSeeder::class,
             TecnicoSeeder::class,
         ]);
