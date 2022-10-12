@@ -15,9 +15,9 @@ body{
 .card{
     align-items: center;
     flex-direction: row;
-    background-color: #7B7979 ;
+   background-color:#7b7979;
     padding: auto;
-    color: #272725;
+    color: #ffff;
     font-size:20px;
 }
 .TituloPais{
@@ -50,7 +50,7 @@ body{
     padding: 0;
 }
 .btn{
-    background-color: #272725;
+    background-color: #fca311;
     font-size: 14;
     border: #272725;
   }
