@@ -3,7 +3,7 @@
                'CATEGORIAS' => 'option',
                'CORREO_ELECTRONICO' => 'correoElectronico',
                'TELEFONO_CONTACTO' => 'telefonoDeContacto',
-               'DATOS_PAGO' => 'datosDePago',
+               'DATOS_PAGO' => 'numeroDeComprobanteDePago',
                'MONTO_PAGAR' => 'montoAPagar',
                'NUM_CUENTA' => 'numeroDeCuenta',
                'FEC_DEPOSITO' => 'fechaDeDeposito',
