@@ -84,7 +84,7 @@ class CuerpoTecnicoController extends Controller
                         ->get();
         //return $consulta2;
         if(!$consulta2 ->isEmpty()){
-            return redirect('tecnico/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El Ci esta registrado');
+            return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
 
         $fecha = $request -> fechaNacimiento;
@@ -92,7 +92,7 @@ class CuerpoTecnicoController extends Controller
         $edadReal = date('Y')-$anio;
         $edadActual = $request -> edad;
         if($edadReal != $edadActual){
-            return redirect('tecnico/create/'.$request -> idEquipo)->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
+            return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
         $rol = 'Entrenador principal';
@@ -102,7 +102,7 @@ class CuerpoTecnicoController extends Controller
                             ->get();
 
         if(!$consultaEntrenador ->isEmpty()){
-            return redirect('tecnico/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
         }
 
         $persona -> save();
