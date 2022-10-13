@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aplicacion;
+
 class AplicacionController extends Controller
 {
 
@@ -16,13 +17,14 @@ class AplicacionController extends Controller
     {
         $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion','aplicaciones.NombreEquipo','preinscripciones.Monto','aplicaciones.EstadoAplicacion','aplicaciones.Categorias')
                     ->join('preinscripciones','aplicaciones.IdPreinscripcion','=','preinscripciones.IdPreinscripcion')
+                    ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion')
                     ->where("EstadoAplicacion","=","Pendiente")
-                    ->orWhere("EstadoAplicacion","=","aceptado")
+                    ->orWhere("EstadoAplicacion","=","Aceptado") 
                     ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
-
-        return view("listaAplicaciones",compact('aplicaciones'));
+        
+        return view("aplicacion.listaAplicaciones",compact('aplicaciones'));
     }
     /**
      * Crea un nuevo arreglo con los datos de las apliaciones junto con el Total a pagar
@@ -32,7 +34,7 @@ class AplicacionController extends Controller
         $arreglo=array();
         if (!$aplicaciones->isEmpty()) {
             foreach($aplicaciones as $aplicacion){
-                $categorias = explode(",",$aplicacion->Categorias);
+                $categorias = $this->separar($aplicacion->Categorias);
                 $total = sizeof($categorias) * $aplicacion-> Monto;
                 $aplicacion->Total=$total;
                 array_push($arreglo,$aplicacion);
@@ -40,6 +42,13 @@ class AplicacionController extends Controller
         }
         return $arreglo;
      }
+
+    /**
+     * Separa un string con comas
+     */
+    private function separar($categorias){
+        return explode(",",$categorias);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -70,7 +79,34 @@ class AplicacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $aplicaciones = Aplicacion::select(
+            'aplicaciones.NombreUsuario',
+           'aplicaciones.CorreoElectronico',
+           'aplicaciones.NumeroTelefono',
+           'aplicaciones.NombreEquipo',
+           'aplicaciones.Categorias',
+            'transacciones.NumeroTransaccion',
+            'transacciones.NumeroCuenta',
+            'transacciones.MontoTransaccion',
+            'transacciones.FechaTransaccion',
+            'transacciones.FotoVaucher',
+            'paises.NombrePais'
+        )
+        ->join('transacciones', 'aplicaciones.IdAplicacion', '=', 'transacciones.IdAplicacion',)
+        ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
+        ->where('aplicaciones.IdAplicacion','=',$id)
+        ->get();
+    
+    
+    if (! $aplicaciones->isEmpty()) {
+        $aplicacion = $aplicaciones[0];
+        $categorias = $this->separar($aplicacion->Categorias);
+        $aplicacion->Categorias=$categorias;
+    }else{
+        $aplicacion = null;
+    }
+    
+    return view("aplicacion.detallesAplicacion",compact('aplicacion'));
     }
 
     /**
@@ -93,7 +129,7 @@ class AplicacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

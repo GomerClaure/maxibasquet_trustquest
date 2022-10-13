@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Aplicacines de preinscripcion</title>
+        <title>Equipos Preinscritos</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -49,32 +49,32 @@
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
-                                <h3>Equipos Preinscritos</h3>
-                                <h5>3er Torneo Internacional de Maxi Basquet</h5>
+                                <h3 class="text-center"> <b>{{$nombreEquipo[0]->NombreEquipo}} --Jugadores</b></h3>
+                                <h5>Categoria: {{$nombreCategoria[0]->NombreCategoria}}</h5>
                             <div class="card">
                                 <div class="ps-3 py-2">
-                                    <h4>Lista Detallada</h4>
+                                    <h4 class="text-black"><b>Integrantes</b> </h4>
                                 </div>
                             <div class="card-body  pt-0 ps-3 ">
                                 <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
                                 <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
                                     <thead>
                                     <tr>
-                                        <th>Nombre de Equipo </th>
-                                        <th>Monto a Pagar</th>
-                                        <th>Estado de Preinscripcion</th>
-                                        <th>Detalles</th>
+                                        <th>Jugador </th>
+                                        <th>#</th>
+                                        <th>Poscicion</th>
+                                        <th>Estatura</th>
+                                        <th>Peso</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($aplicaciones as $aplicacion)
+                                        @foreach ($jugadores as $jugador)
                                         <tr>
-                                            <td>{{$aplicacion->NombreEquipo}}</td>
-                                            <td >{{$aplicacion->Total}} $</td>
-                                            <td>{{$aplicacion->EstadoAplicacion}}</td>
-                                            <td class="d-grid gap-2">
-                                                <a type="button" class="btn btn-primary btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
-                                            </td>
+                                            <td><a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="text-primary">{{$jugador->NombrePersona}}  {{$jugador-> ApellidoPaterno}}</a></td>
+                                            <td >{{$jugador->NumeroCamiseta}}</td>
+                                            <td>{{$jugador->PosicionJugador}}</td>
+                                            <td>{{$jugador->EstaturaJugador}} m</td>
+                                            <td>{{$jugador->PesoJugador}} Kg</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-        
+
 
     </body>
 </html>

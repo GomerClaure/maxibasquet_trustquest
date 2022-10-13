@@ -13,7 +13,7 @@ class TransaccionesSeeder extends Seeder
      */
     public function run()
     {
-        Transaccion::factory(10)->create();
+        Transaccion::factory(60)->create();
     }
 }
 

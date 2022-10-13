@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
 use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\TransaccionController;
+use App\Models\Jugador;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ use App\Http\Controllers\TecnicoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,6 +36,8 @@ Route::get('jugador/create/{id}', [JugadorController::class,'create']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
 Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/aplicaciones',[AplicacionController::class,'index']);
+Route::get('/aplicaciones/{id}',[AplicacionController::class,'show']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
 Route::get('/tecnico/{id}',[TecnicoController::class,'show']);
+Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);

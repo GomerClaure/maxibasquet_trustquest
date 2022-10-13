@@ -17,15 +17,16 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
     
         $this->call([
-            PaisSeeder::class,
             TorneoSeeder::class,
             PreinscripcionSeeder::class,
+            PaisSeeder::class,
             CategoriaSeeder::class,
             AplicacioneSeeder::class,
-            PersonaSeeder::class,
+            TransaccionesSeeder::class,
             EquipoSeeder::class,
+            CategoriasPorEquipoSeeder::class,
             JugadorSeeder::class,
-            TecnicoSeeder::class
+            TecnicoSeeder::class,
         ]);
     }
 }

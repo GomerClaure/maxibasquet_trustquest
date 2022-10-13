@@ -2,8 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Equipo;
-use App\Models\Persona2;
+use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TecnicoFactory extends Factory
@@ -16,14 +15,17 @@ class TecnicoFactory extends Factory
     public function definition()
     {
         return [
-            'IdEquipo' => Equipo::factory(),
-            'IdCategoria' => $this->faker->numberBetween(1,7),
-            'IdPersona' => Persona2::factory(),
-            'RolesTecnicos' => $this->faker->randomElement(["Entrenador","Primer asistente",
-            "Segundo asistente","Médico","Psicólogo","Masajista","Delegado"]),
+            'IdPersona' => Persona::factory(),
+            'RolesTecnicos' => $this->faker->randomElement(["Entrenador ","Preparador Fisico","Asistente","Medico"]),
             'created_at' => now(),
             'updated_at' => now()
-
         ];
+    }
+    public function asignarEquipoCategoria($idEquipo,$categoria){
+        $this->idEquipo = $idEquipo;
+        return $this->state([
+            'IdEquipo' => $idEquipo,
+            'IdCategoria' => $categoria,
+        ]);
     }
 }

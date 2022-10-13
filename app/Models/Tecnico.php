@@ -12,4 +12,5 @@ class Tecnico extends Model
     protected $primaryKey = 'IdTecnicos';
     protected $fillable = ["IdEquipo","IdCategoria","IdPersona","RolesTecnicos"];
     public $timestamps = false;
+    // protected $hidden = ["IdTecnico"];
 }
