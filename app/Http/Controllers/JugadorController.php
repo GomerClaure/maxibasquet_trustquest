@@ -38,6 +38,11 @@ class JugadorController extends Controller
         return view('jugador.create',compact('categorias','idEquipo'));
     }
 
+    public function create2(Request $request)
+    {
+        return view('jugador.create',compact('request'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,7 +101,7 @@ class JugadorController extends Controller
                         ->get();
         //return $consulta2;
         if(!$consulta2 ->isEmpty()){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El Ci esta registrado');
+            return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
 
         $fecha = $request -> fechaNacimiento;
@@ -104,7 +109,7 @@ class JugadorController extends Controller
         $edadReal = date('Y')-$anio;
         $edadActual = $request -> edad;
         if($edadReal != $edadActual){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
+            return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
         $categoria = $request -> selectCategoria;
@@ -112,7 +117,7 @@ class JugadorController extends Controller
         $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
 
         if($edadActual < $categoriaNum){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
+            return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
         }
 
         $persona -> save();
