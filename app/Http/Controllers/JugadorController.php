@@ -37,7 +37,7 @@ class JugadorController extends Controller
         $categorias = Categoria::all();
         return view('jugador.create',compact('categorias','idEquipo'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -131,6 +131,23 @@ class JugadorController extends Controller
         return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
     }
 
+    /** */
+    public function listaJugadores($equipo,$categoria){
+        $jugadores = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno',
+        'personas.Edad','jugadores.PesoJugador','jugadores.EstaturaJugador',
+        'jugadores.PosicionJugador','jugadores.NumeroCamiseta','jugadores.IdJugador')
+                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                    ->join('equipos','jugadores.IdEquipo','=','equipos.IdEquipo')
+                    ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
+                    ->where('equipos.IdEquipo','=',$equipo)
+                    ->where('categorias.IdCategoria','=',$categoria)
+                    ->get();
+        $nombreEquipo = Equipo::select('NombreEquipo')
+                        ->where('IdEquipo','=',$equipo)->get();
+        $nombreCategoria = Categoria::select("NombreCategoria") 
+                        ->where('IdCategoria','=',$categoria)->get();
+        return view('jugador.lista',compact('jugadores','nombreEquipo','nombreCategoria'));
+    }
     /**
      * Display the specified resource.
      *
@@ -155,7 +172,7 @@ class JugadorController extends Controller
                 $mensaje ="No encontrado";
                 return $mensaje;
                                 }
-        return view('datosJugador',compact('jugador'));
+        return view('jugador.datosJugador',compact('jugador'));
     }
     /**
      * Cambia el formato de la fecha de A-M-D a D/M/A

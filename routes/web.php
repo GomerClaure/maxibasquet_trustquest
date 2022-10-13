@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
 use App\Http\Controllers\TransaccionController;
+use App\Models\Jugador;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,4 @@ Route::get('/aplicaciones',[AplicacionController::class,'index']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
+Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);

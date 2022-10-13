@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Jugador Maxi Basquet</title>
+        <title>Equipos Preinscritos</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,9 +21,9 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
     </head>
-    <body>
+    <body class="antialiased">
     <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
@@ -43,93 +43,52 @@
                 </ul>
             </nav>
         </header>
-        <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-
-                <div class="">
-                    <div class="mask d-flex  align-items-center w-100">
-                    <div class="container  ">
-                        <div class="d-flex justify-content-center ">
-                            <h3> <b> DATOS DEL JUGADOR</b> </h3>
-                        </div>
-                        <div class="row">
-                        <div class="col-2">
-
-                        </div>
-                        <div class="col">
-                        <div class="card ">
-                            <div class="card-body  pt-3 ps-3 ">
-                                <div class="aling-item-rigth pb-2">
-                                <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
+        <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
+                <div class="bg-image w-100" >
+                    <div class="mask d-flex align-items-center w-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                        <div class="col-12">
+                                <h3 class="text-center"> <b>{{$nombreEquipo[0]->NombreEquipo}} --Jugadores</b></h3>
+                                <h5>Categoria: {{$nombreCategoria[0]->NombreCategoria}}</h5>
+                            <div class="card">
+                                <div class="ps-3 py-2">
+                                    <h4 class="text-black"><b>Integrantes</b> </h4>
                                 </div>
-                                <div class="row ">
-                                    <div class="col-4 ">
-                                        <div class="card">
-
-                                                @foreach ($jugador as $jug)
-                                                <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
-                                                @endforeach
-
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        @foreach ($jugador as $jug)
-                                        <div class="jugador"> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
-                                        <div>
-                                            <h4 class="transformacion2"> <b>{{$jug->NombrePersona}}</b></h4>
-                                        </div>
-                                        <div>
-                                            <h4 class="transformacion2"><b>{{$jug->ApellidoPaterno}}</b></h4>
-                                        </div>
-                                        <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                            <table class=" table  mb-0 text-center  d-flex justify-content-center">
-
-                                                <tbody  >
-                                                    <tr>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Altura</b></p> </div>
-                                                            <div><p>{{$jug->EstaturaJugador}} m</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Peso</b></p> </div>
-                                                            <div><p>{{$jug->PesoJugador}} kg</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$jug->NacionalidadPersona}}</p></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Edad</b></p> </div>
-                                                            <div><p>{{$jug->Edad}}</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Nacimiento</b></p> </div>
-                                                            <div><p>{{$jug->FechaNacimiento}}</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Camiseta</b></p> </div>
-                                                            <div><p>{{$jug->NumeroCamiseta}}</p></div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            </div>
+                            <div class="card-body  pt-0 ps-3 ">
+                                <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                                <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
+                                    <thead>
+                                    <tr>
+                                        <th>Jugador </th>
+                                        <th>#</th>
+                                        <th>Poscicion</th>
+                                        <th>Estatura</th>
+                                        <th>Peso</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($jugadores as $jugador)
+                                        <tr>
+                                            <td><a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="text-primary">{{$jugador->NombrePersona}}  {{$jugador-> ApellidoPaterno}}</a></td>
+                                            <td >{{$jugador->NumeroCamiseta}}</td>
+                                            <td>{{$jugador->PosicionJugador}}</td>
+                                            <td>{{$jugador->EstaturaJugador}} m</td>
+                                            <td>{{$jugador->PesoJugador}} Kg</td>
+                                        </tr>
                                         @endforeach
-                                    </div>
+                                    </tbody>
+                                </table>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         </div>
-                        <div class="col-2   "></div>
-                        </div>
-
-
+                    </div>
                     </div>
                 </div>
             </div>
 
-        </div>
 
     </body>
 </html>
