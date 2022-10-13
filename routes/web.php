@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
 use App\Http\Controllers\TransaccionController;
-
+use App\Http\Controllers\MostrarJugadoresController;
+use App\Http\Controllers\MostrarTecnicosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,9 +28,8 @@ Route::resource('formulario',FormularioController::class);
 
 
 Route::get('/Equipo',[EquipoController::class,'index']);
-
-//Route::get('/jugador/create',[JugadorController::class,'create']);
-//Route::resource('jugador',JugadorController::class);
+Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
+Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
 Route::get('/jugador/{id}',[JugadorController::class,'show']);

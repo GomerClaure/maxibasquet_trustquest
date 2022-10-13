@@ -24,6 +24,7 @@ class EquipoController extends Controller
                   ->get();
         
              return view('equipo.Equipos',compact('c'));
+             //return $c;
              
     }                             
     public function create()

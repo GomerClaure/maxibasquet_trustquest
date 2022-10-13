@@ -23,7 +23,7 @@
     <p class="card-text">Pais: {{$datosEquipo->NombrePais}} <br>
                            Categoria: {{$datosEquipo->NombreCategoria}}</p>
     <a href="{{url('MostrarJugadores')}}" class="btn btn-primary">Jugadores</a>
-    <a href="#" class="btn btn-primary">Cuerpo Tecnico</a>
+    <a href="{{url('MostrarTecnicos')}}" class="btn btn-primary">Cuerpo Tecnico</a>
   </div>
 </div>
 @endforeach
