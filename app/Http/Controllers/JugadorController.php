@@ -131,7 +131,9 @@ class JugadorController extends Controller
         return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
     }
 
-    /** */
+    /**
+     * Obtine la lista de jugadores correspondientes a un equipo y categoria
+     */
     public function listaJugadores($equipo,$categoria){
         $jugadores = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno',
         'personas.Edad','jugadores.PesoJugador','jugadores.EstaturaJugador',
