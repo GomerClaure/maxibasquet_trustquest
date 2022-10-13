@@ -22,7 +22,7 @@
     <h5 class="card-title">{{$datosEquipo->NombreEquipo}}</h5>
     <p class="card-text">Pais: {{$datosEquipo->NombrePais}} <br>
                            Categoria: {{$datosEquipo->NombreCategoria}}</p>
-    <a href="#" class="btn btn-primary">Jugadores</a>
+    <a href="{{url('MostrarJugadores')}}" class="btn btn-primary">Jugadores</a>
     <a href="#" class="btn btn-primary">Cuerpo Tecnico</a>
   </div>
 </div>
