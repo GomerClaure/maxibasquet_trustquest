@@ -132,11 +132,17 @@ class FormularioController extends Controller
 
         $datos->save();
 
-        $aplicaciones = Aplicacion::select('aplicaciones.IdAplicacion', 'aplicaciones.NombreEquipo', 'preinscripciones.Monto', 'aplicaciones.EstadoAplicacion', 'aplicaciones.Categorias')
+        $aplicaciones = Aplicacion::select(
+            'aplicaciones.IdAplicacion',
+            'aplicaciones.NombreEquipo',
+            'preinscripciones.Monto',
+            'aplicaciones.EstadoAplicacion',
+            'aplicaciones.Categorias'
+        )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
             ->where("EstadoAplicacion", "=", "Pendiente")
-            ->orWhere("EstadoAplicacion", "=", "aceptado")
-            ->orWhere("EstadoAplicacion", "=", "rechazado")
+            ->orWhere("EstadoAplicacion", "=", "Aceptado")
+            ->orWhere("EstadoAplicacion", "=", "Rechazado")
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
