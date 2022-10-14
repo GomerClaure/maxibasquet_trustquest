@@ -40,5 +40,4 @@ Route::get('/aplicaciones/{id}',[AplicacionController::class,'show']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
 Route::get('/tecnico/{id}',[TecnicoController::class,'show']);
-Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);
 Route::get('/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaTecnicos']);

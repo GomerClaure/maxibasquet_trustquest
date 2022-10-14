@@ -44,19 +44,16 @@ class TecnicoController extends Controller
      */
     public function listaTecnicos($equipo,$categoria){
         $tecnicos = Tecnico::select('personas.NombrePersona','personas.ApellidoPaterno',
-                    'tecnicos.RolesTecnicos','tecnicos.IdTecnicos')
+                    'personas.ApellidoMaterno','tecnicos.RolesTecnicos','tecnicos.IdTecnicos','personas.Foto')
                     ->join('personas','tecnicos.IdPersona','=','personas.IdPersona')
                     ->join('equipos','tecnicos.IdEquipo','=','equipos.IdEquipo')
                     ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
-                    ->where('equipos.IdEquipo','=',$equipo)
-                    ->where('categorias.IdCategoria','=',$categoria)
+                    ->where('equipos.NombreEquipo','=',$equipo)
+                    ->where('categorias.NombreCategoria','=',$categoria)
                     ->get();
-        $nombreEquipo = Equipo::select('NombreEquipo')
-                        ->where('IdEquipo','=',$equipo)->get();
-        $nombreCategoria = Categoria::select("NombreCategoria") 
-                        ->where('IdCategoria','=',$categoria)->get();
         
-        return view('tecnico.lista',compact('tecnicos','nombreEquipo','nombreCategoria'));
+        
+        return view('tecnico.lista',compact('tecnicos','equipo','categoria'));
     }
     /**
      * Display the specified resource.

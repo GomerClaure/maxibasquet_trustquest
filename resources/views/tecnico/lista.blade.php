@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Equipos Preinscritos</title>
+        <title>Equipos Cuerpo Tecnico</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleListaTecnicos.css')}}">
     </head>
     <body class="antialiased">
     <header >
@@ -49,31 +49,29 @@
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
-                                <h3 class="text-center"> <b>{{$nombreEquipo[0]->NombreEquipo}} --Cuerpo Tecnico</b></h3>
-                                <h5>Categoria: {{$nombreCategoria[0]->NombreCategoria}}</h5>
-                            <div class="card">
-                                <div class="ps-3 py-2">
-                                    <h4 class="text-black"><b>Integrantes</b> </h4>
+                                <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Tecnico</b></h2>
+                                <h3>Categoria: {{$categoria}}</h3>
+                            <div class="card fondoTabla">
+                                <div class="card-header ps-3 py-2">
+                                    <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                 </div>
-                            <div class="card-body  pt-0 ps-3 ">
-                                <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
-                                    <thead>
-                                    <tr>
-                                        <th>Tecnico </th>
-                                        <th>Rol</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($tecnicos as $tecnico)
-                                        <tr>
-                                            <td><a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="text-primary">{{$tecnico->NombrePersona}}  {{$tecnico-> ApellidoPaterno}}</a></td>
-                                            <td >{{$tecnico->RolesTecnicos}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                </div>
+                            <div class="card-body  pt-0 ps-3">
+                                 @foreach ($tecnicos as $tecnico)
+                                    <div class="card d-inline-block m-3" style="width: 19rem;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
+                                    </div>
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-center">
+                                            <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                            </div>
+                                        
+                                            <h5>{{$tecnico->NombrePersona}} </h5>
+                                            <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
+                                            <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btn btn-primary">Detalles</a>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             </div>
                         </div>

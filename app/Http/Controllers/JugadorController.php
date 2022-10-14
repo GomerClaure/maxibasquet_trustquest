@@ -130,26 +130,6 @@ class JugadorController extends Controller
         $jugador -> save();
         return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
     }
-
-    /**
-     * Obtine la lista de jugadores correspondientes a un equipo y categoria
-     */
-    public function listaJugadores($equipo,$categoria){
-        $jugadores = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno',
-        'personas.Edad','jugadores.PesoJugador','jugadores.EstaturaJugador',
-        'jugadores.PosicionJugador','jugadores.NumeroCamiseta','jugadores.IdJugador')
-                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
-                    ->join('equipos','jugadores.IdEquipo','=','equipos.IdEquipo')
-                    ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
-                    ->where('equipos.IdEquipo','=',$equipo)
-                    ->where('categorias.IdCategoria','=',$categoria)
-                    ->get();
-        $nombreEquipo = Equipo::select('NombreEquipo')
-                        ->where('IdEquipo','=',$equipo)->get();
-        $nombreCategoria = Categoria::select("NombreCategoria") 
-                        ->where('IdCategoria','=',$categoria)->get();
-        return view('jugador.lista',compact('jugadores','nombreEquipo','nombreCategoria'));
-    }
     /**
      * Display the specified resource.
      *
