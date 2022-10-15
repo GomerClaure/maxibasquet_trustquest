@@ -13,33 +13,17 @@
     <!-- Styles -->
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-        
     </style>
 
     <style>
 
-        .boton-color {
-            background-color: #eb8f32;
-        }
-
-        .background-color {
-            background-color: #171f27;
-        }
-
-        .color-navegador {
-            background-color: #2c2a2a;
-        }
-
-        .color-letras {
-            color: white;
-        }
+        
 
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
     <link rel="stylesheet" href="{{asset('css/StyleFormulario.css')}}">
-
 </head>
 
 <body class="antialiased background-color">
@@ -107,8 +91,5 @@
             </div>
         </div>
     </div>
-
-
 </body>
-
 </html>

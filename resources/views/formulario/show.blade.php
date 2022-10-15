@@ -1,5 +1,3 @@
-
-
 @if(!empty($datos))
 <!DOCTYPE html>
 <html lang="en">
@@ -10,38 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Preinscripcion</title>
-    <style>
-        .mause-nulo {
-            pointer-events: none;
-        }
-
-        .boton-color {
-            background-color: #eb8f32;
-        }
-
-        .background-color{
-            background-color: #171f27;
-        }
-
-        .color-navegador{
-            background-color: #2c2a2a;
-        }
-
-        .color-letras{
-            color: white;
-        }
-
-        .color-form{
-            background-color: #b5b5bd;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/StyleFormularioShow.css')}}">
 </head>
 
 <body class="background-color">
-    <div >
+    <div>
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
-            <h1 class="display-6 mb-0 color-letras" >Formulario de preinscripción de equipos</h1>
+            <h1 class="display-6 mb-0 color-letras">Formulario de preinscripción de equipos</h1>
             <p class="color-letras">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="form">
@@ -113,11 +87,11 @@
                             <input class="form-control mause-nulo" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
                             <label for="inputPassword4" class="form-label mause-nulo">Nro Cuenta:</label>
                             <input class="form-control mause-nulo" id="inputPassword4" value="{{$datos->NumeroCuenta}}">
-                            <label for="observaciones" class="form-label">observaciones</label>
+                            <label for="observaciones" class="form-label">Observaciones</label>
                             @if($datos->EstadoAplicacion=='Pendiente')
-                            <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="10" >ninguno</textarea>
+                            <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="10">ninguno</textarea>
                             @else
-                            <textarea class="form-control mause-nulo" name="observaciones" id="observaciones" cols="30" rows="10" >{{$datos->observaciones}}</textarea>
+                            <textarea class="form-control mause-nulo" name="observaciones" id="observaciones" cols="30" rows="10">{{$datos->observaciones}}</textarea>
                             @endif
                         </div>
                     </div>
