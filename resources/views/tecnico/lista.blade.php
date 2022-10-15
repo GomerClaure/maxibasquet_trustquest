@@ -56,6 +56,7 @@
                                     <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                 </div>
                             <div class="card-body  pt-0 ps-3">
+                                @if(!$tecnicos->isEmpty())
                                  @foreach ($tecnicos as $tecnico)
                                     <div class="card d-inline-block m-3" style="width: 19rem;">
                                     <div class="card-header">
@@ -72,6 +73,11 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @else
+                                    <div class="d-flex justify-content-center">
+                                        <h4>No se encontró personal del cuerpo técnico registrados</h4>
+                                    </div>
+                                @endif
                             </div>
                             </div>
                         </div>
