@@ -80,7 +80,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nombre de Equipo </th>
-                                                    <th>Monto a Pagar</th>
+                                                    <th>Observaciones</th>
                                                     <th>Estado de Preinscripcion</th>
                                                     <th>Detalles</th>
                                                 </tr>
@@ -89,7 +89,7 @@
                                                 @foreach ($aplicaciones as $aplicacion)
                                                 <tr>
                                                     <td>{{$aplicacion->NombreEquipo}}</td>
-                                                    <td>{{$aplicacion->Total}} $</td>
+                                                    <td>{{$aplicacion->observaciones}} </td>
                                                     <td>{{$aplicacion->EstadoAplicacion}}</td>
                                                     <td class="d-grid gap-2">
                                                         <a type="button" class="boton-color btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>

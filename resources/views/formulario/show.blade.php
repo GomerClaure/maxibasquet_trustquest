@@ -88,31 +88,37 @@
                         </div>
                     </div>
 
-                    <div class=" row pb-3 registro-datos  color-form  border-top border-5 border-success mause-nulo">
+                    <div class=" row pb-3 registro-datos  color-form  border-top border-5 border-success ">
                         <h5>Datos de pago</h5>
                         <hr>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mause-nulo">
                             <label for="inputEmail4" class="form-label">Nro de Transcción:</label>
                             <input class="form-control" id="inputEmail4" value="{{$datos->NumeroTransaccion}}">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mause-nulo">
                             <label for="inputPassword4" class="form-label">Monto a pagar:</label>
                             <input class="form-control" id="inputPassword4" value="{{$datos->MontoTransaccion}}">
                         </div>
 
                         <div class="col-md-6">
                             <div>
-                                <label for="inputEmail4" class="form-label">Foto Vaucher:</label>
+                                <label for="inputEmail4" class="form-label mause-nulo">Foto Vaucher:</label>
                             </div>
                             <div class="input-group">
-                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="362" height="203">
+                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="500" height="450">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Fecha de depósito:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
-                            <label for="inputPassword4" class="form-label">Nro Cuenta:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->NumeroCuenta}}">
+                            <label for="inputPassword4" class="form-label mause-nulo">Fecha de depósito:</label>
+                            <input class="form-control mause-nulo" id="inputPassword4" value="{{$datos->FechaTransaccion}}">
+                            <label for="inputPassword4" class="form-label mause-nulo">Nro Cuenta:</label>
+                            <input class="form-control mause-nulo" id="inputPassword4" value="{{$datos->NumeroCuenta}}">
+                            <label for="observaciones" class="form-label">observaciones</label>
+                            @if($datos->EstadoAplicacion=='Pendiente')
+                            <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="10" >ninguno</textarea>
+                            @else
+                            <textarea class="form-control mause-nulo" name="observaciones" id="observaciones" cols="30" rows="10" >{{$datos->observaciones}}</textarea>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">

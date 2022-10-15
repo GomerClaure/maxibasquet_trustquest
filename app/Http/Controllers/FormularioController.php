@@ -125,24 +125,25 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $valido = request()->except(['_token', '_method']);
-        $valido = $valido['estadoAplicacion'];
-        $datos = Aplicaciones::find($id);
-        $datos->EstadoAplicacion = $valido;
-
-        $datos->save();
+        $datos = request()->except(['_token', '_method']);
+        $observacion=$datos['observaciones'];
+        $valido = $datos['estadoAplicacion'];
+        $datosApp = Aplicaciones::find($id);
+        $datosApp->EstadoAplicacion = $valido;
+        $datosApp->observaciones = $observacion;
+        echo ($observacion);
+        $datosApp->save();
 
         $aplicaciones = Aplicacion::select(
             'aplicaciones.IdAplicacion',
             'aplicaciones.NombreEquipo',
             'preinscripciones.Monto',
             'aplicaciones.EstadoAplicacion',
-            'aplicaciones.Categorias'
+            'aplicaciones.Categorias',
+            'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->where("EstadoAplicacion", "=", "Pendiente")
-            ->orWhere("EstadoAplicacion", "=", "Aceptado")
-            ->orWhere("EstadoAplicacion", "=", "Rechazado")
+            
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
