@@ -48,45 +48,50 @@
                     <div class="mask d-flex align-items-center w-100">
                     <div class="container">
                         <div class="row justify-content-center">
-                        <div class="col-12">
+                            <div class="col-12">
+                                @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Tecnico</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
-                            <div class="card fondoTabla">
-                                <div class="card-header ps-3 py-2">
-                                    <h4 class="text-black card-title"><b>Integrantes</b> </h4>
-                                </div>
-                            <div class="card-body  pt-0 ps-3">
-                                @if(!$tecnicos->isEmpty())
-                                 @foreach ($tecnicos as $tecnico)
-                                    <div class="card d-inline-block m-3" style="width: 19rem;">
-                                    <div class="card-header">
-                                        <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
+                                <div class="card fondoTabla">
+                                    <div class="card-header ps-3 py-2">
+                                        <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                     </div>
-                                        <div class="card-body">
+                                        <div class="card-body  pt-0 ps-3">
+                                            @if(!$tecnicos->isEmpty())
+                                            @foreach ($tecnicos as $tecnico)
+                                                <div class="card d-inline-block m-3" style="width: 19rem;">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
+                                                </div>
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-center">
+                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                        </div>
+                                                    
+                                                        <h5>{{$tecnico->NombrePersona}} </h5>
+                                                        <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
+                                                        <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btn btn-primary">Detalles</a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @else
                                             <div class="d-flex justify-content-center">
-                                            <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                 <h3>No se encontro personal tecnico registrado</h3>
                                             </div>
-                                        
-                                            <h5>{{$tecnico->NombrePersona}} </h5>
-                                            <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
-                                            <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btn btn-primary">Detalles</a>
-                                        </div>
+                                            
+                                            @endif
                                     </div>
-                                @endforeach
+                                </div>
                                 @else
                                     <div class="d-flex justify-content-center">
-                                        <h4>No se encontró personal del cuerpo técnico registrados</h4>
+                                        <h3>No se encontraron datos</h3>
                                     </div>
                                 @endif
                             </div>
-                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
-
-
+        </div>
     </body>
 </html>
