@@ -21,3 +21,7 @@
 .color-form{
     background-color: #b5b5bd;
 }
+
+textarea {
+    resize: none;
+}
