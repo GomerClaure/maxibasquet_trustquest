@@ -50,7 +50,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Tecnico</b></h2>
+                                <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Técnico</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
                                 <div class="card fondoTabla">
                                     <div class="card-header ps-3 py-2">
