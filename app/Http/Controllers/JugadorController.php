@@ -131,6 +131,34 @@ class JugadorController extends Controller
         return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
     }
     /**
+     * Obtine la lista de jugadores correspondientes a un equipo y categoria
+     */
+    public function listaJugadores($equipo,$categoria){
+        $jugadores = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno',
+                    'jugadores.PosicionJugador','jugadores.IdJugador','personas.Foto','jugadores.NumeroCamiseta')
+                     ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                    ->join('equipos','jugadores.IdEquipo','=','equipos.IdEquipo')
+                    ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
+                    ->where('equipos.NombreEquipo','=',$equipo)
+                    ->where('categorias.NombreCategoria','=',$categoria)
+                    ->get();
+        
+        $equipos = Equipo::select('NombreEquipo','NombreCategoria')
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                            ->where('equipos.NombreEquipo','=',$equipo)
+                            ->where('categorias.NombreCategoria','=',$categoria)
+                            ->get();
+        if(! $equipos->isEmpty()){
+            $equipo = $equipos[0]->NombreEquipo;
+            $categoria = $equipos[0]->NombreCategoria;
+        }else{ 
+            $equipo = null;
+            $categoria = null;
+        }
+        return view('jugador.lista',compact('jugadores','equipo','categoria'));
+    }
+    /**
      * Display the specified resource.
      *
      * @param  int  $id

@@ -39,7 +39,7 @@ class TecnicoController extends Controller
     {
         //
     }
-        /**
+    /**
      * Obtine la lista de tecnicos correspondientes a un equipo y categoria
      */
     public function listaTecnicos($equipo,$categoria){
