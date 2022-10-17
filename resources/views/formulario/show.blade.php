@@ -79,7 +79,7 @@
                                 <label for="inputEmail4" class="form-label mause-nulo">Foto Vaucher:</label>
                             </div>
                             <div class="input-group">
-                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" width="500" height="450">
+                                <img src="{{asset('storage').'/'.$datos->FotoVaucher}}" name="foto" width="500" height="450">
                             </div>
                         </div>
                         <div class="col-md-6">
