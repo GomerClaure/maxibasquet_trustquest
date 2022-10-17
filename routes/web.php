@@ -6,7 +6,7 @@ use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
-use App\Http\Controllers\TransaccionController;
+use App\Http\Controllers\SubirLogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +37,4 @@ Route::get('/aplicaciones',[AplicacionController::class,'index']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
+Route::get('/subirLogo', [SubirLogoController::class,'index'])->name('subirLogo');
