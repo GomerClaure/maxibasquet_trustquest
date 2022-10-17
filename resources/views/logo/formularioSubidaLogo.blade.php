@@ -4,40 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('css/StyleSubirLogo.css' )}}">
-    <title>Subir Logo</title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <title>Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {{-- <link rel="stylesheet" href="{{asset('bootstrap.min.css')}}"> --}}
 </head>
 <body>
     
-</body>
-</html>
-@extends('welcome')
-@section('content')
-<div class="container justify-content-center"">
-    <section class=" main-title ">
-        <h1 class="display-6 mb-0" >Subir logotipo de equipo</h1>
-        <p>3er Torneo Internacional de Maxi Basquet</p>
-    </section>
-    <section class="form mx-5">
-        <div class="row">
+    <div class="container">
+        <div class="row" style="margin-top: 50px">
             <div class="col-md-6">
-                <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
-                <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}">
+                  <div class="card">
+                      <div class="card-header bg-primary text-white">Add new product</div>
+                      <div class="card-body">
+                          <form action="" method="post" enctype="multipart/form-data" id="form">
+                            @csrf
+                              <div class="form-group">
+                                  <label for="">Product name</label>
+                                  <input type="text" name="product_name" class="form-control" placeholder="Enter product name">
+                                  <span class="text-danger error-text product_name_error"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="">Product image</label>
+                                  <input type="file" name="product_image" class="form-control">
+                                  <span class="text-danger error-text product_image_error"></span>
+                              </div>
+                              <div class="img-holder"></div>
+                              <button type="submit" class="btn btn-primary">Save Product</button>
+                          </form>
+                      </div>
+                  </div>
             </div>
             <div class="col-md-6">
-                <div class="input-group">
-                    <img src="{{asset('storage').$equipo->LogoEquipo}}" width="362" height="203">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">All Products</div>
+                    <div class="card-body" id="AllProducts">
+
+                    </div>
                 </div>
-                <label for="nombreDeEquipo" class="form-label">Logotipo del equipo:</label>
-                <div class="input-group">
-                    <input name="vaucherDePago" type="file" class="form-control" id="vaucherDePago" accept="image/*" aria-label="Upload" value="{{old("vaucherDePago")}}">
-                </div>
-            </div>
-            <div class="col-md-12 text-center">
-                <button type="submit" class="btn botonPreinscripcion">Preinscribir Equipo</button>
             </div>
         </div>
-        
-    </section>
-</div>
-@endsection
+    </div>
+
+    <script src="{{asset('jquery.min.js')}}"></script>
+    <script>
+        $(function(){
+
+            $('#form').on('submit', function(e){
+                e.preventDefault();
+
+                var form = this;
+                $.ajax({
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){
+                        $(form).find('span.error-text').text('');
+                    },
+                    success:function(data){
+                        if(data.code == 0){
+                            $.each(data.error, function(prefix,val){
+                                $(form).find('span.'+prefix+'_error').text(val[0]);
+                            });
+                        }else{
+                            $(form)[0].reset();
+                            // alert(data.msg);
+                            fetchAllProducts();
+                        }
+                    }
+                });
+            });
+
+            //Reset input file
+            $('input[type="file"][name="product_image"]').val('');
+            //Image preview
+            $('input[type="file"][name="product_image"]').on('change', function(){
+                var img_path = $(this)[0].value;
+                var img_holder = $('.img-holder');
+                var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
+
+                if(extension == 'jpeg' || extension == 'jpg' || extension == 'png'){
+                     if(typeof(FileReader) != 'undefined'){
+                          img_holder.empty();
+                          var reader = new FileReader();
+                          reader.onload = function(e){
+                              $('<img/>',{'src':e.target.result,'class':'img-fluid','style':'max-width:100px;margin-bottom:10px;'}).appendTo(img_holder);
+                          }
+                          img_holder.show();
+                          reader.readAsDataURL($(this)[0].files[0]);
+                     }else{
+                         $(img_holder).html('This browser does not support FileReader');
+                     }
+                }else{
+                    $(img_holder).empty();
+                }
+            });
+
+            
+    
+        })
+    </script>
+</body>
+</html>
