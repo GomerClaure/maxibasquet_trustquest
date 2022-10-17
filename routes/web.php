@@ -37,4 +37,4 @@ Route::get('/aplicaciones',[AplicacionController::class,'index']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show']);
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
-Route::get('/subirLogo', [SubirLogoController::class,'index'])->name('subirLogo');
+Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subirLogo');

@@ -22,11 +22,11 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
-                <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" placeholder="Los pumas" value="{{ old('nombreDeEquipo') }}">
+                <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}">
             </div>
             <div class="col-md-6">
                 <div class="input-group">
-                    <img src="{{asset('storage').'/uploads/logo.jpg'}}" width="362" height="203">
+                    <img src="{{asset('storage').$equipo->LogoEquipo}}" width="362" height="203">
                 </div>
                 <label for="nombreDeEquipo" class="form-label">Logotipo del equipo:</label>
                 <div class="input-group">
