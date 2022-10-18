@@ -21,7 +21,7 @@ class PreinscripcionSeeder extends Seeder
             'created_at'=>now()
         ]);
         DB::table("preinscripciones")->insert([
-            'IdCampeonato'=>1,
+            'IdCampeonato'=>2,
             'FechaIncioPreinscripcion'=>date("2022-10-01"),
             'FechaFinPreinscripcion'=>date("2023-01-01"),
             'Monto'=>350,
