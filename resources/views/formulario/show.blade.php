@@ -12,6 +12,7 @@
 </head>
 
 <body class="background-color">
+
     <div>
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
@@ -29,7 +30,7 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
-                            <input class="form-control" id="inputEmail4" value="{{$datos->NombreEquipo}}">
+                            <input class="form-control" id="inputEmail4" value="{{$datos->NombreEquipo}}" name="nombreEquipos">
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
@@ -42,7 +43,7 @@
 
                             <div class="form-check form-check-inline">
 
-                                <label class="form-check-label" for="inlineCheckbox1">{{$datos->Categorias}}</label>
+                                <label class="form-check-label" for="inlineCheckbox1" name="categorias">{{$datos->Categorias}}</label>
                             </div>
 
                         </div>
@@ -90,6 +91,11 @@
                             <label for="observaciones" class="form-label">Observaciones</label>
                             @if($datos->EstadoAplicacion=='Pendiente')
                             <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="10">ninguno</textarea>
+                            @error('observaciones')
+                            <span class="error-message">
+                                {{$message}}
+                            </span>
+                            @enderror
                             @else
                             <textarea class="form-control mause-nulo" name="observaciones" id="observaciones" cols="30" rows="10">{{$datos->observaciones}}</textarea>
                             @endif

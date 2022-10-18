@@ -125,6 +125,14 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $request->validate([
+            'observaciones'=>'required|regex:/^([a-z][a-z, ]+)+$/'
+        ],
+        [
+            'observaciones.required'=>'por favor llene este campo',
+            'observaciones.regex'=>'solo se admiten letras'
+        ]);
         $datos = request()->except(['_token', '_method']);
         $observacion=$datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
@@ -143,7 +151,6 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);

@@ -25,3 +25,7 @@
 textarea {
     resize: none;
 }
+
+.error-message{
+    color: red;
+}
