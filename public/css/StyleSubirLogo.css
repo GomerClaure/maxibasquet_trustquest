@@ -1,11 +1,9 @@
-
 .main-title{
     color: white;
 }
 .row{
     background: #b5b5bd;
 }
-
 .btn.botonPreinscripcion{
     margin-top: 15px;
     background-color: #eb8f32;
@@ -13,11 +11,4 @@
 }
 .btn.botonPreinscripcion:first-child:hover{
     background: #fa841a;
-}
-
-.card-title{
-    background: #2c2a2a;
-}
-h5{
-    color: white;
 }
