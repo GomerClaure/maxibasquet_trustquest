@@ -26,6 +26,7 @@ class TecnicoFactory extends Factory
         return $this->state([
             'IdEquipo' => $idEquipo,
             'IdCategoria' => $categoria,
+            'FotoCarnet' => 'uploads\carnet.jpg',
         ]);
     }
 }
