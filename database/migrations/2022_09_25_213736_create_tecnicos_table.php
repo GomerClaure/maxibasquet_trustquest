@@ -14,15 +14,16 @@ class CreateTecnicosTable extends Migration
     public function up()
     {
         Schema::create('tecnicos', function (Blueprint $table) {
-            $table->id("IdTenicos");
+            $table->bigIncrements("IdTecnicos");
             $table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedInteger("IdPersona");
             $table->string("RolesTecnicos");
+            $table->string("FotoCarnet");
             $table->timestamps();
-            $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas');
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
-            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos'); 
+            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
         });
     }
 

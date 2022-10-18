@@ -1,9 +1,15 @@
 @extends('welcome')
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{asset('css/StylePreinscripcion.css' )}}" rel="stylesheet">
+    <title>Preinscripcion</title>
+</head>
 @section('content')
 <div class="container justify-content-center"">
-        {{-- @section('scripts')
-                <script src="/public/js/admin/users/preinscripcion.js"></script>
-            @endsection --}}
 		    <section class=" main-title text-center">
                 <h1 class="display-6 mb-0" >Formulario de preinscripción de equipos</h1>
                 <p>3er Torneo Internacional de Maxi Basquet</p>
@@ -67,7 +73,7 @@
                                 <input name="option[]" class="form-check-input" type="checkbox" id="categoria60" value="+60">
                                 <label class="form-check-label" for="categoria60">+60</label>
                             </div>
-                            @error('option[]')
+                            @error('option')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
@@ -105,9 +111,9 @@
                         </div>
                         <hr>
                         <div class="col-md-6">
-                            <label for="datosDePago" class="form-label">Numero de comprobante de pago:</label>
-                            <input name="datosDePago" type="text" class="form-control" id="numComprobante" value="{{old("datosDePago")}}">
-                            @error('datosDePago')
+                            <label for="numeroDeComprobanteDePago" class="form-label">Numero de comprobante de pago:</label>
+                            <input name="numeroDeComprobanteDePago" type="text" class="form-control" id="numeroDeComprobanteDePago" value="{{old("numeroDeComprobanteDePago")}}">
+                            @error('numeroDeComprobanteDePago')
                                     <p style="color:#FF0000" class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
@@ -151,7 +157,7 @@
 
                     </div>
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn">Preinscribir Equipo</button>
+                        <button type="submit" class="btn botonPreinscripcion">Preinscribir Equipo</button>
                     </div>
                </form>
             </section>
@@ -161,3 +167,4 @@
 
         </div>
 @endsection
+</html>

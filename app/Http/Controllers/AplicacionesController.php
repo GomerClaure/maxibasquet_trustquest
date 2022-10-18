@@ -10,6 +10,7 @@ use App\Models\Transaccion;
 use Illuminate\Validation\Rule;
 use App\Rules\AlphaSpaces;
 use App\Rules\AlphaNumeric;
+use App\Rules\RequiredCheck;
 use DateTime;
 
 
@@ -30,9 +31,9 @@ class AplicacionesController extends Controller
             $dateAfter = new DateTime('2022-07-01');
             $request -> validate([
                 config('constants.VAUCHER_PAGO')=>'required|image|max:10000',
-                config('constants.NOMBRE_EQUIPO')=>['required','max:30',new AlphaNumeric],
+                config('constants.NOMBRE_EQUIPO')=>['required','max:30',new AlphaSpaces],
                 config('constants.NOMBRE_ENCARGADO') => ['required','max:50',new AlphaSpaces],
-                config('constants.CATEGORIAS') =>  'required',
+                // config('constants.CATEGORIAS.*') =>  ['required','integer', new RequiredCheck],
                 config('constants.CORREO_ELECTRONICO') => 'required|email|max:255',
                 config('constants.TELEFONO_CONTACTO') => 'required|max:15',
                 config('constants.DATOS_PAGO') => ['required','max:50', new AlphaNumeric],
@@ -42,7 +43,7 @@ class AplicacionesController extends Controller
             ]);
             $formulario=request()->except('_token');
             $aplicacionPreinscripcion = new Aplicacion;
-            $formulario[config('constants.VAUCHER_PAGO')] = $request->file(config('constants.VAUCHER_PAGO'))->store('upload');
+            $formulario[config('constants.VAUCHER_PAGO')] = $request->file(config('constants.VAUCHER_PAGO'))->store('uploads','public');
             $aplicacionPreinscripcion->IdPreinscripcion = 1;
             // echo $formulario['pais'];
 
@@ -83,7 +84,8 @@ class AplicacionesController extends Controller
             $transaccion->save();
             $paises = Pais::all();
             // return $request;
-            return view('preinscripcion.preinscripcionEquipo',compact('paises'));
+            return redirect()->route('preinscripcion');
+            // return view('preinscripcion.preinscripcionEquipo',compact('paises'));
             // Empleado::insert($datosEmpleado);
         // return response()->json($datosEmpleado);
         }

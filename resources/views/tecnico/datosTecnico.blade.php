@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Jugador Maxi Basquet</title>
+        <title>Personal Maxi Basquet</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
     </head>
-    <body class="antialiased">
+    <body>
     <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
@@ -43,13 +43,13 @@
                 </ul>
             </nav>
         </header>
-        <div class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
                 <div class="">
                     <div class="mask d-flex  align-items-center w-100">
                     <div class="container  ">
                         <div class="d-flex justify-content-center ">
-                            <h3> <b> DATOS DEL JUGADOR</b> </h3>
+                            <h3> <b> DATOS DE PERSONAL TÉCNICO</b> </h3>
                         </div>
                         <div class="row">
                         <div class="col-2">
@@ -64,21 +64,16 @@
                                 <div class="row ">
                                     <div class="col-4 ">
                                         <div class="card">
-
-                                                @foreach ($jugador as $jug)
-                                                <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
-                                                @endforeach
-
+                                                <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
                                         </div>
                                     </div>
                                     <div class="col">
-                                        @foreach ($jugador as $jug)
-                                        <div> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
+                                        <div class="jugador"> <p> <b>{{$tecnico->NombreEquipo}} {{$tecnico->NombreCategoria}} | {{$tecnico->RolesTecnicos}}</b></p> </div>
                                         <div>
-                                            <h4 class="transformacion2"> <b>{{$jug->NombrePersona}}</b></h4>
+                                            <h4 class="transformacion2"> <b>{{$tecnico->NombrePersona}}</b></h4>
                                         </div>
                                         <div>
-                                            <h4 class="transformacion2"><b>{{$jug->ApellidoPaterno}}</b></h4>
+                                            <h4 class="transformacion2"><b>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</b></h4>
                                         </div>
                                         <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
                                             <table class=" table  mb-0 text-center  d-flex justify-content-center">
@@ -86,36 +81,21 @@
                                                 <tbody  >
                                                     <tr>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Altura</b></p> </div>
-                                                            <div><p>{{$jug->EstaturaJugador}} m</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Peso</b></p> </div>
-                                                            <div><p>{{$jug->PesoJugador}} kg</p></div>
-                                                        </td>
-                                                        <td class="border border-dark">
-                                                            <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$jug->NacionalidadPersona}}</p></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="border border-dark">
                                                             <div> <p><b>Edad</b></p> </div>
-                                                            <div><p>{{$jug->Edad}}</p></div>
+                                                            <div><p>{{$tecnico->Edad}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
                                                             <div> <p><b>Nacimiento</b></p> </div>
-                                                            <div><p>{{$jug->FechaNacimiento}}</p></div>
+                                                            <div><p>{{$tecnico->FechaNacimiento}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Camiseta</b></p> </div>
-                                                            <div><p>{{$jug->NumeroCamiseta}}</p></div>
+                                                            <div> <p><b>Nacionalidad</b></p> </div>
+                                                            <div><p>{{$tecnico->NacionalidadPersona}}</p></div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>

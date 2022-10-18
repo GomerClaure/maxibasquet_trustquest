@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Datos de la Preinscripcion</title>
+        <title>Equipos Jugadores</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,8 +21,9 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleaplicacionJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleListaTecnicos.css')}}">
     </head>
+    <body class="antialiased">
     <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
@@ -42,96 +43,55 @@
                 </ul>
             </nav>
         </header>
-    
-        <body >
-        <div style="background: #e9e9e9;">
-            <div class="container justify-content-center">
-            <div class="aling-item-rigth py-2">
-            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
-        </div>
-        @if( $aplicacion != null)
-		<section class=" main-title text-center">
-
-            <h1 class="display-6 mb-0" style="color:#37474f"><b>
-                Datos de preinscripción de equipos
-            </b> </h1>
-            <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
-            </section>
-            <section class="container pb-5 pt-3">
-                <div class="row g-3 " >
-                    <div class=" row pb-3 mb-4 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
-                        <h5><b>Datos del Equipo</b> </h5>
-                        <hr>
-                        <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label"><b>Nombre de equipo:</b> </label>
-                            <input class="form-control" id="inputEmail4" readonly="readonly" value="{{$aplicacion->NombreEquipo}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label"><b>Nombre del encargado:</b> </label>
-                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->NombreUsuario}}">
-                        </div>
-                        <div class="col-md-6">
-                            <div>
-                                <label for="inputEmail4" class="form-label"><b>Categorias:</b></label>
+        <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
+                <div class="bg-image w-100" >
+                    <div class="mask d-flex align-items-center w-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                @if($equipo != null)
+                                <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
+                                <h3>Categoria: {{$categoria}}</h3>
+                                <div class="card fondoTabla">
+                                    <div class="card-header ps-3 py-2">
+                                        <h4 class="text-black card-title"><b>Integrantes</b> </h4>
+                                    </div>
+                                        <div class="card-body  pt-0 ps-3">
+                                            @if(!$jugadores->isEmpty())
+                                            @foreach ($jugadores as $jugador)
+                                                <div class="card d-inline-block m-3" style="width: 19rem;">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">{{$jugador->PosicionJugador}} #{{$jugador->NumeroCamiseta}}</h5>
+                                                </div>
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-center">
+                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                        </div>
+                                                    
+                                                        <h5>{{$jugador->NombrePersona}} </h5>
+                                                        <h6>{{$jugador->ApellidoPaterno}}</h6>
+                                                        <a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="btn btn-primary">Detalles</a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @else
+                                            <div class="d-flex justify-content-center">
+                                                 <h3>No se encontro personal tecnico registrado</h3>
+                                            </div>
+                                            
+                                            @endif
+                                    </div>
+                                </div>
+                                @else
+                                    <div class="d-flex justify-content-center">
+                                        <h3>No se encontraron datos</h3>
+                                    </div>
+                                @endif
                             </div>
-                         
-                            <div class=" d-inline-block">
-                            @foreach($aplicacion->Categorias as $categoria)
-                                <input name="option[]" class="form-check-input"  type="checkbox" checked disabled>
-                                <label class="form-check-label" for="categoria30">{{$categoria}}</label>
-                            @endforeach
-                            </div>
-
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label"><b>Correo Electrónico:</b> </label>
-                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->CorreoElectronico}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="pais" class="form-label"><b>Pais:</b> </label>
-                            <input class="form-control" type="text" id="pais" readonly="readonly" value="{{$aplicacion->NombrePais}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label"><b>Telefono de contacto:</b> </label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" readonly="readonly" id="specificSizeInputGroupUsername" value="{{$aplicacion->NumeroTelefono}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" row pb-3 pt-3 registro-aplicacion bg-white  border-top border-5 border-success mause-nulo">
-                        <h5><b>Datos de pago</b></h5>
-                        <hr>
-                        <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label"><b>Nro de Transcción:</b></label>
-                            <input class="form-control" id="inputEmail4"  readonly="readonly" value="{{$aplicacion->NumeroTransaccion}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label"><b>Monto a pagar:</b></label>
-                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->MontoTransaccion}} $">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div>
-                                <label for="inputEmail4" class="form-label"><b>Foto Vaucher:</b> </label>
-                            </div>
-                            <div class="input-group">
-                                <img src="{{asset('storage').'/'.$aplicacion->FotoVaucher}}" width="362" height="203">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label"><b>Fecha de depósito:</b> </label>
-                            <input class="form-control" id="inputPassword4" readonly="readonly" value="{{$aplicacion->FechaTransaccion}}">
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-        @else
-        <h1>No encontrado</h1>
-        @endif
     </body>
-
-
 </html>
