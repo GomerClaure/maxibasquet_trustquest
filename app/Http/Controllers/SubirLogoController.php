@@ -12,7 +12,6 @@ class SubirLogoController extends Controller
     {
         $equipo = Equipo::find($id);
         echo $equipo;
-        // echo "Estoy en el controlador para subir logo";
         return view('logo.formularioSubidaLogo',compact('equipo','id'));
     }
     public function store(Request $request)
@@ -20,7 +19,7 @@ class SubirLogoController extends Controller
         $formulario=request()->except('_token');
         $id = $formulario['idEquipo'];
         $equipo = Equipo::find($id);
-        $formulario['logotipoDelEquipo'] = $request->logotipoDelEquipo->store('uploads');
+        $formulario['logotipoDelEquipo'] = $request->file('logotipoDelEquipo')->store('uploads','public');
         // echo $formulario['logotipoDelEquipo'];
         Storage::disk('public')->delete('/'.($equipo->LogEquipo));
         $equipo->LogoEquipo = $formulario['logotipoDelEquipo'];
