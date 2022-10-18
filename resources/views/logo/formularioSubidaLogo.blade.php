@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Products</title>
+    <title>Subir Logo</title>
     <link rel="stylesheet" href="{{asset('css/StyleSubirLogo.css' )}}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 @extends('welcome')
 @section('content')
@@ -17,7 +12,7 @@
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">
-    <form action="" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{route('subirLogo', ['idEquipo' => $equipo->IdEquipo])}}" method="post" enctype="multipart/form-data" id="form">
         @csrf
     <div class="row">
         <div class="col-md-6">
@@ -26,12 +21,11 @@
         </div>
         <div class="col-md-6">
             <div class="input-group">
-                <img id='img_view'src="{{asset('storage').'/'.$equipo->LogoEquipo}}" width="362" height="203">
+                <img id='img_view'src="{{asset('storage')."/".$equipo->LogoEquipo}}" width="250" height="250">
             </div>
             <div class="form-group">
                 <label for="">Logotipo del equipo:</label>
-                <input type="file" name="product_image" class="form-control">
-                <span class="text-danger error-text product_image_error"></span>
+                <input type="file" name="logotipoDelEquipo" class="form-control">
             </div>
             <div class="img-holder"></div>
         </div>
@@ -47,9 +41,9 @@
     $(function(){
 
         //Reset input file
-        $('input[type="file"][name="product_image"]').val('');
+        $('input[type="file"][name="logotipoDelEquipo"]').val('');
         //Image preview
-        $('input[type="file"][name="product_image"]').on('change', function(){
+        $('input[type="file"][name="logotipoDelEquipo"]').on('change', function(){
             var img_path = $(this)[0].value;
             var img_holder = $('.img-holder');
             var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
