@@ -63,8 +63,8 @@ class CuerpoTecnicoController extends Controller
             'selectRol'=>'required'
         ]);
 
-        $imagenTecnico = $request->file('fotoTecnico')->store('uploads');
-        $imagenCarnet = $request->file('fotoCarnet')->store('uploads');
+        $imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
+        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
 
         $persona = new Persona;
         $persona -> CiPersona = $request -> ci;
