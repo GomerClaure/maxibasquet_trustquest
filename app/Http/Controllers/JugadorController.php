@@ -37,7 +37,7 @@ class JugadorController extends Controller
         $categorias = Categoria::all();
         return view('jugador.create',compact('categorias','idEquipo'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -71,8 +71,8 @@ class JugadorController extends Controller
             'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
 
-        $imagenJucador = $request->file('fotoJugador')->store('uploads');
-        $imagenCarnet = $request->file('fotoCarnet')->store('uploads');
+        $imagenJucador = $request->file('fotoJugador')->store('uploads','public');
+        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
 
         //$direccionImgJugador = Storage::url($imagenJucador);
         //$direccionImgCarnet = Storage::url($imagenCarnet);
@@ -96,7 +96,7 @@ class JugadorController extends Controller
                         ->get();
         //return $consulta2;
         if(!$consulta2 ->isEmpty()){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorExiste','El Ci esta registrado');
+            return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
 
         $fecha = $request -> fechaNacimiento;
@@ -104,7 +104,7 @@ class JugadorController extends Controller
         $edadReal = date('Y')-$anio;
         $edadActual = $request -> edad;
         if($edadReal != $edadActual){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
+            return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
         $categoria = $request -> selectCategoria;
@@ -112,7 +112,7 @@ class JugadorController extends Controller
         $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
 
         if($edadActual < $categoriaNum){
-            return redirect('jugador/create/'.$request -> idEquipo)->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
+            return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
         }
 
         $persona -> save();
@@ -142,7 +142,7 @@ class JugadorController extends Controller
                     ->where('equipos.NombreEquipo','=',$equipo)
                     ->where('categorias.NombreCategoria','=',$categoria)
                     ->get();
-        
+
         $equipos = Equipo::select('NombreEquipo','NombreCategoria')
                             ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
                             ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
@@ -152,7 +152,7 @@ class JugadorController extends Controller
         if(! $equipos->isEmpty()){
             $equipo = $equipos[0]->NombreEquipo;
             $categoria = $equipos[0]->NombreCategoria;
-        }else{ 
+        }else{
             $equipo = null;
             $categoria = null;
         }
