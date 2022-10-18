@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
 use App\Models\Aplicaciones;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -133,13 +134,19 @@ class FormularioController extends Controller
             'observaciones.required'=>'por favor llene este campo',
             'observaciones.regex'=>'solo se admiten letras'
         ]);
+        
+        $equipo = new Equipo;
+        $equipo -> NombreEquipo = $request -> nombreEquipos;
+        $equipo -> IdAplicacion = $id;
+        $equipo -> LogoEquipo = 'uploads\logo.jpg';
+        $equipo->save();
+
         $datos = request()->except(['_token', '_method']);
         $observacion=$datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
-        echo ($observacion);
         $datosApp->save();
 
         $aplicaciones = Aplicacion::select(
