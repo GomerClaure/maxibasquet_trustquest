@@ -49,7 +49,7 @@ class ListaEquiposController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipo $persona)
+    public function show(Equipo $equipo)
     {
         //
     }
@@ -60,7 +60,7 @@ class ListaEquiposController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function edit(Equipo $persona)
+    public function edit(Equipo $equipo)
     {
         //
     }
@@ -72,7 +72,7 @@ class ListaEquiposController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipo $persona)
+    public function update(Request $request, Equipo $equipo)
     {
         //
     }
@@ -83,7 +83,7 @@ class ListaEquiposController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipo $persona)
+    public function destroy(Equipo $equipo)
     {
         //
     }
