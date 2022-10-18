@@ -73,7 +73,7 @@
                                 <input name="option[]" class="form-check-input" type="checkbox" id="categoria60" value="+60">
                                 <label class="form-check-label" for="categoria60">+60</label>
                             </div>
-                            @error('option[]')
+                            @error('option')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>

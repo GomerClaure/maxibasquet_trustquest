@@ -22,7 +22,7 @@ class CreateTransaccionesTable extends Migration
             $table->date("FechaTransaccion");
             $table->string("FotoVaucher");
             $table->timestamps();
-            $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');            
+            $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');
 
         });
     }

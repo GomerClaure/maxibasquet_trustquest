@@ -24,7 +24,7 @@ class AplicacionController extends Controller
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
         
-        return view("listaAplicaciones",compact('aplicaciones'));
+        return view("aplicacion.listaAplicaciones",compact('aplicaciones'));
     }
     /**
      * Crea un nuevo arreglo con los datos de las apliaciones junto con el Total a pagar
@@ -106,7 +106,7 @@ class AplicacionController extends Controller
         $aplicacion = null;
     }
     
-    return view("detallesAplicacion",compact('aplicacion'));
+    return view("aplicacion.detallesAplicacion",compact('aplicacion'));
     }
 
     /**

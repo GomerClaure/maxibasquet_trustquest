@@ -30,7 +30,7 @@
             <div class="img-holder"></div>
         </div>
         <div class="col-md-12 text-center">
-            <button type="submit" class="btn botonPreinscripcion">Preinscribir Equipo</button>
+            <button type="submit" class="btn botonPreinscripcion">Subir Logotipo</button>
         </div>
     </div>
     </form>
