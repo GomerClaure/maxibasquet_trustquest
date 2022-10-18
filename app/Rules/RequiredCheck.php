@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class AlphaSpaces implements Rule
+class RequiredCheck implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,8 +25,10 @@ class AlphaSpaces implements Rule
      */
     public function passes($attribute, $value)
     {
+        
+        echo $attribute;
         echo $value;
-        return preg_match('/^[\pL\s]+$/u', $value);
+        return true;
     }
 
     /**
@@ -36,6 +38,6 @@ class AlphaSpaces implements Rule
      */
     public function message()
     {
-        return 'El campo :attribute debe contener solo letras.';
+        return 'The validation error message.';
     }
 }
