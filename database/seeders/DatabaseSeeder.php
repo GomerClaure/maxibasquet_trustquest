@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +15,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+    
+        $this->call([
+            TorneoSeeder::class,
+            PreinscripcionSeeder::class,
+            PaisSeeder::class,
+            CategoriaSeeder::class,
+            AplicacioneSeeder::class,
+            TransaccionesSeeder::class,
+            EquipoSeeder::class,
+            CategoriasPorEquipoSeeder::class,
+            JugadorSeeder::class,
+            TecnicoSeeder::class,
+        ]);
     }
 }
