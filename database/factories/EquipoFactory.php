@@ -15,7 +15,7 @@ class EquipoFactory extends Factory
     public function definition()
     {
         return [
-            'IdAplicacion' => $this->faker->unique()->numberBetween(51,60),
+            'IdAplicacion' => $this->faker->unique()->randomElement([51,52,53,54,55,56,57,58,59,60]),
             'NombreEquipo' => $this->faker->name(),
             'LogoEquipo' => 'uploads\logo.jpg',
             'created_at' => now(),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
 use App\Models\Aplicaciones;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -125,13 +126,32 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate(
+            [
+                'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
+            ],
+            [
+                'observaciones.required' => 'por favor llene este campo',
+                'observaciones.regex' => 'solo se admiten letras'
+            ]
+        );
+
+
+
         $datos = request()->except(['_token', '_method']);
-        $observacion=$datos['observaciones'];
+        $observacion = $datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
+        if ($valido == 'Aceptado') {
+            $equipo = new Equipo;
+            $equipo->NombreEquipo = $request->nombreEquipos;
+            $equipo->IdAplicacion = $id;
+            $equipo->LogoEquipo = 'uploads\logo.jpg';
+            $equipo->save();
+        }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
-        echo ($observacion);
         $datosApp->save();
 
         $aplicaciones = Aplicacion::select(
@@ -143,7 +163,6 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            
             ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);
