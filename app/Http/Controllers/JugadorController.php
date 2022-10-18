@@ -76,8 +76,8 @@ class JugadorController extends Controller
             'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
 
-        $imagenJucador = $request->file('fotoJugador')->store('uploads');
-        $imagenCarnet = $request->file('fotoCarnet')->store('uploads');
+        $imagenJucador = $request->file('fotoJugador')->store('uploads','public');
+        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
 
         //$direccionImgJugador = Storage::url($imagenJucador);
         //$direccionImgCarnet = Storage::url($imagenCarnet);
