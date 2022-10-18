@@ -1,0 +1,26 @@
+body{
+    background: #171f27;
+}
+
+.main-title{
+    color: white;
+}
+.row{
+    background: #b5b5bd;
+}
+
+.btn{
+    margin-top: 15px;
+    background: #eb8f32;
+    /* color: white; */
+}
+.btn:first-child:hover{
+    background: #fa841a;
+}
+
+.card-title{
+    background: #2c2a2a;
+}
+h5{
+    color: white;
+}

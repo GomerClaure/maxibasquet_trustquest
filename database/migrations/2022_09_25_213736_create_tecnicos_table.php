@@ -14,7 +14,7 @@ class CreateTecnicosTable extends Migration
     public function up()
     {
         Schema::create('tecnicos', function (Blueprint $table) {
-            $table->id("IdTenicos");
+            $table->bigIncrements("IdTecnicos");
             $table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedInteger("IdPersona");
