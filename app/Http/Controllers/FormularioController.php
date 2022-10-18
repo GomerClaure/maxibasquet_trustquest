@@ -126,24 +126,29 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $request->validate([
-            'observaciones'=>'required|regex:/^([a-z][a-z, ]+)+$/'
-        ],
-        [
-            'observaciones.required'=>'por favor llene este campo',
-            'observaciones.regex'=>'solo se admiten letras'
-        ]);
-        
-        $equipo = new Equipo;
-        $equipo -> NombreEquipo = $request -> nombreEquipos;
-        $equipo -> IdAplicacion = $id;
-        $equipo -> LogoEquipo = 'uploads\logo.jpg';
-        $equipo->save();
+
+        $request->validate(
+            [
+                'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
+            ],
+            [
+                'observaciones.required' => 'por favor llene este campo',
+                'observaciones.regex' => 'solo se admiten letras'
+            ]
+        );
+
+
 
         $datos = request()->except(['_token', '_method']);
-        $observacion=$datos['observaciones'];
+        $observacion = $datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
+        if ($valido == 'Aceptado') {
+            $equipo = new Equipo;
+            $equipo->NombreEquipo = $request->nombreEquipos;
+            $equipo->IdAplicacion = $id;
+            $equipo->LogoEquipo = 'uploads\logo.jpg';
+            $equipo->save();
+        }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
