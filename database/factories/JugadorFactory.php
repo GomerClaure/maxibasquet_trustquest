@@ -13,16 +13,24 @@ class JugadorFactory extends Factory
      *
      * @return array
      */
+    private $idEquipo;
+    
+    public function asignarEquipoCategoria($idEquipo,$categoria){
+        $this->idEquipo = $idEquipo;
+        return $this->state([
+            'IdEquipo' => $idEquipo,
+            'IdCategoria' => $categoria,
+        ]);
+    }
+
     public function definition()
     {
         return [
-            'IdEquipo' => Equipo::factory(),
-            'IdCategoria' => $this->faker->numberBetween(1,7),
             'IdPersona' => Persona::factory(),
             //'PesoJugador' => $this->faker->randomFloat(2,80,150),
             'PesoJugador' => $this->faker->numberBetween(1,99),
             'EstaturaJugador' => $this->faker->randomFloat(2,1,2),
-            'FotoCarnet' => $this->faker->imageUrl(360,360,'people',true),
+            'FotoCarnet' => 'uploads\carnet.jpg',
             'PosicionJugador' => $this->faker->randomElement(["BASE","ESCOLTA","ALERO","ALA-PIVOT","PIVOT"]),
             'NumeroCamiseta' => $this->faker->numberBetween(0,99),
             //'HabilitacionJugador' => true,
