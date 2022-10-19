@@ -26,7 +26,6 @@
     <a href="{{url('MostrarJugadores')}}" class="btn btn-primary">Jugadores</a>
     <a href="{{url('MostrarTecnicos')}}" class="btn btn-primary">Cuerpo Tecnico</a>
   @endforeach
-    
   </div>
 </div>
 @endforeach

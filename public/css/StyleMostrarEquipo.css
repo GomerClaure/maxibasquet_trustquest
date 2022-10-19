@@ -2,8 +2,8 @@ html,body{
   background:#171f27;
   margin: 30px;
 }
-.equipos-card{
-  text-align: center;
+.equipos-card{ 
+  text-align: center; 
   align-items: center;
 }
 .card{
@@ -13,6 +13,7 @@ html,body{
     color: #ffff;
     font-size:20px;
     margin: 10px;
+    flex-direction: row;
 }
   
 .card-img-top{
