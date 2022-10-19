@@ -84,8 +84,12 @@ class TecnicoController extends Controller
                                     ->join('categorias','categorias.IdCategoria','=','tecnicos.IdCategoria')
                                     ->where('IdTecnicos','=',$id)
                                     ->get();
-        $tecnico =( $this->formatoFecha($tecnico))[0];
-        
+        $tecnico =$this->formatoFecha($tecnico);
+        if ($id <= 0 || $id >= 9000000000000000000 || $tecnico->isEmpty()) {
+            $mensaje ="No encontrado";
+            return $mensaje;
+                          }
+        $tecnico = $tecnico[0];
         return view('tecnico.datosTecnico',compact('tecnico'));
 
     }

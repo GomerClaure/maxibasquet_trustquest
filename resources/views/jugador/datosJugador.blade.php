@@ -59,7 +59,7 @@
                         <div class="card ">
                             <div class="card-body  pt-3 ps-3 ">
                                 <div class="aling-item-rigth pb-2">
-                                <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
+                                <a type="button" href="{{ url('jugadores'.'/'.$jugador[0]->NombreEquipo.'/'.$jugador[0]->NombreCategoria)}}" class="btn btn-primary btn-sm "> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">

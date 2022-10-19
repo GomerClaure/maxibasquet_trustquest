@@ -6,6 +6,9 @@ use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
+use App\Http\Controllers\TransaccionController;
+use App\Http\Controllers\MostrarJugadoresController;
+use App\Http\Controllers\MostrarTecnicosController;
 use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
@@ -33,8 +36,10 @@ Route::get('formulario/show/{id}',[FormularioController::class,'show']);
 Route::get('formulario/index/',[FormularioController::class,'index']);
 */
 
-Route::get('/equipo',[EquipoController::class,'index']);
-
+Route::get('/Equipo',[EquipoController::class,'index']);
+Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
+Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
+//Route::get('/equipo',[EquipoController::class,'index']);
 //Route::get('/jugador/create',[JugadorController::class,'create']);
 //Route::resource('jugador',JugadorController::class);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
