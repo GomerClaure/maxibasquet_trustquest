@@ -1,35 +1,39 @@
-html{
-    background-color: #ABA9A9;
+html,body{
+  background:#171f27;
+  margin: 30px;
 }
-.card-img-top{
-    margin: 10px;
-    width: 100px;
-    height: 100px;
+.equipos-card{ 
+  display: grid;
+  text-align: center; 
+  justify-content: center;
 }
 .card{
     align-items: center;
-    background-color: #ABA9A9 ;
+    background-color:#7b7979;
+    padding: auto;
+    color: #ffff;
+    font-size:20px;
+    margin: 10px;
+    flex-direction: row;
 }
-.TituloPais{
- margin: 30px;
+  
+.card-img-top{
+    height: 250px;
+    width: 250px; 
+    padding-top: 20px;
 }
-.TituloCategoria{
-    margin: 30px;
-   }
-.listaJugadores{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    padding: 20px;
+.btn{
+    background-color: #fca311;
+    font-size: 14;
+    border: #272725;
+  } 
+.tituloEquipos{
+   color: #ffff; 
+   text-align: center; 
+   margin-top: 5px;
 }
-.listaCuerpoT{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-}
-.listaEquipo{
-    display: flex;
-    padding: 10px;
-    text-align: center;
+
+.col-md-6.imagen{
+  display: grid;
+  align-content: center;
 }
