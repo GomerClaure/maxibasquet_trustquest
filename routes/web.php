@@ -40,7 +40,6 @@ Route::get('/Equipo',[EquipoController::class,'index']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
 //Route::get('/equipo',[EquipoController::class,'index']);
-
 //Route::get('/jugador/create',[JugadorController::class,'create']);
 //Route::resource('jugador',JugadorController::class);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
