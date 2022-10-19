@@ -21,3 +21,7 @@
     display: flex;
     justify-content: center;
 }
+.col-md-6.nombreEquipo{
+    display: grid;
+    align-content: center;
+}

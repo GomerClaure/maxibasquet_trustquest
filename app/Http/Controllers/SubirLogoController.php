@@ -18,7 +18,7 @@ class SubirLogoController extends Controller
     {
         $request -> validate([
             'logotipoDelEquipo'=>['required','image','max:5000']
-        ]);
+        ],$message =['max'=> 'La imagen es muy pesada, no debe exceder los 5Mb']);
         $formulario=request()->except('_token');
         $id = $formulario['idEquipo'];
         $equipo = Equipo::find($id);

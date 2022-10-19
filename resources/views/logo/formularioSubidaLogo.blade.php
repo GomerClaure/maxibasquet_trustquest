@@ -15,7 +15,7 @@
     <form action="{{route('subirLogo', ['idEquipo' => $equipo->IdEquipo])}}" method="post" enctype="multipart/form-data" id="form">
         @csrf
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 nombreEquipo">
             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
             <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}" readonly>
         </div>
