@@ -27,8 +27,8 @@
       <h5 class="card-title">Pais Equipo: {{$copia['NombrePais']}}</h5>
       @foreach($copia['Categorias'] as $x)
         <h5>Categoria: {{$x['id']}}</h5>
-        <a href="{{url('MostrarJugadores')}}" class="btn btn-primary">Jugadores</a>
-        <a href="{{url('MostrarTecnicos')}}" class="btn btn-primary">Cuerpo Tecnico</a>
+        <a href="{{url('jugadores'.'/'.$copia['NombreEquipo'].'/'.$x['id'])}}" type="button" class="btn btn-primary">Jugadores</a>
+        <a href="{{url('tecnicos'.'/'.$copia['NombreEquipo'].'/'.$x['id'])}}" class="btn btn-primary">Cuerpo Tecnico</a>
         @endforeach
     </div>
     </div>
