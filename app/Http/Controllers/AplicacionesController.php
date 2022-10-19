@@ -64,7 +64,7 @@ class AplicacionesController extends Controller
             try {
                 $opcionesCategorias = $formulario[config('constants.CATEGORIAS')];
             } catch (\Throwable $th) {
-                echo 'Debe seleccionar por lo menos una categoria', "\n";
+                // echo 'Debe seleccionar por lo menos una categoria', "\n";
                 return back()->withError('Debe seleccionar por lo menos una categoria')->withInput();;
             }
             $categorias = "";
@@ -88,11 +88,8 @@ class AplicacionesController extends Controller
             $transaccion->FotoVaucher = $formulario[config('constants.VAUCHER_PAGO')];
             $transaccion->save();
             $paises = Pais::all();
-            // return $request;
             return redirect()->route('preinscripcion');
-            // return view('preinscripcion.preinscripcionEquipo',compact('paises'));
-            // Empleado::insert($datosEmpleado);
-        // return response()->json($datosEmpleado);
+     
         }
         // para eliminar una preinscripcion
         public function destroy()
