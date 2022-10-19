@@ -18,8 +18,9 @@
 @foreach($arreglo as $copia)
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Nombre: {{$copia['NombreEquipo']}}</h5>
-    <h5 class="card-title">{{$copia['NombrePais']}}</h5>
+  <img class="card-img-top"src="{{asset('storage').'/'.$copia['LogoEquipo']}}" alt="">
+    <h5 class="card-title">Nombre Equipo: {{$copia['NombreEquipo']}}</h5>
+    <h5 class="card-title">Pais Equipo: {{$copia['NombrePais']}}</h5>
     <a href="{{url('MostrarJugadores')}}" class="btn btn-primary">Jugadores</a>
     <a href="{{url('MostrarTecnicos')}}" class="btn btn-primary">Cuerpo Tecnico</a>
   </div>
