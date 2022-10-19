@@ -28,13 +28,11 @@
     </head>
     <body class="antialiased">
         <header >
-            <!-- Grey with black text -->
+            <!--
             <nav class="navbar navbar-expand-sm navbar-light">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            <img src="{{asset('storage/uploads/logo_maxi.png')}}" alt="Avatar Logo" style="width:50px;" class="">
-                        </a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
@@ -46,7 +44,7 @@
                         <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
-            </nav>
+            </nav>-->
         </header>
             @php
                 $vadido = "¡Valido!";
@@ -169,7 +167,7 @@
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Sexo:</label>
                                 <select class="form-select" id="selectSexo" name="selectSexo" value="{{ old('selectSexo') }}">
-                                    <option value="Maculino" {{ old('selectSexo') == 'Maculino' ? 'selected' : '' }}>Maculino</option>
+                                    <option value="Maculino" {{ old('selectSexo') == 'Maculino' ? 'selected' : '' }}>Masculino</option>
                                     <option value="Femenino" {{ old('selectSexo') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
                                 </select>
                             </div>
