@@ -28,39 +28,30 @@ class EquipoController extends Controller
                   ->get();
 
         $EquiposDatos=[]; 
+        $Cat=[];
+        $arreglo=[];
   
                    for($i=0;$i<count($eq);$i++){
                        $var=($eq[$i])["NombreEquipo"];
-                       $new=array_push($EquiposDatos,$var);
+                       //$new=array_push($EquiposDatos,$var);
                        //$EquiposDatos=array("NombreEquipo"=>$var);
                        //$new=array_push($EquiposDatos,$s);
                        foreach($c as $cop) {
                          $nombre=$cop["NombreEquipo"];
                          if($nombre==$var){
                             $pais=$cop["NombrePais"];
-                            $p=$cop["NombreCategoria"];
+                            $categoria=$cop["NombreCategoria"];
                             //$new=array_push($EquiposDatos,$p);
                             //$x=array("Categoria"=>$p);
-                            $new=array_push($EquiposDatos,$p);
+                            $new=array_push($Cat,$categoria);
                          }            
                        }
-                       $new=array_push($EquiposDatos,$pais,'*');
+                       //$new=array_push($EquiposDatos,$pais,'*');
                        //$new=array_push($EquiposDatos,$pais);
+                       $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais);
+                       $new=array_push($arreglo,$EquiposDatos);
+                       $Cat=[];
                     }
-            $a=[];
-            $arreglo=[];
-        for($i=0;$i<count($EquiposDatos);$i++){
-                if($EquiposDatos[$i]!='*'){
-                    $p=$EquiposDatos[$i];
-                    $new=array_push($a,$p);
-                }else{ 
-                //$o=array("Equipo"=>$a); 
-                $new=array_push($arreglo,$a); 
-                $a=[];
-               }
-        }
-
-        
                    return $arreglo;
     }                             
     public function create()
