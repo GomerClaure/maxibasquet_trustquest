@@ -6,6 +6,7 @@ use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
+use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\TecnicoController;
@@ -25,10 +26,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('formulario',FormularioController::class);
+Route::resource('/formulario',FormularioController::class);
+Route::resource('/listaequipos',ListaEquiposController::class);
+/*Route::patch('formulario/show/{id}',[FormularioController::class,'update']);
+Route::get('formulario/show/{id}',[FormularioController::class,'show']);
+Route::get('formulario/index/',[FormularioController::class,'index']);
+*/
 
-
-Route::get('/Equipo',[EquipoController::class,'index']);
+Route::get('/equipo',[EquipoController::class,'index']);
 
 //Route::get('/jugador/create',[JugadorController::class,'create']);
 //Route::resource('jugador',JugadorController::class);
