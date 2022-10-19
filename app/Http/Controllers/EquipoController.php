@@ -39,6 +39,7 @@ class EquipoController extends Controller
                             $pais=$cop["NombrePais"];
                             $categoria=$cop["NombreCategoria"];
                             $logo=$cop["LogoEquipo"];
+                            //$f=array("id"=>$categoria);
                             $new=array_push($Cat,$categoria);
                          }            
                        }
@@ -46,7 +47,9 @@ class EquipoController extends Controller
                        $new=array_push($arreglo,$EquiposDatos);
                        $Cat=[];
                     }
- 
+        $s=[];
+
+                
                     return view('equipo.Equipos',compact('arreglo'));
                   //return $arreglo;
     }                             
