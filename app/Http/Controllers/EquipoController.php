@@ -19,7 +19,7 @@ class EquipoController extends Controller
         $eq=Equipo::select('equipos.NombreEquipo') 
                         ->get();
 
-        //Nombre y Pais de un equipo
+        //Nombre y Pais de un equipo Categoria
         $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','equipos.LogoEquipo','categorias.NombreCategoria')
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
@@ -33,68 +33,18 @@ class EquipoController extends Controller
                        $var=($eq[$i])["NombreEquipo"];
                        $new=array_push($EquiposDatos,$var);
                        foreach($c as $cop) {
-                        //echo 'cmsogn';
                          $nombre=$cop["NombreEquipo"];
-                          //echo $nombre;
                          if($nombre==$var){
+                            $pais=$cop["NombrePais"];
                             $p=$cop["NombreCategoria"];
                             $new=array_push($EquiposDatos,$p);
                          }            
                        }
-                       /*
-                       $b=$cop["NombrePais"];
-                       $a=$cop["NombreEquipo"];
-                       $new=array_push($EquiposDatos,$b,$a);
-                       */
+                       $new=array_push($EquiposDatos,$pais,'*');
                    }
-
+        
                    return $EquiposDatos ;
 
-             //return view('equipo.Equipos',compact('c'));
-             //cometado ------------------------------------
-             /*
-        $equipos=Categoria::select('categorias.NombreCategoria','equipos.NombreEquipo')
-                                 ->join('categorias_por_equipo','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
-                                 ->join('equipos','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
-                                 //->where('equipos.NombreEquipo','=',)
-                                 ->get();     
-            //return $funciona;   
-            $arregloCategorias=[];
-       /*
-        for($i=0;$i<count($equipos)-1;$i++){
-            $aux= $equipos[$i]; 
-            $aux1=$equipos[$i+1];
-            if($aux["NombreEquipo"]==$aux1["NombreEquipo"]){
-                 $c=$aux["NombreEquipo"];
-                 $a=$aux["NombreCategoria"];
-                 $b=$aux1["NombreCategoria"];
-                 ))$new=array_push($arregloCategorias,$a,$b,$c);
-            }
-
-        }
-        
-         for($x=0;$x<count($funciona);$x++){
-            $aux= $funciona[$x];
-            $comp= $aux["NombreEquipo"];
-            for($j=0;$j<count($equipos);$j++){
-                 $aux1=$equipos[$j];
-                 $comp1=$aux1["NombreEquipo"]; 
-                if($comp==$comp1){
-                     //$a=$aux1["NombreEquipo"];
-                     $b=$aux1["NombreCategoria"];
-                 $new=array_push($arregloCategorias,$b);
-                } 
-            }
-            $a=$aux1["NombreEquipo"];
-            $new=array_push($arregloCategorias,$a);
-
-        }
-        
-        return $arregloCategorias;
-        */
-         //return $c ;
-             
-       
     }                             
     public function create()
     {
