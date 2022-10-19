@@ -47,7 +47,7 @@ class EquipoController extends Controller
                        $Cat=[];
                     }
  
-                    return view('equipo.Equipos',$arreglo);
+                    return view('equipo.Equipos',compact('arreglo'));
                   //return $arreglo;
     }                             
     public function create()
