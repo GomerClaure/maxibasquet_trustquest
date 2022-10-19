@@ -39,8 +39,8 @@ class EquipoController extends Controller
                             $pais=$cop["NombrePais"];
                             $categoria=$cop["NombreCategoria"];
                             $logo=$cop["LogoEquipo"];
-                            //$f=array("id"=>$categoria);
-                            $new=array_push($Cat,$categoria);
+                            $f=array("id"=>$categoria);
+                            $new=array_push($Cat,$f);
                          }            
                        }
                        $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais,"LogoEquipo"=>$logo);
