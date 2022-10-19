@@ -14,6 +14,6 @@ class AplicacioneSeeder extends Seeder
      */
     public function run()
     {
-        Aplicacion::factory()->count(60)->create();
+        Aplicacion::factory()->count(10)->create();
     }
 }
