@@ -37,7 +37,7 @@ class AplicacionesController extends Controller
                 config('constants.CORREO_ELECTRONICO') => 'required|email|max:255',
                 config('constants.TELEFONO_CONTACTO') => 'required|max:15',
                 config('constants.DATOS_PAGO') => ['required','max:50', new AlphaNumeric],
-                config('constants.MONTO_PAGAR') => 'required|max:6',
+                config('constants.MONTO_PAGAR') => 'required|max:999999|integer|min:250,',
                 config('constants.NUM_CUENTA') => 'required|max:255',
                 config('constants.FEC_DEPOSITO') => ['required','date','before:'.$dateToday,'after:'.date_format($dateAfter, "d/m/Y")],
             ]);
@@ -61,7 +61,12 @@ class AplicacionesController extends Controller
             $aplicacionPreinscripcion->NumeroTelefono = $formulario[config('constants.TELEFONO_CONTACTO')];
             $aplicacionPreinscripcion->EstadoAplicacion= 'Pendiente';
             $aplicacionPreinscripcion->NombreEquipo = $formulario[config('constants.NOMBRE_EQUIPO')];
-            $opcionesCategorias = $formulario[config('constants.CATEGORIAS')];
+            try {
+                $opcionesCategorias = $formulario[config('constants.CATEGORIAS')];
+            } catch (\Throwable $th) {
+                echo 'Debe seleccionar por lo menos una categoria', "\n";
+                return back()->withError('Debe seleccionar por lo menos una categoria')->withInput();;
+            }
             $categorias = "";
             for ($i=0; $i < count($opcionesCategorias); $i++) {
                 if ($i==count($opcionesCategorias)-1) {
