@@ -33,26 +33,22 @@ class EquipoController extends Controller
   
                    for($i=0;$i<count($eq);$i++){
                        $var=($eq[$i])["NombreEquipo"];
-                       //$new=array_push($EquiposDatos,$var);
-                       //$EquiposDatos=array("NombreEquipo"=>$var);
-                       //$new=array_push($EquiposDatos,$s);
                        foreach($c as $cop) {
                          $nombre=$cop["NombreEquipo"];
                          if($nombre==$var){
                             $pais=$cop["NombrePais"];
                             $categoria=$cop["NombreCategoria"];
-                            //$new=array_push($EquiposDatos,$p);
-                            //$x=array("Categoria"=>$p);
+                            $logo=$cop["LogoEquipo"];
                             $new=array_push($Cat,$categoria);
                          }            
                        }
-                       //$new=array_push($EquiposDatos,$pais,'*');
-                       //$new=array_push($EquiposDatos,$pais);
-                       $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais);
+                       $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais,"LogoEquipo"=>$logo);
                        $new=array_push($arreglo,$EquiposDatos);
                        $Cat=[];
                     }
-                   return $arreglo;
+ 
+                    return view('equipo.Equipos',$arreglo);
+                  //return $arreglo;
     }                             
     public function create()
     {
