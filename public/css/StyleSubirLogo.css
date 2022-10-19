@@ -3,12 +3,21 @@
 }
 .row{
     background: #b5b5bd;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
 }
-.btn.botonPreinscripcion{
-    margin-top: 15px;
+.btn.botonSubirLogo{
+    margin-top: 2.5%;
     background-color: #eb8f32;
     color: white;
 }
-.btn.botonPreinscripcion:first-child:hover{
+.btn.botonSubirLogo:first-child:hover{
     background: #fa841a;
+}
+.error-message{
+    color: red;
+}
+.input-group{
+    display: flex;
+    justify-content: center;
 }

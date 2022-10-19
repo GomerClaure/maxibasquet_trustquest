@@ -11,11 +11,14 @@ class SubirLogoController extends Controller
     public function index($id)
     {
         $equipo = Equipo::find($id);
-        echo $equipo;
+        // echo $equipo;
         return view('logo.formularioSubidaLogo',compact('equipo','id'));
     }
     public function store(Request $request)
     {
+        $request -> validate([
+            'logotipoDelEquipo'=>['required','image','max:5000']
+        ]);
         $formulario=request()->except('_token');
         $id = $formulario['idEquipo'];
         $equipo = Equipo::find($id);
