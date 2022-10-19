@@ -115,6 +115,16 @@ class JugadorController extends Controller
             return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
         }
 
+        $numCamiseta = $request -> nCamiseta;
+        $consultaCamiseta = DB::table('jugadores')
+                            ->select('*')
+                            ->where([['NumeroCamiseta', $numCamiseta],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
+                            ->get();
+
+        if(!$consultaCamiseta ->isEmpty()){
+            return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en la categoria');
+        }
+
         $persona -> save();
 
         $jugador = new Jugador;
