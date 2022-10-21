@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
             PreinscripcionSeeder::class,
             PaisSeeder::class,
             CategoriaSeeder::class,
-            AplicacioneSeeder::class,
-            TransaccionesSeeder::class,
-            EquipoSeeder::class,
-            CategoriasPorEquipoSeeder::class,
-            JugadorSeeder::class,
-            TecnicoSeeder::class,
+            // AplicacioneSeeder::class,
+            // TransaccionesSeeder::class,
+            // EquipoSeeder::class,
+            // CategoriasPorEquipoSeeder::class,
+            // JugadorSeeder::class,
+            // TecnicoSeeder::class,
         ]);
     }
 }
