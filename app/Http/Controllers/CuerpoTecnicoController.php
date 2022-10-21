@@ -18,9 +18,31 @@ class CuerpoTecnicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($equipo,$categoria)
     {
-        //
+        $tecnicos = CuerpoTecnico::select('personas.NombrePersona','personas.ApellidoPaterno',
+                    'personas.ApellidoMaterno','tecnicos.RolesTecnicos','tecnicos.IdTecnicos','personas.Foto')
+                    ->join('personas','tecnicos.IdPersona','=','personas.IdPersona')
+                    ->join('equipos','tecnicos.IdEquipo','=','equipos.IdEquipo')
+                    ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
+                    ->where('equipos.NombreEquipo','=',$equipo)
+                    ->where('categorias.NombreCategoria','=',$categoria)
+                    ->get();
+
+        $equipos = Equipo::select('NombreEquipo','NombreCategoria')
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                            ->where('equipos.NombreEquipo','=',$equipo)
+                            ->where('categorias.NombreCategoria','=',$categoria)
+                            ->get();
+        if(! $equipos->isEmpty()){
+            $equipo = $equipos[0]->NombreEquipo;
+            $categoria = $equipos[0]->NombreCategoria;
+        }else{
+            $equipo = null;
+            $categoria = null;
+        }
+        return view('tecnico.listaTecnicos',compact('tecnicos','equipo','categoria'));
     }
 
     /**

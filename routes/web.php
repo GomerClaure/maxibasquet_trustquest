@@ -51,8 +51,11 @@ Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('pr
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
 Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subirLogo');
 Route::post('/subirLogo', [SubirLogoController::class,'store'])->name('subirLogo');
+
+Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index']);
 Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create']);
 Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
+
 Route::get('/tecnico/{id}',[TecnicoController::class,'show']);
 Route::get('/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaTecnicos']);
 Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);
