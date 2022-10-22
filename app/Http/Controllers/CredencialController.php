@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Jugador;
+use App\Models\Tecnico;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -17,9 +18,22 @@ class CredencialController extends Controller
     {
         //
     }
-
+    public function credencialesDeEquipo($equipo,$categoria){
+        $jugadores = Jugador::select()
+                            ->join('personas','personas.IdPersona','jugadores.IdPersona')
+                            ->where('IdEquipo','=',$equipo)
+                            ->where('IdCategoria','=',$categoria)
+                            ->get();
+        $tecnicos = Tecnico::select()
+                            ->join('personas','personas.IdPersona','tecnicos.IdPersona')
+                            ->where('IdEquipo','=',$equipo)
+                            ->where('IdCategoria','=',$categoria)
+                            ->get();
+        return [$jugadores,$tecnicos];
+    }
     public function qr(){
-        QrCode::format('png')->generate('Make me into a QrCode!', '../public/qrcodes/qrcode.png');
+        $id =3;
+        QrCode::format('png')->size(250)->generate('http://127.0.0.1:8000/jugador/'.$id, '../storage/app/public/qrcodes/qrcode.png');
     }
     /**
      * Show the form for creating a new resource.

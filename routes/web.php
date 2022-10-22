@@ -58,3 +58,4 @@ Route::get('/tecnico/{id}',[TecnicoController::class,'show']);
 Route::get('/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaTecnicos']);
 Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);
 Route::get('/qr',[CredencialController::class,'qr']);
+Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo']);
