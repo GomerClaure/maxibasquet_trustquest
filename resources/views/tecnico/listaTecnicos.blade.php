@@ -75,7 +75,7 @@
 
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
                                                         <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
-                                                        <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btnEditar">Editar</a>
+                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar">Editar</a>
                                                     </div>
                                                 </div>
                                             @endforeach

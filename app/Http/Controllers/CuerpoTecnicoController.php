@@ -159,7 +159,9 @@ class CuerpoTecnicoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $idTecnico = $id;
+        $categorias = Categoria::all();
+        return view('tecnico.edit',compact('categorias','idTecnico'));
     }
 
     /**
