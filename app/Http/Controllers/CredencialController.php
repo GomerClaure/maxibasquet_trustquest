@@ -18,6 +18,9 @@ class CredencialController extends Controller
     {
         //
     }
+    /**
+     * obtiene los datos de los integrantes de los equipos y se le asigana un credencuial
+     */
     public function credencialesDeEquipo($equipo,$categoria){
         $jugadores = Jugador::select()
                             ->join('personas','personas.IdPersona','jugadores.IdPersona')
@@ -31,6 +34,9 @@ class CredencialController extends Controller
                             ->get();
         return [$jugadores,$tecnicos];
     }
+    /**
+     * Crea y guarda las imagenes de los codigos qr de las credenciales 
+     */
     public function qr(){
         $id =3;
         QrCode::format('png')->size(250)->generate('http://127.0.0.1:8000/jugador/'.$id, '../storage/app/public/qrcodes/qrcode.png');
