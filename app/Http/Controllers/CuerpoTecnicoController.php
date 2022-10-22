@@ -159,9 +159,15 @@ class CuerpoTecnicoController extends Controller
      */
     public function edit($id)
     {
-        $idTecnico = $id;
+        $tecnicos = DB::table('tecnicos')
+                    ->select('*')
+                    ->join('personas','tecnicos.IdPersona','=','personas.IdPersona')
+                    ->where('IdTecnicos',$id)
+                    ->get();
+
+        $tecnico = $tecnicos[0];
         $categorias = Categoria::all();
-        return view('tecnico.edit',compact('categorias','idTecnico'));
+        return view('tecnico.edit',compact('categorias','tecnico'));
     }
 
     /**
