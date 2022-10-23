@@ -79,8 +79,9 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/tecnico/create/')}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('tecnico/'.$tecnico->IdTecnicos.'/update')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
+                    @method('PUT')
                     <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
                     </div>
