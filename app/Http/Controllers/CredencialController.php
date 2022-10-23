@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credencial;
 use App\Models\Jugador;
 use App\Models\Tecnico;
 use Illuminate\Http\Request;
@@ -19,27 +20,58 @@ class CredencialController extends Controller
         //
     }
     /**
-     * obtiene los datos de los integrantes de los equipos y se le asigana un credencuial
+     * obtiene los datos de los credenciales de los jugadores y cuerpo tecnico
+     * por categoria de un equipo
      */
     public function credencialesDeEquipo($equipo,$categoria){
-        $jugadores = Jugador::select()
-                            ->join('personas','personas.IdPersona','jugadores.IdPersona')
-                            ->where('IdEquipo','=',$equipo)
-                            ->where('IdCategoria','=',$categoria)
+        $credencialesJugadores = Credencial::select()
+                            ->join('personas','personas.IdPersona','credenciales.IdPersona')
+                            ->join('jugadores','personas.IdPersona','jugadores.IdPersona')
+                            ->where('jugadores.IdEquipo','=',$equipo)
+                            ->where('jugadores.IdCategoria','=',$categoria)
                             ->get();
-        $tecnicos = Tecnico::select()
-                            ->join('personas','personas.IdPersona','tecnicos.IdPersona')
-                            ->where('IdEquipo','=',$equipo)
-                            ->where('IdCategoria','=',$categoria)
+
+        $credencialesTecnicos = Credencial::select()
+                            ->join('personas','personas.IdPersona','credenciales.IdPersona')
+                            ->join('tecnicos','personas.IdPersona','tecnicos.IdPersona')
+                            ->where('tecnicos.IdEquipo','=',$equipo)
+                            ->where('tecnicos.IdCategoria','=',$categoria)
                             ->get();
-        return [$jugadores,$tecnicos];
+
+
+        return [$credencialesJugadores,$credencialesTecnicos];
+    }
+    public function generarCredenciales($equipo,$categoria){
+        $jugadores = Jugador::select("personas.CiPersona","personas.IdPersona")
+        ->join('personas','personas.IdPersona','jugadores.IdPersona')
+        ->where('IdEquipo','=',$equipo)
+        ->where('IdCategoria','=',$categoria)
+        ->get();
+        $this->generarQr($jugadores);
+        $tecnicos = Tecnico::select("personas.CiPersona","personas.IdPersona")
+        ->join('personas','personas.IdPersona','tecnicos.IdPersona')
+        ->where('IdEquipo','=',$equipo)
+        ->where('IdCategoria','=',$categoria)
+        ->get();
+        $this->generarQr($tecnicos);
+        $this->credencialesDeEquipo($equipo,$categoria);
+    }
+    public function generarQr($personas){
+        foreach ($personas as $persona) {
+            $this->qr($persona->IdPersona,$persona->CiPersona);
+        }
     }
     /**
      * Crea y guarda las imagenes de los codigos qr de las credenciales 
      */
-    public function qr(){
-        $id =3;
-        QrCode::format('png')->size(250)->generate('http://127.0.0.1:8000/jugador/'.$id, '../storage/app/public/qrcodes/qrcode.png');
+    public function qr($id,$ci){
+        QrCode::format('png')->size(250)
+                ->generate('http://127.0.0.1:8000/jugador/'.$ci,
+                '../storage/app/public/qrcodes/'.$id.$ci.'.png');
+        $credencial = new Credencial;
+        $credencial->IdPersona = $id;
+        $credencial -> CodigoQR = 'qrcodes/'.$id.$ci.'.png';
+        $credencial->save();
     }
     /**
      * Show the form for creating a new resource.
