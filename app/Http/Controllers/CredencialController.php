@@ -24,21 +24,24 @@ class CredencialController extends Controller
      * por categoria de un equipo
      */
     public function credencialesDeEquipo($equipo,$categoria){
-        $credencialesJugadores = Credencial::select()
+        $credencialesJugadores = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
+                            'personas.ApellidoPaterno','personas.Foto')
                             ->join('personas','personas.IdPersona','credenciales.IdPersona')
                             ->join('jugadores','personas.IdPersona','jugadores.IdPersona')
                             ->where('jugadores.IdEquipo','=',$equipo)
                             ->where('jugadores.IdCategoria','=',$categoria)
                             ->get();
 
-        $credencialesTecnicos = Credencial::select()
+        $credencialesTecnicos = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
+                            'personas.ApellidoPaterno','personas.Foto','tecnicos.RolesTecnicos')
                             ->join('personas','personas.IdPersona','credenciales.IdPersona')
                             ->join('tecnicos','personas.IdPersona','tecnicos.IdPersona')
                             ->where('tecnicos.IdEquipo','=',$equipo)
                             ->where('tecnicos.IdCategoria','=',$categoria)
                             ->get();
+        
 
-
+        return view('credencial.credenciales',compact('credencialesJugadores'));
         return [$credencialesJugadores,$credencialesTecnicos];
     }
     public function generarCredenciales($equipo,$categoria){
@@ -47,14 +50,15 @@ class CredencialController extends Controller
         ->where('IdEquipo','=',$equipo)
         ->where('IdCategoria','=',$categoria)
         ->get();
-        $this->generarQr($jugadores);
+       $this->generarQr($jugadores);
         $tecnicos = Tecnico::select("personas.CiPersona","personas.IdPersona")
         ->join('personas','personas.IdPersona','tecnicos.IdPersona')
         ->where('IdEquipo','=',$equipo)
         ->where('IdCategoria','=',$categoria)
         ->get();
         $this->generarQr($tecnicos);
-        $this->credencialesDeEquipo($equipo,$categoria);
+        return redirect('credenciales/'.$equipo.'/'.$categoria);
+
     }
     public function generarQr($personas){
         foreach ($personas as $persona) {
@@ -66,12 +70,19 @@ class CredencialController extends Controller
      */
     public function qr($id,$ci){
         QrCode::format('png')->size(250)
-                ->generate('http://127.0.0.1:8000/jugador/'.$ci,
+                ->generate('http://127.0.0.1:8000/jugador/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
+       $credencial = Credencial::where('IdPersona',$id)->get();
+       if($credencial -> isEmpty()){
         $credencial = new Credencial;
         $credencial->IdPersona = $id;
         $credencial -> CodigoQR = 'qrcodes/'.$id.$ci.'.png';
+        $credencial->created_at = now();
+        $credencial->updated_at = now();
         $credencial->save();
+       }else{
+        $credencial = Credencial::where('IdPersona',$id)->update(['CodigoQR'=>'qrcodes/'.$id.$ci.'.png','updated_at'=>now()]);
+       }
     }
     /**
      * Show the form for creating a new resource.
