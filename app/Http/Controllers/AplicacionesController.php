@@ -90,12 +90,13 @@ class AplicacionesController extends Controller
                     $categorias = $categorias . $opcionesCategorias[$i] . ",";
                 }
             }
-            $sePuedeGuardarAplicacion =  $this->sePuedeGuardarAplicacion($formulario[config('constants.NOMBRE_EQUIPO')],$categorias);
+            $sePuedeGuardarAplicacion =  $this->sePuedeGuardarAplicacion($formulario[config('constants.NOMBRE_EQUIPO')],
+            $categorias,$formulario[config('constants.PAIS')]);
             // print_r($sePuedeGuardarAplicacion);
             if ($sePuedeGuardarAplicacion) {
-                $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
-                $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
-                // echo "Siii, se guardará la aplicacion";
+                // $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
+                // $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
+                echo "Siii, se guardará la aplicacion";
             }else {
                 throw new Exception('Existe un equipo con la misma categoria', 3);
             }
@@ -158,10 +159,11 @@ class AplicacionesController extends Controller
         $transaccion->save();
     }
 
-    private function sePuedeGuardarAplicacion($nombreEquipo,$categoria){
+    private function sePuedeGuardarAplicacion($nombreEquipo,$categoria, $nombrePais){
         $sePuede = true;
-        $aplicaciones = DB::table('aplicaciones')
-                        ->select('Categorias')
+        $aplicaciones = DB::table('aplicaciones',)
+                        ->select(['Categorias','NombrePais'])
+                        ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                         ->where('NombreEquipo', '=', $nombreEquipo)
                         ->where(function($query) {
                             $query->where('EstadoAplicacion', '=','Pendiente')
@@ -175,11 +177,12 @@ class AplicacionesController extends Controller
             $categoriaArray = preg_split ("/[,]+/", $categoriaAplicaciones);
             $categoriasEntrada = preg_split("/[,]+/",$categoria);
             foreach ($categoriasEntrada as $categoria) {
-                if (in_array($categoria,$categoriaArray)) {
+                // echo $aplicacion->NombrePais;
+                // echo $nombrePais;
+                if (in_array($categoria,$categoriaArray) && $aplicacion->NombrePais == $nombrePais) {
                     $sePuede = false;
                 }
             }
-            // $str_arr = preg_split ("/[,]+/", $categoriaAplicaciones);
         }
         // print_r($aplicaciones);
         return $sePuede;
