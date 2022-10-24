@@ -115,7 +115,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="montoAPagar" class="form-label">Monto a pagar:</label>
+                            <label for="montoAPagar" class="form-label">Monto pagado:</label>
                             <input name="{{config('constants.MONTO_PAGAR')}}" type="number" class="form-control" id="montoAPagar" value="{{old(config('constants.MONTO_PAGAR'))}}">
                             @error(config('constants.MONTO_PAGAR'))
                                     <p class="error-message">{{ $message }}</p>

@@ -10,6 +10,7 @@ use App\Rules\AlphaSpaces;
 use App\Rules\AlphaNumeric;
 use Exception;
 use DateTime;
+use Illuminate\Support\Facades\DB;
 
 
 class AplicacionesController extends Controller
@@ -74,10 +75,32 @@ class AplicacionesController extends Controller
             ->firstOrFail();
         $formulario[config('constants.VAUCHER_PAGO')] =
             $request->file(config('constants.VAUCHER_PAGO'))->store('uploads', 'public');
-
+        // $this->sePuedeGuardarAplicacion('Anderson Veum','+35,+40');
         try {
-            $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
-            $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
+            try {
+                $opcionesCategorias = $formulario[$this->categorias];
+            } catch (\Throwable $th) {
+                throw new Exception('Debe seleccionar por lo menos una categoria', 2);
+            }
+            $categorias = "";
+            for ($i = 0; $i < count($opcionesCategorias); $i++) {
+                if ($i == count($opcionesCategorias) - 1) {
+                    $categorias = $categorias . $opcionesCategorias[$i];
+                } else {
+                    $categorias = $categorias . $opcionesCategorias[$i] . ",";
+                }
+            }
+            $sePuedeGuardarAplicacion =  $this->sePuedeGuardarAplicacion($formulario[config('constants.NOMBRE_EQUIPO')],$categorias);
+            // print_r($sePuedeGuardarAplicacion);
+            if ($sePuedeGuardarAplicacion) {
+                $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
+                $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
+                // echo "Siii, se guardará la aplicacion";
+            }else {
+                throw new Exception('Existe un equipo con la misma categoria', 3);
+            }
+           
+            
         } catch (\Throwable $th) {
             return back()->withError($th->getMessage())->withInput();
         }
@@ -134,4 +157,31 @@ class AplicacionesController extends Controller
         $transaccion->FotoVaucher = $formulario[config('constants.VAUCHER_PAGO')];
         $transaccion->save();
     }
+
+    private function sePuedeGuardarAplicacion($nombreEquipo,$categoria){
+        $sePuede = true;
+        $aplicaciones = DB::table('aplicaciones')
+                        ->select('Categorias')
+                        ->where('NombreEquipo', '=', $nombreEquipo)
+                        ->where(function($query) {
+                            $query->where('EstadoAplicacion', '=','Pendiente')
+                                  ->orWhere('EstadoAplicacion', '=','Aceptado');
+                        })
+                        ->get();
+        // echo $aplicaciones;
+        for ($i=0; $i < count($aplicaciones); $i++) { 
+            $aplicacion = $aplicaciones[$i];
+            $categoriaAplicaciones = $aplicacion->Categorias;
+            $categoriaArray = preg_split ("/[,]+/", $categoriaAplicaciones);
+            $categoriasEntrada = preg_split("/[,]+/",$categoria);
+            foreach ($categoriasEntrada as $categoria) {
+                if (in_array($categoria,$categoriaArray)) {
+                    $sePuede = false;
+                }
+            }
+            // $str_arr = preg_split ("/[,]+/", $categoriaAplicaciones);
+        }
+        // print_r($aplicaciones);
+        return $sePuede;
+    }   
 }
