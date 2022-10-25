@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <a type="button" class="boton-color btn btn-primary" href="/formulario">atras</a>
+                        <a type="button" class="boton-color btn btn-primary" href="/formulario">Atras</a>
                         @if($datos->EstadoAplicacion == 'Pendiente')
                         <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="Aceptado">
                         <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="Rechazado">

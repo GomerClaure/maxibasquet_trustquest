@@ -154,19 +154,7 @@ class FormularioController extends Controller
         $datosApp->observaciones = $observacion;
         $datosApp->save();
 
-        $aplicaciones = Aplicacion::select(
-            'aplicaciones.IdAplicacion',
-            'aplicaciones.NombreEquipo',
-            'preinscripciones.Monto',
-            'aplicaciones.EstadoAplicacion',
-            'aplicaciones.Categorias',
-            'aplicaciones.observaciones'
-        )
-            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->get();
-
-        $aplicaciones = $this->ingresarMonto($aplicaciones);
-        return view("formulario.listaFormulario", compact('aplicaciones'));
+        return redirect('/formulario');
     }
 
     /**
