@@ -79,7 +79,7 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/tecnico/create/'.$idTecnico)}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('/tecnico/create/'.$idEquipo)}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
@@ -88,7 +88,7 @@
                         <div class="col-4" id="columna1">
                             <div class="form-group mb-3" style="display: none">
                                 <label for="" class="form-label">Equipo:</label>
-                                <input type="number" class="form-control" placeholder="Ingresar idEquipo" id="idEquipo" name="idEquipo" value="{{$idTecnico}}">
+                                <input type="number" class="form-control" placeholder="Ingresar idEquipo" id="idEquipo" name="idEquipo" value="{{$idEquipo}}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nombre:</label>

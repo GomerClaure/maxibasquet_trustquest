@@ -52,9 +52,26 @@ class CuerpoTecnicoController extends Controller
      */
     public function create($id)
     {
-        $idTecnico = $id;
-        $categorias = Categoria::all();
-        return view('tecnico.create',compact('categorias','idTecnico'));
+        $idEquipo = $id;
+        $cuerpoTecnico = DB::table('tecnicos')
+                            ->select('IdCategoria')
+                            ->where('IdEquipo',$id)
+                            ->distinct()
+                            ->get();
+
+        $arreglo = array();
+        $contador = 0;
+        foreach ($cuerpoTecnico as $categoria) {
+            $arreglo[$contador] = $categoria->IdCategoria;
+            $contador++;
+        }
+
+        $categorias = $cuerpoTecnico = DB::table('categorias')
+                        ->select('*')
+                        ->whereIn('IdCategoria',$arreglo)
+                        ->get();
+
+        return view('tecnico.create',compact('categorias','idEquipo'));
     }
 
     /**
