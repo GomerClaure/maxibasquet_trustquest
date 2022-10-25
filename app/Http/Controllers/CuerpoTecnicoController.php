@@ -96,13 +96,15 @@ class CuerpoTecnicoController extends Controller
         }
 
         $rol = 'Entrenador principal';
-        $consultaEntrenador = DB::table('tecnicos')
-                            ->select('*')
-                            ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
-                            ->get();
+        if($rol == $request->selectRol){
+            $consultaEntrenador = DB::table('tecnicos')
+                                ->select('*')
+                                ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
+                                ->get();
 
-        if(!$consultaEntrenador ->isEmpty()){
-            return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            if(!$consultaEntrenador ->isEmpty()){
+                return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            }
         }
 
         $persona -> save();
