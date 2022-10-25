@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Credencial;
+use App\Models\Equipo;
 use App\Models\Jugador;
 use App\Models\Tecnico;
 use Illuminate\Http\Request;
@@ -40,9 +42,22 @@ class CredencialController extends Controller
                             ->where('tecnicos.IdCategoria','=',$categoria)
                             ->get();
         
-
-        return view('credencial.credenciales',compact('credencialesJugadores'));
-        return [$credencialesJugadores,$credencialesTecnicos];
+        $equipos = Equipo::select()
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                            ->where('equipos.IdEquipo','=',$equipo)
+                            ->where('categorias.IdCategoria','=',$categoria)
+                            ->get();
+        
+        if(! $equipos->isEmpty()){
+            $equipo = $equipos[0];
+    
+        }else{
+            $equipo = null;
+            $categoria = null;
+        }
+        return view('credencial.credenciales',compact('credencialesJugadores',
+                    'credencialesTecnicos','equipo'));
     }
     public function generarCredenciales($equipo,$categoria){
         $jugadores = Jugador::select("personas.CiPersona","personas.IdPersona")
