@@ -16,7 +16,7 @@
             </section>
             <section class="form mx-5">
                 @if (session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
+                    <div class="alert alert-danger">{{ session('error')  }}</div>
                 @endif
                 <form class="g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
