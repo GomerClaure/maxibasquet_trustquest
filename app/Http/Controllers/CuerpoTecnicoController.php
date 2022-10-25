@@ -184,7 +184,9 @@ class CuerpoTecnicoController extends Controller
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
 
-        return view('tecnico.edit',compact('categorias','tecnico'));
+        $equipo = Equipo::find($tecnico->IdEquipo);
+
+        return view('tecnico.edit',compact('categorias','tecnico','equipo'));
     }
 
     /**
