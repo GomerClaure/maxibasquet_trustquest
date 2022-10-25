@@ -52,7 +52,6 @@ class CuerpoTecnicoController extends Controller
      */
     public function create($id)
     {
-        $idEquipo = $id;
         $cuerpoTecnico = DB::table('tecnicos')
                             ->select('IdCategoria')
                             ->where('IdEquipo',$id)
@@ -71,7 +70,7 @@ class CuerpoTecnicoController extends Controller
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
 
-        return view('tecnico.create',compact('categorias','idEquipo'));
+        return view('tecnico.create',compact('categorias','id'));
     }
 
     /**
@@ -80,7 +79,7 @@ class CuerpoTecnicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
@@ -105,17 +104,6 @@ class CuerpoTecnicoController extends Controller
         $imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
         $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
 
-        $persona = new Persona;
-        $persona -> CiPersona = $request -> ci;
-        $persona -> NombrePersona = $request -> nombre;
-        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
-        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
-        $persona -> FechaNacimiento = $request -> fechaNacimiento;
-        $persona -> NacionalidadPersona = $request -> nacionalidad;
-        $persona -> SexoPersona = $request -> selectSexo;
-        $persona -> Edad = $request -> edad;
-        $persona -> Foto = $imagenTecnico;
-
         $carnetId = $request -> ci;
         $consulta2 = DB::table('personas')
                         ->select('CiPersona')
@@ -138,7 +126,7 @@ class CuerpoTecnicoController extends Controller
         if($rol == $request->selectRol){
             $consultaEntrenador = DB::table('tecnicos')
                                 ->select('*')
-                                ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
+                                ->where([['RolesTecnicos', $rol],['IdEquipo',$id],['IdCategoria',$request -> selectCategoria]])
                                 ->get();
 
             if(!$consultaEntrenador ->isEmpty()){
@@ -146,17 +134,27 @@ class CuerpoTecnicoController extends Controller
             }
         }
 
+        $persona = new Persona;
+        $persona -> CiPersona = $request -> ci;
+        $persona -> NombrePersona = $request -> nombre;
+        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
+        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
+        $persona -> FechaNacimiento = $request -> fechaNacimiento;
+        $persona -> NacionalidadPersona = $request -> nacionalidad;
+        $persona -> SexoPersona = $request -> selectSexo;
+        $persona -> Edad = $request -> edad;
+        $persona -> Foto = $imagenTecnico;
         $persona -> save();
 
         $tenico = new CuerpoTecnico;
-        $tenico -> IdEquipo = $request -> idEquipo;
+        $tenico -> IdEquipo = $id;
         $tenico -> IdCategoria = $request -> selectCategoria;
         $tenico -> IdPersona = $persona -> IdPersona;
         $tenico -> RolesTecnicos = $request -> selectRol;
         $tenico -> FotoCarnet = $imagenCarnet;
 
         $tenico -> save();
-        return redirect('tecnico/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al tecnico correctamente');
+        return redirect('tecnico/create/'.$id)->with('mensaje','Se inscribio al tecnico correctamente');
     }
 
     /**
