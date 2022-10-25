@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Persona;
-use App\Models\Tecnico;
+use App\Models\Aplicacion;
 use App\Models\CuerpoTecnico;
 use Illuminate\Support\Facades\DB;
 
@@ -166,7 +166,24 @@ class CuerpoTecnicoController extends Controller
                     ->get();
 
         $tecnico = $tecnicos[0];
-        $categorias = Categoria::all();
+        $cuerpoTecnico = DB::table('tecnicos')
+                            ->select('IdCategoria')
+                            ->where('IdEquipo',$tecnico->IdEquipo)
+                            ->distinct()
+                            ->get();
+
+        $arreglo = array();
+        $contador = 0;
+        foreach ($cuerpoTecnico as $categoria) {
+            $arreglo[$contador] = $categoria->IdCategoria;
+            $contador++;
+        }
+
+        $categorias = $cuerpoTecnico = DB::table('categorias')
+                        ->select('*')
+                        ->whereIn('IdCategoria',$arreglo)
+                        ->get();
+
         return view('tecnico.edit',compact('categorias','tecnico'));
     }
 
@@ -201,9 +218,6 @@ class CuerpoTecnicoController extends Controller
 
 
         //$datosTecnico = $request->except(['_token','_method']);
-
-        $imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
-        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
 
         $carnetId = $request -> ci;
         $consulta2 = DB::table('personas')
@@ -240,11 +254,6 @@ class CuerpoTecnicoController extends Controller
             return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
         }
 
-        //Persona::where('IdPersona','=',$tecnico->CiPersona)->update(['CiPersona'=>$request -> ci]);
-
-        //Persona::where('IdPersona', $tecnico->CiPersona)
-        //                ->update(['CiPersona' => $request -> ci]);
-
         $persona = Persona::find($tecnico->IdPersona);
         $persona -> CiPersona = $request -> ci;
         $persona -> NombrePersona = $request -> nombre;
@@ -254,13 +263,17 @@ class CuerpoTecnicoController extends Controller
         $persona -> NacionalidadPersona = $request -> nacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
-        $persona -> Foto = $imagenTecnico;
+        if($request->hasFile('fotoTecnico')){
+            $persona -> Foto = $request->file('fotoTecnico')->store('uploads','public');
+        }
         $persona -> save();
 
         $cuerpoTecnico = CuerpoTecnico::find($id);
         $cuerpoTecnico -> IdCategoria = $request -> selectCategoria;
         $cuerpoTecnico -> RolesTecnicos = $request -> selectRol;
-        $cuerpoTecnico -> FotoCarnet = $imagenCarnet;
+        if($request->hasFile('fotoCarnet')){
+            $cuerpoTecnico -> FotoCarnet = $request->file('fotoCarnet')->store('uploads','public');
+        }
         $cuerpoTecnico -> save();
 
         $equipo = Equipo::find($cuerpoTecnico -> IdEquipo);

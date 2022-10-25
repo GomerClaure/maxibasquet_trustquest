@@ -190,6 +190,9 @@
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del tecnico (Resolucion 472x472):</label>
                             <input type="file" class="form-control" id="fotoTecnico" name="fotoTecnico" accept="image/*" value="{{ $tecnico->Foto }}">
+                            @error('fotoTecnico')
+                                    <p class="error-message">{{ $message }}</p>
+                            @enderror
 
                             <div class="col-md-6 imagen mx-auto mt-2">
                                 <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
@@ -199,6 +202,9 @@
                         <div class="form-group mb-6 col-6">
                             <label for="" class="form-label">Foto del carnet:</label>
                             <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*">
+                            @error('fotoCarnet')
+                                    <p class="error-message">{{ $message }}</p>
+                            @enderror
 
                             <div class="col-md-8 imagen mx-auto mt-3">
                                 <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->FotoCarnet}}" alt="">
