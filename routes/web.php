@@ -14,6 +14,7 @@ use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\JugadorQrController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,4 @@ Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJug
 Route::get('/qr',[CredencialController::class,'qr']);
 Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo']);
 Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'GenerarCredenciales']);
+Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
