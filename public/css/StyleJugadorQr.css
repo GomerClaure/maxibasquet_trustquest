@@ -1,68 +1,62 @@
 p{
     font-size:large;
 }
-.row{
-    background: #b5b5bd;
+.col-md-2{
+  border: black solid 1px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .row.filaDato{
-    background: #eb8f32;
+    border: black solid 1px;
+    height: 80px;
 }
-
+.tituloDeCelda{
+  font-size:18px;
+}
+.tituloDeUnaCelda{
+  font-size:20px;
+  margin-bottom: 10%;
+}
+.col-md-2 .row.celda{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.contenidoCelda.nro{
+  padding-left: 25%;
+}
+.row.mainCard{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 20%;
+  padding-left: 20%;
+  background: #b5b5bd;
+}
+.row.data{
+  background: #b5b5bd;
+}
 .nombreJugador{
     font-weight: bold
-}
-
-.imagenJugador{
-    height: 255px;
-}
-table td,
-table th {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-thead th {
-  color: black;
 }
 
 .card {
   border-radius: .0rem;
   background-color: #ABA9A9;
 }
-
-.table-scroll {
-  border-radius: .5rem;
-}
-
-.table-scroll table thead th {
-  font-size: 1.25rem;
-}
-thead {
-  top: 0;
-  position: sticky;
-  background-color: #7B7979;
-}
-tbody{
-    background-color: #D3D3D3;
-}
 .table{
     border-radius: 0;
     
 }
-.btn{
-  background-color: #eb8f32;
-  font-size: 14;
-  border-color: #eb8f32;
+h1{
+  font-weight: bold;
 }
-.btn:first-child:hover{
-  background: #fa841a;
-  border-color: #eb8f32;
-}
-.transformacion2 { 
-    text-transform: uppercase;
-    color: white;
+.main-title{
+  
+  color: white;
+  text-transform: uppercase;
+  
 }
 .jugador{
   color: black;
