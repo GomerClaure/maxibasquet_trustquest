@@ -23,13 +23,24 @@
                         <div class="row mainCard">
                             <div class="col">
                                 {{-- <div class="imagenJugador"> --}}
-                                    <img class="card-img-top imagenJugador" src="{{asset('storage').'\uploads\persona.jpg'}}" alt="Foto del jugador">
+                                    <img class="card-img-top imagenJugador" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
                                 {{-- </div> --}}
                             </div>
                             <div class="col-md-8">
-                                <div class="jugador"> <p> <b>{{"Los pumas del campo "}} | {{" +60" }} | {{" Delantero"}}</b></p> </div>
+                                <div class="jugador"> <p> <b>{{$jugador->NombreEquipo}} | {{$jugador->NombreCategoria }} | {{$jugador->PosicionJugador}}</b></p> </div>
                                 <div class="nombreJugador">
-                                    <p>{{"Este Banquito Lopez"}}</p>
+                                    <p><b>
+                                        <h3>Nombre: </h3>
+                                        {{$jugador->NombrePersona}}
+                                    </b></p>
+                                    <p><b>
+                                        <h3>Apellido Paterno: </h3>
+                                        {{$jugador->ApellidoPaterno}}
+                                    </b></p>
+                                    <p><b>
+                                        <h3>ApellidoMaterno: </h3>
+                                        {{$jugador->ApellidoMaterno}}
+                                    </b></p>
                                 </div>
                             </div>
                         </div>
@@ -39,14 +50,14 @@
                                     <div class="col-lg-9">
                                         <label for="" class="tituloDeCelda">Nro. Camiseta</label>
                                         <br>
-                                        <label for="" class="contenidoCelda">Camiseta</label>
+                                        <label for="" class="contenidoCelda">{{$jugador->NumeroCamiseta}}</label>
                                       </div>
                                 </div>
                                 <div class="row filaDato">
                                     <div class="col-lg-9">
-                                        <label for="" class="tituloDeCelda">Telefono</label>
+                                        <label for="" class="tituloDeCelda">Sexo</label>
                                         <br>
-                                        <label for="" class="contenidoCelda">Camiseta</label>
+                                        <label for="" class="contenidoCelda">{{$jugador->SexoPersona}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -55,39 +66,39 @@
                                     <div class="col-lg-9">
                                         <label for="" class="tituloDeCelda">Nacionalidad</label>
                                         <br>
-                                        <label for="" class="contenidoCelda">Camiseta</label>
+                                        <label for="" class="contenidoCelda">{{$jugador->NacionalidadPersona}}</label>
                                       </div>
                                 </div>
                                 <div class="row filaDato">
                                     <div class="col-lg-9">
                                         <label for="" class="tituloDeCelda">Fecha de nacimiento</label>
-                                        <label for="" class="contenidoCelda">Camiseta</label>
+                                        <label for="" class="contenidoCelda">{{$jugador->FechaNacimiento}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Nro. Documento de Identidad </label>
-                                    <label for="" class="contenidoCelda nro">8745698563</label>
+                                    <label for="" class="contenidoCelda nro">{{$jugador->CiPersona}}</label>
                                 </div>
                                 
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Edad</label>
-                                    <label for="" class="contenidoCelda">Camiseta</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->Edad}}</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Peso</label>
-                                    <label for="" class="contenidoCelda">Camiseta</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->PesoJugador}}</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
-                                    <label for="" class="tituloDeUnaCelda">Altura</label>
-                                    <label for="" class="contenidoCelda">Camiseta</label>
+                                    <label for="" class="tituloDeUnaCelda">Estatura</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->EstaturaJugador}}</label>
                                 </div>
                             </div>
                         </div>
