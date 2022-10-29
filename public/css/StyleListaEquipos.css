@@ -25,6 +25,7 @@ thead th {
 }
 
 .card {
+  border-radius: .0rem;
   background-color: #ABA9A9;
 }
 
