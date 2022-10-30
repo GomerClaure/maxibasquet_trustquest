@@ -67,7 +67,7 @@ class CuerpoTecnicoController extends Controller
             $contador++;
         }
 
-        $categorias = $cuerpoTecnico = DB::table('categorias')
+        $categorias = DB::table('categorias')
                         ->select('*')
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
