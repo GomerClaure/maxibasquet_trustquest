@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Credeenciales Equipo</title>
-        <link  href="{{public_path('css/StyleCredencialesPdf.css')}}" rel="stylesheet" type="text/css">
+        <link  href="{{public_path('css/StylePdf.css')}}" rel="stylesheet" type="text/css">
         <link  href="{{public_path('css/bootstrap.css')}}" rel="stylesheet" type="text/css">
     
     </head>

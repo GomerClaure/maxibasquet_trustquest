@@ -6,10 +6,6 @@
 
         <title>Credeenciales Equipo</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -44,18 +40,24 @@
                                 @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
                                 <h3>Categoria: {{$equipo->NombreCategoria}}</h3>
-                                <div class="aling-item-rigth pb-2">
-                                    <a type="button" href="{{ url('credenciales/generar/'.$equipo->IdEquipo.'/'.$equipo->IdCategoria)}}" class="btn btn-primary btn-sm ">
-                                    @if($credencialesJugadores->isEmpty() && $credencialesTecnicos->isEmpty())
-                                        Generar Credenciales 
-                                    @else
-                                        Actualizar
+                                <div class="d-flex justify-content-between pb-2">
+                                    
+                                            <a type="button" href="{{ url('credenciales/generar/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
+                                        @if($credencialesJugadores->isEmpty() && $credencialesTecnicos->isEmpty())
+                                            Generar Credenciales 
+                                        @else
+                                            Actualizar
+                                        @endif
+                                        </a>
+                                    
+                                    
+                                    @if(!$credencialesJugadores->isEmpty() && !$credencialesTecnicos->isEmpty())
+                                        <a type="button" href="{{ url('credenciales/pdf/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
+                                        Descargar
+                                        </a>
                                     @endif
-                                    </a>
-                                    <a type="button" href="{{ url('credenciales/pdf/'.$equipo->IdEquipo.'/'.$equipo->IdCategoria)}}" class="btn btn-primary btn-sm ">
-                                    Descargar
-                                    </a>
                                 </div>
+                               
                                 <div class="card fondoTabla">
                                     <div class="card-header ps-3 py-2">
                                         <h4 class="text-black card-title"><b>Lista de Credenciales</b> </h4>
@@ -64,13 +66,13 @@
                                             <div class="accordion mt-2" id="accordionPanelsStayOpenExample">
                                                 @if(!$credencialesJugadores->isEmpty())
                                                 <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                                        <strong>Jugadores</strong> 
-                                                        </button>
+                                                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                                    <strong>Jugadores</strong> 
+                                                    </button>
                                                     </h2>
-                                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show " aria-labelledby="panelsStayOpen-headingOne">
-                                                        <div class="accordion-body">
+                                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                                <div class="accordion-body">
                                                             <div class="row justify-content-center">
                                                             @foreach ($credencialesJugadores as $jugador)
                                                             <div class="col-4 p-0 mb-3">

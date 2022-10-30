@@ -15,15 +15,25 @@ table th {
   white-space: nowrap;
   overflow: hidden;
 }
+.btn-primary {
+    color: #fff;
+    background: #fa841a;
+    border-color: #eb8f32; /*set the color you want here*/
+}
+
 .btn:first-child:hover{
   background: #fa841a;
   border-color: #eb8f32;
+}
+.btn-primary:hover {
+    
+    background: #fa841a !important;
+    border-color: #eb8f32 !important;
 }
 
 thead th {
   color: black;
 }
-
 .card {
   background-color: #ABA9A9;
 }
@@ -81,3 +91,4 @@ a{
         
     height: max-content;
 }
+
