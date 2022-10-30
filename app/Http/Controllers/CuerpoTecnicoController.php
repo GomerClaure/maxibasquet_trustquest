@@ -72,7 +72,11 @@ class CuerpoTecnicoController extends Controller
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
 
-        return view('tecnico.create',compact('categorias','id'));
+        $paises = DB::table('paises')
+                ->orderBy('Nacionalidad', 'asc')
+                ->get();
+
+        return view('tecnico.create',compact('categorias','id','paises'));
     }
 
     /**
@@ -94,7 +98,7 @@ class CuerpoTecnicoController extends Controller
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
+            'selectNacionalidad'=>'required',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:100',
             'fotoTecnico'=>'required|image|dimensions:width=472, height=472',
@@ -142,7 +146,7 @@ class CuerpoTecnicoController extends Controller
         $persona -> ApellidoPaterno = $request -> apellidoPaterno;
         $persona -> ApellidoMaterno = $request -> apellidoMaterno;
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
-        $persona -> NacionalidadPersona = $request -> nacionalidad;
+        $persona -> NacionalidadPersona = $request -> selectNacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenTecnico;

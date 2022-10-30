@@ -140,10 +140,11 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nacionalidad:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad" value="{{ old('nacionalidad') }}">
-                                @error('nacionalidad')
-                                    <p class="error-message">{{ $message }}</p>
-                                @enderror
+                                <select class="form-select" id="selectNacionalidad" name="selectNacionalidad">
+                                    @foreach ($paises as $pais)
+                                        <option value="{{$pais->Nacionalidad}}" {{ old('selectNacionalidad') == "$pais->Nacionalidad" ? 'selected' : '' }}>{{$pais->Nacionalidad}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group mb-3">
@@ -204,7 +205,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="btn btnFomulario">Inscribir</button>
+                        <button type="submit" class="botones">Inscribir</button>
                     </div>
                 </form>
             </div>
