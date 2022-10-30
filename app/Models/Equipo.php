@@ -17,4 +17,5 @@ class Equipo extends Model
         return $this->hasMany(Jugador::class, 'IdJugador');
     }
 
+    
 }
