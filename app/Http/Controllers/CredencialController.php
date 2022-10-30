@@ -23,7 +23,9 @@ class CredencialController extends Controller
     {
         
     }
-
+    /**
+     * Genera un docmuento pdf de los credenciales de un equipo 
+     */
 
     public function credencialesPdf($equipo,$categoria){
         $credencialesJugadores = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
@@ -52,7 +54,7 @@ class CredencialController extends Controller
     $pdf = Pdf::loadView('credencial.pdf',['credencialesJugadores'=>$credencialesJugadores,
            'credencialesTecnicos'=>$credencialesTecnicos,'equipo'=>$equipo]);
     
-    return $pdf->stream();
+    return $pdf->download($equipo->NombreEquipo.'_'.$equipo->NombreCategoria.'_'.'credenciales.pdf');
     }
     /**
      * obtiene los datos de los credenciales de los jugadores y cuerpo tecnico
