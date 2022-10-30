@@ -33,9 +33,29 @@ class JugadorController extends Controller
      */
     public function create($id)
     {
-        $idEquipo = $id;
-        $categorias = Categoria::all();
-        return view('jugador.create',compact('categorias','idEquipo'));
+        $jugadores = DB::table('jugadores')
+                            ->select('IdCategoria')
+                            ->where('IdEquipo',$id)
+                            ->distinct()
+                            ->get();
+
+        $arreglo = array();
+        $contador = 0;
+        foreach ($jugadores as $categoria) {
+            $arreglo[$contador] = $categoria->IdCategoria;
+            $contador++;
+        }
+
+        $categorias = DB::table('categorias')
+                        ->select('*')
+                        ->whereIn('IdCategoria',$arreglo)
+                        ->get();
+
+        $paises = DB::table('paises')
+                ->orderBy('Nacionalidad', 'asc')
+                ->get();
+
+        return view('jugador.create',compact('categorias','id','paises'));
     }
 
     /**
@@ -44,10 +64,8 @@ class JugadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //$datos = recuest() -> all();
-        //return response()->json($datos);
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $anio = date('Y')-100;
@@ -59,7 +77,7 @@ class JugadorController extends Controller
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
+            'selectNacionalidad'=>'required',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:100',
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
@@ -83,7 +101,7 @@ class JugadorController extends Controller
         $persona -> ApellidoPaterno = $request -> apellidoPaterno;
         $persona -> ApellidoMaterno = $request -> apellidoMaterno;
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
-        $persona -> NacionalidadPersona = $request -> nacionalidad;
+        $persona -> NacionalidadPersona = $request -> selectNacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         $persona -> Foto = $imagenJucador;
@@ -128,7 +146,7 @@ class JugadorController extends Controller
         $persona -> save();
 
         $jugador = new Jugador;
-        $jugador -> IdEquipo = $request -> idEquipo;
+        $jugador -> IdEquipo = $id;
         $jugador -> IdCategoria = $request -> selectCategoria;
         $jugador -> IdPersona = $persona -> IdPersona;
         $jugador -> EstaturaJugador = $request -> estatura;
@@ -138,7 +156,7 @@ class JugadorController extends Controller
         $jugador -> NumeroCamiseta = $request -> nCamiseta;
 
         $jugador -> save();
-        return redirect('jugador/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al jugador correctamente');
+        return redirect('jugador/create/'.$id)->with('mensaje','Se inscribio al jugador correctamente');
     }
     /**
      * Obtine la lista de jugadores correspondientes a un equipo y categoria
