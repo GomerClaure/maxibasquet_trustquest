@@ -143,7 +143,7 @@
                                 <label for="" class="form-label">Nacionalidad:</label>
                                 <select class="form-select" id="selectNacionalidad" name="selectNacionalidad">
                                     @foreach ($paises as $pais)
-                                        <option value="{{$pais->IdPais}}" {{ $tecnico->NacionalidadPersona == "$pais->Nacionalidad" ? 'selected' : '' }}>{{$pais->Nacionalidad}}</option>
+                                        <option value="{{$pais->Nacionalidad}}" {{ $tecnico->NacionalidadPersona == "$pais->Nacionalidad" ? 'selected' : '' }}>{{$pais->Nacionalidad}}</option>
                                     @endforeach
                                 </select>
                             </div>
