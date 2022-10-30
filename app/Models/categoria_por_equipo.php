@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria_por_equipo extends Model
+class Categorias_por_equipo extends Model
 {
     use HasFactory;
     protected $table ="categoria_por_equipo";

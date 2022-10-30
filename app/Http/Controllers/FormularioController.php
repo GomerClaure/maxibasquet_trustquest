@@ -6,7 +6,7 @@ use App\Models\Delegado;
 use App\Models\Aplicacion;
 use App\Models\Aplicaciones;
 use App\Models\Categoria;
-use App\Models\Categoria_por_equipo;
+use App\Models\Categorias_por_equipo;
 use App\Models\CategoriaEquipo;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
@@ -97,13 +97,7 @@ class FormularioController extends Controller
             $datos = null;
         }
 
-        /*  if (! $aplicaciones->isEmpty()) {
-            $datos = $aplicaciones[0];
-            $categorias = $this->separar($datos->Categorias);
-            $datos->Categorias=$categorias;
-        }else{
-            $aplicacion = null;
-        }*/
+       
 
         return (view('formulario.show', compact('datos')));
     }
@@ -156,7 +150,7 @@ class FormularioController extends Controller
 
             for ($i = 0; $i < sizeof($categorias); $i++) {
                 if ($categorias[$i] == $categorriasPorEquipo[$i]) {
-                    $categoriasEquipo = new Categoria_por_equipo();
+                    $categoriasEquipo = new Categorias_por_equipo();
                     $categoriasEquipo->IdEquipo = $idEquipo;
                     $categoriasEquipo->IdCategoria = $i;
                     $categoriasEquipo->IdCampeonato = 1;
@@ -167,7 +161,7 @@ class FormularioController extends Controller
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-        $aplicaciones = Aplicacion::select(
+        /*$aplicaciones = Aplicacion::select(
             'aplicaciones.IdAplicacion',
             'aplicaciones.NombreEquipo',
             'preinscripciones.Monto',
@@ -176,7 +170,7 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->get();
+            ->get();*/
         // $aplicaciones = Aplicaciones::all();
 
         //return view("formulario.listaFormulario", compact('aplicaciones'));
