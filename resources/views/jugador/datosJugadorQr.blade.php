@@ -29,15 +29,15 @@
                                 <div class="jugador"> <p> <b>{{$jugador->NombreEquipo}} | {{$jugador->NombreCategoria }} | {{$jugador->PosicionJugador}}</b></p> </div>
                                 <div class="nombreJugador">
                                     <p><b>
-                                        <h3>Nombre: </h3>
+                                        <h4>Nombre: </h4>
                                         {{$jugador->NombrePersona}}
                                     </b></p>
                                     <p><b>
-                                        <h3>Apellido Paterno: </h3>
+                                        <h4>Apellido Paterno: </h4>
                                         {{$jugador->ApellidoPaterno}}
                                     </b></p>
                                     <p><b>
-                                        <h3>ApellidoMaterno: </h3>
+                                        <h4>ApellidoMaterno: </h4>
                                         {{$jugador->ApellidoMaterno}}
                                     </b></p>
                                 </div>
