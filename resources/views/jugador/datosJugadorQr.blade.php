@@ -22,11 +22,9 @@
                     <div class="col">
                         <div class="row mainCard">
                             <div class="col">
-                                {{-- <div class="imagenJugador"> --}}
                                     <img class="card-img-top imagenJugador" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
-                                {{-- </div> --}}
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="jugador"> <p> <b>{{$jugador->NombreEquipo}} | {{$jugador->NombreCategoria }} | {{$jugador->PosicionJugador}}</b></p> </div>
                                 <div class="nombreJugador">
                                     <p><b>
@@ -42,6 +40,12 @@
                                         {{$jugador->ApellidoMaterno}}
                                     </b></p>
                                 </div>
+                            </div>
+                            <div class="col carnet">
+                                {{-- <h8>Documento de Identidad</h8> --}}
+                                
+                                <img class="card-img-top imagenCarnet" src="{{asset('storage').'/'.$jugador->FotoCarnet}}" alt="Foto del jugador">
+                                <div id="zoom"></div>
                             </div>
                         </div>
                         <div class="row data">
@@ -109,4 +113,53 @@
     </div>
 
 </div>
+<script>
+    
+(function() {
+  var zoom = document.getElementById( 'zoom' ),
+      Zw = zoom.offsetWidth,
+      Zh = zoom.offsetHeight,
+      img = document.querySelector( '.card-img-top.imagenCarnet' );
+      
+  
+  var timeout, ratio, Ix, Iy;
+
+  function activate () {
+    document.body.classList.add( 'active' );
+  }
+  
+  function deactivate() {
+    document.body.classList.remove( 'active' );
+  }
+  
+  function updateMagnifier( x, y ) {
+    zoom.style.top = ( y ) + 'px';
+    zoom.style.left = ( x ) + 'px';
+    zoom.style.backgroundPosition = (( Ix - x ) * ratio + Zw / 2 ) + 'px ' + (( Iy - y ) * ratio + Zh / 2 ) + 'px';
+  }
+  
+  function onLoad () {
+    ratio = img.naturalWidth / img.width;
+    zoom.style.backgroundImage = 'url(' + img.src + ')';
+    Ix = img.offsetLeft;
+    Iy = img.offsetTop;
+  }
+  
+  function onMousemove( e ) {
+    clearTimeout( timeout );
+    activate();
+    updateMagnifier( e.x, e.y );
+    timeout = setTimeout( deactivate, 2500 );
+  }
+  
+  function onMouseleave () {
+    deactivate();
+  }
+
+  img.addEventListener( 'load', onLoad );
+  img.addEventListener( 'mousemove', onMousemove );
+  img.addEventListener( 'mouseleave', onMouseleave );
+
+})();
+</script>
 @endsection
