@@ -65,43 +65,20 @@ h1{
 .col.carnet {
   overflow: hidden;
   margin: 0;
+  /* border: black inset 1px; */
+  border-style: dashed;
+  display: grid;
+  align-items: center;
 }
 
 .card-img-top.imagenCarnet:hover{
   cursor: url(), pointer;
 }
-
-
-.col.carnet.active .card-img-top.imagenCarnet{
-  -webkit-filter: grayscale(1);
+.btn.volver{
+  background-color: #eb8f32;
+    color: white;
 }
-
-.card-img-top.imagenCarnet {
-  display: block;
-  margin: 20px auto;
-  
-  border: 1px solid rgba(255,255,255,0.2);
-  -webkit-transition: -webkit-filter 500ms;
-}
-
-#zoom {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 250px;
-  height: 250px;
-  margin: -125px 0 0 -125px;
-  background-repeat: no-repeat;
-  box-shadow: 0 0 0 2px rgba(255,0,0,0.5),
-    5px 5px 10px 5px rgba(0,0,0,0.2);
-  border-radius: 50%;
-  opacity: 0;
-  -webkit-transform: scale(0);
-  -webkit-transition: opacity 500ms, -webkit-transform 500ms;
-  pointer-events: none;
-}
-
-.active #zoom {
-  opacity: 1;
-  -webkit-transform: scale(1);
+.btn.volver:first-child:hover{
+  color: white;
+  background: #fa841a;
 }

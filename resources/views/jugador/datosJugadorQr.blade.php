@@ -23,8 +23,9 @@
                         <div class="row mainCard">
                             <div class="col">
                                     <img class="card-img-top imagenJugador" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
-                            </div>
-                            <div class="col-md-6">
+  
+                                </div>
+                            <div class="col-md-5">
                                 <div class="jugador"> <p> <b>{{$jugador->NombreEquipo}} | {{$jugador->NombreCategoria }} | {{$jugador->PosicionJugador}}</b></p> </div>
                                 <div class="nombreJugador">
                                     <p><b>
@@ -41,11 +42,25 @@
                                     </b></p>
                                 </div>
                             </div>
-                            <div class="col carnet">
-                                {{-- <h8>Documento de Identidad</h8> --}}
-                                
-                                <img class="card-img-top imagenCarnet" src="{{asset('storage').'/'.$jugador->FotoCarnet}}" alt="Foto del jugador">
-                                <div id="zoom"></div>
+                            <div class="col carnet ">
+
+                                <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#exampleModal" src="{{asset('storage').'/'.$jugador->FotoCarnet}}" alt="Foto del jugador">
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Documento De Identidad</h1>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#exampleModal" src="{{asset('storage').'/'.$jugador->FotoCarnet}}" alt="Foto del jugador">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn volver" data-bs-dismiss="modal">Volver</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row data">
@@ -113,53 +128,4 @@
     </div>
 
 </div>
-<script>
-    
-(function() {
-  var zoom = document.getElementById( 'zoom' ),
-      Zw = zoom.offsetWidth,
-      Zh = zoom.offsetHeight,
-      img = document.querySelector( '.card-img-top.imagenCarnet' );
-      
-  
-  var timeout, ratio, Ix, Iy;
-
-  function activate () {
-    document.body.classList.add( 'active' );
-  }
-  
-  function deactivate() {
-    document.body.classList.remove( 'active' );
-  }
-  
-  function updateMagnifier( x, y ) {
-    zoom.style.top = ( y ) + 'px';
-    zoom.style.left = ( x ) + 'px';
-    zoom.style.backgroundPosition = (( Ix - x ) * ratio + Zw / 2 ) + 'px ' + (( Iy - y ) * ratio + Zh / 2 ) + 'px';
-  }
-  
-  function onLoad () {
-    ratio = img.naturalWidth / img.width;
-    zoom.style.backgroundImage = 'url(' + img.src + ')';
-    Ix = img.offsetLeft;
-    Iy = img.offsetTop;
-  }
-  
-  function onMousemove( e ) {
-    clearTimeout( timeout );
-    activate();
-    updateMagnifier( e.x, e.y );
-    timeout = setTimeout( deactivate, 2500 );
-  }
-  
-  function onMouseleave () {
-    deactivate();
-  }
-
-  img.addEventListener( 'load', onLoad );
-  img.addEventListener( 'mousemove', onMousemove );
-  img.addEventListener( 'mouseleave', onMouseleave );
-
-})();
-</script>
 @endsection
