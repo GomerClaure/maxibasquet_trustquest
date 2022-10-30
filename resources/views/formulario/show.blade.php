@@ -40,12 +40,11 @@
                             <div>
                                 <label for="inputEmail4" class="form-label">Categorias:</label>
                             </div>
-
-                            <div class="form-check form-check-inline">
-
-                                <label class="form-check-label" for="inlineCheckbox1" name="categorias">{{$datos->Categorias}}</label>
+                            <div>
+                            <input value="{{$datos->Categorias}}"   type="text"  name="categorias">
                             </div>
-
+                            
+                          
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
