@@ -54,9 +54,29 @@ class CuerpoTecnicoController extends Controller
      */
     public function create($id)
     {
-        $idTecnico = $id;
-        $categorias = Categoria::all();
-        return view('tecnico.create',compact('categorias','idTecnico'));
+        $cuerpoTecnico = DB::table('tecnicos')
+                            ->select('IdCategoria')
+                            ->where('IdEquipo',$id)
+                            ->distinct()
+                            ->get();
+
+        $arreglo = array();
+        $contador = 0;
+        foreach ($cuerpoTecnico as $categoria) {
+            $arreglo[$contador] = $categoria->IdCategoria;
+            $contador++;
+        }
+
+        $categorias = $cuerpoTecnico = DB::table('categorias')
+                        ->select('*')
+                        ->whereIn('IdCategoria',$arreglo)
+                        ->get();
+
+        $paises = DB::table('paises')
+                ->orderBy('Nacionalidad', 'asc')
+                ->get();
+
+        return view('tecnico.create',compact('categorias','id','paises'));
     }
 
     /**
@@ -65,7 +85,7 @@ class CuerpoTecnicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
@@ -78,7 +98,7 @@ class CuerpoTecnicoController extends Controller
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
+            'selectNacionalidad'=>'required',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:100',
             'fotoTecnico'=>'required|image|dimensions:width=472, height=472',
@@ -89,17 +109,6 @@ class CuerpoTecnicoController extends Controller
 
         $imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
         $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
-
-        $persona = new Persona;
-        $persona -> CiPersona = $request -> ci;
-        $persona -> NombrePersona = $request -> nombre;
-        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
-        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
-        $persona -> FechaNacimiento = $request -> fechaNacimiento;
-        $persona -> NacionalidadPersona = $request -> nacionalidad;
-        $persona -> SexoPersona = $request -> selectSexo;
-        $persona -> Edad = $request -> edad;
-        $persona -> Foto = $imagenTecnico;
 
         $carnetId = $request -> ci;
         $consulta2 = DB::table('personas')
@@ -120,26 +129,38 @@ class CuerpoTecnicoController extends Controller
         }
 
         $rol = 'Entrenador principal';
-        $consultaEntrenador = DB::table('tecnicos')
-                            ->select('*')
-                            ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
-                            ->get();
+        if($rol == $request->selectRol){
+            $consultaEntrenador = DB::table('tecnicos')
+                                ->select('*')
+                                ->where([['RolesTecnicos', $rol],['IdEquipo',$id],['IdCategoria',$request -> selectCategoria]])
+                                ->get();
 
-        if(!$consultaEntrenador ->isEmpty()){
-            return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            if(!$consultaEntrenador ->isEmpty()){
+                return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            }
         }
 
+        $persona = new Persona;
+        $persona -> CiPersona = $request -> ci;
+        $persona -> NombrePersona = $request -> nombre;
+        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
+        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
+        $persona -> FechaNacimiento = $request -> fechaNacimiento;
+        $persona -> NacionalidadPersona = $request -> selectNacionalidad;
+        $persona -> SexoPersona = $request -> selectSexo;
+        $persona -> Edad = $request -> edad;
+        $persona -> Foto = $imagenTecnico;
         $persona -> save();
 
         $tenico = new CuerpoTecnico;
-        $tenico -> IdEquipo = $request -> idEquipo;
+        $tenico -> IdEquipo = $id;
         $tenico -> IdCategoria = $request -> selectCategoria;
         $tenico -> IdPersona = $persona -> IdPersona;
         $tenico -> RolesTecnicos = $request -> selectRol;
         $tenico -> FotoCarnet = $imagenCarnet;
 
         $tenico -> save();
-        return redirect('tecnico/create/'.$request -> idEquipo)->with('mensaje','Se inscribio al tecnico correctamente');
+        return redirect('tecnico/create/'.$id)->with('mensaje','Se inscribio al tecnico correctamente');
     }
 
     /**
