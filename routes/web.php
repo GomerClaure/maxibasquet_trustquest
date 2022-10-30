@@ -12,6 +12,7 @@ use App\Http\Controllers\MostrarTecnicosController;
 use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
+use App\Http\Controllers\EditarJugadorController;
 use App\Http\Controllers\TecnicoController;
 
 /*
@@ -31,10 +32,8 @@ Route::get('/', function () {
 
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
-/*Route::patch('formulario/show/{id}',[FormularioController::class,'update']);
-Route::get('formulario/show/{id}',[FormularioController::class,'show']);
-Route::get('formulario/index/',[FormularioController::class,'index']);
-*/
+Route::resource('/erditarJugadores',EditarJugadorController::class);
+
 
 Route::get('/Equipo',[EquipoController::class,'index']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
