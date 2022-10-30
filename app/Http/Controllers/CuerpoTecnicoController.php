@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Persona;
 use App\Models\Aplicacion;
 use App\Models\CuerpoTecnico;
+use App\Models\Pais;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class CuerpoTecnicoController extends Controller
                     ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
                     ->where('equipos.NombreEquipo','=',$equipo)
                     ->where('categorias.NombreCategoria','=',$categoria)
+                    ->orderBy('IdTecnicos', 'asc')
                     ->get();
 
         $equipos = Equipo::select('NombreEquipo','NombreCategoria')
@@ -179,12 +181,18 @@ class CuerpoTecnicoController extends Controller
             $contador++;
         }
 
-        $categorias = $cuerpoTecnico = DB::table('categorias')
+        $categorias = DB::table('categorias')
                         ->select('*')
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
 
-        return view('tecnico.edit',compact('categorias','tecnico'));
+        $equipo = Equipo::find($tecnico->IdEquipo);
+
+        $paises = DB::table('paises')
+                ->orderBy('Nacionalidad', 'asc')
+                ->get();
+
+        return view('tecnico.edit',compact('categorias','tecnico','equipo','paises'));
     }
 
     /**
@@ -207,7 +215,7 @@ class CuerpoTecnicoController extends Controller
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'nacionalidad'=>'required|regex:/^[A-Z][a-z]+$/',
+            'selectNacionalidad'=>'required',
             'selectSexo'=>'required',
             'edad'=>'required|numeric|min:1|max:100',
             'fotoTecnico'=>'image|dimensions:width=472, height=472',
@@ -245,13 +253,16 @@ class CuerpoTecnicoController extends Controller
         }
 
         $rol = 'Entrenador principal';
-        $consultaEntrenador = DB::table('tecnicos')
-                            ->select('*')
-                            ->where([['RolesTecnicos', $rol],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
-                            ->get();
 
-        if(!$consultaEntrenador ->isEmpty()){
-            return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+        if($rol == $request->selectRol){
+            $consultaEntrenador = DB::table('tecnicos')
+                                ->select('*')
+                                ->where([['RolesTecnicos', $rol],['IdEquipo',$tecnico -> IdEquipo],['IdCategoria',$request -> selectCategoria]])
+                                ->get();
+
+            if(!$consultaEntrenador ->isEmpty()){
+                return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            }
         }
 
         $persona = Persona::find($tecnico->IdPersona);
@@ -260,7 +271,7 @@ class CuerpoTecnicoController extends Controller
         $persona -> ApellidoPaterno = $request -> apellidoPaterno;
         $persona -> ApellidoMaterno = $request -> apellidoMaterno;
         $persona -> FechaNacimiento = $request -> fechaNacimiento;
-        $persona -> NacionalidadPersona = $request -> nacionalidad;
+        $persona -> NacionalidadPersona = $request -> selectNacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
         if($request->hasFile('fotoTecnico')){
