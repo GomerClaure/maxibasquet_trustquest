@@ -60,6 +60,9 @@
                                         Actualizar
                                     @endif
                                     </a>
+                                    <a type="button" href="{{ url('pdf')}}" class="btn btn-primary btn-sm ">
+                                    Descargar
+                                    </a>
                                 </div>
                                 <div class="card fondoTabla">
                                     <div class="card-header ps-3 py-2">

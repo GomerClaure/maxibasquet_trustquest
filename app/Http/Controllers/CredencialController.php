@@ -7,7 +7,9 @@ use App\Models\Credencial;
 use App\Models\Equipo;
 use App\Models\Jugador;
 use App\Models\Tecnico;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CredencialController extends Controller
@@ -19,7 +21,14 @@ class CredencialController extends Controller
      */
     public function index()
     {
-        //
+        
+    }
+
+
+    public function credencialesPdf(){
+    $pdf = Pdf::loadView('welcome');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
     }
     /**
      * obtiene los datos de los credenciales de los jugadores y cuerpo tecnico
