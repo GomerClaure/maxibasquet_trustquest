@@ -25,9 +25,33 @@ class CredencialController extends Controller
     }
 
 
-    public function credencialesPdf(){
-    $pdf = Pdf::loadView('welcome');
-    $pdf->loadHTML('<h1>Test</h1>');
+    public function credencialesPdf($equipo,$categoria){
+        $credencialesJugadores = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
+        'personas.ApellidoPaterno','personas.Foto')
+        ->join('personas','personas.IdPersona','credenciales.IdPersona')
+        ->join('jugadores','personas.IdPersona','jugadores.IdPersona')
+        ->where('jugadores.IdEquipo','=',$equipo)
+        ->where('jugadores.IdCategoria','=',$categoria)
+        ->get();
+
+    $credencialesTecnicos = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
+            'personas.ApellidoPaterno','personas.Foto','tecnicos.RolesTecnicos')
+            ->join('personas','personas.IdPersona','credenciales.IdPersona')
+            ->join('tecnicos','personas.IdPersona','tecnicos.IdPersona')
+            ->where('tecnicos.IdEquipo','=',$equipo)
+            ->where('tecnicos.IdCategoria','=',$categoria)
+            ->get();
+
+    $equipos = Equipo::select()
+            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+            ->where('equipos.IdEquipo','=',$equipo)
+            ->where('categorias.IdCategoria','=',$categoria)
+            ->get();
+    $equipo = $equipos[0];
+    $pdf = Pdf::loadView('credencial.pdf',['credencialesJugadores'=>$credencialesJugadores,
+           'credencialesTecnicos'=>$credencialesTecnicos,'equipo'=>$equipo]);
+    
     return $pdf->stream();
     }
     /**

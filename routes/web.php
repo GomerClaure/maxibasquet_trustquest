@@ -60,4 +60,4 @@ Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJug
 Route::get('/qr',[CredencialController::class,'qr']);
 Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo']);
 Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'GenerarCredenciales']);
-Route::get('/pdf',[CredencialController::class,'credencialesPdf']);
+Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
