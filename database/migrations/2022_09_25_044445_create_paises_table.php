@@ -17,7 +17,7 @@ class CreatePaisesTable extends Migration
             $table->id("IdPais");
             $table->string('NombrePais',30)->unique();
             $table->string('CodigoPais',4)->unique();
-            $table->string('Nacionalidad',30)->unique();
+            $table->string('Nacionalidad',30);
             $table->string('Region',30);
             $table->timestamps();
         });
