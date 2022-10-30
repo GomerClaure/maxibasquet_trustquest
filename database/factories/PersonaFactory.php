@@ -26,7 +26,8 @@ class PersonaFactory extends Factory
             'Edad' => $this->faker-> numberBetween(30,75),
             'Foto' => 'uploads\persona.jpg',
             //"Nacionalidad" => $this->faker->text(15),
-            "NacionalidadPersona" => $this->faker->text(15),
+            "NacionalidadPersona" => $this->faker->randomElement(['Brasileño','Chileno','Colombiano'
+            ,'Trinitense','Argentino','Venezolano','Uruguayo','Guyanés','Peruano','Ecuatoriano','Boliviano','Paraguayo']),
             'created_at' => now(),
             'updated_at' => now()
         ];

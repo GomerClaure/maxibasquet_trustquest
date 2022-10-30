@@ -50,7 +50,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="aling-item-rigth pb-2">
-                                    <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
+                                    <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
                                     </div>
                                 @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Técnico</b></h2>
