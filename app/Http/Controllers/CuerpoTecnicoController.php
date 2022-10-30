@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Persona;
 use App\Models\Aplicacion;
 use App\Models\CuerpoTecnico;
+use App\Models\Pais;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -179,14 +180,18 @@ class CuerpoTecnicoController extends Controller
             $contador++;
         }
 
-        $categorias = $cuerpoTecnico = DB::table('categorias')
+        $categorias = DB::table('categorias')
                         ->select('*')
                         ->whereIn('IdCategoria',$arreglo)
                         ->get();
 
         $equipo = Equipo::find($tecnico->IdEquipo);
 
-        return view('tecnico.edit',compact('categorias','tecnico','equipo'));
+        $paises = DB::table('paises')
+                ->orderBy('Nacionalidad', 'asc')
+                ->get();
+
+        return view('tecnico.edit',compact('categorias','tecnico','equipo','paises'));
     }
 
     /**
