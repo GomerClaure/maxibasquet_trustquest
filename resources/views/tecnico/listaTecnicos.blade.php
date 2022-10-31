@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Equipos Jugadores</title>
+        <title>Equipos Cuerpo Técnico</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,10 +21,10 @@
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="{{asset('css/StyleListaTecnicos.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleListaCuerpoTecnico.css')}}">
     </head>
-    <body class="antialiased">
-    <header >
+    <body class="">
+        <header >
             <!-- Grey with black text -->
             <nav class="navbar navbar-expand-sm bg-dark navbar-light">
                 <ul class="navbar-nav">
@@ -49,31 +49,33 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                    <div class="aling-item-rigth pb-2">
-                                    <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
-                                    </div>
                                 @if($equipo != null)
-                                <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
-                                <h3>Categoria: {{$categoria}}</h3>
-                                <div class="card fondoTabla">
-                                    <div class="card-header ps-3 py-2">
-                                        <h4 class="text-black card-title"><b>Integrantes</b> </h4>
+                                <h1 class="text-center titulo"> <b>{{$equipo}}</b></h1>
+                                <h3 class="titulo">Categoria: {{$categoria}}</h3>
+                                <div class="card contenedorCard">
+                                    <div class="card-header ps-3 py-2 row">
+                                        <div class="col-10">
+                                            <h4 class="text-black card-title"><b>Integrantes</b> </h4>
+                                        </div>
+                                        <div class="col-2 d-grid">
+                                            <a type="button" href="{{ URL::previous() }}" class="btn"> Volver </a>
+                                        </div>
                                     </div>
-                                        <div class="card-body  pt-0 ps-3">
-                                            @if(!$jugadores->isEmpty())
-                                            @foreach ($jugadores as $jugador)
-                                                <div class="card d-inline-block m-3" style="width: 19rem;">
-                                                <div class="card-header">
-                                                    <h5 class="card-title">{{$jugador->PosicionJugador}} #{{$jugador->NumeroCamiseta}}</h5>
-                                                </div>
-                                                    <div class="card-body">
+                                    <div class="card-body  pt-0 ps-3">
+                                            @if(!$tecnicos->isEmpty())
+                                            @foreach ($tecnicos as $tecnico)
+                                                <div class="card tarjeta d-inline-block m-3" style="width: 19rem;">
+                                                    <div class="card-header cardHeader">
+                                                        <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
+                                                    </div>
+                                                    <div class="card-body cardBody">
                                                         <div class="d-flex justify-content-center">
-                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
                                                         </div>
-                                                    
-                                                        <h5>{{$jugador->NombrePersona}} </h5>
-                                                        <h6>{{$jugador->ApellidoPaterno}}</h6>
-                                                        <a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="btn btn-primary">Detalles</a>
+
+                                                        <h5>{{$tecnico->NombrePersona}} </h5>
+                                                        <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
+                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar">Editar</a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -81,7 +83,7 @@
                                             <div class="d-flex justify-content-center">
                                                  <h3>No se encontro personal tecnico registrado</h3>
                                             </div>
-                                            
+
                                             @endif
                                     </div>
                                 </div>
