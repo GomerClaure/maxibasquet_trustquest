@@ -8,6 +8,8 @@ use App\Models\Jugador;
 use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Persona;
+use Illuminate\Support\Facades\DB;
+
 
 class EditarJugadorController extends Controller
 {
@@ -15,6 +17,7 @@ class EditarJugadorController extends Controller
     {
         $eq = Equipo::select('equipos.NombreEquipo')
             ->get();
+        echo "hola index";
 
         //Nombre y Pais de un equipo Categoria
         $c = Equipo::select('paises.NombrePais', 'equipos.NombreEquipo', 'equipos.LogoEquipo', 'categorias.NombreCategoria')
@@ -27,7 +30,7 @@ class EditarJugadorController extends Controller
         $EquiposDatos = [];
         $Cat = [];
         $arreglo = [];
-        
+
         for ($i = 0; $i < count($eq); $i++) {
             $var = ($eq[$i])["NombreEquipo"];
             foreach ($c as $cop) {
@@ -45,73 +48,111 @@ class EditarJugadorController extends Controller
             $Cat = [];
         }
         $s = [];
-        echo "hola ";
+        echo "hola index";
 
         return view('editarJugadores.equipos', compact('arreglo'));
     }
 
-    public function show($id)
+    /* public function show($id)
     {
 
-        $jugador = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.FechaNacimiento',
-                                'personas.Edad','personas.Foto','jugadores.PesoJugador','jugadores.EstaturaJugador',
-                                'jugadores.PosicionJugador','jugadores.NumeroCamiseta','personas.NacionalidadPersona',
-                                'categorias.NombreCategoria','equipos.NombreEquipo')
-                                ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
-                                ->join('equipos','equipos.IdEquipo','=','jugadores.IdEquipo')
-                                ->join('categorias','categorias.IdCategoria','=','jugadores.IdCategoria')
-                                ->where('IdJugador','=',$id)
-                                ->get();
+    }*/
 
-        $jugador = $this->formatoFecha($jugador);
-        if ($id <= 0 || $id >= 9000000000000000000 || $jugador->isEmpty()) {
-                $mensaje ="No encontrado";
-                return $mensaje;
-                                }
-        return view('editarJugadores.edit',compact('jugador'));
-    }
-
-    public function formatoFecha($jugador){
+    public function formatoFecha($jugador)
+    {
         if (!$jugador->isEmpty()) {
-            foreach($jugador as $jug){
-                $fechas=explode( "-",$jug->FechaNacimiento);
-                $formato=$fechas[2]."/".$fechas[1]."/".$fechas[0];
-                $jug->FechaNacimiento=$formato;
+            foreach ($jugador as $jug) {
+                $fechas = explode("-", $jug->FechaNacimiento);
+                $formato = $fechas[2] . "/" . $fechas[1] . "/" . $fechas[0];
+                $jug->FechaNacimiento = $formato;
             }
         }
 
         return $jugador;
     }
 
-    public function lista($equipo,$categoria)
+    public function show($equipo, $categoria)
     {
-        $jugadores = Jugador::select('personas.NombrePersona','personas.ApellidoPaterno',
-                    'jugadores.PosicionJugador','jugadores.IdJugador','personas.Foto','jugadores.NumeroCamiseta')
-                     ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
-                    ->join('equipos','jugadores.IdEquipo','=','equipos.IdEquipo')
-                    ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
-                    ->where('equipos.NombreEquipo','=',$equipo)
-                    ->where('categorias.NombreCategoria','=',$categoria)
-                    ->get();
+        $jugadores = Jugador::select(
+            'personas.NombrePersona',
+            'personas.ApellidoPaterno',
+            'jugadores.PosicionJugador',
+            'jugadores.IdJugador',
+            'personas.Foto',
+            'jugadores.NumeroCamiseta'
+        )
+            ->join('personas', 'jugadores.IdPersona', '=', 'personas.IdPersona')
+            ->join('equipos', 'jugadores.IdEquipo', '=', 'equipos.IdEquipo')
+            ->join('categorias', 'jugadores.IdCategoria', 'categorias.IdCategoria')
+            ->where('equipos.NombreEquipo', '=', $equipo)
+            ->where('categorias.NombreCategoria', '=', $categoria)
+            ->get();
 
-        $equipos = Equipo::select('NombreEquipo','NombreCategoria')
-                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
-                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
-                            ->where('equipos.NombreEquipo','=',$equipo)
-                            ->where('categorias.NombreCategoria','=',$categoria)
-                            ->get();
-        if(! $equipos->isEmpty()){
+        $equipos = Equipo::select('NombreEquipo', 'NombreCategoria')
+            ->join('categorias_por_equipo', 'categorias_por_equipo.IdEquipo', 'equipos.IdEquipo')
+            ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
+            ->where('equipos.NombreEquipo', '=', $equipo)
+            ->where('categorias.NombreCategoria', '=', $categoria)
+            ->get();
+        if (!$equipos->isEmpty()) {
             $equipo = $equipos[0]->NombreEquipo;
             $categoria = $equipos[0]->NombreCategoria;
-        }else{
+        } else {
             $equipo = null;
             $categoria = null;
         }
-        return view('editarJugadores.listaJugadores',compact('jugadores','equipo','categoria'));
+        echo "hola desde lista";
+        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria'));
     }
 
     public function edit(Request $request, $id)
     {
-        //
+        $jugadores = DB::table('jugadores')
+            ->select('IdCategoria')
+            ->where('IdEquipo', $id)
+            ->distinct()
+            ->get();
+
+        $arreglo = array();
+        $contador = 0;
+        foreach ($jugadores as $categoria) {
+            $arreglo[$contador] = $categoria->IdCategoria;
+            $contador++;
+        }
+
+        $categorias = DB::table('categorias')
+            ->select('*')
+            ->whereIn('IdCategoria', $arreglo)
+            ->get();
+
+        $paises = DB::table('paises')
+            ->orderBy('NombrePais', 'asc')
+            ->get();
+
+        $datos = Jugador::select(
+            'personas.NombrePersona',
+            'personas.ApellidoPaterno',
+            'personas.FechaNacimiento',
+            'personas.Edad',
+            'personas.Foto',
+            'jugadores.PesoJugador',
+            'jugadores.EstaturaJugador',
+            'jugadores.PosicionJugador',
+            'jugadores.NumeroCamiseta',
+            'personas.NacionalidadPersona',
+            'categorias.NombreCategoria',
+            'equipos.NombreEquipo'
+        )
+            ->join('personas', 'personas.IdPersona', '=', 'jugadores.IdPersona')
+            ->join('equipos', 'equipos.IdEquipo', '=', 'jugadores.IdEquipo')
+            ->join('categorias', 'categorias.IdCategoria', '=', 'jugadores.IdCategoria')
+            ->where('IdJugador', '=', $id)
+            ->get();
+        echo "hola desde edit";
+        return view('editarJugadores.edit', compact('categorias', 'id', 'paises,$datos'));
+    }
+
+    public function update()
+    {
     }
 }

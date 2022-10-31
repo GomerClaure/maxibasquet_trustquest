@@ -28,6 +28,7 @@
     </head>
     <body class="antialiased">
         <header >
+            
         </header>
             @php
                 $vadido = "¡Valido!";
@@ -69,10 +70,10 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/jugador/create/'.$id)}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('/jugador/')}}" method="PATCH" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">INSCRIPCION DE JUGADOR</h1>
+                        <h1 class="tituloFomulario">EDITAR JUGADOR</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
@@ -121,7 +122,7 @@
                                 <label for="" class="form-label">Nacionalidad:</label>
                                 <select class="form-select" id="selectNacionalidad" name="selectNacionalidad">
                                     @foreach ($paises as $pais)
-                                        <option value="{{$pais->Nacionalidad}}" {{ old('selectNacionalidad') == "$pais->Nacionalidad" ? 'selected' : '' }}>{{$pais->Nacionalidad}}</option>
+                                        <option value="{{$pais->NombrePais}}" {{ old('selectNacionalidad') == "$pais->NombrePais" ? 'selected' : '' }}>{{$pais->NombrePais}}</option>
                                     @endforeach
                                 </select>
                             </div>

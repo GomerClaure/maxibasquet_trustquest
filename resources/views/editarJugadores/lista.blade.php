@@ -50,7 +50,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                     <div class="aling-item-rigth pb-2">
-                                    <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm "> Volver </a>
+                                    <a type="button" href="{{ url('editarJugadores') }}" class="btn btn-primary btn-sm "> Volver </a>
                                     </div>
                                 @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
@@ -66,21 +66,19 @@
                                                 <div class="card-header">
                                                     <h5 class="card-title">{{$jugador->PosicionJugador}} #{{$jugador->NumeroCamiseta}}</h5>
                                                 </div>
-                                                    <div class="card-body">
-                                                        <div class="d-flex justify-content-center">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-center">
                                                         <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
-                                                        </div>
-                                                    
-                                                        <h5>{{$jugador->NombrePersona}} </h5>
-                                                        <h6>{{$jugador->ApellidoPaterno}}</h6>
-                                                        <a href="{{url('editarJugadores'.'/'.$jugador->IdJugador)}}" class="btn btn-primary">Detalles</a>
                                                     </div>
+                                                    
+                                                    <h5>{{$jugador->NombrePersona}} </h5>
+                                                    <h6>{{$jugador->ApellidoPaterno}}</h6>
+                                                    <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="btn btn-primary">Editar</a>
+                                                </div>
                                                 </div>
                                             @endforeach
                                             @else
-                                            <div class="d-flex justify-content-center">
-                                                 <h3>No se encontro personal tecnico registrado</h3>
-                                            </div>
+                                            
                                             
                                             @endif
                                     </div>
