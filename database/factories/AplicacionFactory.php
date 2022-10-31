@@ -19,7 +19,7 @@ class AplicacionFactory extends Factory
             'NombreUsuario' => $this->faker->name(),
             'CorreoElectronico' => $this->faker->safeEmail(),
             'NumeroTelefono' => $this->faker->text(8),
-            'NombreEquipo' => $this->faker->text(20),
+            'NombreEquipo' => $this->faker->name(8),
             'Categorias' => $this->faker->randomElement(["+30","+30,+50","+35,+40,+45","+50,+55"]),
             'EstadoAplicacion' => $this->faker->randomElement(["Aceptado","Rechazado","Pendiente"]),
             'created_at' => now(),
