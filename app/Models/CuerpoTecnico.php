@@ -9,7 +9,8 @@ class CuerpoTecnico extends Model
 {
     use HasFactory;
     protected $table = "tecnicos";
-    protected $primaryKey = 'IdTenicos';
+    protected $primaryKey = 'IdTecnicos';
+    protected $fillable = ["IdEquipo","IdCategoria","IdPersona","RolesTecnicos","FotoCarnet"];
 
     public function equipo(){
         //return $this->belongsTo('App\Models\Equipo', 'IdEquipo');

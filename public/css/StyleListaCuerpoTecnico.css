@@ -1,0 +1,66 @@
+body{
+    background: #171f27;
+}
+
+.titulo{
+    font-weight: bold;
+    color: white;
+}
+
+.btn{
+    background: #eb8f32;
+    color: white;
+}
+
+.btnEditar{
+    display: block;
+    width: 80%;
+    text-decoration: none;
+    color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.btn:first-child:hover{
+    background: #fa841a;
+    background-color: #fa841a;
+    color: white;
+}
+
+.btnEditar:hover{
+    background: #fa841a;
+    color: white;
+}
+
+.contenedorCard{
+    background: #b5b5bd;
+    margin-top: 1%;
+}
+
+.tarjeta{
+    background: #e6e6e6;
+}
+
+.cardHeader{
+    text-align: center;
+}
+
+.cardBody{
+    text-align: center;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+
+.card-img-top{
+    margin: auto;
+    width: 200px;
+    height: 200px;
+}
