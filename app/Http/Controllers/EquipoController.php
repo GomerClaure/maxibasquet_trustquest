@@ -14,9 +14,9 @@ use App\Models\CategoriaEquipo;
 class EquipoController extends Controller
 {
     public function index()
-    {   
-        
-        $eq=Equipo::select('equipos.NombreEquipo') 
+    {
+
+        $eq=Equipo::select('equipos.NombreEquipo')
                         ->get();
 
         //Nombre y Pais de un equipo Categoria
@@ -27,10 +27,10 @@ class EquipoController extends Controller
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
 
-        $EquiposDatos=[]; 
+        $EquiposDatos=[];
         $Cat=[];
         $arreglo=[];
-  
+
                    for($i=0;$i<count($eq);$i++){
                        $var=($eq[$i])["NombreEquipo"];
                        foreach($c as $cop) {
@@ -41,7 +41,7 @@ class EquipoController extends Controller
                             $logo=$cop["LogoEquipo"];
                             $f=array("id"=>$categoria);
                             $new=array_push($Cat,$f);
-                         }            
+                         }
                        }
                        $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais,"LogoEquipo"=>$logo);
                        $new=array_push($arreglo,$EquiposDatos);
@@ -49,10 +49,52 @@ class EquipoController extends Controller
                     }
         $s=[];
 
-                
+
                     return view('equipo.Equipos',compact('arreglo'));
                   //return $arreglo;
-    }                             
+    }
+
+    public function indexDelegado()
+    {
+
+        $eq=Equipo::select('equipos.NombreEquipo')
+                        ->get();
+
+        //Nombre y Pais de un equipo Categoria
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','equipos.LogoEquipo','categorias.NombreCategoria')
+                  ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
+                  ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
+                  ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
+                  ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                  ->get();
+
+        $EquiposDatos=[];
+        $Cat=[];
+        $arreglo=[];
+
+                   for($i=0;$i<count($eq);$i++){
+                       $var=($eq[$i])["NombreEquipo"];
+                       foreach($c as $cop) {
+                         $nombre=$cop["NombreEquipo"];
+                         if($nombre==$var){
+                            $pais=$cop["NombrePais"];
+                            $categoria=$cop["NombreCategoria"];
+                            $logo=$cop["LogoEquipo"];
+                            $f=array("id"=>$categoria);
+                            $new=array_push($Cat,$f);
+                         }
+                       }
+                       $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais,"LogoEquipo"=>$logo);
+                       $new=array_push($arreglo,$EquiposDatos);
+                       $Cat=[];
+                    }
+        $s=[];
+
+
+                    return view('equipo.equipoDelegado',compact('arreglo'));
+                  //return $arreglo;
+    }
+
     public function create()
     {
         //

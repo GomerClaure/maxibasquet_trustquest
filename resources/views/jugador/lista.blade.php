@@ -56,7 +56,7 @@
                                 <div class="card fondoTabla">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
-                                        <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm boton"> Volver </a>
+                                        <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm boton"> Volver </a>
                                         
                                         
                                         

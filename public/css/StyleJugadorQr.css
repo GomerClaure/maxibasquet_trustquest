@@ -1,0 +1,82 @@
+.col-md-2{
+  border: black solid 1px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.row.filaDato{
+    border: black solid 1px;
+    height: 80px;
+}
+.tituloDeCelda{
+  font-size:18px;
+}
+.tituloDeUnaCelda{
+  font-size:20px;
+  margin-bottom: 10%;
+}
+.col-md-2 .row.celda{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.nombre{
+  margin: 0px;
+  font-size: 22px;
+  color: #000;
+}
+.row.mainCard{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 8%;
+  padding-left: 8%;
+  background: #b5b5bd;
+}
+.row.data{
+  background: #b5b5bd;
+}
+.nombreJugador{
+    font-weight: bold
+}
+
+.card {
+  border-radius: .0rem;
+  background-color: #ABA9A9;
+}
+.table{
+    border-radius: 0;
+    
+}
+h1{
+  font-weight: bold;
+}
+.main-title{
+
+  color: white;
+  text-transform: uppercase;
+  
+}
+.jugador{
+  color: black;
+}
+.col.jugador {
+  overflow: hidden;
+  margin: 0;
+  /* border: black inset 1px; */
+  border-style: dashed;
+  display: grid;
+  align-items: center;
+}
+
+img:hover{
+  cursor: url(), pointer;
+}
+.btn.volver{
+  background-color: #eb8f32;
+    color: white;
+}
+.btn.volver:first-child:hover{
+  color: white;
+  background: #fa841a;
+}
