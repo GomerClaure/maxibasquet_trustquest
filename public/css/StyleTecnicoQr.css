@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .row.filaDato{
     border: black solid 1px;
     height: 80px;
@@ -21,11 +20,9 @@
   justify-content: center;
   align-items: center;
 }
-.nombre{
-  margin: 0px;
-  font-size: 22px;
-  color: #000;
-}
+/* .contenidoCelda.nro{
+  padding-left: 25%;
+} */
 .row.mainCard{
   padding-top: 2%;
   padding-bottom: 2%;
@@ -35,6 +32,7 @@
 }
 .row.data{
   background: #b5b5bd;
+  padding-bottom: 2%;
 }
 .nombreJugador{
     font-weight: bold
@@ -60,8 +58,9 @@ h1{
 .jugador{
   color: black;
 }
-h4{
-  font-size: 14px;
+.nombre{
+  margin: 0px;
+  font-size: 22px;
   color: #000;
 }
 .col.jugador {
