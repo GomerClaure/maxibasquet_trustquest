@@ -43,6 +43,18 @@
                 </ul>
             </nav>
         </header>
+
+        @php
+            $vadido = "¡Valido!";
+            $noVadido = "¡No valido!";
+        @endphp
+        @if (Session::has('mensaje'))
+            <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
+            </div>
+        @endif
+
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
                 <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
@@ -58,7 +70,7 @@
                                             <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         </div>
                                         <div class="col-2 d-grid">
-                                            <a type="button" href="{{ URL::previous() }}" class="btn"> Volver </a>
+                                            <a type="button" href="{{url('equipo/delegado')}}" class="btn"> Volver </a>
                                         </div>
                                     </div>
                                     <div class="card-body  pt-0 ps-3">

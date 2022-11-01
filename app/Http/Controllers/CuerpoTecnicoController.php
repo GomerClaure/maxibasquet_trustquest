@@ -310,7 +310,7 @@ class CuerpoTecnicoController extends Controller
 
         $equipo = Equipo::find($cuerpoTecnico -> IdEquipo);
         $categoria = Categoria::find($request -> selectCategoria);
-        return redirect('tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Se inscribio al tecnico correctamente');
+        return redirect('tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Se actualizo los datos del tecnico correctamente');
     }
 
     /**
