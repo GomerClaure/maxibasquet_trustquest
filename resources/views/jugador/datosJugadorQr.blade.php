@@ -28,7 +28,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Documento De Identidad</h1>
+                                                <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Foto del Jugador</h1>
                                             </div>
                                             <div class="modal-body">
                                                 <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#modalImgJugador" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
@@ -44,15 +44,15 @@
                                 <div class="jugador"> <p> <b>{{$jugador->NombreEquipo}} | {{$jugador->NombreCategoria }} | {{$jugador->PosicionJugador}}</b></p> </div>
                                 <div class="nombreJugador">
                                     <p><b>
-                                        <p class="nombre">Nombre: </h4>
+                                        <p class="nombre">Nombre: </p>
                                         {{$jugador->NombrePersona}}
                                     </b></p>
                                     <p><b>
-                                        <<p class="nombre">Apellido Paterno: </h4>
+                                        <p class="nombre">Apellido Paterno: </p>
                                         {{$jugador->ApellidoPaterno}}
                                     </b></p>
                                     <p><b>
-                                        <p class="nombre">ApellidoMaterno: </h4>
+                                        <p class="nombre">ApellidoMaterno: </p>
                                         {{$jugador->ApellidoMaterno}}
                                     </b></p>
                                 </div>

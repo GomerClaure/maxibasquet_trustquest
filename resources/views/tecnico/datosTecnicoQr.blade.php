@@ -12,7 +12,7 @@
 @section('content')
 <div class="justify-content-center">
     <section class=" main-title text-center">
-        <h1>Datos del Personal Tecnico </h1>
+        <h1>Datos de Personal Tecnico </h1>
         {{-- <p>3er Torneo Internacional de Maxi Basquet</p> --}}
     </section>
     <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -28,7 +28,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Documento De Identidad</h1>
+                                                <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Foto del Técnico</h1>
                                             </div>
                                             <div class="modal-body">
                                                 <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#modalImgJugador" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
