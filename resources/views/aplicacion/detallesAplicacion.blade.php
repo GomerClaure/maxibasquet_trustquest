@@ -54,14 +54,15 @@
             <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
             <div >
             <div class="container justify-content-center">
-            <div class="aling-item-rigth py-2">
-            <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm "> Volver </a>
-            </div>
+            
             </section>
 
             <section class="container pb-5 pt-3">
                 <div class="row g-3 "  >
                     <div class=" row pb-3 mb-4 registro-aplicacion formulario border-top border-5 border-success mause-nulo">
+                        <div class="d-flex flex-row-reverse py-2">
+                        <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm boton "> Volver </a>
+                        </div>
                         <h5><b>Datos del Equipo</b> </h5>
                         <hr>
                         <div class="col-md-6">

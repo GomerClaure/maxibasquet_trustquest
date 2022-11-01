@@ -49,15 +49,15 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <div class="aling-item-rigth pb-2">
-                                    <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm "> Volver </a>
-                                    </div>
+                                
                                 @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Técnico</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
                                 <div class="card fondoTabla">
-                                    <div class="card-header ps-3 py-2">
-                                        <h4 class="text-black card-title"><b>Integrantes</b> </h4>
+                                    <div class="card-header ps-3 py-2 d-flex justify-content-between">
+                                        <h4 class="text-black card-title"><b>Integrantes</b> </h4> 
+                                    <a type="button" href="{{ URL::previous() }}" class="btn btn-primary btn-sm boton "> Volver </a>
+                                    
                                     </div>
                                         <div class="card-body  pt-0 ps-3">
                                             @if(!$tecnicos->isEmpty())
