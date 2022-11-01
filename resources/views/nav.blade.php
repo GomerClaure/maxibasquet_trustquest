@@ -10,7 +10,7 @@
 </head>
 <body>
     <ul class="menu">
-        <li><a href="{{url('/Home')}}">Inicio</a></li>
+        <li><a href="{{url('/home')}}">Inicio</a></li>
         <li><a href="{{url('/Equipo')}}">Equipos</a></li> 
         <li><a href="{{url('/preinscripcion')}}">Contacto</a></li>
         <li><a href="{{url('/Aplicaciones')}}">Sesion</a></li>
