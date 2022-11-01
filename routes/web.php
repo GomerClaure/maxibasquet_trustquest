@@ -15,6 +15,7 @@ use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
 Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit']);
 Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index']);
-
+Route::get('home',[HomeController::class,'index']);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
 Route::get('/jugador/{id}',[JugadorController::class,'show']);
