@@ -37,6 +37,7 @@ Route::get('formulario/index/',[FormularioController::class,'index']);
 */
 
 Route::get('/Equipo',[EquipoController::class,'index']);
+Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
 //Route::get('/equipo',[EquipoController::class,'index']);

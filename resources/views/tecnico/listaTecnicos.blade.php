@@ -58,7 +58,7 @@
                                             <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         </div>
                                         <div class="col-2 d-grid">
-                                            <a type="button" href="{{ URL::previous() }}" class="btn"> Volver </a>
+                                            <a type="button" href="{{url('equipo/delegado')}}" class="btn"> Volver </a>
                                         </div>
                                     </div>
                                     <div class="card-body  pt-0 ps-3">
