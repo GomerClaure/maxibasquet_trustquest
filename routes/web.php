@@ -66,6 +66,7 @@ Route::get('/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaTecn
 Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);
 Route::get('/qr',[CredencialController::class,'qr']);
 Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo']);
-Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'GenerarCredenciales']);
+Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'generarCredenciales']);
+Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
