@@ -1,6 +1,14 @@
 html,body{
   background:#171f27;
 }
+.tituloEquipos{
+  font-family: "Helvetica Rounded", Arial, sans-serif;;
+  color: #eb8f32; 
+  font-weight: bold;
+  letter-spacing: -4px;
+  text-align: center;
+  border-radius: 20px;
+}
 .card{
   align-items: center;
   background-color:#7b7979;

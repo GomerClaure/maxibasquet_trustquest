@@ -11,7 +11,7 @@
 @extends('nav')
 @section('content')
 <div>
-    <h1 class="titulo">MaxiBasquet</h1>
+    <h1 class="titulo">Maxi Basquet</h1>
   </div>
   <section class="content sau">
 <div class="parr">

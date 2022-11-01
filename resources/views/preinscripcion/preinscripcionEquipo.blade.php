@@ -8,6 +8,7 @@
     <link href="{{asset('css/StylePreinscripcion.css' )}}" rel="stylesheet">
     <title>Preinscripcion</title>
 </head>
+@extends('nav')
 @section('content')
 <div class="container justify-content-center"">
 		    <section class=" main-title text-center">

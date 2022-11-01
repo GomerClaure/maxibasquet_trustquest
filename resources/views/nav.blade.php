@@ -10,11 +10,11 @@
 </head>
 <body>
     <ul class="menu">
-        <li><a href="{{url('/home')}}">Inicio</a></li>
+        <li><a href="{{url('/home')}}">Home</a></li>
         <li><a href="{{url('/Equipo')}}">Equipos</a></li> 
-        <li><a href="{{url('/preinscripcion')}}">Contacto</a></li>
-        <li><a href="{{url('/Aplicaciones')}}">Sesion</a></li>
-        <li><a href="#">Historia</a></li>
+        <li><a href="{{url('/preinscripcion')}}">Preinscripcion</a></li>
+        <li><a href="{{url('/historia')}}">Historia</a></li>
+        <li><a href="{{url('/Aplicaciones')}}">Login</a></li>
     </ul>
     <main >
             {{-- @include('flash-message') --}}
