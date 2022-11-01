@@ -33,6 +33,7 @@ Route::get('/', function () {
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
 //Route::resource('/editarJugadores',EditarJugadorController::class);
+Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
 Route::get('/editarJugadores',[EditarJugadorController::class,'index']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show']);

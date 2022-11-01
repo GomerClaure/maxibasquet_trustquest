@@ -129,16 +129,20 @@ class EditarJugadorController extends Controller
             ->orderBy('NombrePais', 'asc')
             ->get();
 
-        $datos = Jugador::select(
+        $jugador = Jugador::select(
             'personas.NombrePersona',
             'personas.ApellidoPaterno',
+            'personas.ApellidoMaterno',
             'personas.FechaNacimiento',
+            'personas.SexoPersona',
             'personas.Edad',
             'personas.Foto',
+            'personas.CiPersona',
             'jugadores.PesoJugador',
             'jugadores.EstaturaJugador',
             'jugadores.PosicionJugador',
             'jugadores.NumeroCamiseta',
+            'jugadores.FotoCarnet',
             'personas.NacionalidadPersona',
             'categorias.NombreCategoria',
             'equipos.NombreEquipo'
@@ -148,11 +152,45 @@ class EditarJugadorController extends Controller
             ->join('categorias', 'categorias.IdCategoria', '=', 'jugadores.IdCategoria')
             ->where('IdJugador', '=', $id)
             ->get();
-        echo "hola desde edit";
-        return view('editarJugadores.edit', compact('categorias', 'id', 'paises,$datos'));
+            $datos = $this->formatoFecha($jugador);
+            if ($id <= 0 || $id >= 9000000000000000000 || $jugador->isEmpty()) {
+                $mensaje = "No encontrado";
+                return $mensaje;
+            }
+
+        //$jugador = Jugador::find($id);
+        $datos = $jugador[0];
+        echo $datos;
+        //return view('editarJugadores.edit', compact('datos'));
+
+        return view('editarJugadores.edit', compact('categorias', 'id', 'paises', 'datos'));
     }
 
-    public function update()
+    public function update($id,Request $request)
     {
+        $datos = request()->except(['_token','_method']);
+        $jugador=Jugador::select(
+            'personas.NombrePersona',
+            'personas.ApellidoPaterno',
+            'personas.ApellidoMaterno',
+            'personas.FechaNacimiento',
+            'personas.SexoPersona',
+            'personas.Edad',
+            'personas.Foto',
+            'personas.CiPersona',
+            'jugadores.PesoJugador',
+            'jugadores.EstaturaJugador',
+            'jugadores.PosicionJugador',
+            'jugadores.NumeroCamiseta',
+            'jugadores.FotoCarnet',
+            'personas.NacionalidadPersona',
+            'categorias.NombreCategoria',
+        )
+            ->join('personas', 'personas.IdPersona', '=', 'jugadores.IdPersona')
+            ->join('equipos', 'equipos.IdEquipo', '=', 'jugadores.IdEquipo')
+            ->join('categorias', 'categorias.IdCategoria', '=', 'jugadores.IdCategoria')
+            ->where('IdJugador', '=', $id);
+           // return redirect('/editarJugadores');
     }
+
 }
