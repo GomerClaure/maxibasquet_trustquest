@@ -105,7 +105,7 @@ class CredencialController extends Controller
      * Genera las crecenciales de los jugadores y tecnicos de un equipo
      */
     public function generarCredenciales($equipo,$categoria){
-        $jugadores = Jugador::select("personas.CiPersona","personas.IdPersona")
+        $jugadores = Jugador::select("personas.CiPersona","personas.IdPersona","jugadores.IdJugador")
         ->join('personas','personas.IdPersona','jugadores.IdPersona')
         ->join('equipos','jugadores.IdEquipo','equipos.IdEquipo')
         ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
@@ -114,33 +114,60 @@ class CredencialController extends Controller
         ->get();
        
        $this->generarQr($jugadores);
-        $tecnicos = Tecnico::select("personas.CiPersona","personas.IdPersona")
+        $tecnicos = Tecnico::select("personas.CiPersona","personas.IdPersona",'tecnicos.IdTecnicos')
         ->join('personas','personas.IdPersona','tecnicos.IdPersona')
         ->join('equipos','tecnicos.IdEquipo','equipos.IdEquipo')
         ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
         ->where('equipos.NombreEquipo','=',$equipo)
         ->where('categorias.NombreCategoria','=',$categoria)
         ->get();
-        $this->generarQr($tecnicos);
+        
+        $this->generarQrTec($tecnicos);
+
         return redirect('credenciales/'.$equipo.'/'.$categoria);
 
     }
     public function generarQr($personas){
         foreach ($personas as $persona) {
-            $this->qr($persona->IdPersona,$persona->CiPersona);
+            $this->qr($persona->IdJugador,$persona->CiPersona,$persona->IdPersona);
+        }
+    }
+    public function generarQrTec($personas){
+        foreach ($personas as $persona) {
+            $this->qrtecnico($persona->IdTecnicos,$persona->CiPersona,$persona->IdPersona);
         }
     }
     /**
-     * Crea y guarda las imagenes de los codigos qr de las credenciales 
+     * Crea y guarda las imagenes de los codigos qr de las credenciales  de los jugadores
      */
-    public function qr($id,$ci){
+    public function qr($id,$ci,$id2){
         QrCode::format('png')->size(250)
-                ->generate('http://127.0.0.1:8000/jugador/'.$id,
+                ->generate('http://127.0.0.1:8000/jugadorqr/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
-       $credencial = Credencial::where('IdPersona',$id)->get();
+       $credencial = Credencial::where('IdPersona',$id2)->get();
        if($credencial -> isEmpty()){
         $credencial = new Credencial;
-        $credencial->IdPersona = $id;
+        $credencial->IdPersona = $id2;
+        $credencial -> CodigoQR = 'qrcodes/'.$id.$ci.'.png';
+        $credencial->created_at = now();
+        $credencial->updated_at = now();
+        $credencial->save();
+       }else{
+        $credencial = Credencial::where('IdPersona',$id2)->update(['CodigoQR'=>'qrcodes/'.$id.$ci.'.png','updated_at'=>now()]);
+       }
+    }
+
+     /**
+     * Crea y guarda las imagenes de los codigos qr de las credenciales  del cuerpo tecnico
+     */
+    public function qrtecnico($id,$ci,$id2){
+        QrCode::format('png')->size(250)
+                ->generate('http://127.0.0.1:8000/tecnicoqr/'.$id,
+                '../storage/app/public/qrcodes/'.$id.$ci.'.png');
+       $credencial = Credencial::where('IdPersona',$id2)->get();
+       if($credencial -> isEmpty()){
+        $credencial = new Credencial;
+        $credencial->IdPersona = $id2;
         $credencial -> CodigoQR = 'qrcodes/'.$id.$ci.'.png';
         $credencial->created_at = now();
         $credencial->updated_at = now();
