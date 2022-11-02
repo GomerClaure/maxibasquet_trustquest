@@ -48,7 +48,7 @@ class EditarJugadorController extends Controller
             $Cat = [];
         }
         $s = [];
-      
+
 
         return view('editarJugadores.equipos', compact('arreglo'));
     }
@@ -147,21 +147,21 @@ class EditarJugadorController extends Controller
         $anio = date('Y') - 100;
         $fecha = $anio . "-01-01";
 
-        $request -> validate([
-            'ci'=>'required|numeric|digits_between:6,9',
-            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
-            'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
-            'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
-            'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
-            'selectNacionalidad'=>'required',
-            'selectSexo'=>'required',
-            'edad'=>'required|numeric|min:1|max:100',
-            'fotoJugador'=>'image|dimensions:width=472, height=472',
-            'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
-            'peso'=>'required|numeric|min:1|max:99',
-            'fotoCarnet'=>'image',
-            'posicion'=>'required',
-            'nCamiseta'=>'required|numeric|min:1|max:99'
+        $request->validate([
+            'ci' => 'required|numeric|digits_between:6,9',
+            'nombre' => 'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoPaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoMaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'fechaNacimiento' => 'required|date|before:' . $fechaActual . '|after:' . $fecha . '|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'selectNacionalidad' => 'required',
+            'selectSexo' => 'required',
+            'edad' => 'required|numeric|min:1|max:100',
+            'fotoJugador' => 'image|dimensions:width=472, height=472',
+            'estatura' => 'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
+            'peso' => 'required|numeric|min:1|max:99',
+            'fotoCarnet' => 'image',
+            'posicion' => 'required',
+            'nCamiseta' => 'required|numeric|min:1|max:99'
         ]);
 
 
@@ -181,6 +181,16 @@ class EditarJugadorController extends Controller
 
         if (!$consulta2->isEmpty() && $request->ci != $jugador->CiPersona) {
             return back()->withInput()->with('mensajeErrorExiste', 'El Ci esta registrado');
+        }
+
+        $numCamiseta = $request->nCamiseta;
+        $consultaCamiseta = DB::table('jugadores')
+            ->select('*')
+            ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $request->idEquipo], ['IdCategoria', $request->selectCategoria]])
+            ->get();
+
+        if (!$consultaCamiseta->isEmpty()) {
+            return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
         }
 
         $fecha = $request->fechaNacimiento;
@@ -206,11 +216,11 @@ class EditarJugadorController extends Controller
         }
         $persona->save();
 
-        $jugadorEquipo= Jugador::find($id);
+        $jugadorEquipo = Jugador::find($id);
         $jugadorEquipo->IdCategoria = $request->selectCategoria;
         $jugadorEquipo->PosicionJugador = $request->posicion;
         $jugadorEquipo->PesoJugador = $request->peso;
-        $jugadorEquipo->EstaturaJugador = $request-> estatura;
+        $jugadorEquipo->EstaturaJugador = $request->estatura;
         if ($request->hasFile('fotoCarnet')) {
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
