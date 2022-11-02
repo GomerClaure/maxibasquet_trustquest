@@ -136,7 +136,7 @@ class EditarJugadorController extends Controller
         $equipo = Equipo::find($datos->IdEquipo);
 
         $paises = DB::table('paises')
-            ->orderBy('NombrePais', 'asc')
+            ->orderBy('Nacionalidad', 'asc')
             ->get();
         return view('editarJugadores.edit', compact('categorias', 'datos', 'equipo', 'paises'));
     }
