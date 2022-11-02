@@ -15,7 +15,7 @@
         <li><a href="{{url('/Equipo')}}">Equipos</a></li> 
         <li><a href="{{url('/preinscripcion')}}">Preinscripcion</a></li>
         <li><a href="{{url('/historia')}}">Historia</a></li>
-        <li><a href="{{url('/Aplicaciones')}}">Login</a></li>
+        <li><a href="{{url('/login')}}">Login</a></li>
     </ul>
     <main >
             {{-- @include('flash-message') --}}
