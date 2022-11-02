@@ -107,15 +107,23 @@ class EditarJugadorController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $jugadores = DB::table('jugadores')
+
+        $tecnicos = DB::table('jugadores')
+            ->select('*')
+            ->join('personas', 'jugadores.IdPersona', '=', 'personas.IdPersona')
+            ->where('IdJugador', $id)
+            ->get();
+
+        $datos = $tecnicos[0];
+        $cuerpoTecnico = DB::table('jugadores')
             ->select('IdCategoria')
-            ->where('IdEquipo', $id)
+            ->where('IdEquipo', $datos->IdEquipo)
             ->distinct()
             ->get();
 
         $arreglo = array();
         $contador = 0;
-        foreach ($jugadores as $categoria) {
+        foreach ($cuerpoTecnico as $categoria) {
             $arreglo[$contador] = $categoria->IdCategoria;
             $contador++;
         }
@@ -125,72 +133,91 @@ class EditarJugadorController extends Controller
             ->whereIn('IdCategoria', $arreglo)
             ->get();
 
+        $equipo = Equipo::find($datos->IdEquipo);
+
         $paises = DB::table('paises')
             ->orderBy('NombrePais', 'asc')
             ->get();
-
-        $jugador = Jugador::select(
-            'personas.NombrePersona',
-            'personas.ApellidoPaterno',
-            'personas.ApellidoMaterno',
-            'personas.FechaNacimiento',
-            'personas.SexoPersona',
-            'personas.Edad',
-            'personas.Foto',
-            'personas.CiPersona',
-            'jugadores.PesoJugador',
-            'jugadores.EstaturaJugador',
-            'jugadores.PosicionJugador',
-            'jugadores.NumeroCamiseta',
-            'jugadores.FotoCarnet',
-            'personas.NacionalidadPersona',
-            'categorias.NombreCategoria',
-            'equipos.NombreEquipo'
-        )
-            ->join('personas', 'personas.IdPersona', '=', 'jugadores.IdPersona')
-            ->join('equipos', 'equipos.IdEquipo', '=', 'jugadores.IdEquipo')
-            ->join('categorias', 'categorias.IdCategoria', '=', 'jugadores.IdCategoria')
-            ->where('IdJugador', '=', $id)
-            ->get();
-            $datos = $this->formatoFecha($jugador);
-            if ($id <= 0 || $id >= 9000000000000000000 || $jugador->isEmpty()) {
-                $mensaje = "No encontrado";
-                return $mensaje;
-            }
-
-        //$jugador = Jugador::find($id);
-        $datos = $jugador[0];
-        echo $datos;
-        //return view('editarJugadores.edit', compact('datos'));
-
-        return view('editarJugadores.edit', compact('categorias', 'id', 'paises', 'datos'));
+        return view('editarJugadores.edit', compact('categorias', 'datos', 'equipo', 'paises'));
     }
 
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
-        $datos = request()->except(['_token','_method']);
-        $jugador=Jugador::select(
-            'personas.NombrePersona',
-            'personas.ApellidoPaterno',
-            'personas.ApellidoMaterno',
-            'personas.FechaNacimiento',
-            'personas.SexoPersona',
-            'personas.Edad',
-            'personas.Foto',
-            'personas.CiPersona',
-            'jugadores.PesoJugador',
-            'jugadores.EstaturaJugador',
-            'jugadores.PosicionJugador',
-            'jugadores.NumeroCamiseta',
-            'jugadores.FotoCarnet',
-            'personas.NacionalidadPersona',
-            'categorias.NombreCategoria',
-        )
-            ->join('personas', 'personas.IdPersona', '=', 'jugadores.IdPersona')
-            ->join('equipos', 'equipos.IdEquipo', '=', 'jugadores.IdEquipo')
-            ->join('categorias', 'categorias.IdCategoria', '=', 'jugadores.IdCategoria')
-            ->where('IdJugador', '=', $id);
-           // return redirect('/editarJugadores');
-    }
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $anio = date('Y') - 100;
+        $fecha = $anio . "-01-01";
 
+        $request -> validate([
+            'ci'=>'required|numeric|digits_between:6,9',
+            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'selectNacionalidad'=>'required',
+            'selectSexo'=>'required',
+            'edad'=>'required|numeric|min:1|max:100',
+            'fotoJugador'=>'image|dimensions:width=472, height=472',
+            'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
+            'peso'=>'required|numeric|min:1|max:99',
+            'fotoCarnet'=>'image',
+            'selectPosicion'=>'required',
+            'nCamiseta'=>'required|numeric|min:1|max:99'
+        ]);
+
+
+
+        $carnetId = $request->ci;
+        $consulta2 = DB::table('personas')
+            ->select('CiPersona')
+            ->where('CiPersona', $carnetId, 1)
+            ->get();
+
+        $jugadores = DB::table('jugadores')
+            ->select('*')
+            ->join('personas', 'jugadores.IdPersona', '=', 'personas.IdPersona')
+            ->where('IdJugador', $id)
+            ->get();
+        $jugador = $jugadores[0];
+
+        if (!$consulta2->isEmpty() && $request->ci != $jugador->CiPersona) {
+            return back()->withInput()->with('mensajeErrorExiste', 'El Ci esta registrado');
+        }
+
+        $fecha = $request->fechaNacimiento;
+        $anio = substr($fecha, 0, 4);
+        $edadReal = date('Y') - $anio;
+        $edadActual = $request->edad;
+        if ($edadReal != $edadActual) {
+            return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
+        }
+
+
+        $persona = Persona::find($jugador->IdPersona);
+        $persona->CiPersona = $request->ci;
+        $persona->NombrePersona = $request->nombre;
+        $persona->ApellidoPaterno = $request->apellidoPaterno;
+        $persona->ApellidoMaterno = $request->apellidoMaterno;
+        $persona->FechaNacimiento = $request->fechaNacimiento;
+        $persona->NacionalidadPersona = $request->selectNacionalidad;
+        $persona->SexoPersona = $request->selectSexo;
+        $persona->Edad = $request->edad;
+        if ($request->hasFile('fotoJugador')) {
+            $persona->Foto = $request->file('fotoJugador')->store('uploads', 'public');
+        }
+        $persona->save();
+
+        $jugadorEquipo= Jugador::find($id);
+        $jugadorEquipo->IdCategoria = $request->selectCategoria;
+        $jugadorEquipo->PosicionJugador = $request->posicion;
+        $jugadorEquipo->PesoJugador = $request->peso;
+        $jugadorEquipo->EstaturaJugador = $request-> estatura;
+        if ($request->hasFile('fotoCarnet')) {
+            $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
+        }
+        $jugadorEquipo->save();
+        $equipo = Equipo::find($jugadorEquipo->IdEquipo);
+        $categoria = Categoria::find($request->selectCategoria);
+        return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
+    }
 }
