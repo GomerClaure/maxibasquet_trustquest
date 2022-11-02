@@ -65,12 +65,12 @@
                             <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                             <h3>Categoria: {{$categoria}}</h3>
                             <div class="card fondoTabla">
-                                <div class="card-header ps-3 py-2 row">
+                                <div class="card-header ps-2 py-2 row">
                                     <div class="col-10">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                     </div>
                                     <div class="col-2 d-grid">
-                                        <a type="button" href="{{ url('editarJugadores') }}" class="btn btn-primary btn-sm "> Volver </a>
+                                        <a type="button" href="{{ url('editarJugadores') }}" class="btn btn-primary"> Volver </a>
                                     </div>
                                 </div>
 
