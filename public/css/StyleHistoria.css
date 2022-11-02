@@ -4,13 +4,11 @@ body{
   color:white;
 }
 h1 {
-    font-family: "Helvetica Rounded", Arial, sans-serif;;
-    font-size: 82px;
-    color: #eb8f32; 
-    font-weight: bold;
-    letter-spacing: -4px;
-    text-align: center;
-    border-radius: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 45px;
+  color: #e5852a; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 .parrafo{
     color: white;

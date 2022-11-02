@@ -10,6 +10,7 @@
 </head>
 <body>
     <ul class="menu">
+    <img class="logito" src="{{asset('storage').'/'.'img_Home'.'/'.'logo_maxi.png'}}" >
         <li><a href="{{url('/home')}}">Home</a></li>
         <li><a href="{{url('/Equipo')}}">Equipos</a></li> 
         <li><a href="{{url('/preinscripcion')}}">Preinscripcion</a></li>

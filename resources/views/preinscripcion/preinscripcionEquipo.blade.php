@@ -1,4 +1,4 @@
-@extends('welcome')
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
