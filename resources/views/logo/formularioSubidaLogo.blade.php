@@ -15,7 +15,7 @@
     <form action="{{route('subirLogo', ['idEquipo' => $equipo->IdEquipo])}}" method="post" enctype="multipart/form-data" id="form">
         @csrf
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 nombreEquipo">
             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
             <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}" readonly>
         </div>
@@ -25,12 +25,15 @@
             </div>
             <div class="form-group">
                 <label for="">Logotipo del equipo:</label>
-                <input type="file" name="logotipoDelEquipo" class="form-control">
+                <input type="file" name="logotipoDelEquipo"  accept="image/*" class="form-control">
             </div>
+            @error('logotipoDelEquipo')
+                <p class="error-message">{{ $message }}</p>
+            @enderror
             <div class="img-holder"></div>
         </div>
         <div class="col-md-12 text-center">
-            <button type="submit" class="btn botonPreinscripcion">Subir Logotipo</button>
+            <button type="submit" class="btn botonSubirLogo">Subir Logotipo</button>
         </div>
     </div>
     </form>

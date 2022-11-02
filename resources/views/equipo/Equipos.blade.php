@@ -8,61 +8,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleMostrarEquipo.css')}}">
-</head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap" rel="stylesheet">
+      </head>
 <body>
-
-@foreach($c as $dato)
-<div style="text-align:center">
-    <h1>{{$dato->NombreEquipo}}</h1>
-</div>
-@endforeach
-
-@foreach($c as $pais)
-<div class="TituloPais">
-    <h1>Pais:{{$pais->NombrePais}}</h1>
-</div>
-@endforeach
-
-@foreach($categoria as $cats)
-<div class="TituloCategoria">
-    <h1>Categorias:{{$cats->NombreCategoria}}</h1>
-</div>
-@endforeach
-<div class="listaEquipo">
-
-<div class="listaJugadores">
-    <h2>Jugadores</h2>
-    @foreach($informacion as $jugado)
-
-<div class="card" style="width: 18rem;" >
-<img class="card-img-top"src="{{asset('storage').'/'.$jugado->Foto}}" alt="">
+  <h1 class="tituloEquipos">Equipos Campeonato Maxi Basquet</h1>
+<div class="equipos-card">
+@foreach($arreglo as $copia)
+<div class="card" style="width: 4 0rem;">
   <div class="card-body">
-    <h5 class="card-title">{{$jugado->NombrePersona}} {{$jugado->ApellidoPaterno}} {{$jugado->ApellidoMaterno}}</h5>
-    <a href="{{url('jugador'.'/'.$jugado->IdJugador)}}" class="btn btn-primary">Detalles</a>
+    <div class="row">
+      <div class="col-md-6 imagen">
+        <img class="card-img-top"src="{{asset('storage').'/'.$copia['LogoEquipo']}}" alt="">
+      </div>  
+    <div class="col-md-6">
+      <h5 class="card-title">Nombre Equipo: {{$copia['NombreEquipo']}}</h5>
+      <h5 class="card-title">Pais Equipo: {{$copia['NombrePais']}}</h5>
+      @foreach($copia['Categorias'] as $x)
+        <h5>Categoria: {{$x['id']}}</h5>
+        <a href="{{url('jugadores'.'/'.$copia['NombreEquipo'].'/'.$x['id'])}}" type="button" class="btn btn-primary">Jugadores</a>
+        <a href="{{url('tecnicos'.'/'.$copia['NombreEquipo'].'/'.$x['id'])}}" class="btn btn-primary">Cuerpo Tecnico</a>
+        @endforeach
+    </div>
+    </div>
   </div>
 </div>
-<br>
 @endforeach
 </div>
-
-<div class="listaCuerpoT">
-
-<h2>Cuerpo Tecnico</h2>
-
-@foreach($informaciontecnicos as $tec)
-
-<div class="card" style="width: 18rem;" >
-<img class="card-img-top" src="{{asset('storage').'/'.$tec->Foto}}" alt="">
-  <div class="card-body">
-    <h5 class="card-title">{{$tec->NombrePersona}} {{$tec->ApellidoPaterno}} {{$tec->ApellidoMaterno}}</h5>
-    <br><br>
-  </div>
-</div>
 <br>
-@endforeach
-
-</div>
-
-</div>
 </body>
 </html>

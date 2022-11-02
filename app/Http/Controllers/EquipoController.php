@@ -9,38 +9,50 @@ use App\Models\Tecnicos;
 use App\Models\Aplicaciones;
 use App\Models\Categoria;
 use App\Models\Paises;
-use App\Models\categoria_por_equipo;
+use App\Models\CategoriaEquipo;
 
 class EquipoController extends Controller
 {
     public function index()
     {   
-        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo')
+        
+        $eq=Equipo::select('equipos.NombreEquipo') 
+                        ->get();
+
+        //Nombre y Pais de un equipo Categoria
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','equipos.LogoEquipo','categorias.NombreCategoria')
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
-                  ->where('IdEquipo','=',1)
-                  ->get();
-        //Sobre la Categoria de un equipo
-        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
-                  ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
+                  ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
+                  ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
 
-        //Sobre la Categoria de un equipo
-        $categoria=Categoria::select('categorias.NombreCategoria')->distinct()
-        ->join('jugadores','categorias.IdCategoria','=','jugadores.IdCategoria')
-        ->get();
-        //informacion de una persona que es un tecnico 
-        $informaciontecnicos=Persona::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
-        ->join('tecnicos','personas.IdPersona','=','tecnicos.IdPersona')
-        ->get();
-       //Informacion de una persona que es un jugador
-        $informacion=Persona::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
-             ->join('jugadores','personas.IdPersona','=','jugadores.IdPersona')
-             ->get();
-             
-             return view('equipo.Equipos',compact('informaciontecnicos','informacion','categoria','c'));
-             
-    }                            
+        $EquiposDatos=[]; 
+        $Cat=[];
+        $arreglo=[];
+  
+                   for($i=0;$i<count($eq);$i++){
+                       $var=($eq[$i])["NombreEquipo"];
+                       foreach($c as $cop) {
+                         $nombre=$cop["NombreEquipo"];
+                         if($nombre==$var){
+                            $pais=$cop["NombrePais"];
+                            $categoria=$cop["NombreCategoria"];
+                            $logo=$cop["LogoEquipo"];
+                            $f=array("id"=>$categoria);
+                            $new=array_push($Cat,$f);
+                         }            
+                       }
+                       $EquiposDatos=array("NombreEquipo"=>$var,"Categorias"=>$Cat,"NombrePais"=>$pais,"LogoEquipo"=>$logo);
+                       $new=array_push($arreglo,$EquiposDatos);
+                       $Cat=[];
+                    }
+        $s=[];
+
+                
+                    return view('equipo.Equipos',compact('arreglo'));
+                  //return $arreglo;
+    }                             
     public function create()
     {
         //
