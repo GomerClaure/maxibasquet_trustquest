@@ -48,7 +48,7 @@ class EditarJugadorController extends Controller
             $Cat = [];
         }
         $s = [];
-        echo "hola index";
+      
 
         return view('editarJugadores.equipos', compact('arreglo'));
     }
@@ -101,7 +101,6 @@ class EditarJugadorController extends Controller
             $equipo = null;
             $categoria = null;
         }
-        echo "hola desde lista";
         return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria'));
     }
 
@@ -161,7 +160,7 @@ class EditarJugadorController extends Controller
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
             'peso'=>'required|numeric|min:1|max:99',
             'fotoCarnet'=>'image',
-            'selectPosicion'=>'required',
+            'posicion'=>'required',
             'nCamiseta'=>'required|numeric|min:1|max:99'
         ]);
 
