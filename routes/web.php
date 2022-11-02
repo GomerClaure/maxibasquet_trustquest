@@ -6,6 +6,7 @@ use App\Http\Controllers\AplicacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AplicacionesController;
+use App\Http\Controllers\CredencialController;
 use App\Http\Controllers\TransaccionController;
 use App\Http\Controllers\MostrarJugadoresController;
 use App\Http\Controllers\MostrarTecnicosController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\EditarJugadorController;
 use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\JugadorQrController;
+use App\Http\Controllers\TecnicoQrController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +43,7 @@ Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::cla
 
 
 Route::get('/Equipo',[EquipoController::class,'index']);
+Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
 //Route::get('/equipo',[EquipoController::class,'index']);
@@ -63,3 +67,9 @@ Route::post('/subirLogo', [SubirLogoController::class,'store'])->name('subirLogo
 Route::get('/tecnico/{id}',[TecnicoController::class,'show']);
 Route::get('/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaTecnicos']);
 Route::get('/jugadores/{equipo}/{categoria}',[JugadorController::class,'listaJugadores']);
+Route::get('/qr',[CredencialController::class,'qr']);
+Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo']);
+Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'generarCredenciales']);
+Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
+Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
+Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);

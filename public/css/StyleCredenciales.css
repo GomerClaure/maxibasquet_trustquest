@@ -15,17 +15,26 @@ table th {
   white-space: nowrap;
   overflow: hidden;
 }
+.btn-primary {
+    color: #fff;
+    background: #fa841a;
+    border-color: #eb8f32; /*set the color you want here*/
+}
+
 .btn:first-child:hover{
   background: #fa841a;
   border-color: #eb8f32;
+}
+.btn-primary:hover {
+    
+    background: #fa841a !important;
+    border-color: #eb8f32 !important;
 }
 
 thead th {
   color: black;
 }
-
 .card {
-  border-radius: .0rem;
   background-color: #ABA9A9;
 }
 
@@ -59,13 +68,27 @@ a{
   text-decoration: none;
   
 }
-.formulario{
-    background-color: #b5b5bd;
+.navbar{
+  background-color: #2c2a2a;
+}
+.fondoTabla{
+  background-color: #D3D3D3;
+}
+.foto{
+    margin: auto;
+    width: 200px;
+    height: 200px;
+}
+.qr{
+    margin: auto;
+    width: 250px;
+    height: 250px;
+}
+.card-body{
     color: black;
 }
-.navbar{
-    background-color: #2c2a2a;
+.credencial{
+        
+    height: max-content;
 }
-.boton{
-  width: 15%;
-}
+
