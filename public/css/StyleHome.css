@@ -2,11 +2,26 @@ body,html{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #171f27;
 }
+.convocatoria{
+    
+    text-align: center;
+}
 .imgh{
     height: 300px ;
     width: 600px;
 }
-
+.imgconv{
+    height: 500px ;
+    width: 600px;
+    margin-left: 60px;
+    padding: 15px;
+}
+.noticias{
+    display: inline-flex;
+    flex-direction: row;
+    margin: 15px;
+    margin-left: 25px;
+}
 .caru{
     text-align: center;
     height: 20px;
@@ -52,6 +67,9 @@ body,html{
     flex-wrap: wrap;
     text-align: center;
     background-color: #eb8f32;
+}
+.card-title{
+    color: #040404;
 }
 .box{
     background-color: #c8ced5;
