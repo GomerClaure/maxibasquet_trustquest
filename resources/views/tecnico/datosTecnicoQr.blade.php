@@ -31,10 +31,10 @@
                                                 <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Foto del Técnico</h1>
                                             </div>
                                             <div class="modal-body">
-                                                <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#modalImgJugador" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
+                                                <img class="card-img-top"  src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del tecnico">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn volver" data-bs-dismiss="modal">Volver</button>
+                                                <button type="button" class="btn volver" data-bs-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="row data">
-                            <div class="col-1">
+                            <div class="col-3">
                             </div>
                             <div class="col dosFilas" >
                                 <div class="row filaDato">
@@ -87,11 +87,11 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
-                                    <label for="" class="tituloDeUnaCelda">Sexo</label>
+                                    <label for="" class="tituloDeUnaCelda">Genero</label>
                                     <label for="" class="contenidoCelda">{{{$tecnico->SexoPersona}}}</label>
                                 </div>
                             </div>
-                            <div class="col-1">
+                            <div class="col-3">
                             </div>
                         </div>
                     </div>
