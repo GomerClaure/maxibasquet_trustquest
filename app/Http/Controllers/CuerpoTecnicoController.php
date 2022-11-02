@@ -232,7 +232,7 @@ class CuerpoTecnicoController extends Controller
 
         $request -> validate([
             'ci'=>'required|numeric|digits_between:6,9',
-            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'nombre'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
