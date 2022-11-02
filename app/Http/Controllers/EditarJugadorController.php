@@ -149,7 +149,7 @@ class EditarJugadorController extends Controller
 
         $request->validate([
             'ci' => 'required|numeric|digits_between:6,9',
-            'nombre' => 'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'nombre' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento' => 'required|date|before:' . $fechaActual . '|after:' . $fecha . '|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
@@ -199,6 +199,10 @@ class EditarJugadorController extends Controller
         $edadActual = $request->edad;
         if ($edadReal != $edadActual) {
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
+        }
+        $categoria = $request -> selectCategoria;
+        if ($edadReal < $categoria) {
+            return back()->withInput()->with('mensajeErrorCategoria', 'La edad no es valida para la categira');
         }
 
 
