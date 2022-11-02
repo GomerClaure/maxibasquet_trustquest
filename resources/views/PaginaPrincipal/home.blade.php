@@ -71,9 +71,6 @@ Fecha definitiva: desde el 24 de junio al 3 de julio de 2022.</p>
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
           <span class="me-3">Campeonato Maxi Basquet</span>
-          <button type="button" class="btn btn-outline-light btn-rounded">
-            Sign up!
-          </button>
         </p>
       </section>
       <!-- Section: CTA -->
