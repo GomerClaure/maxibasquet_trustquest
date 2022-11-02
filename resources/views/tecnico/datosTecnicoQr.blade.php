@@ -82,7 +82,7 @@
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Edad</label>
-                                    <label for="" class="contenidoCelda">{{$tecnico->Edad}}</label>
+                                    <label for="" class="contenidoCelda">{{$tecnico->Edad." años"}}</label>
                                 </div>
                             </div>
                             <div class="col-md-2">

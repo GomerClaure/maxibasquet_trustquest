@@ -102,19 +102,19 @@
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Edad</label>
-                                    <label for="" class="contenidoCelda">{{$jugador->Edad}}</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->Edad." años"}}</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Peso</label>
-                                    <label for="" class="contenidoCelda">{{$jugador->PesoJugador}}</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->PesoJugador." kg"}}</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
                                     <label for="" class="tituloDeUnaCelda">Altura</label>
-                                    <label for="" class="contenidoCelda">{{$jugador->EstaturaJugador}}</label>
+                                    <label for="" class="contenidoCelda">{{$jugador->EstaturaJugador." m"}}</label>
                                 </div>
                             </div>
                         </div>
