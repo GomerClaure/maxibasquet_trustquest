@@ -12,10 +12,12 @@
 @section('content')
 
 <h1 class="titulo">MAXIBASQUET</h1>
+<div class="container">
 <div class="caru">
 <img class="imgh" src="{{asset('storage').'/'.'img_Home'.'/'.'img1.jpg'}}" >
 <img  class="imgh" src="{{asset('storage').'/'.'img_Home'.'/'.'img2.jpeg'}}" >
 <img  class="imgh" src="{{asset('storage').'/'.'img_Home'.'/'.'img5.jpeg'}}">
+</div>
 </div>
 
 
