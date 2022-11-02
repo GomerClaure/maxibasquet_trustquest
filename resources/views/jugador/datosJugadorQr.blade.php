@@ -31,10 +31,10 @@
                                                 <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Foto del Jugador</h1>
                                             </div>
                                             <div class="modal-body">
-                                                <img class="card-img-top imagenCarnet"  data-bs-toggle="modal" data-bs-target="#modalImgJugador" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
+                                                <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn volver" data-bs-dismiss="modal">Volver</button>
+                                                <button type="button" class="btn volver" data-bs-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="row filaDato">
                                     <div class="col-lg-9">
-                                        <label for="" class="tituloDeCelda">Sexo</label>
+                                        <label for="" class="tituloDeCelda">Genero</label>
                                         <br>
                                         <label for="" class="contenidoCelda">{{$jugador->SexoPersona}}</label>
                                     </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="row celda">
-                                    <label for="" class="tituloDeUnaCelda">Estatura</label>
+                                    <label for="" class="tituloDeUnaCelda">Altura</label>
                                     <label for="" class="contenidoCelda">{{$jugador->EstaturaJugador}}</label>
                                 </div>
                             </div>
