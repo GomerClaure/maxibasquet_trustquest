@@ -1,22 +1,27 @@
 html,body{
   background:#171f27;
-  margin: 30px;
+}
+.tituloEquipos{
+  margin-top: 20px;
+    text-align: center;
+    font-size: 45px;
+    color: #e5852a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.card{
+  align-items: center;
+  background-color:#7b7979;
+  padding: auto;
+  color: #ffff;
+  font-size:20px;
+  margin: 10px;
+  flex-direction: row;
 }
 .equipos-card{ 
   display: grid;
   text-align: center; 
   justify-content: center;
-}
-.card{
-    align-items: center;
-    background-color:#7b7979;
-    padding: auto;
-    color: #ffff;
-    font-size:20px;
-    margin: 10px;
-    flex-direction: row;
-}
-  
+}  
 .card-img-top{
     height: 250px;
     width: 250px; 
@@ -27,11 +32,7 @@ html,body{
     font-size: 14;
     border: #272725;
   } 
-.tituloEquipos{
-   color: #ffff; 
-   text-align: center; 
-   margin-top: 5px;
-}
+
 
 .col-md-6.imagen{
   display: grid;
