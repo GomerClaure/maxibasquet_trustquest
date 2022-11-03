@@ -201,7 +201,6 @@ class EditarJugadorController extends Controller
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
         }
 
-
         $persona = Persona::find($jugador->IdPersona);
         $persona->CiPersona = $request->ci;
         $persona->NombrePersona = $request->nombre;
