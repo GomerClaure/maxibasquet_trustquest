@@ -201,6 +201,24 @@ class EditarJugadorController extends Controller
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
         }
 
+        $categoria = $request -> selectCategoria;
+        $consulta = Categoria::where('IdCategoria',$categoria)->get();
+        $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
+
+        if($edadActual < $categoriaNum){
+            return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
+        }
+
+        $numCamiseta = $request -> nCamiseta;
+        $consultaCamiseta = DB::table('jugadores')
+                            ->select('*')
+                            ->where([['NumeroCamiseta', $numCamiseta],['IdEquipo',$request -> idEquipo],['IdCategoria',$request -> selectCategoria]])
+                            ->get();
+
+        if(!$consultaCamiseta ->isEmpty()){
+            return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en la categoria');
+        }
+
         $persona = Persona::find($jugador->IdPersona);
         $persona->CiPersona = $request->ci;
         $persona->NombrePersona = $request->nombre;
@@ -220,6 +238,7 @@ class EditarJugadorController extends Controller
         $jugadorEquipo->PosicionJugador = $request->posicion;
         $jugadorEquipo->PesoJugador = $request->peso;
         $jugadorEquipo->EstaturaJugador = $request->estatura;
+        $jugadorEquipo->NumeroCamiseta = $request->nCamiseta;
         if ($request->hasFile('fotoCarnet')) {
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
