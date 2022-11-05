@@ -224,7 +224,7 @@ class EditarJugadorController extends Controller
         if ($request->hasFile('fotoCarnet')) {
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
-        $jugadorEquipo->save();
+        
         $equipo = Equipo::find($jugadorEquipo->IdEquipo);
         $categoria = Categoria::find($request->selectCategoria);
         
@@ -234,9 +234,11 @@ class EditarJugadorController extends Controller
                             ->where([['NumeroCamiseta', $numCamiseta],['IdEquipo',$equipo->IdEquipo],['IdCategoria',$categoria->IdCategoria]])
                             ->get();
 
-        if(count($consultaCamiseta)>1){
-            return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en el equipo');
+        if(count($consultaCamiseta)>=1){
+           
+            return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en la categoria');
         }
+        $jugadorEquipo->save();
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
 }
