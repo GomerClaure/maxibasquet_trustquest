@@ -76,19 +76,22 @@ a{
 }
 .foto{
     margin: auto;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 .qr{
     margin: auto;
-    width: 250px;
-    height: 250px;
+    width: 75px;
+    height: 75px;
 }
 .card-body{
     color: black;
 }
 .credencial{
-        
-    height: max-content;
+  height: 270px;
+  width: 504px;
+}
+.card-cred{
+  width: 95% !important;
 }
 
