@@ -56,7 +56,7 @@ class CredencialController extends Controller
     $equipo = $equipos[0];
     $pdf = Pdf::loadView('credencial.pdf',['credencialesJugadores'=>$credencialesJugadores,
            'credencialesTecnicos'=>$credencialesTecnicos,'equipo'=>$equipo]);
-    
+    $pdf->setPaper('letter','portrait');
     return $pdf->download($equipo->NombreEquipo.'_'.$equipo->NombreCategoria.'_'.'credenciales.pdf');
     }
     /**
