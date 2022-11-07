@@ -149,8 +149,9 @@ class TecnicoController extends Controller
         
         $foto = $datosTecnico->Foto;
         $path = storage_path().'\app\public'.'\\'.$foto;
-        $file = File::delete($path);
-        return $file;
+        File::delete($path);
+
+        
         
     }
 }
