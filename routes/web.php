@@ -75,3 +75,4 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
+Route::get('/delete/tecnico/{id}',[TecnicoController::class,'destroy']);

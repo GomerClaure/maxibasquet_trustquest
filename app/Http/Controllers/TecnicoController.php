@@ -6,6 +6,8 @@ use App\Models\Categoria;
 use App\Models\Equipo;
 use App\Models\Tecnico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class TecnicoController extends Controller
 {
@@ -138,6 +140,17 @@ class TecnicoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tecnico = Tecnico::select()
+                            ->join('personas','personas.IdPersona','tecnicos.IdPersona')
+                            ->where('IdTecnicos',$id)
+                            ->get();
+        $datosTecnico = $tecnico[0];
+         
+        
+        $foto = $datosTecnico->Foto;
+        $path = storage_path().'\app\public'.'\\'.$foto;
+        $file = File::delete($path);
+        return $file;
+        
     }
 }
