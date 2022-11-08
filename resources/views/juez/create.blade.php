@@ -179,9 +179,10 @@
 
                             <div class="form-group mb-3">
                                 <label for="selectRol" class="form-label">Rol:</label>
-                                <select class="form-select" id="selectRol" name="selectRol">
-                                    <option value="Anotador" {{ old('selectRol') == 'Anotador' ? 'selected' : '' }}>Anotador</option>
-                                    <option value="Anotador asistente" {{ old('selectRol') == 'Anotador asistente' ? 'selected' : '' }}>Anotador asistente</option>
+                                <select class="form-select" id="selectRol" name="selectRol" value="{{ old('selectRol') }}">
+                                    @foreach ($roles as $rol)
+                                        <option value="{{$rol->IdRol}}" {{ old('selectRol') == "$rol->IdRol" ? 'selected' : '' }}>{{$rol->NombreRol}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Juez;
 use App\Models\Pais;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -59,17 +60,14 @@ class JuezController extends Controller
             'foto'=>'required|image|dimensions:width=472, height=472'
         ]);
 
-        return "entro";
-
-        /*$imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
-        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
+        $imagenJuez = $request->file('foto')->store('uploads','public');
 
         $carnetId = $request -> ci;
         $consulta2 = DB::table('personas')
                         ->select('CiPersona')
                         ->where('CiPersona', $carnetId, 1)
                         ->get();
-        //return $consulta2;
+
         if(!$consulta2 ->isEmpty()){
             return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
@@ -82,7 +80,7 @@ class JuezController extends Controller
             return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
-        $rol = 'Entrenador principal';
+        /*$rol = 'Entrenador principal';
         if($rol == $request->selectRol){
             $consultaEntrenador = DB::table('tecnicos')
                                 ->select('*')
@@ -92,7 +90,14 @@ class JuezController extends Controller
             if(!$consultaEntrenador ->isEmpty()){
                 return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
             }
-        }
+        }*/
+
+        $usuario = new Usuario;
+        $usuario -> IdRol = $request -> selectRol;
+        $usuario -> name = $request -> nombreUsuario;
+        $usuario -> email = $persona -> correo;
+        $usuario -> password = $request -> contrasenia;
+        $usuario -> save();
 
         $persona = new Persona;
         $persona -> CiPersona = $request -> ci;
@@ -103,18 +108,15 @@ class JuezController extends Controller
         $persona -> NacionalidadPersona = $request -> selectNacionalidad;
         $persona -> SexoPersona = $request -> selectSexo;
         $persona -> Edad = $request -> edad;
-        $persona -> Foto = $imagenTecnico;
+        $persona -> Foto = $imagenJuez;
         $persona -> save();
 
-        $tenico = new CuerpoTecnico;
-        $tenico -> IdEquipo = $id;
-        $tenico -> IdCategoria = $request -> selectCategoria;
-        $tenico -> IdPersona = $persona -> IdPersona;
-        $tenico -> RolesTecnicos = $request -> selectRol;
-        $tenico -> FotoCarnet = $imagenCarnet;
+        $juez = new Juez;
+        $juez -> IdUsuario = $usuario -> IdUsuario;
+        $juez -> IdPersona = $persona -> IdPersona;
+        $juez -> save();
 
-        $tenico -> save();
-        return redirect('tecnico/create/'.$id)->with('mensaje','Se inscribio al tecnico correctamente');*/
+        return redirect('tecnico/create/')->with('mensaje','Se inscribio al tecnico correctamente');
     }
 
     /**
