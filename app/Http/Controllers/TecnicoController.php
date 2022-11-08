@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Equipo;
 use App\Models\Tecnico;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -148,10 +149,13 @@ class TecnicoController extends Controller
          
         
         $foto = $datosTecnico->Foto;
-        $path = storage_path().'\app\public'.'\\'.$foto;
+        $path = '../storage/app/public/'.$foto;
+        $credencial = '../storage/app/public/qrcodes/'.$datosTecnico->IdTecnicos.$datosTecnico->CiPersona.'.png';
         File::delete($path);
-
-        
-        
+        File::delete($credencial);
+        $persona = Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
+        $equipo = Equipo::find($datosTecnico -> IdEquipo);
+        $categoria = Categoria::find($datosTecnico -> IdCategoria);
+        return redirect('tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
     }
 }
