@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Juez;
 use App\Models\Pais;
-use App\Models\Usuario;
+use App\Models\User;
+use App\Models\Persona;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,9 @@ class JuezController extends Controller
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
                 ->get();
+        $roles = Rol::all();
 
-        return view('juez.create',compact('paises'));
+        return view('juez.create',compact('paises','roles'));
     }
 
     /**
@@ -93,10 +95,10 @@ class JuezController extends Controller
             }
         }*/
 
-        $usuario = new Usuario;
+        $usuario = new User;
         $usuario -> IdRol = $request -> selectRol;
         $usuario -> name = $request -> nombreUsuario;
-        $usuario -> email = $persona -> correo;
+        $usuario -> email = $request -> correo;
         $usuario -> password = $request -> contrasenia;
         $usuario -> save();
 
@@ -113,11 +115,11 @@ class JuezController extends Controller
         $persona -> save();
 
         $juez = new Juez;
-        $juez -> IdUsuario = $usuario -> IdUsuario;
+        $juez -> IdUsuario = $usuario -> id;
         $juez -> IdPersona = $persona -> IdPersona;
         $juez -> save();
 
-        return redirect('tecnico/create/')->with('mensaje','Se inscribio al tecnico correctamente');
+        return redirect('juez/create')->with('mensaje','Se registro correctamente');
     }
 
     /**
