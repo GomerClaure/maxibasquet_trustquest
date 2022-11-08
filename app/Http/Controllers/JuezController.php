@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Persona;
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class JuezController extends Controller
@@ -97,7 +98,9 @@ class JuezController extends Controller
             return back()->withInput()->with('mensajeErrorEmail','El correo ya esta registrado');
         }
 
-        $usuario -> password = $request -> contrasenia;
+        $hashed = Hash::make($request -> contrasenia);
+
+        $usuario -> password = $hashed;
         $usuario -> save();
 
         $persona = new Persona;
