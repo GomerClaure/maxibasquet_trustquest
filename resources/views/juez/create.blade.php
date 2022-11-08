@@ -64,10 +64,10 @@
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorCategoria'))
+            @if (Session::has('mensajeErrorEmail'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEmail')}}</h4>
                 </div>
             @endif
 
@@ -82,7 +82,7 @@
                 <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
+                        <h1 class="tituloFomulario">REGISTRAR JUEZ</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">

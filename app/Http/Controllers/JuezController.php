@@ -66,12 +66,12 @@ class JuezController extends Controller
         $imagenJuez = $request->file('foto')->store('uploads','public');
 
         $carnetId = $request -> ci;
-        $consulta2 = DB::table('personas')
+        $consulta = DB::table('personas')
                         ->select('CiPersona')
                         ->where('CiPersona', $carnetId, 1)
                         ->get();
 
-        if(!$consulta2 ->isEmpty()){
+        if(!$consulta ->isEmpty()){
             return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
 
@@ -83,22 +83,20 @@ class JuezController extends Controller
             return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
 
-        /*$rol = 'Entrenador principal';
-        if($rol == $request->selectRol){
-            $consultaEntrenador = DB::table('tecnicos')
-                                ->select('*')
-                                ->where([['RolesTecnicos', $rol],['IdEquipo',$id],['IdCategoria',$request -> selectCategoria]])
-                                ->get();
-
-            if(!$consultaEntrenador ->isEmpty()){
-                return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
-            }
-        }*/
-
         $usuario = new User;
         $usuario -> IdRol = $request -> selectRol;
         $usuario -> name = $request -> nombreUsuario;
         $usuario -> email = $request -> correo;
+
+        $consultaCorreo = DB::table('users')
+                        ->select('email')
+                        ->where('email', $request -> correo, 1)
+                        ->get();
+
+        if(!$consultaCorreo ->isEmpty()){
+            return back()->withInput()->with('mensajeErrorEmail','El correo ya esta registrado');
+        }
+
         $usuario -> password = $request -> contrasenia;
         $usuario -> save();
 
