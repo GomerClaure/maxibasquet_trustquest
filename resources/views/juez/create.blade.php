@@ -79,7 +79,7 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/tecnico/create')}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
@@ -119,7 +119,10 @@
 
                             <div class="form-group mb-3 mt-5">
                                 <label for="nombreUsuario" class="form-label">Nombre de usuario:</label>
-                                <input type="text" class="form-control" id="nombreUsuario" placeholder="Ingrese nombre de usuario" name="nombreUsuario">
+                                <input type="text" class="form-control" id="nombreUsuario" placeholder="Ingrese nombre de usuario" name="nombreUsuario"  value="{{ old('nombreUsuario') }}">
+                                @error('nombreUsuario')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-4" id="columna2">
@@ -150,7 +153,10 @@
 
                             <div class="form-group mb-3 mt-5">
                                 <label for="correo" class="form-label">Correo:</label>
-                                <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" name="correo">
+                                <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" name="correo" value="{{ old('correo') }}">
+                                @error('correo')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -181,7 +187,10 @@
 
                             <div class="form-group mb-3 mt-5">
                                 <label for="contrasenia" class="form-label">Contraseña:</label>
-                                <input type="password" class="form-control" id="contrasenia" placeholder="Ingresar contraseña" name="contrasenia">
+                                <input type="password" class="form-control" id="contrasenia" placeholder="Ingresar contraseña" name="contrasenia" value="{{ old('contrasenia') }}">
+                                @error('contrasenia')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>

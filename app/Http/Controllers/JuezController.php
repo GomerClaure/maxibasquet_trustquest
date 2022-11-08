@@ -41,7 +41,80 @@ class JuezController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $anio = date('Y')-100;
+        $fecha = $anio."-01-01";
+
+        $request -> validate([
+            'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
+            'ci'=>'required|numeric|digits_between:6,9',
+            'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
+            'edad'=>'required|numeric|min:1|max:100',
+            'nombreUsuario'=>'required|alpha_num|min:4|max:64',
+            'correo'=>'required|regex:/^([A-Z,a-z,0-9]+[@][A-Z,a-z]+[.][A-Z,a-z]+)+$/',
+            'contrasenia'=>'required|regex:/^([A-Z,a-z,0-9]+)+$/',
+            'foto'=>'required|image|dimensions:width=472, height=472'
+        ]);
+
+        return "entro";
+
+        /*$imagenTecnico = $request->file('fotoTecnico')->store('uploads','public');
+        $imagenCarnet = $request->file('fotoCarnet')->store('uploads','public');
+
+        $carnetId = $request -> ci;
+        $consulta2 = DB::table('personas')
+                        ->select('CiPersona')
+                        ->where('CiPersona', $carnetId, 1)
+                        ->get();
+        //return $consulta2;
+        if(!$consulta2 ->isEmpty()){
+            return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
+        }
+
+        $fecha = $request -> fechaNacimiento;
+        $anio = substr($fecha, 0, 4);
+        $edadReal = date('Y')-$anio;
+        $edadActual = $request -> edad;
+        if($edadReal != $edadActual){
+            return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
+        }
+
+        $rol = 'Entrenador principal';
+        if($rol == $request->selectRol){
+            $consultaEntrenador = DB::table('tecnicos')
+                                ->select('*')
+                                ->where([['RolesTecnicos', $rol],['IdEquipo',$id],['IdCategoria',$request -> selectCategoria]])
+                                ->get();
+
+            if(!$consultaEntrenador ->isEmpty()){
+                return back()->withInput()->with('mensajeErrorExiste','El entrenador principal ya esta registrado en la categoria');
+            }
+        }
+
+        $persona = new Persona;
+        $persona -> CiPersona = $request -> ci;
+        $persona -> NombrePersona = $request -> nombre;
+        $persona -> ApellidoPaterno = $request -> apellidoPaterno;
+        $persona -> ApellidoMaterno = $request -> apellidoMaterno;
+        $persona -> FechaNacimiento = $request -> fechaNacimiento;
+        $persona -> NacionalidadPersona = $request -> selectNacionalidad;
+        $persona -> SexoPersona = $request -> selectSexo;
+        $persona -> Edad = $request -> edad;
+        $persona -> Foto = $imagenTecnico;
+        $persona -> save();
+
+        $tenico = new CuerpoTecnico;
+        $tenico -> IdEquipo = $id;
+        $tenico -> IdCategoria = $request -> selectCategoria;
+        $tenico -> IdPersona = $persona -> IdPersona;
+        $tenico -> RolesTecnicos = $request -> selectRol;
+        $tenico -> FotoCarnet = $imagenCarnet;
+
+        $tenico -> save();
+        return redirect('tecnico/create/'.$id)->with('mensaje','Se inscribio al tecnico correctamente');*/
     }
 
     /**

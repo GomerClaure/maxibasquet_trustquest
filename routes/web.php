@@ -78,3 +78,4 @@ Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
 
 Route::get('juez/create',[JuezController::class,'create']);
+Route::post('juez/create',[JuezController::class,'store']);
