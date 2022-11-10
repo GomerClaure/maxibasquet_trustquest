@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Partido;
 use App\Models\Equipo;
 
-class RegistrarPartidos extends Controller
+class RegistrarPartidosController extends Controller
 {
     public function index()
     {
@@ -26,29 +26,44 @@ class RegistrarPartidos extends Controller
         $fecha = $anio . "-01-01";
         $request->validate(
             [
-                'equipo1' => 'required',
-                'equipo2' => 'required',
+                'equipoA' => 'required',
+                'equipoB' => 'required',
                 'hora' => 'required',
                 'lugar' => 'required',
                 'fecha' => 'required',
                 'option' => 'required',
             ],
-            [
-                'equipo1.required' => 'el campo no puede estar vacion',
-                'equipo2.required' => 'el campo no puede estar vacion',
-                'hora.required' => 'el campo no puede estar vacion',
-                'fecha.required' => 'el campo no puede estar vacion',
-
-            ]
+           
         );
 
+        //verificar la existencia del equipoA
+        $equipoA = $request ->equipoA;
+        $consultaEquipoA = DB::table('equipos')
+                            ->select('NombreEquipo')
+                            ->where('NombreEquipo',$equipoA)
+                            ->exists();
+        if(!$consultaEquipoA){
+            return back()->withInput()->with('mensajeErrorEquipoA','El Equipo A no existe');
+        }
+
+        //verificar la existencia del equipo B
+        $equipoB = $request ->equipoB;
+        $consultaEquipoB = DB::table('equipos')
+                            ->select('NombreEquipo')
+                            ->where('NombreEquipo',$equipoB)
+                            ->exists();
+        if(!$consultaEquipoB){
+            return back()->withInput()->with('mensajeErrorEquipoB','El Equipo B no existe');
+        }
+
+        
         $fecha = $request->fecha;
         $anio = substr($fecha, 0, 4);
         $edadReal = date('Y') - $anio;
         $edadActual = $request->edad;
-        if ($edadReal != $edadActual) {
-            return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
-        }
+        /*if ($edadReal != $edadActual) {
+            return back()->withInput()->with('mensajeErrorFecha', 'La edad no coincide con la fecha de nacimiento');
+        }*/
 
         $datos = request()->except('_token');
         $nuevoPartido = new Partido;

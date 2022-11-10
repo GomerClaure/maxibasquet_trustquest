@@ -11,6 +11,24 @@
 </head>
 
 <body class="background-color">
+    @php
+    $vadido = "¡Valido!";
+    $noVadido = "¡No valido!";
+    @endphp
+
+    @if (Session::has('mensajeErrorEquipoA'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoA')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorEquipoB'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoB')}}</h4>
+    </div>
+    @endif
 
     <div>
         <div class="container justify-content-center"">
@@ -26,17 +44,17 @@
                     <div class=" row pb-3 mb-4 registro-datos  color-form  border-top border-5 border-success">
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nombre de equipo</label>
-                            <input class="form-control" id="inputEmail4" name="equipo1">
-                            @error('equipo1')
-                                <p class="error-message">{{ $message }}</p>
+                            <label for="inputEmail4" class="form-label">Nombre de equipo A</label>
+                            <input class="form-control" id="inputEmail4" name="equipoA">
+                            @error('equipoA')
+                            <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Nombre de Equipo</label>
-                            <input class="form-control" id="inputPassword4" name="equipo2">
-                            @error('equipo2')
-                                <p class="error-message">{{ $message }}</p>
+                            <label for="inputPassword4" class="form-label">Nombre de Equipo B</label>
+                            <input class="form-control" id="inputPassword4" name="equipoB">
+                            @error('equipoB')
+                            <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
@@ -74,14 +92,21 @@
                                 </div>
                             </div>
                             @error('option')
-                                <p class="error-message">{{$message}}</p>
+                            <p class="error-message">{{$message}}</p>
                             @enderror
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Fecha</label>
                             <input class="form-control" id="inputPassword4" type="date" name="fecha">
                             @error('fecha')
-                                <p class="error-message">{{ $message }}</p>
+                            <p class="error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputPassword4" class="form-label">Lugar</label>
+                            <input class="form-control" id="inputPassword4" type="text" name="lugar">
+                            @error('lugar')
+                            <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-4">
@@ -89,10 +114,10 @@
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Hora</label>
                             <div>
-                                <input type="datetime" class="form-control" id="hora" name="hora">
+                                <input type="time" class="form-control" id="hora" name="hora">
                             </div>
                             @error('hora')
-                                <p class="error-message">{{ $message }}</p>
+                            <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
