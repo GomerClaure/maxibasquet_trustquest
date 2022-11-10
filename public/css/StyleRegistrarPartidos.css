@@ -1,0 +1,31 @@
+.mause-nulo {
+    pointer-events: none;
+}
+
+.boton-color {
+    background-color: #eb8f32;
+}
+
+.background-color{
+    background-color: #171f27;
+}
+
+.color-navegador{
+    background-color: #2c2a2a;
+}
+
+.color-letras{
+    color: white;
+}
+
+.color-form{
+    background-color: #b5b5bd;
+}
+
+textarea {
+    resize: none;
+}
+
+.error-message{
+    color: red;
+}

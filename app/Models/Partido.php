@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Partido extends Model
 {
     use HasFactory;
+    protected $table = "partidos";
+    protected $primaryKey = 'IdPartido';
+    protected $fillable = ["HoraPartido","LugarPartido","FechaPartido","EstadoPartido"];
 }
