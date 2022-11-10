@@ -19,19 +19,25 @@
             <p class="color-letras">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="col-7 p-4 mx-auto contenedorForm">
-                <form class="row g-1" action="{{url('/registrarPartido')}}" method="POST">
+                <form class="row g-1" action="{{url('/registrarPartidos')}}" method="POST">
                     @csrf
                     <div class="col-md-6">
                     </div>
                     <div class=" row pb-3 mb-4 registro-datos  color-form  border-top border-5 border-success">
                         <hr>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Nombre de equipo:</label>
+                            <label for="inputEmail4" class="form-label">Nombre de equipo</label>
                             <input class="form-control" id="inputEmail4" name="equipo1">
+                            @error('equipo1')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre de Equipo</label>
                             <input class="form-control" id="inputPassword4" name="equipo2">
+                            @error('equipo2')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -67,25 +73,33 @@
                                     <label class="form-check-label" for="categoria60">+60</label>
                                 </div>
                             </div>
-
+                            @error('option')
+                                <p class="error-message">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Fecha</label>
                             <input class="form-control" id="inputPassword4" type="date" name="fecha">
+                            @error('fecha')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Hora</label>
-                            <div class="input-group">
+                            <div>
                                 <input type="datetime" class="form-control" id="hora" name="hora">
                             </div>
+                            @error('hora')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
 
                     <div class="col-md-12 text-center margen">
-                        <input type="button" class="boton-color btn btn-primary" value="Registrar">
+                        <button type="submit" class="boton-color btn btn-primary">Registrar</button>
                         <input type="button" class="boton-color btn btn-primary" value="Cancelar">
                     </div>
                 </form>

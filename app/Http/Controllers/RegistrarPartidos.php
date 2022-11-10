@@ -31,9 +31,14 @@ class RegistrarPartidos extends Controller
                 'hora' => 'required',
                 'lugar' => 'required',
                 'fecha' => 'required',
+                'option' => 'required',
             ],
             [
-                'equipo1.required' => 'el campo nopuede estar vacion',
+                'equipo1.required' => 'el campo no puede estar vacion',
+                'equipo2.required' => 'el campo no puede estar vacion',
+                'hora.required' => 'el campo no puede estar vacion',
+                'fecha.required' => 'el campo no puede estar vacion',
+
             ]
         );
 
