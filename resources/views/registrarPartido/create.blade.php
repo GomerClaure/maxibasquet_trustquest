@@ -16,6 +16,13 @@
     $noVadido = "¡No valido!";
     @endphp
 
+    @if (Session::has('mensaje'))
+    <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
+    </div>
+    @endif
+
     @if (Session::has('mensajeErrorEquipoA'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -27,6 +34,20 @@
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoB')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorEquipoB'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoB')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorCategoriaA'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaA')}}</h4>
     </div>
     @endif
 

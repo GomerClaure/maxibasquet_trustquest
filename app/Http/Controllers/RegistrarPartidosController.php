@@ -24,7 +24,7 @@ class RegistrarPartidosController extends Controller
         $fechaActual = date('Y-m-d');
         $anio = date('Y') - 100;
         $fecha = $anio . "-01-01";
-        $request->validate(
+        /* $request->validate(
             [
                 'equipoA' => 'required',
                 'equipoB' => 'required',
@@ -33,30 +33,54 @@ class RegistrarPartidosController extends Controller
                 'fecha' => 'required',
                 'option' => 'required',
             ],
-           
-        );
+
+        );*/
 
         //verificar la existencia del equipoA
-        $equipoA = $request ->equipoA;
+        $equipoA = $request->equipoA;
         $consultaEquipoA = DB::table('equipos')
-                            ->select('NombreEquipo')
-                            ->where('NombreEquipo',$equipoA)
-                            ->exists();
-        if(!$consultaEquipoA){
-            return back()->withInput()->with('mensajeErrorEquipoA','El Equipo A no existe');
+            ->select('*')
+            ->where('NombreEquipo', $equipoA)
+            ->exists();
+        if (!$consultaEquipoA) {
+            return back()->withInput()->with('mensajeErrorEquipoA', 'El Equipo A no existe');
         }
 
         //verificar la existencia del equipo B
-        $equipoB = $request ->equipoB;
+        $equipoB = $request->equipoB;
         $consultaEquipoB = DB::table('equipos')
-                            ->select('NombreEquipo')
-                            ->where('NombreEquipo',$equipoB)
-                            ->exists();
-        if(!$consultaEquipoB){
-            return back()->withInput()->with('mensajeErrorEquipoB','El Equipo B no existe');
+            ->select('*')
+            ->where('NombreEquipo', $equipoB)
+            ->exists();
+        if (!$consultaEquipoB) {
+            return back()->withInput()->with('mensajeErrorEquipoB', 'El Equipo B no existe');
         }
 
-        
+        //verificar que los equipos que pertenezcan a la categoria seleccionada
+        $categoriaSelecionada = $request->option[0];
+        $consultaCatEquipoA = DB::table('equipos')
+            ->select('NombreCategoria')
+            ->join('categorias_por_equipo', 'categorias_por_equipo.IdEquipo', 'equipos.IdEquipo')
+            ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
+            ->where('equipos.NombreEquipo', '=', $equipoA)
+            ->where('categorias.NombreCategoria', '=', $categoriaSelecionada)
+            ->exists();
+        if (!$consultaCatEquipoA) {
+            return back()->withInput()->with('mensajeErrorCategoriaA', 'El Equipo A no pertenece a la categoria');
+        }
+
+        $consultaCatEquipoB = DB::table('equipos')
+            ->select('NombreCategoria')
+            ->join('categorias_por_equipo', 'categorias_por_equipo.IdEquipo', 'equipos.IdEquipo')
+            ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
+            ->where('equipos.NombreEquipo', '=', $equipoB)
+            ->where('categorias.NombreCategoria', '=', $categoriaSelecionada)
+            ->exists();
+        if (!$consultaCatEquipoB) {
+            return back()->withInput()->with('mensajeErrorCategoriaB', 'El Equipo B no pertenece a la categoria');
+        }
+
+
         $fecha = $request->fecha;
         $anio = substr($fecha, 0, 4);
         $edadReal = date('Y') - $anio;
