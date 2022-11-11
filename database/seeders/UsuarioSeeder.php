@@ -16,8 +16,7 @@ class UsuarioSeeder extends Seeder
     {
         User::factory(20)->asignarRol(1)->create();
         User::factory(20)->asignarRol(2)->create();
-        User::factory(5)->asignarRol(3)->create();
-        User::factory(5)->asignarRol(4)->create();
+        User::factory(2)->asignarRol(3)->create();
         // DB::table('users') ->insert([
         //     'id'=>1,
         //     'name'=>'ronald',

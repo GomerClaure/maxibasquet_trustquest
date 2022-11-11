@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Juez;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
             TecnicoSeeder::class,
             RolSeeder::class,
             UsuarioSeeder::class,
+            DelegadoSeeder::class,
+            JuezSeeder::class,
         ]);
     }
 }

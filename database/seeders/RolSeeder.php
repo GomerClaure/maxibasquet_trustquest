@@ -30,5 +30,9 @@ class RolSeeder extends Seeder
             'NombreRol'=>'Delegado',
             'created_at'=>now()
         ]);
+        DB::table("roles")->insert([
+            'NombreRol'=>'Juez',
+            'created_at'=>now()
+        ]);
     }
 }
