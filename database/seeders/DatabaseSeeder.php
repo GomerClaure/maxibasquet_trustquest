@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             JugadorSeeder::class,
             TecnicoSeeder::class,
             RolSeeder::class,
+            UsuarioSeeder::class,
         ]);
     }
 }
