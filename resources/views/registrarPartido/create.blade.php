@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Preinscripcion</title>
     <link rel="stylesheet" href="{{asset('css/StyleRegistrarPartidos.css')}}">
 </head>
@@ -55,6 +56,13 @@
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorFecha')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorHora'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorHora')}}</h4>
     </div>
     @endif
 
@@ -123,9 +131,16 @@
                             <p class="error-message">{{$message}}</p>
                             @enderror
                         </div>
+
+                        @php
+                    date_default_timezone_set('America/La_Paz');
+                    $fechaActual = date('Y-m-d');
+                    $anio = date('Y')+2;
+                    $fecha = $anio."-01-01"
+                    @endphp
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Fecha</label>
-                            <input class="form-control" id="inputPassword4" type="date" name="fecha" value="{{ old('fecha') }}">
+                            <input class="form-control" id="inputPassword4" type="date" name="fecha" value="{{ old('fecha') }}" min="{{$fechaActual}}" max="{{$fecha}}">
                             @error('fecha')
                             <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -142,7 +157,7 @@
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Hora</label>
                             <div>
-                                <input type="time" class="form-control" id="hora" name="hora" value="{{ old('hora') }}">
+                                <input type="time" class="form-control" id="hora" name="hora" value="{{ old('hora') }}" min="9:00" max="22:00">
                             </div>
                             @error('hora')
                             <p class="error-message">{{ $message }}</p>

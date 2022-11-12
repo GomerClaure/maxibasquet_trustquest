@@ -23,7 +23,7 @@ class RegistrarPartidosController extends Controller
         //$datos = request()->all();
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
-        $anio = date('Y') - 100;
+        $anio = date('Y') +2;
         $fecha = $anio . "-01-01";
         /* $request->validate(
             [
@@ -82,14 +82,19 @@ class RegistrarPartidosController extends Controller
         }
 
 
-       /* $fecha = $request->fecha;
-        $anio = substr($fecha, 0, 4);
-        $edadReal = date('Y') - $anio;
-        $edadActual = $request->edad;*/
+       //validar fecha
         $fechaPrevista = $request->fecha;
         $fechaHoy = Carbon::now();
-        if ($fechaHoy > $fechaPrevista) {
+        if ($fechaHoy> $fechaPrevista ) {
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
+        }
+
+        //validar la hora
+        $horaMin = "09:00";
+        $horaMax = "21:00";
+        $horaPrevista = $request->hora;
+        if ($horaMin > $horaPrevista && $horaMax < $horaPrevista  ) {
+            return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
         }
 
         $datos = request()->except('_token');
