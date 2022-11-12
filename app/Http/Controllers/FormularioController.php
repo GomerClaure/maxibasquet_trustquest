@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
 use App\Models\Aplicaciones;
+use App\Models\Categoria;
+use App\Models\Categorias_por_equipo;
+use App\Models\CategoriaEquipo;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -29,24 +32,10 @@ class FormularioController extends Controller
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
             ->get();
-        // $aplicaciones = Aplicaciones::all();
-        $aplicaciones = $this->ingresarMonto($aplicaciones);
+
         return view("formulario.listaFormulario", compact('aplicaciones'));
     }
 
-    private function ingresarMonto($aplicaciones)
-    {
-        $arreglo = array();
-        if (!$aplicaciones->isEmpty()) {
-            foreach ($aplicaciones as $aplicacion) {
-                $categorias = explode(",", $aplicacion->Categorias);
-                $total = sizeof($categorias) * $aplicacion->Monto;
-                $aplicacion->Total = $total;
-                array_push($arreglo, $aplicacion);
-            }
-        }
-        return $arreglo;
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -67,6 +56,11 @@ class FormularioController extends Controller
     public function store(Request $request)
     {
         return ('hola store');
+    }
+
+    private function separar($categorias)
+    {
+        return explode(",", $categorias);
     }
 
     /**
@@ -103,6 +97,8 @@ class FormularioController extends Controller
             $datos = null;
         }
 
+       
+
         return (view('formulario.show', compact('datos')));
     }
 
@@ -126,7 +122,7 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $categorriasPorEquipo = ['+30', '+35', '40', '+45', '+50', '55', '60'];
         $request->validate(
             [
                 'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
@@ -148,13 +144,24 @@ class FormularioController extends Controller
             $equipo->IdAplicacion = $id;
             $equipo->LogoEquipo = 'uploads\logo.jpg';
             $equipo->save();
+            $idEquipo = $equipo->idEquipo;
+            echo $equipo->idEquipo;
+            $categorias = $this->separar($request->categorias);
+
+            for ($i = 0; $i < sizeof($categorias); $i++) {
+                if ($categorias[$i] == $categorriasPorEquipo[$i]) {
+                    $categoriasEquipo = new Categorias_por_equipo();
+                    $categoriasEquipo->IdEquipo = $idEquipo;
+                    $categoriasEquipo->IdCategoria = $i;
+                    $categoriasEquipo->IdCampeonato = 1;
+                }
+            }
         }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-
-        $aplicaciones = Aplicacion::select(
+        /*$aplicaciones = Aplicacion::select(
             'aplicaciones.IdAplicacion',
             'aplicaciones.NombreEquipo',
             'preinscripciones.Monto',
@@ -163,10 +170,12 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->get();
+            ->get();*/
+        // $aplicaciones = Aplicaciones::all();
 
-        $aplicaciones = $this->ingresarMonto($aplicaciones);
-        return view("formulario.listaFormulario", compact('aplicaciones'));
+        //return view("formulario.listaFormulario", compact('aplicaciones'));
+
+        return redirect('/formulario');
     }
 
     /**
