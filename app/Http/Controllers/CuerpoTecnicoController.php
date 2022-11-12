@@ -210,9 +210,9 @@ class CuerpoTecnicoController extends Controller
         $equipo = Equipo::find($tecnico->IdEquipo);
 
         $paises = DB::table('paises')
-                ->orderBy('NombrePais', 'asc')
+                ->orderBy('Nacionalidad', 'asc')
                 ->get();
-        echo $equipo;
+
         return view('tecnico.edit',compact('categorias','tecnico','equipo','paises'));
     }
 
