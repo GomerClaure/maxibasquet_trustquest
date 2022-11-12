@@ -37,10 +37,10 @@
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorEquipoB'))
+    @if (Session::has('mensajeErrorCategoriaB'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoB')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaB')}}</h4>
     </div>
     @endif
 
@@ -51,10 +51,17 @@
     </div>
     @endif
 
+    @if (Session::has('mensajeErrorFecha'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorFecha')}}</h4>
+    </div>
+    @endif
+
     <div>
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
-            <h1 class="display-6 mb-0 color-letras">Formulario de preinscripción de equipos</h1>
+            <h1 class="display-6 mb-0 color-letras">Registro de Partidos</h1>
             <p class="color-letras">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="col-7 p-4 mx-auto contenedorForm">
@@ -66,14 +73,14 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo A</label>
-                            <input class="form-control" id="inputEmail4" name="equipoA">
+                            <input class="form-control" id="inputEmail4" name="equipoA" value="{{old('equipoA')}}">
                             @error('equipoA')
                             <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre de Equipo B</label>
-                            <input class="form-control" id="inputPassword4" name="equipoB">
+                            <input class="form-control" id="inputPassword4" name="equipoB" value="{{ old('equipoB') }}">
                             @error('equipoB')
                             <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -118,14 +125,14 @@
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Fecha</label>
-                            <input class="form-control" id="inputPassword4" type="date" name="fecha">
+                            <input class="form-control" id="inputPassword4" type="date" name="fecha" value="{{ old('fecha') }}">
                             @error('fecha')
                             <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Lugar</label>
-                            <input class="form-control" id="inputPassword4" type="text" name="lugar">
+                            <input class="form-control" id="inputPassword4" type="text" name="lugar" value="{{ old('lugar') }}">
                             @error('lugar')
                             <p class="error-message">{{ $message }}</p>
                             @enderror
@@ -135,7 +142,7 @@
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Hora</label>
                             <div>
-                                <input type="time" class="form-control" id="hora" name="hora">
+                                <input type="time" class="form-control" id="hora" name="hora" value="{{ old('hora') }}">
                             </div>
                             @error('hora')
                             <p class="error-message">{{ $message }}</p>

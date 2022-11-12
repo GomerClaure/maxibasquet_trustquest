@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Partido;
 use App\Models\Equipo;
+use Carbon\Carbon;
 
 class RegistrarPartidosController extends Controller
 {
@@ -81,13 +82,15 @@ class RegistrarPartidosController extends Controller
         }
 
 
-        $fecha = $request->fecha;
+       /* $fecha = $request->fecha;
         $anio = substr($fecha, 0, 4);
         $edadReal = date('Y') - $anio;
-        $edadActual = $request->edad;
-        /*if ($edadReal != $edadActual) {
-            return back()->withInput()->with('mensajeErrorFecha', 'La edad no coincide con la fecha de nacimiento');
-        }*/
+        $edadActual = $request->edad;*/
+        $fechaPrevista = $request->fecha;
+        $fechaHoy = Carbon::now();
+        if ($fechaHoy > $fechaPrevista) {
+            return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
+        }
 
         $datos = request()->except('_token');
         $nuevoPartido = new Partido;
