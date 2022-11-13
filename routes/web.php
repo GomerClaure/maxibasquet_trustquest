@@ -20,6 +20,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HistoriaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TecnicoQrController;
+use App\Http\Controllers\JuezController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +79,6 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
+
+Route::get('juez/create',[JuezController::class,'create']);
+Route::post('juez/create',[JuezController::class,'store']);
