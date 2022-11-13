@@ -79,3 +79,4 @@ Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
 Route::get('/delete/jugador/{id}',[JugadorController::class,'destroy']);
+Route::get('/mostrar/jugador/{id}',[JugadorController::class,'Modal']);
