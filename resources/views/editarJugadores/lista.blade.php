@@ -59,8 +59,6 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12">
-
-
                             @if($equipo != null)
                             <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                             <h3>Categoria: {{$categoria}}</h3>
@@ -101,36 +99,34 @@
                                                                     <div class="modal-body">
                                                                         <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
                                                                         <h4>¿Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?</h4>
-                                                                         
-                                                                        <h5>{{$jugador->NombrePersona}} </h5>
-                                            <h6>{{$jugador->ApellidoPaterno}}</h6>
-
                                                                     </div>
+                                                                    <h5>{{$jugador->NombrePersona}} </h5>
+                                            <h6>{{$jugador->ApellidoPaterno}}</h6>
                                                                     <div class="modal-footer">
                                                                         <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton red"> Eliminar </a>
+                                                                        <a href=""class="Boton red"> Eliminar </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        
+                                                        </div>         
                                         </div>
                                     </div>
                                     @endforeach
                                     @else
-
-
-                                    @endif
+                            
+                                    <div class="d-flex justify-content-center">
+                                
+                                    <h3>No se encontraron datos</h3>
                                 </div>
-                            </div>
-                            @else
-                            <div class="d-flex justify-content-center">
-                                <h3>No se encontraron datos</h3>
-                            </div>
+                                
                             @endif
                         </div>
                     </div>
+                    @else
+                                    <div class="d-flex justify-content-center">
+                                        <h3>No se encontraron datos</h3>
+                                    </div>
+                 @endif
                 </div>
             </div>
         </div>
