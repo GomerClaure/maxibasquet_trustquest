@@ -208,7 +208,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="botones">Inscribir</button>
+                        <button type="submit" class="botones">Registrar</button>
                     </div>
                 </form>
             </div>
