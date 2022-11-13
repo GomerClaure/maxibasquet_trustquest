@@ -59,8 +59,8 @@ class JuezController extends Controller
             'fechaNacimiento'=>'required|date|before:'.$fechaActual.'|after:'.$fecha.'|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
             'edad'=>'required|numeric|min:1|max:100',
             'nombreUsuario'=>'required|alpha_num|min:4|max:64',
-            'correo'=>'required|regex:/^([A-Z,a-z,0-9]+[@][A-Z,a-z]+[.][A-Z,a-z]+)+$/',
-            'contrasenia'=>'required|regex:/^([A-Z,a-z,0-9]+)+$/',
+            'correo'=>'required|email',
+            'contrasenia'=>'required|min:7',
             'foto'=>'required|image|dimensions:width=472, height=472'
         ]);
 
