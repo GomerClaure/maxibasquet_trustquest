@@ -258,12 +258,7 @@ class JugadorController extends Controller
     public function destroy($id)
     {
         
-        $jugador = Jugador::select()
-                            ->join('personas','personas.IdPersona','jugadores.IdPersona')
-                            //->where('IdTecnicos',$id)
-                            ->get();
-                        
-        return $jugador;
+    
         /*
         $datosJugador = $jugador[0];
          
@@ -278,6 +273,6 @@ class JugadorController extends Controller
         $categoria = Categoria::find($datosJugador -> IdCategoria);
         return redirect('jugador/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del jugador eliminados correctamente'); 
        */ 
-      echo("hiii");
+    
     }
 }
