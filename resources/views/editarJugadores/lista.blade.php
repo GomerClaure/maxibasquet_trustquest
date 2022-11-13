@@ -89,7 +89,7 @@
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
                                             <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="btn btn-primary">Editar</a>
-                                            <a href="" class="btn btn-primary">Eliminar</a>
+                                            <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}" class="btn btn-primary">Eliminar</a>
                                             {{-- Modal --}}
 
                                                         <div class="modal fade" id="modalImgJugador" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
@@ -104,7 +104,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <a type="button" class="Boton1" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href=""class="BotonRed"> Eliminar </a>
+                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton red"> Eliminar </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
