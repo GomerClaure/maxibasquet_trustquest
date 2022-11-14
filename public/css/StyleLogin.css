@@ -47,3 +47,13 @@ body{
  .error-message{
     color: red;
  }
+ .alert button{
+    padding: 10px;
+ }
+ .alert p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+ }
+ .alert{
+    min-width: 97%;
+ }

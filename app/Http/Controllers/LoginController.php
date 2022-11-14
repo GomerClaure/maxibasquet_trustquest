@@ -23,13 +23,11 @@ class LoginController extends Controller
     }
 
     public function verificarInicioSesion(Request $request){
-        echo "holi";
         $formulario = request()->except('_token');
         $request->validate([
             $this->nombreUsuario=> ['required', 'max:15'],
             $this->contrasenia => ['required', 'max:15'],
         ]);
-        echo "holi";
         $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
         
         if($usuario){
@@ -42,25 +40,9 @@ class LoginController extends Controller
                 Auth::login($userAuth);
                 echo "Las contraseñas coinciden";
                 return redirect('/home');
-            }
-            
+            }  
         }
-        return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto, por favor ingresa tus datos nuevamente.');
-        
-        // echo $nomUsuario;
-        // try{
-        //     $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
-        // }
-        // catch (\Throwable $th) {
-        //     return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto, por favor ingresa tus datos nuevamente.');
-        // }
-        
-        // if (Hash::check('password', $hashedPassword)) {
-                  
-        // }
-        // echo Hash::make("password");
-        // return view('login.loginVista');
-        // return $request;
+        return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto.');
     }
 
     private function getLoginRequest($formulario){
