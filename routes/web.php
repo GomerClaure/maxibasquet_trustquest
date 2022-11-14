@@ -18,6 +18,7 @@ use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HistoriaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 
 /*
@@ -54,9 +55,10 @@ Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
 Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit']);
 Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index']);
-Route::get('home',[HomeController::class,'index']);
+Route::get('/home',[HomeController::class,'index'])->name('home');
 Route::get('login',[LoginController::class,'index']);
 Route::post('login',[LoginController::class,'verificarInicioSesion']);
+Route::get('logout',[LogoutController::class,'logout']);
 Route::get('historia',[HistoriaController::class,'index']);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);

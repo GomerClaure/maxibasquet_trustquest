@@ -9,11 +9,11 @@ use PhpOption\None;
 
 class LoginController extends Controller
 {
-    private $nombreUsusario;
+    private $nombreUsuario;
     private $contrasenia;
     function __construct()
     {
-        $this->nombreUsusario = 'nombreDeUsuario';
+        $this->nombreUsuario = 'nombreDeUsuario';
         $this->contrasenia = 'contraseña';
     }
     public function index()
@@ -26,18 +26,22 @@ class LoginController extends Controller
         echo "holi";
         $formulario = request()->except('_token');
         $request->validate([
-            $this->nombreUsusario=> ['required', 'max:15'],
+            $this->nombreUsuario=> ['required', 'max:15'],
             $this->contrasenia => ['required', 'max:15'],
         ]);
-       
-        $usuario = User::where('name',$formulario[$this->nombreUsusario]) -> first();
+        echo "holi";
+        $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
+        
         if($usuario){
             $nomUsuario = $usuario->name;
             $contra = $usuario->password;
             if (Hash::check($formulario[$this->contrasenia], $contra)) {
-                Auth::login($usuario);
+                $credentials = $this->getLoginRequest($formulario);
+                // print_r($credentials);
+                $userAuth = Auth::getProvider()->retrieveByCredentials($credentials);
+                Auth::login($userAuth);
                 echo "Las contraseñas coinciden";
-                return view('PaginaPrincipal.home');
+                return redirect('/home');
             }
             
         }
@@ -45,7 +49,7 @@ class LoginController extends Controller
         
         // echo $nomUsuario;
         // try{
-        //     $usuario = User::where('name',$formulario[$this->nombreUsusario]) -> first();
+        //     $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
         // }
         // catch (\Throwable $th) {
         //     return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto, por favor ingresa tus datos nuevamente.');
@@ -57,5 +61,12 @@ class LoginController extends Controller
         // echo Hash::make("password");
         // return view('login.loginVista');
         // return $request;
+    }
+
+    private function getLoginRequest($formulario){
+        return [
+            'name' => $formulario[$this->nombreUsuario],
+            'password' => $formulario[$this->contrasenia],
+        ];
     }
 }

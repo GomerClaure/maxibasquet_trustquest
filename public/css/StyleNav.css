@@ -36,7 +36,7 @@ body,html{
     padding: 20px;
     display: block;
   }
-  .menu li{
+  .rutas li{
     display: inline-block;
     text-align: center;
   }
@@ -44,4 +44,24 @@ body,html{
     background-color: #eb8f32;
   }
 
-
+.nav-item.dropdown{
+  margin-right: 3%;
+  text-align: center
+}
+.dropdown-menu{
+  min-width: 100%;
+  font-size: 15px;
+  text-align: center;
+  background-color:  hsl(0, 0%, 78%);
+}
+.dropdown-menu li a{
+  padding: 10px 5px 10px 5px;
+  font-size: 15px;
+  color: #171f27;
+}
+.dropdown-menu li a:hover{
+  background-color: hsl(0, 1%, 81%);
+}
+.dropdown-menu:hover{
+  background-color: hsl(0, 1%, 81%);
+}
