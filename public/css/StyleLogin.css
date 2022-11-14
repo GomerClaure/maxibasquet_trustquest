@@ -1,17 +1,32 @@
 body{
     background-color: #171f27;
 }
+.seccionLogin{
+    display: grid;
+    justify-items: center;
+}
+.formularioLogin{
+    width: 100%;
+}
 .login{
-    margin-top: 5%;
+    margin-top: 3%;
+}
+.titulo{
+    color: white;
+    padding-left: 3%;
+    background: #2c2a2a;
+    border: 0px;
 }
 .card-title{
     color: #e5852a;
-    border-bottom: white solid 1px;
+    /* border-bottom: white solid 1px; */
 }
 .card.login
 {
+    display: grid;
     color: black;
     background: #b5b5bd;
+    border: 0px;
 }
 .btn.iniciar-sesion{
     margin-top: 15px;
@@ -22,3 +37,13 @@ body{
     background: #fa841a;
     color: white;
 }
+
+.icoLogin{
+    margin-top: 2%;
+    width: 100px;
+    height: 100px;
+    color: #D9D9D9;
+}
+ .error-message{
+    color: red;
+ }

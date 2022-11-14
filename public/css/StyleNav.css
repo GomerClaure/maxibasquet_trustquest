@@ -5,7 +5,7 @@ body,html{
 .logito{
   height: 70px;
   width: 70px;
-  margin: 10px;
+  /* margin: 10px; */
 }
 .card{
   align-items: center;
@@ -22,12 +22,13 @@ body,html{
   border: #272725;
 } 
 .menu{
-    list-style: none;
-    padding: 0;
-    background-color:  #c8c8c8;
-    width:100%;
-    max-width: 1800px;
-    margin: auto;
+    /* display: flex;
+    list-style: none; */
+    /* padding: 0; */
+    background-color:  hsl(0, 0%, 78%);
+    /* width:100%; */
+    /* max-width: 1800px; */
+    /* margin: auto; */
   }
   .menu li a{
     text-decoration: none;

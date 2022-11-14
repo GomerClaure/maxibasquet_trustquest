@@ -56,6 +56,7 @@ Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit']);
 Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index']);
 Route::get('home',[HomeController::class,'index']);
 Route::get('login',[LoginController::class,'index']);
+Route::post('login',[LoginController::class,'verificarInicioSesion']);
 Route::get('historia',[HistoriaController::class,'index']);
 Route::get('jugador/create/{id}', [JugadorController::class,'create']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
