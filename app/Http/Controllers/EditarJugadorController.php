@@ -189,6 +189,7 @@ class EditarJugadorController extends Controller
         $edadReal = date('Y') - $anio;
         $edadActual = $request->edad;
         if ($edadReal != $edadActual) {
+            
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
         }
 
@@ -198,6 +199,7 @@ class EditarJugadorController extends Controller
 
         if($edadActual < $categoriaNum){
             return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
+
         }
 
 
