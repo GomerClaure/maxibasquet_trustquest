@@ -98,34 +98,11 @@
                                 <label for="inputEmail4" class="form-label">Categorias:</label>
                             </div>
                             <div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria30" value="+30">
-                                    <label class="form-check-label" for="categoria30">+30</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria30" value="+35">
-                                    <label class="form-check-label" for="categoria35">+35</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria40" value="+40">
-                                    <label class="form-check-label" for="categoria40">+40</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria45" value="+45">
-                                    <label class="form-check-label" for="categoria45">+45</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria50" value="+50">
-                                    <label class="form-check-label" for="categoria50">+50</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria55" value="+55">
-                                    <label class="form-check-label" for="categoria55">+55</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="option[]" class="form-check-input" type="checkbox" id="categoria60" value="+60">
-                                    <label class="form-check-label" for="categoria60">+60</label>
-                                </div>
+                                <select class="form-select" id="selectCategoria" name="selectCategoria" value="{{ old('selectCategoria') }}">
+                                    @foreach ($categorias as $categoria)
+                                    <option value="{{$categoria->IdCategoria}}" {{ old('selectCategoria') == "$categoria->IdCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             @error('option')
                             <p class="error-message">{{$message}}</p>
@@ -133,11 +110,11 @@
                         </div>
 
                         @php
-                    date_default_timezone_set('America/La_Paz');
-                    $fechaActual = date('Y-m-d');
-                    $anio = date('Y')+2;
-                    $fecha = $anio."-01-01"
-                    @endphp
+                        date_default_timezone_set('America/La_Paz');
+                        $fechaActual = date('Y-m-d');
+                        $anio = date('Y')+2;
+                        $fecha = $anio."-01-01"
+                        @endphp
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Fecha</label>
                             <input class="form-control" id="inputPassword4" type="date" name="fecha" value="{{ old('fecha') }}" min="{{$fechaActual}}" max="{{$fecha}}">

@@ -58,7 +58,7 @@ class RegistrarPartidosController extends Controller
         }
 
         //verificar que los equipos que pertenezcan a la categoria seleccionada
-        $categoriaSelecionada = $request->option[0];
+        $categoriaSelecionada = $request->selectCategoria;
         $consultaCatEquipoA = DB::table('equipos')
             ->select('NombreCategoria')
             ->join('categorias_por_equipo', 'categorias_por_equipo.IdEquipo', 'equipos.IdEquipo')
@@ -109,6 +109,9 @@ class RegistrarPartidosController extends Controller
 
     public function create()
     {
-        return view('registrarPartido.create');
+        $categorias = DB::table('categorias')
+        ->select('*')
+        ->get();
+        return view('registrarPartido.create',compact('categorias'));
     }
 }
