@@ -233,8 +233,7 @@ class EditarJugadorController extends Controller
                             ->select('*')
                             ->where([['NumeroCamiseta', $numCamiseta],['IdEquipo',$equipo->IdEquipo],['IdCategoria',$categoria->IdCategoria]])
                             ->get();
-
-        if(count($consultaCamiseta)>=1){
+        if(!$consultaCamiseta ->isEmpty()){
            
             return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en la categoria');
         }
