@@ -102,7 +102,8 @@ class EditarJugadorController extends Controller
             $categoria = null;
         }
         echo "hola desde lista";
-        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria'));
+        $deleteJugador=[];
+        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
     }
 
     public function edit(Request $request, $id)
@@ -285,5 +286,15 @@ class EditarJugadorController extends Controller
         $equipo = Equipo::find($cuerpoTecnico->IdEquipo);
         $categoria = Categoria::find($request->selectCategoria);
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
+    }
+
+    public function Modal($id){
+
+        $deleteJugador= Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
+                                 ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
+                                 ->where('jugadores.IdJugador','=',$id)
+                                 ->get();
+               // return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
+                        //return $deleteJugador;
     }
 }
