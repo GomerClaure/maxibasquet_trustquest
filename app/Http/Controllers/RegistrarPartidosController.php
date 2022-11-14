@@ -23,9 +23,9 @@ class RegistrarPartidosController extends Controller
         //$datos = request()->all();
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
-        $anio = date('Y') +2;
+        $anio = date('Y') + 2;
         $fecha = $anio . "-01-01";
-        /* $request->validate(
+        $request->validate(
             [
                 'equipoA' => 'required',
                 'equipoB' => 'required',
@@ -35,7 +35,7 @@ class RegistrarPartidosController extends Controller
                 'option' => 'required',
             ],
 
-        );*/
+        );
 
         //verificar la existencia del equipoA
         $equipoA = $request->equipoA;
@@ -82,10 +82,10 @@ class RegistrarPartidosController extends Controller
         }
 
 
-       //validar fecha
+        //validar fecha
         $fechaPrevista = $request->fecha;
         $fechaHoy = Carbon::now();
-        if ($fechaHoy> $fechaPrevista ) {
+        if ($fechaHoy > $fechaPrevista) {
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
         }
 
@@ -93,7 +93,7 @@ class RegistrarPartidosController extends Controller
         $horaMin = "09:00";
         $horaMax = "21:00";
         $horaPrevista = $request->hora;
-        if ($horaMin > $horaPrevista && $horaMax < $horaPrevista  ) {
+        if ($horaMin > $horaPrevista && $horaMax < $horaPrevista) {
             return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
         }
 
@@ -110,8 +110,8 @@ class RegistrarPartidosController extends Controller
     public function create()
     {
         $categorias = DB::table('categorias')
-        ->select('*')
-        ->get();
-        return view('registrarPartido.create',compact('categorias'));
+            ->select('*')
+            ->get();
+        return view('registrarPartido.create', compact('categorias'));
     }
 }
