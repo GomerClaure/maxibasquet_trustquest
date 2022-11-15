@@ -22,5 +22,17 @@ class RolSeeder extends Seeder
             'NombreRol'=>'Anotador asistente',
             'created_at'=>now()
         ]);
+        DB::table("roles")->insert([
+            'NombreRol'=>'Administrador',
+            'created_at'=>now()
+        ]);
+        DB::table("roles")->insert([
+            'NombreRol'=>'Delegado',
+            'created_at'=>now()
+        ]);
+        DB::table("roles")->insert([
+            'NombreRol'=>'Juez',
+            'created_at'=>now()
+        ]);
     }
 }

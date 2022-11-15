@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Juez;
 use Illuminate\Database\Seeder;
-use App\Models\Delegado;
-class DelegadoSeeder extends Seeder
+
+class JuezSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DelegadoSeeder extends Seeder
      */
     public function run()
     {
-        Delegado::factory(10)->create();
+        Juez::factory(5)->create();
     }
 }
