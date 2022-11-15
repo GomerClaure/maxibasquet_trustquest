@@ -30,9 +30,9 @@ class RegistrarPartidosController extends Controller
                 'equipoA' => 'required',
                 'equipoB' => 'required',
                 'hora' => 'required',
-                'lugar' => 'required',
+                'lugar' => 'required|min:6|regex:/^([A-Z][a-z, ]+)+$/',
                 'fecha' => 'required',
-                'option' => 'required',
+                
             ],
 
         );
@@ -104,7 +104,11 @@ class RegistrarPartidosController extends Controller
         $nuevoPartido->LugarPartido = $request->lugar;
         $nuevoPartido->EstadoPartido = 'espera';
         $nuevoPartido->save();
-        return response()->json($datos);
+
+         $categorias = DB::table('categorias')
+            ->select('*')
+            ->get();
+        return view('registrarPartido.create', compact('categorias'));
     }
 
     public function create()
