@@ -40,20 +40,14 @@ Route::get('/', function () {
 
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
-//Route::resource('/editarJugadores',EditarJugadorController::class);
 Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
 Route::get('/editarJugadores',[EditarJugadorController::class,'index']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show']);
-
-
 Route::get('/Equipo',[EquipoController::class,'index']);
 Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index']);
-//Route::get('/equipo',[EquipoController::class,'index']);
-//Route::get('/jugador/create',[JugadorController::class,'create']);
-//Route::resource('jugador',JugadorController::class);
 Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create']);
 Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
@@ -82,7 +76,6 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
-//Route::get('/delete/jugador/{id}',[JugadorController::class,'destroy']);
 Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy']);
 Route::get('/delete/tecnico/{id}',[TecnicoController::class,'destroy']);
 Route::get('juez/create',[JuezController::class,'create']);

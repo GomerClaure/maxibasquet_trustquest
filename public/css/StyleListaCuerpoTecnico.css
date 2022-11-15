@@ -13,14 +13,13 @@ body{
 }
 
 .btnEditar{
-    display: block;
-    width: 80%;
+    display: inline-block;
     text-decoration: none;
     color: white;
     background: #eb8f32;
     padding: 1%;
     border-radius: 4px;
-    margin: auto;
+    vertical-align: middle;
 }
 .red{
     background-color: #eb3232 !important;
