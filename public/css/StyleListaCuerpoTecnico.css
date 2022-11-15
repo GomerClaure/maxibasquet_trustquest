@@ -19,10 +19,35 @@ body{
     color: white;
     background: #eb8f32;
     padding: 1%;
-    border-radius: 8px;
+    border-radius: 4px;
     margin: auto;
 }
-
+.red{
+    background-color: #eb3232 !important;
+}
+.Boton{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.displayBoton{
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
+}
+.red:hover{
+    background: #fa1a1a !important;
+    color: white; 
+}
+.Boton:hover{
+    background: #fa841a;
+    color: white; 
+}
 .btn:first-child:hover{
     background: #fa841a;
     background-color: #fa841a;
