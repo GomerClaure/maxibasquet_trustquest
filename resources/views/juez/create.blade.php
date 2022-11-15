@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Editar Técnicos</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -64,10 +64,10 @@
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorCategoria'))
+            @if (Session::has('mensajeErrorEmail'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEmail')}}</h4>
                 </div>
             @endif
 
@@ -79,17 +79,16 @@
             @endif
 
             <div class="col-7 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('tecnico/'.$tecnico->IdTecnicos.'/update')}}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
-                    @method('PUT')
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">ACTUALIZAR TECNICO</h1>
+                        <h1 class="tituloFomulario">REGISTRAR JUEZ</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre" value="{{ $tecnico->NombrePersona }}">
+                                <input type="text" class="form-control" placeholder="Ingresar nombre" id="nombre" name="nombre" value="{{ old('nombre') }}">
                                 @error('nombre')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -97,7 +96,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">CI:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ $tecnico->CiPersona }}">
+                                <input type="text" class="form-control" placeholder="Ingrese su CI" id="ci" name="ci" value="{{ old('ci') }}">
                                 @error('ci')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -112,28 +111,24 @@
                             <div class="form-group mb-3 contFecha">
                                 <label for="" class="form-label">Fecha de nacimiento:</label>
                                 <input type="date" class="form-control" placeholder="Ingrese su fecha" id="fechaNacimiento" name="fechaNacimiento"
-                                    value="{{ $tecnico->FechaNacimiento}}" min="{{$fecha}}" max="{{$fechaActual}}">
+                                    value="{{ old('fechaNacimiento') }}" min="{{$fecha}}" max="{{$fechaActual}}">
                                 @error('fechaNacimiento')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="sel1" class="form-label">Rol:</label>
-                                <select class="form-select" id="selectRol" name="selectRol">
-                                    <option value="Entrenador principal" {{ $tecnico->RolesTecnicos == 'Entrenador principal' ? 'selected' : '' }}>Entrenador principal</option>
-                                    <option value="Entrenador asistente" {{ $tecnico->RolesTecnicos == 'Entrenador asistente' ? 'selected' : '' }}>Entrenador asistente</option>
-                                    <option value="Preparador físico" {{ $tecnico->RolesTecnicos == 'Preparador físico' ? 'selected' : '' }}>Preparador físico</option>
-                                    <option value="Medico" {{ $tecnico->RolesTecnicos == 'Medico' ? 'selected' : '' }}>Medico</option>
-                                    <option value="Asistente tecnico" {{ $tecnico->RolesTecnicos == 'Asistente tecnico' ? 'selected' : '' }}>Asistente tecnico</option>
-                                    <option value="Asistente estadistico" {{ $tecnico->RolesTecnicos == 'Asistente estadistico' ? 'selected' : '' }}>Asistente estadistico</option>
-                                </select>
+                            <div class="form-group mb-3 mt-5">
+                                <label for="nombreUsuario" class="form-label">Nombre de usuario:</label>
+                                <input type="text" class="form-control" id="nombreUsuario" placeholder="Ingrese nombre de usuario" name="nombreUsuario"  value="{{ old('nombreUsuario') }}">
+                                @error('nombreUsuario')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-4" id="columna2">
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Apellido Paterno:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno" value="{{ $tecnico->ApellidoPaterno }}">
+                                <input type="text" class="form-control" placeholder="Ingresar apellido paterno" id="apellidoPaterno" name="apellidoPaterno" value="{{ old('apellidoPaterno') }}">
                                 @error('apellidoPaterno')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -143,15 +138,23 @@
                                 <label for="" class="form-label">Nacionalidad:</label>
                                 <select class="form-select" id="selectNacionalidad" name="selectNacionalidad">
                                     @foreach ($paises as $pais)
-                                        <option value="{{$pais->NombrePais}}" {{ $tecnico->NacionalidadPersona == "$pais->NombrePais" ? 'selected' : '' }}>{{$pais->NombrePais}}</option>
+                                        <option value="{{$pais->Nacionalidad}}" {{ old('selectNacionalidad') == "$pais->Nacionalidad" ? 'selected' : '' }}>{{$pais->Nacionalidad}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Edad:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ $tecnico->Edad }}">
+                                <input type="text" class="form-control" placeholder="Ingrese la edad" id="edad" name="edad" value="{{ old('edad') }}">
                                 @error('edad')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-3 mt-5">
+                                <label for="correo" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" name="correo" value="{{ old('correo') }}">
+                                @error('correo')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -160,7 +163,7 @@
                         <div class="col-4" id="columna3">
                             <div class="form-group mb-3 ">
                                 <label for="" class="form-label">Apellido Materno:</label>
-                                <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno" value="{{ $tecnico->ApellidoMaterno}}">
+                                <input type="text" class="form-control" placeholder="Ingresar apellido materno" id="apellidoMaterno" name="apellidoMaterno" value="{{ old('apellidoMaterno') }}">
                                 @error('apellidoMaterno')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror
@@ -168,64 +171,44 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Sexo:</label>
-                                <select class="form-select" id="selectSexo" name="selectSexo">
-                                    <option value="Maculino" {{ $tecnico->SexoPersona == 'Maculino' ? 'selected' : '' }}>Masculino</option>
-                                    <option value="Femenino" {{ $tecnico->SexoPersona == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+                                <select class="form-select" id="selectSexo" name="selectSexo" value="{{ old('selectSexo') }}">
+                                    <option value="Maculino" {{ old('selectSexo') == 'Maculino' ? 'selected' : '' }}>Masculino</option>
+                                    <option value="Femenino" {{ old('selectSexo') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="" class="form-label">Categoria:</label>
-                                <select class="form-select" id="selectCategoria" name="selectCategoria">
-                                    @foreach ($categorias as $categoria)
-                                        <option value="{{$categoria->IdCategoria}}" {{ $tecnico->IdCategoria == "$categoria->IdCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
+                                <label for="selectRol" class="form-label">Rol:</label>
+                                <select class="form-select" id="selectRol" name="selectRol" value="{{ old('selectRol') }}">
+                                    @foreach ($roles as $rol)
+                                        <option value="{{$rol->IdRol}}" {{ old('selectRol') == "$rol->IdRol" ? 'selected' : '' }}>{{$rol->NombreRol}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
+                            <div class="form-group mb-3 mt-5">
+                                <label for="contrasenia" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="contrasenia" placeholder="Ingresar contraseña" name="contrasenia" value="{{ old('contrasenia') }}">
+                                @error('contrasenia')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del tecnico (Resolucion 472x472):</label>
-                            <input type="file" class="form-control" id="fotoTecnico" name="fotoTecnico" accept="image/*" value="{{ $tecnico->Foto }}">
-                            @error('fotoTecnico')
-                                    <p class="error-message">{{ $message }}</p>
+                            <label for="" class="form-label">Foto del juez (Resolucion 472x472):</label>
+                            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" value="{{ old('foto') }}">
+                            @error('foto')
+                                <p class="error-message">{{ $message }}</p>
                             @enderror
-
-                            <div class="col-md-6 imagen mx-auto mt-2">
-                                <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del carnet:</label>
-                            <input type="file" class="form-control" id="fotoCarnet" name="fotoCarnet" accept="image/*">
-                            @error('fotoCarnet')
-                                    <p class="error-message">{{ $message }}</p>
-                            @enderror
-
-                            <div class="col-md-8 imagen mx-auto mt-3">
-                                <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->FotoCarnet}}" alt="">
-                            </div>
                         </div>
                     </div>
 
-                    <div class="d-flex mx-auto mt-4 mb-4 col-6">
-                            <button type="submit" class="botones btnFomulario">Actualizar</button>
-
-                            @php
-                                $categoriaActual="";
-                                foreach ($categorias as $key => $categoria) {
-                                    if ($tecnico->IdCategoria == $categoria->IdCategoria) {
-                                        $categoriaActual= $categoria->NombreCategoria;
-                                    }
-                                }
-                            @endphp
-                            <a href="{{url('tecnico/'.$equipo->NombreEquipo.'/'.$categoriaActual)}}" class="botones btnCancelar">Cancelar</a>
-
+                    <div class="d-flex justify-content-center mt-4 mb-4">
+                        <button type="submit" class="botones">Registrar</button>
                     </div>
                 </form>
             </div>
