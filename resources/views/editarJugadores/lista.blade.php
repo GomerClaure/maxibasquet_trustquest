@@ -88,9 +88,9 @@
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
                                             <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="btn btn-primary">Editar</a>
                                             <br>
-                                            <a href=""class="Boton red displayBoton " data-bs-toggle="modal" data-bs-target="#myModal" > Eliminar </a>
+                                            <a href=""class="Boton red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdTecnicos}}" > Eliminar </a>
                                                         {{-- Modal --}}
-                                                        <div class="modal fade"  id="myModal" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
+                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdTecnicos}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
