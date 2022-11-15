@@ -40,12 +40,11 @@
                             <div>
                                 <label for="inputEmail4" class="form-label">Categorias:</label>
                             </div>
-
-                            <div class="form-check form-check-inline">
-
-                                <label class="form-check-label" for="inlineCheckbox1" name="categorias">{{$datos->Categorias}}</label>
+                            <div>
+                            <input value="{{$datos->Categorias}}"   type="text"  name="categorias">
                             </div>
-
+                            
+                          
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
@@ -102,7 +101,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margen">
-                        <a type="button" class="boton-color btn btn-primary" href="/formulario">atras</a>
+                        <a type="button" class="boton-color btn btn-primary" href="/formulario">Atras</a>
                         @if($datos->EstadoAplicacion == 'Pendiente')
                         <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="Aceptado">
                         <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="Rechazado">

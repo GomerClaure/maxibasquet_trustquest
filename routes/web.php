@@ -13,6 +13,7 @@ use App\Http\Controllers\MostrarTecnicosController;
 use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
+use App\Http\Controllers\EditarJugadorController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\HistoriaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
+use App\Http\Controllers\JuezController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +40,12 @@ Route::get('/', function () {
 
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
-/*Route::patch('formulario/show/{id}',[FormularioController::class,'update']);
-Route::get('formulario/show/{id}',[FormularioController::class,'show']);
-Route::get('formulario/index/',[FormularioController::class,'index']);
-*/
+//Route::resource('/editarJugadores',EditarJugadorController::class);
+Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
+Route::get('/editarJugadores',[EditarJugadorController::class,'index']);
+Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit']);
+Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show']);
+
 
 Route::get('/Equipo',[EquipoController::class,'index']);
 Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado']);
@@ -78,3 +82,6 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
+
+Route::get('juez/create',[JuezController::class,'create']);
+Route::post('juez/create',[JuezController::class,'store']);

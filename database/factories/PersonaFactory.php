@@ -18,12 +18,12 @@ class PersonaFactory extends Factory
     {
         return [
             'CiPersona' => $this->faker->unique()->randomNumber(8,true),
-            'NombrePersona' => $this->faker->name(),
-            'ApellidoPaterno' => $this->faker->word(),
-            'ApellidoMaterno' => $this->faker->word(),
-            'FechaNacimiento' => $this->faker->date(),
-            'SexoPersona' => $this->faker->randomElement(['Masculino','Femenino']),
-            'Edad' => $this->faker-> numberBetween(30,75),
+            'NombrePersona' => $this->faker->randomElement(['Jose','Jorge','Victor','Miguel','Pedro','Fernando','Felix','Oscar','Julio','Juan','Luis']),
+            'ApellidoPaterno' => $this->faker->randomElement(['Mamani','Vargas','Rodriguez','Garcia','Perez','Flores','Condori','Gonzales','Cruz','Lopez','Martinez']),
+            'ApellidoMaterno' => $this->faker->randomElement(['Mamani','Vargas','Rodriguez','Garcia','Perez','Flores','Condori','Gonzales','Cruz','Lopez','Martinez']),
+            'FechaNacimiento' => $this->faker->randomElement(['1980-09-09']),
+            'SexoPersona' => $this->faker->randomElement(['Masculino']),
+            'Edad' => $this->faker-> randomElement([42]),
             'Foto' => 'uploads\persona.jpg',
             //"Nacionalidad" => $this->faker->text(15),
             "NacionalidadPersona" => $this->faker->randomElement(['Brasileño','Chileno','Colombiano'
