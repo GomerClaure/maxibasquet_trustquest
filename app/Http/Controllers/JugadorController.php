@@ -249,14 +249,6 @@ class JugadorController extends Controller
         //
     }
 
-    public function Modal($id){
-        $deleteJugador= Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
-                                 ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
-                                 ->where('jugadores.IdJugador','=',$id)
-                                 ->get();
-                        return view('editarJugadores.lista',compact('deleteJugador'));
-                        //return $deleteJugador;
-    }
 
     /**
      * Remove the specified resource from storage.
