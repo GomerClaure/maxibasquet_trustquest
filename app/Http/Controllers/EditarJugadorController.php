@@ -9,6 +9,8 @@ use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class EditarJugadorController extends Controller
