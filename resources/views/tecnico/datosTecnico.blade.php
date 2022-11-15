@@ -58,8 +58,8 @@
                         <div class="col">
                         <div class="card ">
                             <div class="card-body  pt-3 ps-3 ">
-                                <div class="aling-item-rigth pb-2">
-                                <a type="button" href="{{ url('tecnicos'.'/'.$tecnico->NombreEquipo.'/'.$tecnico->NombreCategoria)}}" class="btn btn-primary btn-sm "> Volver </a>
+                                <div class="d-flex justify-content-end pb-2">
+                                <a type="button" href="{{ url('tecnicos'.'/'.$tecnico->NombreEquipo.'/'.$tecnico->NombreCategoria)}}" class="btn btn-primary btn-sm boton"> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">

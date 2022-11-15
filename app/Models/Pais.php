@@ -10,6 +10,6 @@ class Pais extends Model
     use HasFactory;
     protected $table = "paises";
     protected $primaryKey = 'IdAplicacion';
-    protected $fillable = ["IdPais","NombrePais","CodigoPais"];
+    protected $fillable = ["IdPais","NombrePais","CodigoPais","Nacionalidad","Region"];
     protected $hidden = ["pais"];
 }

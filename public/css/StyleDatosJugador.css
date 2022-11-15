@@ -60,3 +60,12 @@ tbody{
 .navbar{
   background-color: #2c2a2a;
 }
+.boton{
+  width: 20%;
+  height: 10%;
+}
+.btn-primary:hover {
+    
+  background: #fa841a !important;
+  border-color: #eb8f32 !important;
+}

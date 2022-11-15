@@ -83,7 +83,7 @@
                     @csrf
                     @method('PUT')
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">INSCRIPCION DE CUERPO TECNICO</h1>
+                        <h1 class="tituloFomulario">ACTUALIZAR TECNICO</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
@@ -141,10 +141,11 @@
 
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Nacionalidad:</label>
-                                <input type="text" class="form-control" placeholder="Ingrese la nacionalidad" id="nacionalidad" name="nacionalidad" value="{{ $tecnico->NacionalidadPersona }}">
-                                @error('nacionalidad')
-                                    <p class="error-message">{{ $message }}</p>
-                                @enderror
+                                <select class="form-select" id="selectNacionalidad" name="selectNacionalidad">
+                                    @foreach ($paises as $pais)
+                                        <option value="{{$pais->NombrePais}}" {{ $tecnico->NacionalidadPersona == "$pais->NombrePais" ? 'selected' : '' }}>{{$pais->NombrePais}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group mb-3">
@@ -212,8 +213,19 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="btn btnFomulario">Guardar</button>
+                    <div class="d-flex mx-auto mt-4 mb-4 col-6">
+                            <button type="submit" class="botones btnFomulario">Actualizar</button>
+
+                            @php
+                                $categoriaActual="";
+                                foreach ($categorias as $key => $categoria) {
+                                    if ($tecnico->IdCategoria == $categoria->IdCategoria) {
+                                        $categoriaActual= $categoria->NombreCategoria;
+                                    }
+                                }
+                            @endphp
+                            <a href="{{url('tecnico/'.$equipo->NombreEquipo.'/'.$categoriaActual)}}" class="botones btnCancelar">Cancelar</a>
+
                     </div>
                 </form>
             </div>

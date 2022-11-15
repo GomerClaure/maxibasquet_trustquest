@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Delegado;
 class DelegadoSeeder extends Seeder
 {
     /**
@@ -13,12 +14,6 @@ class DelegadoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("delegados")->insert([
-            'IdDelegado'=>1,
-            'IdPersona'=>1,
-            'IdUsuario'=>1,
-            'NumeroDelegado' => '+591 4567895',
-            'created_at'=>now()
-        ]);
+        Delegado::factory(10)->create();
     }
 }

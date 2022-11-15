@@ -1,0 +1,127 @@
+html,
+body{
+  
+  color:black;
+  width: 100%;
+}
+.intro {
+  height: 100%;
+}
+.fondo{
+  background-color: #D9D9D9;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn:first-child:hover{
+  background: #fa841a;
+  border-color: #eb8f32;
+}
+
+thead th {
+  color: black;
+}
+
+.card {
+  background-color: #ABA9A9;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+ 
+  
+}
+
+.table{
+    border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+.btn{
+  background-color: #eb8f32;
+  font-size: 14;
+  border-color: #eb8f32;
+}
+a{
+  color: white;
+  text-decoration: none;
+  
+}
+.navbar{
+  background-color: #2c2a2a;
+}
+.fondoTabla{
+  background-color: #D3D3D3;
+}
+.foto{
+    display: flex !important;
+    margin: auto;
+    width: 225px;
+    height: 225px;
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    justify-content: center !important;
+    margin-left: 54px;
+}
+
+.qr{
+    margin: auto;
+    width: 275px;
+    height: 275px;
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    margin-left: 29px;
+}
+.card-body{
+    color: black;
+}
+.credencial{
+    width: 333px;    
+    height: 435px;
+    background-color: #D9D9D9;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 0;
+    position: absolute;
+    left: 15px;
+}
+.contenedorCredencial{
+  width: 686px;    
+  height: 450px;
+  
+}
+
+.credencialAtras{
+  width: 333px;    
+  height: 435px;
+  background-color: #D9D9D9;
+  color: black;
+  border-radius: 0.5rem;
+  position: absolute;
+  left: 351px;
+  
+
+}
+.separador{
+  height: 15px;
+}
+.credencialtitulo{
+  text-align: center !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.page-break {
+  page-break-after: always;
+}

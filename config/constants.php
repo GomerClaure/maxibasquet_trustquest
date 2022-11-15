@@ -4,7 +4,7 @@
                'CORREO_ELECTRONICO' => 'correoElectronico',
                'TELEFONO_CONTACTO' => 'telefonoDeContacto',
                'DATOS_PAGO' => 'numeroDeComprobanteDePago',
-               'MONTO_PAGAR' => 'montoAPagar',
+               'MONTO_PAGAR' => 'montoPagado',
                'NUM_CUENTA' => 'numeroDeCuenta',
                'FEC_DEPOSITO' => 'fechaDeDeposito',
                'VAUCHER_PAGO' => 'vaucherDePago',

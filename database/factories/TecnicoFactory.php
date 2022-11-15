@@ -16,7 +16,7 @@ class TecnicoFactory extends Factory
     {
         return [
             'IdPersona' => Persona::factory(),
-            'RolesTecnicos' => $this->faker->randomElement(["Entrenador principal ","Entrenador asistente","Preparador físico","Medico","Asistente tecnico","Asistente estadistico"]),
+            'RolesTecnicos' => $this->faker->randomElement(["Entrenador asistente","Preparador físico","Medico","Asistente tecnico","Asistente estadistico"]),
             'created_at' => now(),
             'updated_at' => now()
         ];

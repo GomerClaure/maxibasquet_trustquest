@@ -1,0 +1,46 @@
+body,html{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #171f27;
+}
+.logito{
+  height: 70px;
+  width: 70px;
+  margin: 10px;
+}
+.card{
+  align-items: center;
+  background-color:#7b7979;
+  padding: auto;
+  color: #ffff;
+  font-size:20px;
+  margin: 10px;
+  flex-direction: row;
+}
+.btn{
+  background-color: #fca311;
+  font-size: 14;
+  border: #272725;
+} 
+.menu{
+    list-style: none;
+    padding: 0;
+    background-color:  #c8c8c8;
+    width:100%;
+    max-width: 1800px;
+    margin: auto;
+  }
+  .menu li a{
+    text-decoration: none;
+    color: #171f27;
+    padding: 20px;
+    display: block;
+  }
+  .menu li{
+    display: inline-block;
+    text-align: center;
+  }
+  .menu li a:hover{
+    background-color: #eb8f32;
+  }
+
+
