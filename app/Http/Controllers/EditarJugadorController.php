@@ -9,6 +9,8 @@ use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class EditarJugadorController extends Controller
@@ -102,7 +104,8 @@ class EditarJugadorController extends Controller
             $categoria = null;
         }
         echo "hola desde lista";
-        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria'));
+        $deleteJugador=[];
+        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
     }
 
     public function edit(Request $request, $id)
@@ -286,4 +289,35 @@ class EditarJugadorController extends Controller
         $categoria = Categoria::find($request->selectCategoria);
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
     }
+
+    public function Modal($id){
+
+        $deleteJugador= Jugador::select('personas.NombrePersona','personas.ApellidoPaterno','personas.ApellidoMaterno','personas.Foto')
+                                 ->join('personas','personas.IdPersona','=','jugadores.IdPersona')
+                                 ->where('jugadores.IdJugador','=',$id)
+                                 ->get();
+               // return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
+                        //return $deleteJugador;
+    }
+
+    public function destroy($id)
+    {   
+        $jugador=Jugador::select()
+                          ->join('personas','personas.IdPersona','jugadores.IdPersona')
+                          ->where('IdJugador',$id)
+                          ->get(); 
+        $datosJugador=$jugador[0];
+
+        $foto = $datosJugador->Foto;
+        $path = '../storage/app/public/'.$foto;
+        $credencial = '../storage/app/public/qrcodes/'.$datosJugador->IdJugador.$datosJugador->CiPersona.'.png';
+        File::delete($path);
+        File::delete($credencial);
+        $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+        $equipo = Equipo::find($datosJugador -> IdEquipo);
+        $categoria = Categoria::find($datosJugador -> IdCategoria);
+        return redirect('editarJugadores/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+
+    }
+
 }

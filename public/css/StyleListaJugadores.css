@@ -6,6 +6,12 @@ body{
 .intro {
   height: 100%;
 }
+.Boton1{
+  background-color: #eb8f32;
+}
+.BotonRed{
+   background-color: red;
+}
 .fondo{
   background-color: #D9D9D9;
 }
@@ -14,6 +20,12 @@ table th {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.btn{
+  background-color: #eb8f32;
+  font-size: 14;
+  border-color: #eb8f32;
+  color: white;
 }
 .btn:first-child:hover{
   background: #fa841a;
@@ -48,11 +60,7 @@ thead {
     background-color: #D3D3D3;
     
 }
-.btn{
-  background-color: #eb8f32;
-  font-size: 14;
-  border-color: #eb8f32;
-}
+
 a{
   color: white;
   text-decoration: none;
@@ -71,4 +79,38 @@ a{
 }
 .card-body{
     color: black;
+}
+.Boton{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: #eb8f32;
+  padding: 1%;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.BotonE{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: #ff431e;
+  padding: 1%;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.displayBoton{
+  display: block;
+  margin: auto;
+  margin-top: 0.5rem ;
+  width: 80%;
+}
+.red:hover{
+  background: #fa1a1a !important;
+  color: white; 
+}
+.Boton:hover{
+  background: #fa841a;
+  color: white; 
 }
