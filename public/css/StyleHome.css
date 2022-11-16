@@ -1,0 +1,88 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #171f27;
+}
+.convocatoria{
+    
+    text-align: center;
+}
+.imgh{
+    height: 300px ;
+    width: 600px;
+}
+.imgconv{
+    height: 500px ;
+    width: 600px;
+    margin-left: 60px;
+    padding: 15px;
+}
+.noticias{
+    display: inline-flex;
+    flex-direction: row;
+    margin: 15px;
+    margin-left: 25px;
+}
+.caru{
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    display:inline-flex;
+    flex-direction:row;
+}
+
+.titulo{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 45px;
+    color: #e5852a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+.menu{
+    list-style: none;
+    padding: 0;
+    background-color:  #dad5d5;
+    width:100%;
+    max-width: 1800px;
+    margin: auto;
+}
+.menu li a{
+    text-decoration: none;
+    color: #171f27;
+    padding: 20px;
+    display: block;
+}
+.menu li{
+    display: inline-block;
+    text-align: center;
+}
+.menu li a:hover{
+    background-color: #eb8f32;
+}
+.parr{
+    color: white;
+}
+.box-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    background-color: #eb8f32;
+}
+.card-title{
+    color: #040404;
+}
+.box{
+    background-color: #c8ced5;
+    margin: 50px;
+    padding: 10px;
+    border-radius: 5px;
+}
+footer{
+    background-color: #444b52;
+}
+
+.parr{
+    text-align: center;
+    margin: 50px;
+    padding: 20px;
+}

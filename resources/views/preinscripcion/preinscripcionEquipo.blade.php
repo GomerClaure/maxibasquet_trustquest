@@ -1,4 +1,4 @@
-@extends('welcome')
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +8,7 @@
     <link href="{{asset('css/StylePreinscripcion.css' )}}" rel="stylesheet">
     <title>Preinscripcion</title>
 </head>
+@extends('nav')
 @section('content')
 <div class="container justify-content-center"">
 		    <section class=" main-title text-center">
@@ -28,16 +29,16 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
-                            <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ old('nombreDeEquipo') }}">
-                            @error('nombreDeEquipo')
-                                <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <input name="{{config('constants.NOMBRE_EQUIPO')}}" type="text" class="form-control" id="nombreDeEquipo" value="{{ old(config('constants.NOMBRE_EQUIPO')) }}">
+                            @error(config('constants.NOMBRE_EQUIPO'))
+                                <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="nombreDelEncargado" class="form-label">Nombre del encargado:</label>
-                            <input name="nombreDelEncargado" type="text" class="form-control" id="nombreDelEncargado" value="{{ old('nombreDelEncargado') }}">
-                            @error('nombreDelEncargado')
-                                <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <input name="{{config('constants.NOMBRE_ENCARGADO')}}" type="text" class="form-control" id="nombreDelEncargado" value="{{ old(config('constants.NOMBRE_ENCARGADO')) }}">
+                            @error(config('constants.NOMBRE_ENCARGADO'))
+                                <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
@@ -73,15 +74,12 @@
                                 <input name="option[]" class="form-check-input" type="checkbox" id="categoria60" value="+60">
                                 <label class="form-check-label" for="categoria60">+60</label>
                             </div>
-                            @error('option')
-                                <p class="error-message">{{ $message }}</p>
-                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="correoElectronico" class="form-label">Correo Electronico:</label>
-                            <input name="correoElectronico" type="text" class="form-control" id="correoElectronico" value={{ old('correoElectronico') }}>
-                            @error('correoElectronico')
-                                <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <input name="{{config('constants.CORREO_ELECTRONICO')}}" type="text" class="form-control" id="correoElectronico" value={{ old(config('constants.CORREO_ELECTRONICO')) }}>
+                            @error(config('constants.CORREO_ELECTRONICO'))
+                                <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
@@ -96,11 +94,11 @@
                             <label for="telefonoDeContacto" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
                                 <!-- <input disabled class="input-group-text p-0 " value="+591"> -->
-                                <input name="telefonoDeContacto" min="1"type="number" class="form-control" id="telefono" value={{ old('telefonoDeContacto') }}>
+                                <input name="{{config('constants.TELEFONO_CONTACTO')}}" min="1"type="number" class="form-control" id="telefono" value={{ old(config('constants.TELEFONO_CONTACTO')) }}>
 
                             </div>
-                            @error('telefonoDeContacto')
-                                <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            @error(config('constants.TELEFONO_CONTACTO'))
+                                <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -112,16 +110,16 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="numeroDeComprobanteDePago" class="form-label">Numero de comprobante de pago:</label>
-                            <input name="numeroDeComprobanteDePago" type="text" class="form-control" id="numeroDeComprobanteDePago" value="{{old("numeroDeComprobanteDePago")}}">
-                            @error('numeroDeComprobanteDePago')
-                                    <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <input name="{{config('constants.DATOS_PAGO')}}" type="text" class="form-control" id="numeroDeComprobanteDePago" value="{{old(config('constants.DATOS_PAGO'))}}">
+                            @error(config('constants.DATOS_PAGO'))
+                                    <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="montoAPagar" class="form-label">Monto a pagar:</label>
-                            <input name="montoAPagar" type="number" class="form-control" id="montoAPagar" value="{{old("montoAPagar")}}">
-                            @error('montoAPagar')
-                                    <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <label for="montoAPagar" class="form-label">Monto pagado:</label>
+                            <input name="{{config('constants.MONTO_PAGAR')}}" type="number" class="form-control" id="montoAPagar" value="{{old(config('constants.MONTO_PAGAR'))}}">
+                            @error(config('constants.MONTO_PAGAR'))
+                                    <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
@@ -129,18 +127,18 @@
                                 <label for="numeroDeCuenta" class="form-label">Numero de cuenta:</label>
                             </div>
                             <div class="input-group">
-                                <input name="numeroDeCuenta" type="number" class="form-control" id="numeroDeCuenta" value="{{old("numeroDeCuenta")}}">
+                                <input name="{{config('constants.NUM_CUENTA')}}" type="number" class="form-control" id="numeroDeCuenta" value="{{old(config('constants.NUM_CUENTA'))}}">
 
                             </div>
-                            @error('numeroDeCuenta')
-                                        <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            @error(config('constants.NUM_CUENTA'))
+                                        <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="fechaDeDeposito" class="form-label">Fecha de depósito:</label>
-                            <input name="fechaDeDeposito" type="date" class="form-control" id="fechaDeDeposito" min="2022-07-01" max="2023-01-04" value="{{old("fechaDeDeposito")}}">
-                            @error('fechaDeDeposito')
-                                    <p style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            <input name="{{config('constants.FEC_DEPOSITO')}}" type="date" class="form-control" id="fechaDeDeposito" min="2022-07-01" max="2023-01-04" value="{{old(config('constants.FEC_DEPOSITO'))}}">
+                            @error(config('constants.FEC_DEPOSITO'))
+                                    <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
@@ -148,10 +146,10 @@
                                 <label for="vaucherDePago" class="form-label">Vaucher de Pago:</label>
                             </div>
                             <div class="input-group">
-                                <input name="vaucherDePago" type="file" class="form-control" id="vaucherDePago" accept="image/*" aria-label="Upload" value="{{old("vaucherDePago")}}">
+                                <input name="{{config('constants.VAUCHER_PAGO')}}" type="file" class="form-control" id="vaucherDePago" accept="image/*" aria-label="Upload" value="{{old(config('constants.VAUCHER_PAGO'))}}">
                             </div>
-                            @error('vaucherDePago')
-                                        <p  style="color:#FF0000" class="error-message">{{ $message }}</p>
+                            @error(config('constants.VAUCHER_PAGO'))
+                                        <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -166,5 +164,26 @@
             </section> --}}
 
         </div>
+        <br><br>
+        <footer class="text-center text-white" style="background-color: #444b52;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Campeonato Maxi Basquet</span>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
 @endsection
 </html>
