@@ -14,6 +14,7 @@
                 <h2 class="text-center"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
                 <h3>Categoria: {{$equipo->NombreCategoria}}</h3>                                                  
                 <h2 > <strong>Jugadores</strong>  </h2> 
+                
                 @foreach ($credencialesJugadores as $jugador)            
                 <div class="contenedorCredencial">
                     <div class="separador">                        
@@ -22,26 +23,30 @@
                             <div >
                                 <h5 class="credencialtitulo">Campeonato Maxi-Basquet</h5>
                             </div>
-                                 
+                               <h5 class="text-center"> <b>Jugador</b></h5> 
+                                        
+                                            <div>
+                                                <img class="foto" src="{{public_path('storage'.'/'.$jugador->Foto)}}" alt="">
+                                                
+                                            </div>
+                                            
+                                        
+                                        <div class="credencial-contenido"> 
+                                                <p><b class="negrita">Nombre: </b>{{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} <br> 
+                                                <b class="negrita">Equipo: </b> {{$equipo->NombreEquipo}} <br> 
+                                                <b class="negrita">Categoria: </b> {{$equipo->NombreCategoria}}</p>
+                                            </div>
+                                        
                                         <div >
-                                            <img class="foto" src="{{public_path('storage'.'/'.$jugador->Foto)}}" alt="">
-                                        </div>
-                                        <div class="text-center"><h5><b>Jugador</b></h5></div>
-                                        <div class="ms-2"> <p><b>Nombre: </b>{{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}}</p>
-                                            <p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p> 
-                                            <p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p> 
+                                         <img class="qr" src="{{public_path('storage'.'/'.$jugador->CodigoQR)}}" alt="">
                                         </div>
                                      
                     </div>
-                    <div class="credencialAtras" >
-                            <h5 class="credencialtitulo">Campeonato Maxi-Basquet</h5>
-                                 <div >
-                                   <img class="qr" src="{{public_path('storage'.'/'.$jugador->CodigoQR)}}" alt="">
-                                 </div>
-                            <div class="text-center"><h5><b>Escanee el código QR para mayor información</b></h5></div>
-                    </div> 
+             
                 </div>
                 @endforeach     
+                
+               
                 <div class="page-break"></div>                   
                 <h2 > <strong>Técnicos</strong>  </h2> 
                 @foreach ($credencialesTecnicos as $tecnico)            
@@ -52,24 +57,24 @@
                             <div >
                                 <h5 class="credencialtitulo">Campeonato Maxi-Basquet</h5>
                             </div>
-                                 
+                            <h5 class="text-center"><b>{{$tecnico->RolesTecnicos}}</b></h5>
+
                                         <div >
                                             <img class="foto" src="{{public_path('storage'.'/'.$tecnico->Foto)}}" alt="">
                                         </div>
-                                        <div class="text-center"><h5><b>{{$tecnico->RolesTecnicos}}</b></h5></div>
-                                        <div class="ms-2"> <p><b>Nombre: </b>{{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}}</p>
-                                            <p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p> 
-                                            <p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p> 
+                                        <div class="credencial-contenido"> 
+                                            <p><b class="negrita">Nombre: </b>{{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}}
+                                            <br><b class="negrita">Equipo: </b> {{$equipo->NombreEquipo}}
+                                            <br><b class="negrita"> Categoria: </b> {{$equipo->NombreCategoria}}
+                                            </p>
+                                    
+                                        </div>
+                                        <div >
+                                            <img class="qr" src="{{public_path('storage'.'/'.$tecnico->CodigoQR)}}" alt="">
                                         </div>
                                      
                     </div>
-                    <div class="credencialAtras" >
-                            <h5 class="credencialtitulo">Campeonato Maxi-Basquet</h5>
-                                 <div >
-                                   <img class="qr" src="{{public_path('storage'.'/'.$tecnico->CodigoQR)}}" alt="">
-                                 </div>
-                            <div class="text-center"><h5><b>Escanee el código QR para mayor información</b></h5></div>
-                    </div> 
+                   
                 </div>
                 @endforeach                      
     </body>
