@@ -73,7 +73,7 @@
 
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
                                                         <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
-                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar">Editar</a>
+                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar displayBoton ">Editar</a>
                                                         <a href=""class="Boton red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}" > Eliminar </a>
                                                         {{-- Modal --}}
                                                         <div class="modal fade" id="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}" tabindex="-1" aria-labelledby="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}Label" aria-hidden="true">
