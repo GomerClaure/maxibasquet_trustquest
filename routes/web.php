@@ -67,29 +67,29 @@ Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
 
 
 //Usuario Delegado
-Route::get('jugador/create/{id}', [JugadorController::class,'create'])->middleware(['auth','delegado','admin']);
+Route::get('jugador/create/{id}', [JugadorController::class,'create'])->middleware(['auth','delegado']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
-Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create'])->middleware(['auth','delegado','admin']);
+Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create'])->middleware(['auth','delegado']);
 Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
-Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subirLogo')->middleware(['auth','delegado','admin']);
+Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subirLogo')->middleware(['auth','delegado']);
 Route::post('/subirLogo', [SubirLogoController::class,'store'])->name('subirLogo');
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
-Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit'])->middleware(['auth','delegado','admin']);
+Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit'])->middleware(['auth','delegado']);
 Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
-Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado','admin']);
-Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado','admin']);
-Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado','admin']);
-Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado'])->middleware(['auth','delegado','admin']);
-Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index'])->middleware(['auth','delegado','admin']);
-Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index'])->middleware(['auth','delegado','admin']);
-Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index'])->middleware(['auth','delegado','admin']);
+Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado']);
+Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado']);
+Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado']);
+Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado'])->middleware(['auth','delegado']);
+Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index'])->middleware(['auth','delegado']);
+Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index'])->middleware(['auth','delegado']);
+Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/qr',[CredencialController::class,'qr'])->middleware(['auth']);
-Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo'])->middleware(['auth','delegado','admin']);
-Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'generarCredenciales'])->middleware(['auth','delegado','admin']);
-Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf'])->middleware(['auth','delegado','admin']);
-Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware(['auth','delegado','admin']);
-Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado','admin']);
-Route::get('/delete/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado','admin']);
+Route::get('/credenciales/{equipo}/{categoria}',[CredencialController::class,'credencialesDeEquipo'])->middleware(['auth','delegado']);
+Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::class,'generarCredenciales'])->middleware(['auth','delegado']);
+Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf'])->middleware(['auth','delegado']);
+Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware(['auth','delegado']);
+Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
+Route::get('/delete/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
 
 
 
