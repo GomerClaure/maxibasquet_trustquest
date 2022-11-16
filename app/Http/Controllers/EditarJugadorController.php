@@ -149,7 +149,7 @@ class EditarJugadorController extends Controller
 
         $request->validate([
             'ci' => 'required|numeric|digits_between:6,9',
-            'nombre' => 'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'nombre' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento' => 'required|date|before:' . $fechaActual . '|after:' . $fecha . '|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
@@ -161,7 +161,7 @@ class EditarJugadorController extends Controller
             'peso' => 'required|numeric|min:1|max:99',
             'fotoCarnet' => 'image',
             'posicion' => 'required',
-            'nCamiseta' => 'required|numeric|min:1|max:99'
+            'nCamiseta' => 'required|numeric|min:0|max:99'
         ]);
 
 
@@ -183,22 +183,22 @@ class EditarJugadorController extends Controller
             return back()->withInput()->with('mensajeErrorExiste', 'El Ci esta registrado');
         }
 
-        $numCamiseta = $request->nCamiseta;
-        $consultaCamiseta = DB::table('jugadores')
-            ->select('*')
-            ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $request->idEquipo], ['IdCategoria', $request->selectCategoria]])
-            ->get();
-
-        if (!$consultaCamiseta->isEmpty()) {
-            return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
-        }
 
         $fecha = $request->fechaNacimiento;
         $anio = substr($fecha, 0, 4);
         $edadReal = date('Y') - $anio;
         $edadActual = $request->edad;
         if ($edadReal != $edadActual) {
+
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
+        }
+
+        $categoria = $request->selectCategoria;
+        $consulta = Categoria::where('IdCategoria', $categoria)->get();
+        $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
+
+        if ($edadActual < $categoriaNum) {
+            return back()->withInput()->with('mensajeErrorCategoria', 'La edad del jugador es inferior a la categoria elegida');
         }
 
 
@@ -221,12 +221,32 @@ class EditarJugadorController extends Controller
         $jugadorEquipo->PosicionJugador = $request->posicion;
         $jugadorEquipo->PesoJugador = $request->peso;
         $jugadorEquipo->EstaturaJugador = $request->estatura;
+        $jugadorEquipo->NumeroCamiseta = $request->nCamiseta;
         if ($request->hasFile('fotoCarnet')) {
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
-        $jugadorEquipo->save();
+
         $equipo = Equipo::find($jugadorEquipo->IdEquipo);
         $categoria = Categoria::find($request->selectCategoria);
+
+        $numCamiseta = $request->nCamiseta;
+        $consultaCamiseta = DB::table('jugadores')
+            ->select('*')
+            ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $equipo->IdEquipo], ['IdCategoria', $categoria->IdCategoria]])
+            ->get();
+        
+        $consultaCamisetaJugador = Jugador::find($id);    
+        if (!$consultaCamiseta->isEmpty()) {
+
+            if ($consultaCamisetaJugador->NumeroCamiseta == $request->nCamiseta) {
+                $jugadorEquipo->save();
+            } else {
+                return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
+            }
+        }
+
+
+        $jugadorEquipo->save();
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
 }
