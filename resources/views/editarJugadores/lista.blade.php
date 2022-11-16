@@ -56,13 +56,13 @@
     <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
         <div class="bg-image w-100">
             <div class="mask d-flex align-items-center w-100">
-                <div class="container text-center">
+                <div class="container ">
                     <div class="row justify-content-center">
                         <div class="col-12">
                             @if($equipo != null)
                             <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                             <h3>Categoria: {{$categoria}}</h3>
-                            <div class="card fondoTabla">
+                            <div class="card fondoTabla text-center">
                                 <div class="card-header ps-2 py-2 row">
                                     <div class="col-10">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
