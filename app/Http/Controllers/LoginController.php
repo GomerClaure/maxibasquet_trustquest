@@ -25,8 +25,8 @@ class LoginController extends Controller
     public function verificarInicioSesion(Request $request){
         $formulario = request()->except('_token');
         $request->validate([
-            $this->nombreUsuario=> ['required', 'max:15'],
-            $this->contrasenia => ['required', 'max:15'],
+            $this->nombreUsuario=> ['required','alpha_num','min:4','max:64'],
+            $this->contrasenia => ['required', 'min:7'],
         ]);
         $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
         

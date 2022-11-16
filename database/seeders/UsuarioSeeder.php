@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Str;
 class UsuarioSeeder extends Seeder
 {
     /**
@@ -17,15 +18,9 @@ class UsuarioSeeder extends Seeder
         User::factory(20)->asignarRol(1)->create();
         User::factory(20)->asignarRol(2)->create();
         User::factory(2)->asignarRol(3)->create();
-        // DB::table('users') ->insert([
-        //     'id'=>1,
-        //     'name'=>'ronald',
-        //     'IdRol'=>1,
-        //     'email'=>'ronaldt@hotmial.com',
-        //     'created_at'=>now(),
-        //     'password'=>'12345678',
-        //     'remember_token'=>'4d45s6d432ds',
-        //     'created_at'=>now(),
-        // ]);
+        User::factory(1)->asignarRol(1)->asignarNombre('Juez')->create();
+        User::factory(1)->asignarRol(2)->asignarNombre('JuezAsistente')->create();
+        User::factory(1)->asignarRol(3)->asignarNombre('Administrador')->create();
+        User::factory(1)->asignarRol(4)->asignarNombre('Delegado')->create();
     }
 }
