@@ -13,7 +13,6 @@
     <!-- Styles -->
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-      
     </style>
 
     <style>
@@ -43,6 +42,7 @@
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCamiseta')}}</h4>
     </div>
     @endif
+
 
     @if (Session::has('mensajeErrorEdad'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">

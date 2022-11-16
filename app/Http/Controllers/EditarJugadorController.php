@@ -9,6 +9,8 @@ use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class EditarJugadorController extends Controller
@@ -48,7 +50,7 @@ class EditarJugadorController extends Controller
             $Cat = [];
         }
         $s = [];
-
+        echo "hola index";
 
         return view('editarJugadores.equipos', compact('arreglo'));
     }
@@ -101,11 +103,14 @@ class EditarJugadorController extends Controller
             $equipo = null;
             $categoria = null;
         }
-        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria'));
+       
+        $deleteJugador=[];
+        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
     }
 
     public function edit(Request $request, $id)
     {
+        
 
         $tecnicos = DB::table('jugadores')
             ->select('*')
@@ -135,7 +140,7 @@ class EditarJugadorController extends Controller
         $equipo = Equipo::find($datos->IdEquipo);
 
         $paises = DB::table('paises')
-            ->orderBy('Nacionalidad', 'asc')
+            ->orderBy('NombrePais', 'asc')
             ->get();
         return view('editarJugadores.edit', compact('categorias', 'datos', 'equipo', 'paises'));
     }
@@ -157,6 +162,7 @@ class EditarJugadorController extends Controller
             'selectSexo' => 'required',
             'edad' => 'required|numeric|min:1|max:100',
             'fotoJugador' => 'image|dimensions:width=472, height=472',
+            'selectCategoria' => 'required',
             'estatura' => 'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
             'peso' => 'required|numeric|min:1|max:99',
             'fotoCarnet' => 'image',
@@ -165,6 +171,7 @@ class EditarJugadorController extends Controller
         ]);
 
 
+        //$datosTecnico = $request->except(['_token','_method']);
 
         $carnetId = $request->ci;
         $consulta2 = DB::table('personas')
@@ -182,7 +189,6 @@ class EditarJugadorController extends Controller
         if (!$consulta2->isEmpty() && $request->ci != $jugador->CiPersona) {
             return back()->withInput()->with('mensajeErrorExiste', 'El Ci esta registrado');
         }
-
 
         $fecha = $request->fechaNacimiento;
         $anio = substr($fecha, 0, 4);
@@ -249,4 +255,28 @@ class EditarJugadorController extends Controller
         $jugadorEquipo->save();
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
+
+    public function destroy($id)
+    {   
+        $jugador=Jugador::select()
+                          ->join('personas','personas.IdPersona','jugadores.IdPersona')
+                          ->where('IdJugador',$id)
+                          ->get(); 
+        $datosJugador=$jugador[0];
+        $defaultJugador = '../storage/app/public/uploads\persona.jpg';
+        $foto = $datosJugador->Foto;
+        $path = '../storage/app/public/'.$foto;
+        $credencial = '../storage/app/public/qrcodes/'.$datosJugador->IdJugador.$datosJugador->CiPersona.'.png';
+        if ( $defaultJugador != $path) {
+            File::delete($path);
+        }
+        
+        File::delete($credencial);
+        $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+        $equipo = Equipo::find($datosJugador -> IdEquipo);
+        $categoria = Categoria::find($datosJugador -> IdCategoria);
+        return redirect('editarJugadores/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+
+    }
+
 }

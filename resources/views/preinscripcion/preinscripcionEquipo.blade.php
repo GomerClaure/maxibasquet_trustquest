@@ -1,4 +1,4 @@
-@extends('welcome')
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +8,7 @@
     <link href="{{asset('css/StylePreinscripcion.css' )}}" rel="stylesheet">
     <title>Preinscripcion</title>
 </head>
+@extends('nav')
 @section('content')
 <div class="container justify-content-center"">
 		    <section class=" main-title text-center">
@@ -163,5 +164,26 @@
             </section> --}}
 
         </div>
+        <br><br>
+        <footer class="text-center text-white" style="background-color: #444b52;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Campeonato Maxi Basquet</span>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
 @endsection
 </html>

@@ -14,10 +14,11 @@ class CreateDelegadosTable extends Migration
     public function up()
     {
         Schema::create('delegados', function (Blueprint $table) {
-            $table->id("IdDelegado");
+            $table->bigIncrements("IdDelegado");
             $table->unsignedBigInteger("IdPersona");
             $table->unsignedBigInteger("IdUsuario");
-            $table->string("NumeroDelegado",20);
+            $table->date("FechaRegistroDelegado");
+            $table->string("TelefonoDelegado",20);
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
             $table->foreign("IdUsuario")->references("id")->on('users');            

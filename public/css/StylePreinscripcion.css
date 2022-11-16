@@ -1,6 +1,9 @@
 
 .main-title{
-    color: white;
+    margin-top: 20px;
+    text-align: center;
+    color: #e5852a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .row{
     background: #b5b5bd;
@@ -19,7 +22,7 @@
     background: #2c2a2a;
 }
 h5{
-    color: white;
+    color: #ffffff;
 }
 .error-message{
     color: red;
