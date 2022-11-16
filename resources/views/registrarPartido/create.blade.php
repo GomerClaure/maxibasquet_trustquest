@@ -31,6 +31,13 @@
     </div>
     @endif
 
+    @if (Session::has('mensajeErrorEquipos'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipos')}}</h4>
+    </div>
+    @endif
+
     @if (Session::has('mensajeErrorEquipoB'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -73,7 +80,7 @@
             <p class="color-letras">3er Torneo Internacional de Maxi Basquet</p>
             </section>
             <section class="col-7 p-4 mx-auto contenedorForm">
-                <form class="row g-1" action="{{url('/registrarPartidos')}}" method="POST">
+                <form class="row g-1" action="{{url('/registrarPartidos')}}" method="POST" novalidate>
                     @csrf
                     <div class="col-md-6">
                     </div>
