@@ -103,6 +103,12 @@ class RegistrarPartidosController extends Controller
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
         }
 
+        //validar fecha para registrar
+        /*$fechaLimite = date('2022-11-20');
+        if($fechaLimite>$request->fecha){
+            return back()->withInput()->with('mensajeErrorFechaLimite', 'No es la fecha de registros de partidos');
+        }*/
+
         //validar la hora
         $hora1 = date('08:00');
         $hora2 = date('07:00');
