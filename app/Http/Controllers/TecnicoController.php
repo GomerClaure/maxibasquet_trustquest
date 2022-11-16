@@ -140,7 +140,7 @@ class TecnicoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   $defaulpersona = '../storage/app/public/uploads\persona.jpg';
         $tecnico = Tecnico::select()
                             ->join('personas','personas.IdPersona','tecnicos.IdPersona')
                             ->where('IdTecnicos',$id)
@@ -151,7 +151,9 @@ class TecnicoController extends Controller
         $foto = $datosTecnico->Foto;
         $path = '../storage/app/public/'.$foto;
         $credencial = '../storage/app/public/qrcodes/'.$datosTecnico->IdTecnicos.$datosTecnico->CiPersona.'.png';
-        File::delete($path);
+        if($path != $defaulpersona){
+            File::delete($path);
+        }
         File::delete($credencial);
         $persona = Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
         $equipo = Equipo::find($datosTecnico -> IdEquipo);
