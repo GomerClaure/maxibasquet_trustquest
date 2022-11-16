@@ -56,7 +56,7 @@
     <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
         <div class="bg-image w-100">
             <div class="mask d-flex align-items-center w-100">
-                <div class="container">
+                <div class="container text-center">
                     <div class="row justify-content-center">
                         <div class="col-12">
                             @if($equipo != null)
@@ -87,9 +87,9 @@
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
                                             <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="Boton displayBoton">Editar</a>
-                                            <a href=""class="BotonE red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdTecnicos}}" > Eliminar </a>
+                                            <a href=""class="BotonE BotonRed red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" > Eliminar </a>
                                                         {{-- Modal --}}
-                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdTecnicos}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
+                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -101,7 +101,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton red "> Eliminar </a>
+                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton BotonRed red "> Eliminar </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
