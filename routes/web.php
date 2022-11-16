@@ -14,6 +14,7 @@ use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\EditarJugadorController;
+use App\Http\Controllers\RegistrarPartidosController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,7 @@ Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middlewar
 Route::resource('/formulario',FormularioController::class)->middleware(['auth','admin']);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
+Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
 
 
 
