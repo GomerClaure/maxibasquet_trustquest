@@ -307,11 +307,14 @@ class EditarJugadorController extends Controller
                           ->where('IdJugador',$id)
                           ->get(); 
         $datosJugador=$jugador[0];
-
+        $defaultJugador = '../storage/app/public/uploads\persona.jpg';
         $foto = $datosJugador->Foto;
         $path = '../storage/app/public/'.$foto;
         $credencial = '../storage/app/public/qrcodes/'.$datosJugador->IdJugador.$datosJugador->CiPersona.'.png';
-        File::delete($path);
+        if ( $defaultJugador != $path) {
+            File::delete($path);
+        }
+        
         File::delete($credencial);
         $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador -> IdEquipo);
