@@ -56,7 +56,7 @@ class CredencialController extends Controller
     $equipo = $equipos[0];
     $pdf = Pdf::loadView('credencial.pdf',['credencialesJugadores'=>$credencialesJugadores,
            'credencialesTecnicos'=>$credencialesTecnicos,'equipo'=>$equipo]);
-    
+    $pdf->setPaper('letter','portrait');
     return $pdf->download($equipo->NombreEquipo.'_'.$equipo->NombreCategoria.'_'.'credenciales.pdf');
     }
     /**
@@ -141,7 +141,7 @@ class CredencialController extends Controller
      * Crea y guarda las imagenes de los codigos qr de las credenciales  de los jugadores
      */
     public function qr($id,$ci,$id2){
-        QrCode::format('png')->size(250)
+        QrCode::format('png')->size(250)->margin(0)
                 ->generate('http://127.0.0.1:8000/jugadorqr/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
        $credencial = Credencial::where('IdPersona',$id2)->get();
@@ -161,7 +161,7 @@ class CredencialController extends Controller
      * Crea y guarda las imagenes de los codigos qr de las credenciales  del cuerpo tecnico
      */
     public function qrtecnico($id,$ci,$id2){
-        QrCode::format('png')->size(250)
+        QrCode::format('png')->size(250)->margin(0)
                 ->generate('http://127.0.0.1:8000/tecnicoqr/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
        $credencial = Credencial::where('IdPersona',$id2)->get();
@@ -173,7 +173,7 @@ class CredencialController extends Controller
         $credencial->updated_at = now();
         $credencial->save();
        }else{
-        $credencial = Credencial::where('IdPersona',$id)->update(['CodigoQR'=>'qrcodes/'.$id.$ci.'.png','updated_at'=>now()]);
+        $credencial = Credencial::where('IdPersona',$id2)->update(['CodigoQR'=>'qrcodes/'.$id.$ci.'.png','updated_at'=>now()]);
        }
     }
     /**
