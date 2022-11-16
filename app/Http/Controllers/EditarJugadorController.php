@@ -189,17 +189,16 @@ class EditarJugadorController extends Controller
         $edadReal = date('Y') - $anio;
         $edadActual = $request->edad;
         if ($edadReal != $edadActual) {
-            
+
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
         }
 
-        $categoria = $request -> selectCategoria;
-        $consulta = Categoria::where('IdCategoria',$categoria)->get();
+        $categoria = $request->selectCategoria;
+        $consulta = Categoria::where('IdCategoria', $categoria)->get();
         $categoriaNum = substr($consulta[0]->NombreCategoria, 1, 3);
 
-        if($edadActual < $categoriaNum){
-            return back()->withInput()->with('mensajeErrorCategoria','La edad del jugador es inferior a la categoria elegida');
-
+        if ($edadActual < $categoriaNum) {
+            return back()->withInput()->with('mensajeErrorCategoria', 'La edad del jugador es inferior a la categoria elegida');
         }
 
 
@@ -226,19 +225,27 @@ class EditarJugadorController extends Controller
         if ($request->hasFile('fotoCarnet')) {
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
-        
+
         $equipo = Equipo::find($jugadorEquipo->IdEquipo);
         $categoria = Categoria::find($request->selectCategoria);
-        
-        $numCamiseta = $request -> nCamiseta;
+
+        $numCamiseta = $request->nCamiseta;
         $consultaCamiseta = DB::table('jugadores')
-                            ->select('*')
-                            ->where([['NumeroCamiseta', $numCamiseta],['IdEquipo',$equipo->IdEquipo],['IdCategoria',$categoria->IdCategoria]])
-                            ->get();
-        if(!$consultaCamiseta ->isEmpty()){
-           
-            return back()->withInput()->with('mensajeErrorCamiseta','El numero de camiseta ya esta registrado en la categoria');
+            ->select('*')
+            ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $equipo->IdEquipo], ['IdCategoria', $categoria->IdCategoria]])
+            ->get();
+        
+        $consultaCamisetaJugador = Jugador::find($id);    
+        if (!$consultaCamiseta->isEmpty()) {
+
+            if ($consultaCamisetaJugador->NumeroCamiseta == $request->nCamiseta) {
+                $jugadorEquipo->save();
+            } else {
+                return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
+            }
         }
+
+
         $jugadorEquipo->save();
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
