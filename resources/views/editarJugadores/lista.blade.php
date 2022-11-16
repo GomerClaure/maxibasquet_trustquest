@@ -62,7 +62,7 @@
                             @if($equipo != null)
                             <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                             <h3>Categoria: {{$categoria}}</h3>
-                            <div class="card fondoTabla text-center">
+                            <div class="card fondoTabla ">
                                 <div class="card-header ps-2 py-2 row">
                                     <div class="col-10">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card-body  pt-0 ps-3">
+                                <div class="card-body  pt-0 ps-3 text-center">
                                     @if(!$jugadores->isEmpty())
                                     @foreach ($jugadores as $jugador)
                                     <div class="card d-inline-block m-3" style="width: 19rem;">
