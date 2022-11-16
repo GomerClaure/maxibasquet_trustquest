@@ -14,6 +14,7 @@ use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\EditarJugadorController;
+use App\Http\Controllers\RegistrarPartidosController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
@@ -40,6 +41,8 @@ Route::get('/', function () {
 
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
+//Route::resource('/editarJugadores',EditarJugadorController::class);
+Route::resource('/registrarPartidos',RegistrarPartidosController::class);
 Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
 Route::get('/editarJugadores',[EditarJugadorController::class,'index']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit']);
