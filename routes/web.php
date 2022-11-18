@@ -77,7 +77,7 @@ Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subir
 Route::post('/subirLogo', [SubirLogoController::class,'store'])->name('subirLogo');
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
 Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit'])->middleware(['auth','delegado']);
-Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);
+Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado']);
@@ -92,6 +92,7 @@ Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/delete/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
+Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
 
 
 

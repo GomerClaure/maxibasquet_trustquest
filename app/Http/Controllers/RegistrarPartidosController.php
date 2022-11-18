@@ -137,7 +137,8 @@ class RegistrarPartidosController extends Controller
         $categorias = DB::table('categorias')
             ->select('*')
             ->get();
-        return view('registrarPartido.create', compact('categorias'));
+        return redirect('registrarPartidos/create');
+        // return view('registrarPartido.create', compact('categorias'));
         //return response()->json($request);
     }
 
