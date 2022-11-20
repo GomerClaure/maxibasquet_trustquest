@@ -48,7 +48,7 @@
                                         </a>
                                     
                                     
-                                    @if(!$credencialesJugadores->isEmpty() && !$credencialesTecnicos->isEmpty())
+                                    @if(!$credencialesJugadores->isEmpty() || !$credencialesTecnicos->isEmpty())
                                         <a type="button" href="{{ url('credenciales/pdf/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
                                         Descargar
                                         </a>
