@@ -24,6 +24,7 @@ body{
 }
 .red{
     background-color: #eb3232 !important;
+    border: none;
 }
 .Boton{
     display: inline-block;

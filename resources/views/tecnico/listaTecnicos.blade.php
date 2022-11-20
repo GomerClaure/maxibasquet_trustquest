@@ -62,7 +62,8 @@
                                     <div class="card-body  pt-0 ps-3">
                                             @if(!$tecnicos->isEmpty())
                                             @foreach ($tecnicos as $tecnico)
-                                                <div class="card tarjeta d-inline-block m-3" style="width: 19rem;">
+                                            
+                                               <div class="card tarjeta d-inline-block m-3" style="width: 19rem;">
                                                     <div class="card-header cardHeader">
                                                         <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
                                                     </div>
@@ -86,15 +87,20 @@
                                                                         <img class="card-img-top" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
                                                                         <h4>¿Deseea eliminar los datos de {{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}?</h4>
                                                                     </div>
-                                                                    <div class="modal-footer">
+                                                                    <form method="POST" action="/tecnico/{{$tecnico->IdTecnicos}}">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                      <div class="modal-footer">
                                                                         <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/tecnico/'.$tecnico->IdTecnicos)}}"class="Boton red"> Eliminar </a>
-                                                                    </div>
+                                                                        <input type="submit" class="Boton red" value="Eliminar">  </input>
+                                                                    </div>  
+                                                                    </form>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             @endforeach
                                             @else
                                             <div class="d-flex justify-content-center">
