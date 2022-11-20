@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Partido;
 use App\Models\Equipo;
+use App\Models\DatoPartido;
 use Carbon\Carbon;
 
 class RegistrarPartidosController extends Controller
@@ -134,18 +135,36 @@ class RegistrarPartidosController extends Controller
         $nuevoPartido->EstadoPartido = 'espera';
         $nuevoPartido->save();
 
-        $categorias = DB::table('categorias')
-            ->select('*')
-            ->get();
-        return view('registrarPartido.create', compact('categorias'));
+        $idEquipoA = Equipo::find('equipoA');
+        $idEquipoB = Equipo::find('equipoB');
+
+        $datosEquipoA = new DatoPartido;
+        $datosEquipoA->IdEquipo = $idEquipoA->IdEquipo;
+        $datosEquipoA->IdPartido = $nuevoPartido->IdPartido;
+        $datosEquipoA->ScoreEquipo = 0;
+        $datosEquipoA->save();
+
+        $datosEquipoB = new DatoPartido;
+        $datosEquipoB->IdEquipo = $idEquipoB->IdEquipo;
+        $datosEquipoB->IdPartido = $nuevoPartido->IdPartido;
+        $datosEquipoB->ScoreEquipo = 0;
+        $datosEquipoA->save();
+
+
+        return redirect('/registrarPartidos/create');
         //return response()->json($request);
     }
 
     public function create()
     {
+        $equipos = DB::table('equipos')
+            ->select('NombreEquipo')
+            ->orderBy('NombreEquipo','ASC')
+            ->get();
+
         $categorias = DB::table('categorias')
             ->select('*')
             ->get();
-        return view('registrarPartido.create', compact('categorias'));
+        return view('registrarPartido.create', compact('categorias','equipos'));
     }
 }

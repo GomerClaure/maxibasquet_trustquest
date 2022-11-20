@@ -95,17 +95,19 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo A</label>
-                            <input class="form-control" id="inputEmail4" name="equipoA" value="{{old('equipoA')}}">
-                            @error('equipoA')
-                            <p class="error-message">{{ $message }}</p>
-                            @enderror
+                            <select class="form-select" id="selectCategoria" name="selectEquipo" value="{{ old('selectCategoria') }}">
+                                @foreach ($equipos as $equipo)
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipo') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre de Equipo B</label>
-                            <input class="form-control" id="inputPassword4" name="equipoB" value="{{ old('equipoB') }}">
-                            @error('equipoB')
-                            <p class="error-message">{{ $message }}</p>
-                            @enderror
+                            <select class="form-select" id="selectCategoria" name="selectEquipo" value="{{ old('selectCategoria') }}">
+                                @foreach ($equipos as $equipo)
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipo') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div>
