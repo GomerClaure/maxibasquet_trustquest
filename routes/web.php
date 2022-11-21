@@ -82,6 +82,7 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index']);
+Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar']);
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy']);
 Route::get('juez/create',[JuezController::class,'create']);
 Route::post('juez/create',[JuezController::class,'store']);

@@ -72,6 +72,35 @@ class TecnicoController extends Controller
         }
         return view('tecnico.lista',compact('tecnicos','equipo','categoria'));
     }
+
+    /** Lista de tecnicos para eliminar */
+    public function listaEliminar($equipo,$categoria)
+    {
+        $tecnicos = Tecnico::select('personas.NombrePersona','personas.ApellidoPaterno',
+                    'personas.ApellidoMaterno','personas.CiPersona','tecnicos.RolesTecnicos','tecnicos.IdTecnicos','personas.Foto')
+                    ->join('personas','tecnicos.IdPersona','=','personas.IdPersona')
+                    ->join('equipos','tecnicos.IdEquipo','=','equipos.IdEquipo')
+                    ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
+                    ->where('equipos.NombreEquipo','=',$equipo)
+                    ->where('categorias.NombreCategoria','=',$categoria)
+                    ->orderBy('personas.NombrePersona')
+                    ->get();
+        
+        $equipos = Equipo::select('NombreEquipo','NombreCategoria')
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                            ->where('equipos.NombreEquipo','=',$equipo)
+                            ->where('categorias.NombreCategoria','=',$categoria)
+                            ->get();
+        if(! $equipos->isEmpty()){
+            $equipo = $equipos[0]->NombreEquipo;
+            $categoria = $equipos[0]->NombreCategoria;
+        }else{
+            $equipo = null;
+            $categoria = null;
+        }
+        return view('tecnico.eliminar',compact('tecnicos','equipo','categoria'));
+    }
     /**
      * Display the specified resource.
      *
@@ -153,6 +182,6 @@ class TecnicoController extends Controller
         Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
         $equipo = Equipo::find($datosTecnico -> IdEquipo);
         $categoria = Categoria::find($datosTecnico -> IdCategoria);
-        return redirect('tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
+        return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
     }
 }
