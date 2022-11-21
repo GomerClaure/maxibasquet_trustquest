@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jugador extends Model
-{
+{   use SoftDeletes;
     use HasFactory;
     protected $table = "jugadores";
     protected $primaryKey = 'IdJugador';
+    protected $dates =['deleted_at'];
     protected $fillable = ["IdEquipo","IdCategoria","IdPais","IdPersona","PesoJugador","EstaturaJugador","FotoCarnet","PosicionJugador","NumeroCamiseta"];
     protected $hidden = ["IdJugador"];
 

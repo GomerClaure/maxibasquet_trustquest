@@ -10,6 +10,9 @@ use App\Models\Aplicaciones;
 use App\Models\Categoria;
 use App\Models\Paises;
 use App\Models\CategoriaEquipo;
+use App\Models\Categorias_por_equipo;
+use App\Models\Credencial;
+use App\Models\Tecnico;
 
 class EquipoController extends Controller
 {
@@ -94,7 +97,13 @@ class EquipoController extends Controller
                     return view('equipo.equipoDelegado',compact('arreglo'));
                   //return $arreglo;
     }
-
+    public function listaEquipos(){
+        $equipos = Equipo::select()
+                   ->join("categorias_por_equipo","categorias_por_equipo.IdEquipo","=","equipos.IdEquipo")
+                   ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
+                   ->get();
+        return $equipos;
+    }
     public function create()
     {
         //
@@ -148,11 +157,54 @@ class EquipoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Equipo  $equipo
+     * @param  int  $id
+     * @param  int  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipo $equipo)
+    public function destroy($id,$categoria)
     {
-        //
+        $jugadores = Jugador::select("personas.IdPersona")
+                    ->join("personas","personas.IdPersona","=","jugadores.IdPersona")
+                    ->join("equipos","equipos.IdEquipo","=","jugadores.IdEquipo")
+                    ->join("categorias","categorias.IdCategoria","=","jugadores.IdCategoria")
+                    ->where("jugadores.IdEquipo",$id)
+                    ->where("jugadores.IdCategoria",$categoria)
+                    ->get();
+        
+        foreach ($jugadores as $jugador) {
+          $this->eliminarJugador($jugador->IdPersona); 
+        }
+        
+        $tecnicos = Tecnico::select()
+                    ->join("personas","personas.IdPersona","=","tecnicos.IdPersona")
+                    ->join("equipos","equipos.IdEquipo","=","tecnicos.IdEquipo")
+                    ->join("categorias","categorias.IdCategoria","=","tecnicos.IdCategoria")
+                    ->where("tecnicos.IdEquipo",$id)
+                    ->where("tecnicos.IdCategoria",$categoria)
+                    ->get();
+        
+        foreach ($tecnicos as $tecnico) {
+            $this->eliminarTecnico($tecnico->IdPersona);
+        }
+        
+       Categorias_por_equipo::where("IdEquipo",$id)
+        ->where("IdCategoria",$categoria)->delete();
+        
+        $equipo = Categorias_por_equipo::where("IdEquipo",$id)->get();
+        if ($equipo->isEmpty()) {
+            Equipo::where("IdEquipo",$id)->delete();
+        }
+    }
+    /** Eliminar un jugador  por medio de su idPersona */
+    public function eliminarJugador($idPersona){
+        Jugador::where("IdPersona",$idPersona)->delete();
+        Persona::where("IdPersona",$idPersona)->delete();
+        Credencial::where("IdPersona",$idPersona)->delete();
+    }
+    /**Eliminar miembro del cuerpo técnico por medio de su idPersona  */
+    public function eliminarTecnico($idPersona){
+        Tecnico::where("IdPersona",$idPersona)->delete();
+        Persona::where("IdPersona",$idPersona)->delete();
+        Credencial::where("IdPersona",$idPersona)->delete();
     }
 }

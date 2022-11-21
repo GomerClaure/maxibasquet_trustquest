@@ -60,6 +60,7 @@ Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/home',[HomeController::class,'index'])->name('home');
 Route::get('historia',[HistoriaController::class,'index']);
 Route::resource('/listaequipos',ListaEquiposController::class);
+Route::get('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy']);
 Route::get('login',[LoginController::class,'index'])->name('login')->middleware(['login']);
 Route::post('login',[LoginController::class,'verificarInicioSesion']);
 
