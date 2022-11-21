@@ -36,6 +36,7 @@ class CredencialController extends Controller
         ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
         ->where('equipos.NombreEquipo','=',$equipo)
         ->where('categorias.NombreCategoria','=',$categoria)
+        ->orderBy('personas.NombrePersona')
         ->get();
         $credencialesTecnicos = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
                 'personas.ApellidoPaterno','personas.Foto','tecnicos.RolesTecnicos')
@@ -45,6 +46,7 @@ class CredencialController extends Controller
                 ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
                 ->where('equipos.NombreEquipo','=',$equipo)
                 ->where('categorias.NombreCategoria','=',$categoria)
+                ->orderBy('personas.NombrePersona')
                 ->get();
 
         $equipos = Equipo::select()
@@ -72,6 +74,7 @@ class CredencialController extends Controller
                             ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
                             ->where('equipos.NombreEquipo','=',$equipo)
                             ->where('categorias.NombreCategoria','=',$categoria)
+                            ->orderBy('personas.NombrePersona')
                             ->get();
 
         $credencialesTecnicos = Credencial::select('credenciales.CodigoQR','personas.CiPersona','personas.NombrePersona',
@@ -82,6 +85,7 @@ class CredencialController extends Controller
                             ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
                             ->where('equipos.NombreEquipo','=',$equipo)
                             ->where('categorias.NombreCategoria','=',$categoria)
+                            ->orderBy('personas.NombrePersona')
                             ->get();
         
         $equipos = Equipo::select()
@@ -111,6 +115,7 @@ class CredencialController extends Controller
         ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
         ->where('equipos.NombreEquipo','=',$equipo)
         ->where('categorias.NombreCategoria','=',$categoria)
+        ->orderBy('personas.NombrePersona')
         ->get();
        
        $this->generarQr($jugadores);
@@ -120,6 +125,7 @@ class CredencialController extends Controller
         ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
         ->where('equipos.NombreEquipo','=',$equipo)
         ->where('categorias.NombreCategoria','=',$categoria)
+        ->orderBy('personas.NombrePersona')
         ->get();
         
         $this->generarQrTec($tecnicos);

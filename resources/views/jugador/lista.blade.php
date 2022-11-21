@@ -53,14 +53,14 @@
                                                 <div class="card-header">
                                                     <h5 class="card-title">{{$jugador->PosicionJugador}} #{{$jugador->NumeroCamiseta}}</h5>
                                                 </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body text-center">
                                                         <div class="d-flex justify-content-center">
                                                         <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
                                                         </div>
                                                     
                                                         <h5>{{$jugador->NombrePersona}} </h5>
                                                         <h6>{{$jugador->ApellidoPaterno}}</h6>
-                                                        <a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="btn btn-primary">Detalles</a>
+                                                        <a href="{{url('jugador'.'/'.$jugador->IdJugador)}}" class="btn btn-primary displayBoton">Detalles</a>
                                                     </div>
                                                 </div>
                                             @endforeach
