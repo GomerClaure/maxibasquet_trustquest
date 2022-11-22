@@ -17,10 +17,11 @@ class CreateEquiposTable extends Migration
             $table->id("IdEquipo");
             //$table->unsignedBigInteger("IdDelegado");
             $table->unsignedBigInteger("IdAplicacion");
-            $table->string("NombreEquipo")->unique();
+            $table->string("NombreEquipo");
             $table->string("LogoEquipo");
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['NombreEquipo','deleted_at']);
             $table->foreign("IdAplicacion")->references("IdAplicacion")->on('aplicaciones');
             //$table->foreign("IdDelegado")->references("IdDelegado")->on('delegados');
 

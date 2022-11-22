@@ -98,11 +98,16 @@ class EquipoController extends Controller
                   //return $arreglo;
     }
     public function listaEquipos(){
-        $equipos = Equipo::select()
+        $equipos = Equipo::select("equipos.NombreEquipo","equipos.IdEquipo","categorias.IdCategoria","NombreCategoria","NombrePais","equipos.LogoEquipo")
                    ->join("categorias_por_equipo","categorias_por_equipo.IdEquipo","=","equipos.IdEquipo")
                    ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
+                   ->join("aplicaciones","aplicaciones.IdAplicacion","=","equipos.IdAplicacion")
+                   ->join("paises","paises.IdPais","=","aplicaciones.IdPais")
+                   ->whereNull('categorias_por_equipo.deleted_at')
+                   ->orderBy('equipos.NombreEquipo')
                    ->get();
-        return $equipos;
+        
+        return view('equipo.eliminar',compact('equipos'));
     }
     public function create()
     {
@@ -194,6 +199,9 @@ class EquipoController extends Controller
         if ($equipo->isEmpty()) {
             Equipo::where("IdEquipo",$id)->delete();
         }
+
+        return redirect('/equipo/lista/eliminar')->with('mensaje','Datos del equipo eliminados correctamente'); 
+
     }
     /** Eliminar un jugador  por medio de su idPersona */
     public function eliminarJugador($idPersona){
