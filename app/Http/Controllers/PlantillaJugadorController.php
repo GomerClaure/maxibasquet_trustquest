@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PlantillaJugador;
+use App\Models\Persona;
+use App\Models\Jugador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlantillaJugadorController extends Controller
 {
@@ -14,7 +17,31 @@ class PlantillaJugadorController extends Controller
      */
     public function index()
     {
-        return view("plantillaJugador.index");
+        $arregloEquipoA = DB::table('jugadores')
+                            ->select('*')
+                            ->where('IdEquipo',1)
+                            ->get();
+
+        $personasA = array();
+        $contador = 0;
+        foreach ($arregloEquipoA as $jugador){
+            $personasA[$contador] = Persona::find($jugador->IdPersona);
+            $contador++;
+        }
+
+        $arregloEquipoB = DB::table('jugadores')
+                            ->select('*')
+                            ->where('IdEquipo',2)
+                            ->get();
+
+        $personasB = array();
+        $contador = 0;
+        foreach ($arregloEquipoB as $jugador){
+            $personasB[$contador] = Persona::find($jugador->IdPersona);
+            $contador++;
+        }
+        
+        return view("plantillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB'));
     }
 
     /**

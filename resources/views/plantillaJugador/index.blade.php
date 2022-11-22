@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
-                            <h3 class="">N°</h3>
+                            <h3 class="">Camiseta</h3>
                         </div>
 
                         <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark">
@@ -102,197 +102,262 @@
                                 <h5 class="">Numero 1</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
+                                <h5 class="">Numero 2</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
+                                <h5 class="">Numero 3</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>  
+                                <h5 class="">Numero 4</h5>  
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
+                                <h5 class="">Numero 5</h5>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                            <h5 class="mb-0 nombre">PEDRO MAMAMI MAMANI</h5>
+                    @php
+                        $contador = 0;
+                    @endphp
+                    @foreach ($personasA as $persona)
+                        
+                        @php
+                            $jugador=$arregloEquipoA[$contador];
+                            $contador++;
+                        @endphp
+                        
+                        <div class="row">
+                            <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
+                                <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                            </div>
+
+                            <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
+                                <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
+                            </div>
+
+                            <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    @endforeach
+
+                    <div class="row mt-5">
+                        <h2 class="">Equipo B</h2>
+                        <div class="col-4 d-flex justify-content-center border border-dark pt-3">
+                            <h3 class="">Nombre de jugador</h3>
                         </div>
 
-                        <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                            <h5 class="mb-0 camiseta">99</h5>
+                        <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
+                            <h3 class="">Camiseta</h3>
                         </div>
 
-                        <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
+                        <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark">
+                            <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
 
                             <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <h5 class="">Numero 1</h5>
                             </div>
-
                             <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <h5 class="">Numero 2</h5>
                             </div>
-
                             <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <h5 class="">Numero 3</h5>
                             </div>
-
                             <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <h5 class="">Numero 4</h5>  
                             </div>
-
                             <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <h5 class="">Numero 5</h5>
                             </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                            <h5 class="mb-0 nombre">PEDRO MAMAMI MAMANI</h5>
-                        </div>
-
-                        <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                            <h5 class="mb-0 camiseta">99</h5>
-                        </div>
-
-                        <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <select class="form-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                            
                         </div>
                     </div>
+
+                    @php
+                        $contador = 0;
+                    @endphp
+                    @foreach ($personasB as $persona)
+                        
+                        @php
+                            $jugador=$arregloEquipoB[$contador];
+                            $contador++;
+                        @endphp
+                        
+                        <div class="row">
+                            <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
+                                <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                            </div>
+
+                            <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
+                                <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
+                            </div>
+
+                            <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2 d-flex justify-content-center ">
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>P</option>
+                                        <option>T</option>
+                                        <option>U</option>
+                                        <option>D</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    @endforeach
+
+                    
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
                         <button type="submit" class="botones">Guardar</button>
