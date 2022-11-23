@@ -95,17 +95,17 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo A</label>
-                            <select class="form-select" id="selectCategoria" name="selectEquipo" value="{{ old('selectCategoria') }}">
+                            <select class="form-select" id="selectEquipoA" name="selectEquipoA" value="{{ old('selectEquipoA') }}">
                                 @foreach ($equipos as $equipo)
-                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipo') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipoA') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre de Equipo B</label>
-                            <select class="form-select" id="selectCategoria" name="selectEquipo" value="{{ old('selectCategoria') }}">
+                            <select class="form-select" id="selectEquipoB" name="selectEquipoB" value="{{ old('selectEquipoB') }}">
                                 @foreach ($equipos as $equipo)
-                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipo') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipoB') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -116,7 +116,7 @@
                             <div>
                                 <select class="form-select" id="selectCategoria" name="selectCategoria" value="{{ old('selectCategoria') }}">
                                     @foreach ($categorias as $categoria)
-                                    <option value="{{$categoria->IdCategoria}}" {{ old('selectCategoria') == "$categoria->IdCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
+                                    <option value="{{$categoria->NombreCategoria}}" {{ old('selectCategoria') == "$categoria->NombreCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
                                     @endforeach
                                 </select>
                             </div>

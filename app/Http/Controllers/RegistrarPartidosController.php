@@ -35,24 +35,23 @@ class RegistrarPartidosController extends Controller
         $fechaActual = date('Y-m-d');
         $anio = date('Y') + 2;
         $fecha = $anio . "-01-01";
-        $request->validate(
+        /*$request->validate(
             [
-                'equipoA' => 'required',
-                'equipoB' => 'required',
+                
                 'hora' => 'required',
                 'lugar' => 'required|min:6|regex:/^([A-Z][a-z, ]+)+$/',
                 'fecha' => 'required',
             ],
 
-        );
+        );*/
 
         //verificar que los equipos no sean los mismos 
-        if ($request->equipoA == $request->equipoB) {
+        if ($request->selectEquipoA == $request->selectEquipoB) {
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
         //verificar la existencia del equipoA
-        $equipoA = $request->equipoA;
+        $equipoA = $request->selectEquipoA;
         $consultaEquipoA = DB::table('equipos')
             ->select('*')
             ->where('NombreEquipo', $equipoA)
@@ -62,7 +61,7 @@ class RegistrarPartidosController extends Controller
         }
 
         //verificar la existencia del equipo B
-        $equipoB = $request->equipoB;
+        $equipoB = $request->selectEquipoB;
         $consultaEquipoB = DB::table('equipos')
             ->select('*')
             ->where('NombreEquipo', $equipoB)
@@ -72,8 +71,8 @@ class RegistrarPartidosController extends Controller
         }
 
         //verificar que los equipos que pertenezcan a la categoria seleccionada
-        $posCategoria = $request->selectCategoria;
-        $categoriaSelecionada = $categorias[$posCategoria];
+        
+        $categoriaSelecionada = $request->selectCategoria;
         $consultaCatEquipoA = DB::table('equipos')
             ->select('NombreCategoria')
             ->join('categorias_por_equipo', 'categorias_por_equipo.IdEquipo', 'equipos.IdEquipo')
@@ -104,11 +103,6 @@ class RegistrarPartidosController extends Controller
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
         }
 
-        //validar fecha para registrar
-        /*$fechaLimite = date('2022-11-20');
-        if($fechaLimite>$request->fecha){
-            return back()->withInput()->with('mensajeErrorFechaLimite', 'No es la fecha de registros de partidos');
-        }*/
 
         //validar la hora
         $hora1 = date('08:00');
@@ -151,8 +145,8 @@ class RegistrarPartidosController extends Controller
         $datosEquipoA->save();
 
 
-        return redirect('/registrarPartidos/create');
-        //return response()->json($request);
+        //return redirect('/registrarPartidos/create');
+        return response()->json($request);
     }
 
     public function create()
@@ -163,7 +157,7 @@ class RegistrarPartidosController extends Controller
             ->get();
 
         $categorias = DB::table('categorias')
-            ->select('*')
+            ->select('NombreCategoria')
             ->get();
         return view('registrarPartido.create', compact('categorias','equipos'));
     }
