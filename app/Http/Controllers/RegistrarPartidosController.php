@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Partido;
@@ -21,15 +22,7 @@ class RegistrarPartidosController extends Controller
 
     public function store(Request $request)
     {
-        $categorias = array(
-            "1" => "+30",
-            "2" => "+35",
-            "3" => "+40",
-            "4" => "+45",
-            "5" => "+50",
-            "6" => "+55",
-            "7" => "+60",
-        );
+
         //$datos = request()->all();
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
@@ -44,14 +37,27 @@ class RegistrarPartidosController extends Controller
             ],
 
         );*/
+        $categoria = $request->selectCategoria;
+        //ids
+        $equipoA = $request->selectEquipoA;
+        $equipoB = $request->selectEquipoB;
+        $idEquipoA = DB::table('equipos')
+            ->where('NombreEquipo', $equipoA)
+            ->first();
+        $idEquipoB = DB::table('equipos')
+            ->where('NombreEquipo', $equipoB)
+            ->first();
+        $idCategoria = DB::table('categorias')
+            ->where('NombreCategoria', $categoria)
+            ->first();
 
         //verificar que los equipos no sean los mismos 
-        if ($request->selectEquipoA == $request->selectEquipoB) {
+        /* if ($request->selectEquipoA == $request->selectEquipoB) {
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
         //verificar la existencia del equipoA
-        $equipoA = $request->selectEquipoA;
+
         $consultaEquipoA = DB::table('equipos')
             ->select('*')
             ->where('NombreEquipo', $equipoA)
@@ -61,7 +67,7 @@ class RegistrarPartidosController extends Controller
         }
 
         //verificar la existencia del equipo B
-        $equipoB = $request->selectEquipoB;
+
         $consultaEquipoB = DB::table('equipos')
             ->select('*')
             ->where('NombreEquipo', $equipoB)
@@ -71,7 +77,7 @@ class RegistrarPartidosController extends Controller
         }
 
         //verificar que los equipos que pertenezcan a la categoria seleccionada
-        
+
         $categoriaSelecionada = $request->selectCategoria;
         $consultaCatEquipoA = DB::table('equipos')
             ->select('NombreCategoria')
@@ -93,19 +99,42 @@ class RegistrarPartidosController extends Controller
             ->exists();
         if (!$consultaCatEquipoB) {
             return back()->withInput()->with('mensajeErrorCategoriaB', 'El Equipo B no pertenece a la categoria');
+        }*/
+
+        //valdiar cantidad de jugadores A
+        $jugadores = DB::table('jugadores')
+            ->select('*')
+            ->where('jugadores.IdEquipo', '=', $idEquipoA->IdEquipo)
+            ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
+            ->get();
+
+        if (count($jugadores) < 5) {
+            //return response()->json(count($jugadores));
+            return back()->whithInput()->with('mensajeErrorCantidadJugadoresA', 'El equipo A no cuenta con la cantidad minima de jugadores');
         }
 
+        //validar cantidad de jugadores B
+        $jugadores = DB::table('jugadores')
+            ->select('*')
+            ->where('jugadores.IdEquipo', '=', $idEquipoB->IdEquipo)
+            ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
+            ->get();
+
+        if (count($jugadores) < 5) {
+            //return response()->json(count($jugadores));
+            return back()->whithInput()->with('mensajeErrorCantidadJugadoresA', 'El equipo B no cuenta con la cantidad minima de jugadores');
+        }
 
         //validar fecha
-        $fechaPrevista = $request->fecha;
+        /*$fechaPrevista = $request->fecha;
         $fechaHoy = Carbon::now();
         if ($fechaHoy > $fechaPrevista) {
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
-        }
+        }*/
 
 
         //validar la hora
-        $hora1 = date('08:00');
+        /*  $hora1 = date('08:00');
         $hora2 = date('07:00');
         $hora3 = date('06:00');
         $hora4 = date('04:00');
@@ -119,20 +148,17 @@ class RegistrarPartidosController extends Controller
         $horaPrevista = $request->hora;
         if ($horaNul == $horaPrevista || $horaPrevista == $hora1 || $horaPrevista == $hora2 || $horaPrevista == $hora3 || $horaPrevista == $hora4 || $horaPrevista == $hora5 || $horaPrevista == $hora6 || $horaPrevista == $hora7 || $horaPrevista == $hora8 || $horaPrevista == $hora9) {
             return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
-        }
+        }*/
 
-        $datos = request()->except('_token');
-        $nuevoPartido = new Partido;
+        /*$nuevoPartido = new Partido;
         $nuevoPartido->HoraPartido = $request->hora;
         $nuevoPartido->FechaPartido = $request->fecha;
         $nuevoPartido->LugarPartido = $request->lugar;
         $nuevoPartido->EstadoPartido = 'espera';
-        $nuevoPartido->save();
+        $nuevoPartido->save();*/
 
-        $idEquipoA = Equipo::find('equipoA');
-        $idEquipoB = Equipo::find('equipoB');
 
-        $datosEquipoA = new DatoPartido;
+        /* $datosEquipoA = new DatoPartido;
         $datosEquipoA->IdEquipo = $idEquipoA->IdEquipo;
         $datosEquipoA->IdPartido = $nuevoPartido->IdPartido;
         $datosEquipoA->ScoreEquipo = 0;
@@ -142,7 +168,7 @@ class RegistrarPartidosController extends Controller
         $datosEquipoB->IdEquipo = $idEquipoB->IdEquipo;
         $datosEquipoB->IdPartido = $nuevoPartido->IdPartido;
         $datosEquipoB->ScoreEquipo = 0;
-        $datosEquipoA->save();
+        $datosEquipoA->save();*/
 
 
         //return redirect('/registrarPartidos/create');
@@ -153,12 +179,12 @@ class RegistrarPartidosController extends Controller
     {
         $equipos = DB::table('equipos')
             ->select('NombreEquipo')
-            ->orderBy('NombreEquipo','ASC')
+            ->orderBy('NombreEquipo', 'ASC')
             ->get();
 
         $categorias = DB::table('categorias')
             ->select('NombreCategoria')
             ->get();
-        return view('registrarPartido.create', compact('categorias','equipos'));
+        return view('registrarPartido.create', compact('categorias', 'equipos'));
     }
 }
