@@ -23,7 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 use App\Http\Controllers\JuezController;
-use App\Http\Controllers\PlantillaJugadorController;
+use App\Http\Controllers\PlanillaJugadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,4 +99,4 @@ Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->m
 
 
 //Usuario Anotador-Juez
-Route::get('plantilla/jugador', [PlantillaJugadorController::class,'index']);
+Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);

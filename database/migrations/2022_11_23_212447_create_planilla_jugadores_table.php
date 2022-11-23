@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlantillaJugadorsTable extends Migration
+class CreatePlanillaJugadoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreatePlantillaJugadorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('plantilla_jugadors', function (Blueprint $table) {
-            $table->id();
+        Schema::create('planilla_jugadores', function (Blueprint $table) {
+            $table->id("IdPlanillaJugador");
+            $table->unsignedBigInteger("IdPartido");
             $table->timestamps();
+            $table->foreign("IdPartido")->references("IdPartido")->on('partidos');    
         });
     }
 
@@ -26,6 +28,6 @@ class CreatePlantillaJugadorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plantilla_jugadors');
+        Schema::dropIfExists('planilla_jugadores');
     }
 }

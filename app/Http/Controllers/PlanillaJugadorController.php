@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PlantillaJugador;
+use App\Models\PlanillaJugador;
 use App\Models\Persona;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PlantillaJugadorController extends Controller
+class PlanillaJugadorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class PlantillaJugadorController extends Controller
             $contador++;
         }
         
-        return view("plantillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB'));
+        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB'));
     }
 
     /**
@@ -68,10 +68,10 @@ class PlantillaJugadorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PlantillaJugador  $plantillaJugador
+     * @param  \App\Models\PlanillaJugador  $planillaJugador
      * @return \Illuminate\Http\Response
      */
-    public function show(PlantillaJugador $plantillaJugador)
+    public function show(PlanillaJugador $planillaJugador)
     {
         //
     }
@@ -79,10 +79,10 @@ class PlantillaJugadorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PlantillaJugador  $plantillaJugador
+     * @param  \App\Models\PlanillaJugador  $planillaJugador
      * @return \Illuminate\Http\Response
      */
-    public function edit(PlantillaJugador $plantillaJugador)
+    public function edit(PlanillaJugador $planillaJugador)
     {
         //
     }
@@ -91,10 +91,10 @@ class PlantillaJugadorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PlantillaJugador  $plantillaJugador
+     * @param  \App\Models\PlanillaJugador  $planillaJugador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PlantillaJugador $plantillaJugador)
+    public function update(Request $request, PlanillaJugador $planillaJugador)
     {
         //
     }
@@ -102,10 +102,10 @@ class PlantillaJugadorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PlantillaJugador  $plantillaJugador
+     * @param  \App\Models\PlanillaJugador  $planillaJugador
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PlantillaJugador $plantillaJugador)
+    public function destroy(PlanillaJugador $planillaJugador)
     {
         //
     }
