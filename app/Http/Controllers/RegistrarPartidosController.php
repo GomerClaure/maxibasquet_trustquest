@@ -122,7 +122,18 @@ class RegistrarPartidosController extends Controller
 
         if (count($jugadores) < 5) {
             //return response()->json(count($jugadores));
-            return back()->whithInput()->with('mensajeErrorCantidadJugadoresA', 'El equipo B no cuenta con la cantidad minima de jugadores');
+            return back()->whithInput()->with('mensajeErrorCantidadJugadoresB', 'El equipo B no cuenta con la cantidad minima de jugadores');
+        }
+
+        //validar lugar fecha partidos
+        $obtenerPartido = DB::table('partidos')
+        ->where('partidos.LugarPartido',$request->lugar)
+        ->where('partidos.HoraPartido',$request->hora)
+        ->where('partidos.FechaPartido',$request->fecha)
+        ->exists();
+        if($obtenerPartido){
+            //return response()->json('el partido ya existen');
+            return back()->whitInput()->with('mesajeErrorMismoPartido','El que partido ya esta registrado');
         }
 
         //validar fecha
