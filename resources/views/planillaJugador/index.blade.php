@@ -79,11 +79,9 @@
             @endif
 
             <div class="col-10 p-4 mx-auto contenedorForm" >
-                <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
-                    @csrf
-                    <div class="d-flex justify-content-center mb-4 border-bottom">
+                <div class="d-flex justify-content-center mb-4 border-bottom">
                         <h1 class="tituloFomulario">PLANILLA DE JUGADOR</h1>
-                    </div>
+                </div>
                     
                     <div class="row">
                         <h2 class="">Equipo A</h2>
@@ -95,7 +93,7 @@
                             <h3 class="">Camiseta</h3>
                         </div>
 
-                        <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark">
+                        <div class="col-7 d-flex  row border border-start-0 border-dark">
                             <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
 
                             <div class="col-2 d-flex justify-content-center ">
@@ -115,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     @php
                         $contador = 0;
                     @endphp
@@ -125,101 +123,45 @@
                             $jugador=$arregloEquipoA[$contador];
                             $contador++;
                         @endphp
-                        
-                        <div class="row">
-                            <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                                <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                        <form action="{{ url('/planilla/jugador/'.$jugador->IdJugador)}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
+                                    <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                                </div>
+
+                                <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
+                                    <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
+                                </div>
+
+                                <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
+                            
+                                    @for ($i = 0; $i < 5 ; $i++)
+                                    <div class="col-2 d-flex justify-content-center ">
+                                        <select class="form-select selectFalta{{$i+1}}">
+                                            <option value="vacio"></option>
+                                            <option value="P">P</option>
+                                            <option value="T">T</option>
+                                            <option value="U">U</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                        <select class="form-select selectTiroLibre{{$i+1}}">
+                                            <option value="vacio"></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    @endfor
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <button type="submit" class="botones">Guardar</button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                                <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
-                            </div>
-
-                            <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-                                
-                            </div>
-                        </div>
+                        </form>
                     @endforeach
+                
+
 
                     <div class="row mt-5">
                         <h2 class="">Equipo B</h2>
@@ -231,7 +173,7 @@
                             <h3 class="">Camiseta</h3>
                         </div>
 
-                        <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark">
+                        <div class="col-7 d-flex  row border border-start-0 border-dark">
                             <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
 
                             <div class="col-2 d-flex justify-content-center ">
@@ -261,108 +203,44 @@
                             $jugador=$arregloEquipoB[$contador];
                             $contador++;
                         @endphp
-                        
-                        <div class="row">
-                            <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                                <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                        <form action="{{ url('/planilla/jugador/'.$jugador->IdJugador)}}" method="POST">
+                         @csrf
+                            <div class="row">
+                                <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
+                                    <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
+                                </div>
+
+                                <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
+                                    <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
+                                </div>
+
+                                <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
+
+                                    @for ($i = 0; $i < 5 ; $i++)
+                                    <div class="col-2 d-flex justify-content-center ">
+                                        <select class="form-select selectFalta{{$i+1}}">
+                                            <option value="vacio"></option>
+                                            <option value="P">P</option>
+                                            <option value="T">T</option>
+                                            <option value="U">U</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                        <select class="form-select selectTiroLibre{{$i+1}}">
+                                            <option value="vacio"></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    @endfor
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <button type="submit" class="botones">Guardar</button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                                <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
-                            </div>
-
-                            <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2 d-flex justify-content-center ">
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>P</option>
-                                        <option>T</option>
-                                        <option>U</option>
-                                        <option>D</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-                                
-                            </div>
-                        </div>
+                        </form>
                     @endforeach
-
                     
-
-                    <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="botones">Guardar</button>
-                    </div>
-                </form>
             </div>
     </body>
 </html>

@@ -20,6 +20,7 @@ class PlanillaJugadorController extends Controller
         $arregloEquipoA = DB::table('jugadores')
                             ->select('*')
                             ->where('IdEquipo',1)
+                            ->where('IdCategoria',1)
                             ->get();
 
         $personasA = array();
@@ -32,6 +33,7 @@ class PlanillaJugadorController extends Controller
         $arregloEquipoB = DB::table('jugadores')
                             ->select('*')
                             ->where('IdEquipo',2)
+                            ->where('IdCategoria',1)
                             ->get();
 
         $personasB = array();
@@ -60,9 +62,9 @@ class PlanillaJugadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        return redirect('planilla/jugador/');
     }
 
     /**
