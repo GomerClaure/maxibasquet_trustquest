@@ -40,15 +40,15 @@ class LoginController extends Controller
                 // print_r($credentials);
                 $userAuth = Auth::getProvider()->retrieveByCredentials($credentials);
                 Auth::login($userAuth);
-                echo "Las contraseñas coinciden";
-                // return redirect('/home');
+                // echo "Las contraseñas coinciden";
+                return redirect('/home');
             }else{
-                echo "contraseña incorrecta wey";
+                // echo "contraseña incorrecta wey";
             }
         }else {
-            echo "No encuentra al usuarios";
+            // echo "No encuentra al usuarios";
         }
-        // return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto.');
+        return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto.');
     }
 
     private function getLoginRequest($formulario){
