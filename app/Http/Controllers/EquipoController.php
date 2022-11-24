@@ -12,6 +12,7 @@ use App\Models\Paises;
 use App\Models\CategoriaEquipo;
 use App\Models\Categorias_por_equipo;
 use App\Models\Credencial;
+use App\Models\Datos_partidos;
 use App\Models\Tecnico;
 
 class EquipoController extends Controller
@@ -167,7 +168,10 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id,$categoria)
-    {
+    {   $fecha = $this->comprobarPartido($id);
+        if ($fecha) {
+            return redirect('/equipo/lista/eliminar')->with('PartidoRegistrado','No se puede eliminar el equipo Existe un partido en espera o en curso'); 
+        }
         $jugadores = Jugador::select("personas.IdPersona")
                     ->join("personas","personas.IdPersona","=","jugadores.IdPersona")
                     ->join("equipos","equipos.IdEquipo","=","jugadores.IdEquipo")
@@ -214,5 +218,25 @@ class EquipoController extends Controller
         Tecnico::where("IdPersona",$idPersona)->delete();
         Persona::where("IdPersona",$idPersona)->delete();
         Credencial::where("IdPersona",$idPersona)->delete();
+    }
+
+    /**Verificar si existe un partido progamado para un equipo */
+    public function comprobarPartido($idEquipo){
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('G:i:s');
+        $partido = Datos_partidos::select()
+                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
+                    ->where("IdEquipo",$idEquipo)
+                    ->where("FechaPartido",">=",$fechaActual)
+                    ->where("EstadoPartido","=","espera")
+                    ->orwhere("EstadoPartido","=","curso")
+                    ->get();
+        if (!$partido->isEmpty()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
