@@ -15,6 +15,7 @@ class CreatePartidosTable extends Migration
     {
         Schema::create('partidos', function (Blueprint $table) {
             $table->id("IdPartido");
+            $table->integer("IdCategoria");
             $table->time("HoraPartido");
             $table->string("LugarPartido");
             $table->date("FechaPartido");
