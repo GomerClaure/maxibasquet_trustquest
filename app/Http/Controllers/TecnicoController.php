@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Credencial;
+use App\Models\Datos_partidos;
 use App\Models\Equipo;
 use App\Models\Tecnico;
 use App\Models\Persona;
@@ -171,17 +172,43 @@ class TecnicoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {  
+    {  date_default_timezone_set('America/La_Paz');
+        
         $tecnico = Tecnico::select()
                             ->join('personas','personas.IdPersona','tecnicos.IdPersona')
                             ->where('IdTecnicos',$id)
                             ->get();
         $datosTecnico = $tecnico[0];
+        $equipo = Equipo::find($datosTecnico -> IdEquipo);
+        $categoria = Categoria::find($datosTecnico -> IdCategoria);
+        $partido = $this->comprobarPartido($equipo -> IdEquipo);
+        if ($partido) {
+            return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del tecnico existe un partido en curso o en espera'); 
+        }
         Tecnico::where('IdTecnicos',$id)->delete();
         Credencial::where('IdPersona',$datosTecnico->IdPersona)->delete();
         Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
-        $equipo = Equipo::find($datosTecnico -> IdEquipo);
-        $categoria = Categoria::find($datosTecnico -> IdCategoria);
+       
         return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
+    }
+
+    /**Verificar si existe un partido progamado para un equipo */
+    public function comprobarPartido($idEquipo){
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('G:i:s');
+        $partido = Datos_partidos::select()
+                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
+                    ->where("IdEquipo",$idEquipo)
+                    ->where("FechaPartido",">=",$fechaActual)
+                    ->where("EstadoPartido","=","espera")
+                    ->orwhere("EstadoPartido","=","curso")
+                    ->get();
+        if (!$partido->isEmpty()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
