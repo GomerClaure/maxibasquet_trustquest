@@ -168,7 +168,7 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id,$categoria)
-    {   $fecha = $this->comprobarPartido($id);
+    {   $fecha = $this->comprobarPartido($id,$categoria);
         if ($fecha) {
             return redirect('/equipo/lista/eliminar')->with('PartidoRegistrado','No se puede eliminar el equipo Existe un partido en espera o en curso'); 
         }
@@ -221,7 +221,7 @@ class EquipoController extends Controller
     }
 
     /**Verificar si existe un partido progamado para un equipo */
-    public function comprobarPartido($idEquipo){
+    public function comprobarPartido($idEquipo,$categoria){
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $horaActual = date('G:i:s');
@@ -229,6 +229,7 @@ class EquipoController extends Controller
                     ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
                     ->where("IdEquipo",$idEquipo)
                     ->where("FechaPartido",">=",$fechaActual)
+                    ->where("partidos.IdCategoria",$categoria)
                     ->where("EstadoPartido","=","espera")
                     ->orwhere("EstadoPartido","=","curso")
                     ->get();
