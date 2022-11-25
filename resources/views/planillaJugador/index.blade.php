@@ -57,17 +57,17 @@
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorEdad'))
+            @if (Session::has('mensajeNingunDato'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEdad')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeNingunDato')}}</h4>
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorEmail'))
+            @if (Session::has('mensajeErrorOrden'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEmail')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorOrden')}}</h4>
                 </div>
             @endif
 
@@ -123,7 +123,7 @@
                             $jugador=$arregloEquipoA[$contador];
                             $contador++;
                         @endphp
-                        <form action="{{ url('/planilla/jugador/'.$jugador->IdJugador)}}" method="POST">
+                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$jugador->IdJugador)}}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
@@ -138,14 +138,17 @@
                             
                                     @for ($i = 0; $i < 5 ; $i++)
                                     <div class="col-2 d-flex justify-content-center ">
-                                        <select class="form-select selectFalta{{$i+1}}">
-                                            <option value="vacio"></option>
-                                            <option value="P">P</option>
-                                            <option value="T">T</option>
-                                            <option value="U">U</option>
-                                            <option value="D">D</option>
+                                        <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
+                                            @php
+                                                $select="selectFalta".($i+1);
+                                            @endphp
+                                            <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                            <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                            <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                            <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                            <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                         </select>
-                                        <select class="form-select selectTiroLibre{{$i+1}}">
+                                        <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
                                             <option value="vacio"></option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -203,7 +206,7 @@
                             $jugador=$arregloEquipoB[$contador];
                             $contador++;
                         @endphp
-                        <form action="{{ url('/planilla/jugador/'.$jugador->IdJugador)}}" method="POST">
+                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$jugador->IdJugador)}}" method="POST">
                          @csrf
                             <div class="row">
                                 <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
@@ -218,14 +221,14 @@
 
                                     @for ($i = 0; $i < 5 ; $i++)
                                     <div class="col-2 d-flex justify-content-center ">
-                                        <select class="form-select selectFalta{{$i+1}}">
+                                        <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
                                             <option value="vacio"></option>
                                             <option value="P">P</option>
                                             <option value="T">T</option>
                                             <option value="U">U</option>
                                             <option value="D">D</option>
                                         </select>
-                                        <select class="form-select selectTiroLibre{{$i+1}}">
+                                        <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
                                             <option value="vacio"></option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlanillaJugador extends Model
 {
     use HasFactory;
+    protected $table = "planilla_jugadores";
+    protected $primaryKey = 'IdPlanillaJugador';
+    protected $fillable = ["IdPartido"];
 }

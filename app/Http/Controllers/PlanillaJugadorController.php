@@ -15,7 +15,7 @@ class PlanillaJugadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idPartido)
     {
         $arregloEquipoA = DB::table('jugadores')
                             ->select('*')
@@ -43,7 +43,7 @@ class PlanillaJugadorController extends Controller
             $contador++;
         }
         
-        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB'));
+        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido'));
     }
 
     /**
@@ -62,9 +62,62 @@ class PlanillaJugadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $idPartido, $id)
     {
-        return redirect('planilla/jugador/');
+        $selectFalta = "";
+        if($request -> selectFalta1 == "vacio"){
+            for($j=2; $j<=5; $j++){
+                $select = 'selectFalta'.$j;
+                if($request -> $select != "vacio"){
+                    return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+                }
+            }
+            return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');
+        }else{
+            for($i=2; $i<=5; $i++){
+                $select = 'selectFalta'.$i;
+                if($request -> $select == "vacio"){
+                    $selectActual = 'selectFalta'.($i-1);
+                    $selectFalta = $request -> $selectActual;
+                    
+                    for($j=$i+1; $j<=5; $j++){
+                        $select = 'selectFalta'.$j;
+                        if($request -> $select != "vacio"){
+                            return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+                        }
+                    }
+                    $i=6;
+                }
+            }
+                /*if($request -> selectFalta.$i != "vacio"){
+                    if($request -> selectFalta.($i-1) == "vacio"){
+                        return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+                    }
+                }else{
+                    for($j=$i+1; $j<=5; $j++){
+                        if($request -> selectFalta.$j != "vacio"){
+                            return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+                        }
+                    }
+                } 
+            }*/
+        }
+
+        return $selectFalta;
+        
+
+        $planilla = new PlanillaJugador;
+        $planilla -> IdPartido = $idPartido;
+        $planilla -> save();
+
+        $faltaJugador = new Falta;
+        $faltaJugador -> IdJugador = $id;
+        $faltaJugador -> IdPlanillaJugador = $planilla -> IdPlanillaJugador;
+        $faltaJugador -> TipoFalta = $request -> selectFalta;
+        $faltaJugador -> CantidadTiroLibre = $request -> selectFalta;
+        $tenico -> save();
+
+        return redirect('planilla/jugador/')->with('mensaje','Informacion guardado correctamente');
     }
 
     /**

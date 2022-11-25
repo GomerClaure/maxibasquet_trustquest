@@ -99,5 +99,5 @@ Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->m
 
 
 //Usuario Anotador-Juez
-Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
-Route::post('planilla/jugador/{id}', [PlanillaJugadorController::class,'store']);
+Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'index']);
+Route::post('planilla/jugador/{idPartido}/{id}', [PlanillaJugadorController::class,'store']);
