@@ -15,13 +15,13 @@ class CreatePartidosTable extends Migration
     {
         Schema::create('partidos', function (Blueprint $table) {
             $table->id("IdPartido");
-            $table->unsignedBigInteger("IdCategoria");
+            //$table->unsignedBigInteger("IdCategoria");
             $table->time("HoraPartido");
             $table->string("LugarPartido");
             $table->date("FechaPartido");
             $table->enum("EstadoPartido",["curso","finalizado","espera"]);
             $table->timestamps();
-            $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
+            //$table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
         });
     }
 

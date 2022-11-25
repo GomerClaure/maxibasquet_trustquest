@@ -44,9 +44,9 @@ Route::get('/', function () {
 Route::get('/aplicaciones',[AplicacionController::class,'index'])->middleware(['auth','admin']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middleware(['auth','admin']);
 Route::resource('/formulario',FormularioController::class)->middleware(['auth','admin']);
-Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
+Route::get('juez/create',[JuezController::class,'create']); //->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
-Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
+Route::resource('/registrarPartidos',RegistrarPartidosController::class); //->middleware(['auth','admin']);
 
 
 
@@ -82,7 +82,7 @@ Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update'])-
 Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado']);
-Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado'])->middleware(['auth','delegado']);
+Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado']); //->middleware(['auth','delegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index'])->middleware(['auth','delegado']);
 Route::get('tecnico/{equipo}/{categoria}',[CuerpoTecnicoController::class,'index'])->middleware(['auth','delegado']);

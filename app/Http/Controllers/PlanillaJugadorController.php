@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PlanillaJugador;
 use App\Models\Persona;
 use App\Models\Jugador;
+use App\Models\Falta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -113,7 +114,6 @@ class PlanillaJugadorController extends Controller
         $planilla -> IdPartido = $idPartido;
         $planilla -> save();
 
-        return "llego";
         $faltaJugador = new Falta;
         $faltaJugador -> IdJugador = $id;
         $faltaJugador -> IdPlanillaJugador = $planilla -> IdPlanillaJugador;
