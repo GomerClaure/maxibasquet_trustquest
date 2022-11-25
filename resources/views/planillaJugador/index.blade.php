@@ -64,17 +64,17 @@
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorOrden'))
+            @if (Session::has('mensajeErrorOrdenIngreso'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorOrden')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorOrdenIngreso')}}</h4>
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorExiste'))
+            @if (Session::has('mensajeDatosNoCompletos'))
                 <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorExiste')}}</h4>
+                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeDatosNoCompletos')}}</h4>
                 </div>
             @endif
 
@@ -141,6 +141,7 @@
                                         <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
                                             @php
                                                 $select="selectFalta".($i+1);
+                                                $selectTiro = "selectTiroLibre".($i+1);
                                             @endphp
                                             <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
                                             <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
@@ -149,10 +150,10 @@
                                             <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                         </select>
                                         <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
-                                            <option value="vacio"></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                            <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                            <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                            <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
                                         </select>
                                     </div>
                                     @endfor
@@ -222,17 +223,21 @@
                                     @for ($i = 0; $i < 5 ; $i++)
                                     <div class="col-2 d-flex justify-content-center ">
                                         <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
-                                            <option value="vacio"></option>
-                                            <option value="P">P</option>
-                                            <option value="T">T</option>
-                                            <option value="U">U</option>
-                                            <option value="D">D</option>
+                                            @php
+                                                $select="selectFalta".($i+1);
+                                                $selectTiro = "selectTiroLibre".($i+1);
+                                            @endphp
+                                            <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                            <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                            <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                            <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                            <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                         </select>
                                         <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
-                                            <option value="vacio"></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                            <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                            <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                            <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
                                         </select>
                                     </div>
                                     @endfor

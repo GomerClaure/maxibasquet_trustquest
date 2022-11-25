@@ -65,45 +65,51 @@ class PlanillaJugadorController extends Controller
     public function store(Request $request, $idPartido, $id)
     {
         $selectFalta = "";
+        $selectTiroLibre = "";
         if($request -> selectFalta1 == "vacio"){
-            for($j=2; $j<=5; $j++){
-                $select = 'selectFalta'.$j;
-                if($request -> $select != "vacio"){
-                    return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+            if($request -> selectTiroLibre1 == "vacio"){
+                for($j=2; $j<=5; $j++){
+                    $select = 'selectFalta'.$j;
+                    $select2 = 'selectTiroLibre'.$j;
+                    if($request -> $select != "vacio" || $request -> $select2 != "vacio"){
+                        return back()->withInput()->with('mensajeErrorOrdenIngreso','Las faltas no fueron ingresadas en orden');
+                    }
                 }
+                return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');  
+            }else{
+                return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
             }
-            return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');
-        }else{
+            
+        }else if($request -> selectTiroLibre1 != "vacio"){
             for($i=2; $i<=5; $i++){
                 $select = 'selectFalta'.$i;
-                if($request -> $select == "vacio"){
+                $select2 = 'selectTiroLibre'.$i;
+                if($request -> $select == "vacio" && $request -> $select2 == "vacio"){
                     $selectActual = 'selectFalta'.($i-1);
                     $selectFalta = $request -> $selectActual;
+
+                    $selectActual2 = 'selectTiroLibre'.($i-1);
+                    $selectTiroLibre = $request -> $selectActual2;
                     
                     for($j=$i+1; $j<=5; $j++){
-                        $select = 'selectFalta'.$j;
-                        if($request -> $select != "vacio"){
-                            return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
+                        $select = 'selectFalta'.$j; 
+                        $select2 = 'selectTiroLibre'.$j;
+                        if($request -> $select != "vacio" || $request -> $select2 != "vacio"){
+                            return back()->withInput()->with('mensajeErrorOrdenIngreso','Las faltas no fueron ingresadas en orden');
                         }
                     }
                     $i=6;
+                }else if($request -> $select == "vacio" && $request -> $select2 != "vacio"){
+                    return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
+                }else if($request -> $select != "vacio" && $request -> $select2 == "vacio"){
+                    return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
                 }
             }
-                /*if($request -> selectFalta.$i != "vacio"){
-                    if($request -> selectFalta.($i-1) == "vacio"){
-                        return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
-                    }
-                }else{
-                    for($j=$i+1; $j<=5; $j++){
-                        if($request -> selectFalta.$j != "vacio"){
-                            return back()->withInput()->with('mensajeErrorOrden','Ingrese en orden las faltas');
-                        }
-                    }
-                } 
-            }*/
+        }else{
+            return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
         }
 
-        return $selectFalta;
+        return $selectTiroLibre;
         
 
         $planilla = new PlanillaJugador;
