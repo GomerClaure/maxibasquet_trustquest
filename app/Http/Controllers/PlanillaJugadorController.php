@@ -109,21 +109,19 @@ class PlanillaJugadorController extends Controller
             return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
         }
 
-        return $selectTiroLibre;
-        
-
         $planilla = new PlanillaJugador;
         $planilla -> IdPartido = $idPartido;
         $planilla -> save();
 
+        return "llego";
         $faltaJugador = new Falta;
         $faltaJugador -> IdJugador = $id;
         $faltaJugador -> IdPlanillaJugador = $planilla -> IdPlanillaJugador;
-        $faltaJugador -> TipoFalta = $request -> selectFalta;
-        $faltaJugador -> CantidadTiroLibre = $request -> selectFalta;
-        $tenico -> save();
+        $faltaJugador -> TipoFalta = $selectFalta;
+        $faltaJugador -> CantidadTiroLibre = $selectTiroLibre;
+        $faltaJugador -> save();
 
-        return redirect('planilla/jugador/')->with('mensaje','Informacion guardado correctamente');
+        return redirect('planilla/jugador/'.$idPartido)->with('mensaje','Informacion guardado correctamente');
     }
 
     /**
