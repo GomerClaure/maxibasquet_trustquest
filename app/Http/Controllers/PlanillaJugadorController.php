@@ -18,6 +18,17 @@ class PlanillaJugadorController extends Controller
      */
     public function index($idPartido)
     {
+        $idPlanilla = DB::table('planilla_jugadores')
+                        ->select('IdPlanillaJugador')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
+        $idPlanillaJugador = $idPlanilla[0] -> IdPlanillaJugador;
+
+        $faltas = DB::table('faltas')
+                        ->select('*')
+                        ->where('IdPlanillaJugador',$idPlanillaJugador)
+                        ->get(); 
+
         $arregloEquipoA = DB::table('jugadores')
                             ->select('*')
                             ->where('IdEquipo',1)
@@ -43,8 +54,9 @@ class PlanillaJugadorController extends Controller
             $personasB[$contador] = Persona::find($jugador->IdPersona);
             $contador++;
         }
+
         
-        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido'));
+        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas'));
     }
 
     /**
@@ -63,7 +75,7 @@ class PlanillaJugadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $idPartido, $id)
+    public function store(Request $request, $idPartido, $idPlanillaJugador, $id)
     {
         $selectFalta = "";
         $selectTiroLibre = "";
@@ -110,13 +122,9 @@ class PlanillaJugadorController extends Controller
             return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
         }
 
-        $planilla = new PlanillaJugador;
-        $planilla -> IdPartido = $idPartido;
-        $planilla -> save();
-
         $faltaJugador = new Falta;
         $faltaJugador -> IdJugador = $id;
-        $faltaJugador -> IdPlanillaJugador = $planilla -> IdPlanillaJugador;
+        $faltaJugador -> IdPlanillaJugador = $idPlanillaJugador;
         $faltaJugador -> TipoFalta = $selectFalta;
         $faltaJugador -> CantidadTiroLibre = $selectTiroLibre;
         $faltaJugador -> save();

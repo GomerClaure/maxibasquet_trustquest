@@ -123,7 +123,7 @@
                             $jugador=$arregloEquipoA[$contador];
                             $contador++;
                         @endphp
-                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$jugador->IdJugador)}}" method="POST">
+                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$idPlanillaJugador.'/'.$jugador->IdJugador)}}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
@@ -136,26 +136,56 @@
 
                                 <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
                             
-                                    @for ($i = 0; $i < 5 ; $i++)
-                                    <div class="col-2 d-flex justify-content-center ">
-                                        <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($faltas as $falta)
+                                        @if ($jugador->IdJugador == $falta->IdJugador)
+                                        <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="selectFalta{{$i}}" name="selectFalta{{$i}}" disabled>
+                                                @php
+                                                    $select="selectFalta".$i;
+                                                    $selectTiro = "selectTiroLibre".$i;
+                                                @endphp
+                                                <option value="vacio" {{ $falta->TipoFalta == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ $falta->TipoFalta == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ $falta->TipoFalta == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="selectTiroLibre{{$i}}" name="selectTiroLibre{{$i}}" disabled>
+                                                <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ $falta->CantidadTiroLibre == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                        </div>
                                             @php
-                                                $select="selectFalta".($i+1);
-                                                $selectTiro = "selectTiroLibre".($i+1);
+                                                $i++;
                                             @endphp
-                                            <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
-                                            <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
-                                            <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
-                                            <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
-                                            <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
-                                        </select>
-                                        <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
-                                            <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
-                                            <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
-                                            <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
-                                            <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
-                                        </select>
-                                    </div>
+                                        @endif
+
+                                    @endforeach
+                                    @for ($j = $i; $j <= 5 ; $j++)
+                                        <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="selectFalta{{$j}}" name="selectFalta{{$j}}">
+                                                @php
+                                                    $select="selectFalta".$j;
+                                                    $selectTiro = "selectTiroLibre".$j;
+                                                @endphp
+                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="selectTiroLibre{{$j}}" name="selectTiroLibre{{$j}}">
+                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                        </div>
                                     @endfor
                                     <div class="col-2 d-flex justify-content-center">
                                         <button type="submit" class="botones">Guardar</button>
@@ -207,7 +237,7 @@
                             $jugador=$arregloEquipoB[$contador];
                             $contador++;
                         @endphp
-                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$jugador->IdJugador)}}" method="POST">
+                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$idPlanillaJugador.'/'.$jugador->IdJugador)}}" method="POST">
                          @csrf
                             <div class="row">
                                 <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
@@ -220,26 +250,55 @@
 
                                 <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
 
-                                    @for ($i = 0; $i < 5 ; $i++)
-                                    <div class="col-2 d-flex justify-content-center ">
-                                        <select class="form-select" id="selectFalta{{$i+1}}" name="selectFalta{{$i+1}}">
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($faltas as $falta)
+                                        @if ($jugador->IdJugador == $falta->IdJugador)
+                                        <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="selectFalta{{$i}}" name="selectFalta{{$i}}">
+                                                @php
+                                                    $select="selectFalta".$i;
+                                                    $selectTiro = "selectTiroLibre".$i;
+                                                @endphp
+                                                <option value="vacio" {{ $falta->TipoFalta == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ $falta->TipoFalta == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ $falta->TipoFalta == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="selectTiroLibre{{$i}}" name="selectTiroLibre{{$i}}">
+                                                <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ $falta->CantidadTiroLibre == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                        </div>
                                             @php
-                                                $select="selectFalta".($i+1);
-                                                $selectTiro = "selectTiroLibre".($i+1);
+                                                $i++;
                                             @endphp
-                                            <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
-                                            <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
-                                            <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
-                                            <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
-                                            <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
-                                        </select>
-                                        <select class="form-select" id="selectTiroLibre{{$i+1}}" name="selectTiroLibre{{$i+1}}">
-                                            <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
-                                            <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
-                                            <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
-                                            <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
-                                        </select>
-                                    </div>
+                                        @endif
+                                    @endforeach
+                                    @for ($j = $i; $j <= 5 ; $j++)
+                                        <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="selectFalta{{$j}}" name="selectFalta{{$j}}">
+                                                @php
+                                                    $select="selectFalta".$j;
+                                                    $selectTiro = "selectTiroLibre".$j;
+                                                @endphp
+                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="selectTiroLibre{{$j}}" name="selectTiroLibre{{$j}}">
+                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                        </div>
                                     @endfor
                                     <div class="col-2 d-flex justify-content-center">
                                         <button type="submit" class="botones">Guardar</button>
