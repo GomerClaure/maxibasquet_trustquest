@@ -15,6 +15,7 @@ class PartidoSeeder extends Seeder
     public function run()
     {   date_default_timezone_set('America/La_Paz');
         DB::table("partidos")->insert([
+            "IdCategoria"=>3,
             'HoraPartido'=>date("09:00"),
             'LugarPartido'=>'Chancha B UMSS',
             'FechaPartido'=>date("2022-11-24"),

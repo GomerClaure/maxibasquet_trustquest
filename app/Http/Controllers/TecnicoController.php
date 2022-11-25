@@ -181,7 +181,7 @@ class TecnicoController extends Controller
         $datosTecnico = $tecnico[0];
         $equipo = Equipo::find($datosTecnico -> IdEquipo);
         $categoria = Categoria::find($datosTecnico -> IdCategoria);
-        $partido = $this->comprobarPartido($equipo -> IdEquipo);
+        $partido = $this->comprobarPartido($equipo -> IdEquipo,$datosTecnico->IdCategoria);
         if ($partido) {
             return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del tecnico existe un partido en curso o en espera'); 
         }
@@ -193,13 +193,14 @@ class TecnicoController extends Controller
     }
 
     /**Verificar si existe un partido progamado para un equipo */
-    public function comprobarPartido($idEquipo){
+    public function comprobarPartido($idEquipo, $categoria ){
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $horaActual = date('G:i:s');
         $partido = Datos_partidos::select()
                     ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
                     ->where("IdEquipo",$idEquipo)
+                    ->where("partidos.IdCategoria",$categoria)
                     ->where("FechaPartido",">=",$fechaActual)
                     ->where("EstadoPartido","=","espera")
                     ->orwhere("EstadoPartido","=","curso")
