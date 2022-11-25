@@ -18,6 +18,7 @@ class CreateCategoriasPorEquipoTable extends Migration
             $table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedBigInteger("IdCampeonato");
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
             $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos'); 
