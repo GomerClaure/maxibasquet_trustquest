@@ -17,6 +17,7 @@ class CreateCredencialesTable extends Migration
             $table->id("IdCredencial");
             $table->unsignedBigInteger("IdPersona");
             $table->string("CodigoQR")->unique();
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
 

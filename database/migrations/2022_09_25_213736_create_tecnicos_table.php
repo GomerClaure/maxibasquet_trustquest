@@ -20,6 +20,7 @@ class CreateTecnicosTable extends Migration
             $table->unsignedInteger("IdPersona");
             $table->string("RolesTecnicos");
             $table->string("FotoCarnet");
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("IdPersona")->references("IdPersona")->on('personas');
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');

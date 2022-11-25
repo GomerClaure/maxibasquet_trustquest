@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CuerpoTecnico extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     protected $table = "tecnicos";
     protected $primaryKey = 'IdTecnicos';
+    protected $dates =['deleted_at'];
     protected $fillable = ["IdEquipo","IdCategoria","IdPersona","RolesTecnicos","FotoCarnet"];
 
     public function equipo(){
