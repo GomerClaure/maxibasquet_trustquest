@@ -24,55 +24,40 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
         <link rel="stylesheet" href="{{asset('css/stylePlanillaJugador.css')}}">
+        <link rel="stylesheet" href="{{asset('css/StyleNav.css')}}">
 
     </head>
-    <body class="antialiased">
-        <header >
-            <!-- Grey with black text
-            <nav class="navbar navbar-expand-sm navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-            </nav>-->
-        </header>
+    <!--<body class="antialiased">-->
+        @extends('nav')
+        @section('content')
+
             @php
                 $vadido = "¡Valido!";
                 $noVadido = "¡No valido!";
             @endphp
             @if (Session::has('mensaje'))
-                <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <div class="alert alert-success alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeNingunDato'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <div class="alert alert-warning alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeNingunDato')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeErrorOrdenIngreso'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <div class="alert alert-warning alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorOrdenIngreso')}}</h4>
                 </div>
             @endif
 
             @if (Session::has('mensajeDatosNoCompletos'))
-                <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <div class="alert alert-warning alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeDatosNoCompletos')}}</h4>
                 </div>
@@ -142,7 +127,7 @@
                                     @foreach ($faltas as $falta)
                                         @if ($jugador->IdJugador == $falta->IdJugador)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="selectFalta{{$i}}" name="selectFalta{{$i}}" disabled>
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}" disabled>
                                                 @php
                                                     $select="selectFalta".$i;
                                                     $selectTiro = "selectTiroLibre".$i;
@@ -153,7 +138,7 @@
                                                 <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="selectTiroLibre{{$i}}" name="selectTiroLibre{{$i}}" disabled>
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" disabled>
                                                 <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
@@ -168,10 +153,10 @@
                                     @endforeach
                                     @for ($j = $i; $j <= 5 ; $j++)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="selectFalta{{$j}}" name="selectFalta{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
                                                 @php
-                                                    $select="selectFalta".$j;
-                                                    $selectTiro = "selectTiroLibre".$j;
+                                                    $select= $jugador->IdJugador."selectFalta".$j;
+                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
                                                 @endphp
                                                 <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
@@ -179,7 +164,7 @@
                                                 <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="selectTiroLibre{{$j}}" name="selectTiroLibre{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
                                                 <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
@@ -256,7 +241,7 @@
                                     @foreach ($faltas as $falta)
                                         @if ($jugador->IdJugador == $falta->IdJugador)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="selectFalta{{$i}}" name="selectFalta{{$i}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}" disabled>
                                                 @php
                                                     $select="selectFalta".$i;
                                                     $selectTiro = "selectTiroLibre".$i;
@@ -267,7 +252,7 @@
                                                 <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="selectTiroLibre{{$i}}" name="selectTiroLibre{{$i}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" disabled>
                                                 <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
@@ -281,10 +266,10 @@
                                     @endforeach
                                     @for ($j = $i; $j <= 5 ; $j++)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="selectFalta{{$j}}" name="selectFalta{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
                                                 @php
-                                                    $select="selectFalta".$j;
-                                                    $selectTiro = "selectTiroLibre".$j;
+                                                    $select= $jugador->IdJugador."selectFalta".$j;
+                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
                                                 @endphp
                                                 <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
@@ -292,7 +277,7 @@
                                                 <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="selectTiroLibre{{$j}}" name="selectTiroLibre{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
                                                 <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
@@ -309,5 +294,6 @@
                     @endforeach
                     
             </div>
-    </body>
+    <!--</body>-->
+    @endsection
 </html>
