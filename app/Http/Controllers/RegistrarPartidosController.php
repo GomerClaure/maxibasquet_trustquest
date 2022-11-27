@@ -193,13 +193,13 @@ class RegistrarPartidosController extends Controller
 
          $datosEquipoA = new DatoPartido;
         $datosEquipoA->IdEquipo = 1;
-        $datosEquipoA->IdPartido = 1;
+        $datosEquipoA->IdPartido = 2;
         $datosEquipoA->ScoreEquipo = 0;
         $datosEquipoA->save();
 
         $datosEquipoB = new DatoPartido;
         $datosEquipoB->IdEquipo = 2;
-        $datosEquipoB->IdPartido = 1;
+        $datosEquipoB->IdPartido = 2;
         $datosEquipoB->ScoreEquipo = 0;
         $datosEquipoA->save();
 
