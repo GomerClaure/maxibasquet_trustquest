@@ -108,6 +108,7 @@ class EquipoController extends Controller
                    ->join("paises","paises.IdPais","=","aplicaciones.IdPais")
                    ->whereNull('categorias_por_equipo.deleted_at')
                    ->orderBy('equipos.NombreEquipo')
+                   ->orderBy('categorias.NombreCategoria')
                    ->get();
         
         return view('equipo.eliminar',compact('equipos'));
