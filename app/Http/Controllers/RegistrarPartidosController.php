@@ -24,7 +24,6 @@ class RegistrarPartidosController extends Controller
     public function store(Request $request)
     {
 
-        //$datos = request()->all();
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $anio = date('Y') + 2;
@@ -53,29 +52,10 @@ class RegistrarPartidosController extends Controller
             ->first();
 
         //verificar que los equipos no sean los mismos 
-        /* if ($request->selectEquipoA == $request->selectEquipoB) {
+        /*  if ($request->selectEquipoA == $request->selectEquipoB) {
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
-        //verificar la existencia del equipoA
-
-        $consultaEquipoA = DB::table('equipos')
-            ->select('*')
-            ->where('NombreEquipo', $equipoA)
-            ->exists();
-        if (!$consultaEquipoA) {
-            return back()->withInput()->with('mensajeErrorEquipoA', 'El Equipo A no existe');
-        }
-
-        //verificar la existencia del equipo B
-
-        $consultaEquipoB = DB::table('equipos')
-            ->select('*')
-            ->where('NombreEquipo', $equipoB)
-            ->exists();
-        if (!$consultaEquipoB) {
-            return back()->withInput()->with('mensajeErrorEquipoB', 'El Equipo B no existe');
-        }
 
         //verificar que los equipos que pertenezcan a la categoria seleccionada
 
@@ -100,7 +80,7 @@ class RegistrarPartidosController extends Controller
             ->exists();
         if (!$consultaCatEquipoB) {
             return back()->withInput()->with('mensajeErrorCategoriaB', 'El Equipo B no pertenece a la categoria');
-        }*/
+        }
 
         //valdiar cantidad de jugadores A
         $jugadores = DB::table('jugadores')
@@ -109,8 +89,8 @@ class RegistrarPartidosController extends Controller
             ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
             ->get();
 
+
         if (count($jugadores) < 5) {
-            //return response()->json(count($jugadores));
             return back()->whithInput()->with('mensajeErrorCantidadJugadoresA', 'El equipo A no cuenta con la cantidad minima de jugadores');
         }
 
@@ -120,91 +100,100 @@ class RegistrarPartidosController extends Controller
             ->where('jugadores.IdEquipo', '=', $idEquipoB->IdEquipo)
             ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
             ->get();
-
         if (count($jugadores) < 5) {
             //return response()->json(count($jugadores));
             return back()->whithInput()->with('mensajeErrorCantidadJugadoresB', 'El equipo B no cuenta con la cantidad minima de jugadores');
         }
 
         //validar lugar fecha partidos
-        /*$obtenerPartido = DB::table('partidos')
-        ->where('partidos.LugarPartido',$request->lugar)
-        ->where('partidos.HoraPartido',$request->hora)
-        ->where('partidos.FechaPartido',$request->fecha)
-        ->exists();
-        if($obtenerPartido){
+        $obtenerPartido = DB::table('partidos')
+            ->where('partidos.LugarPartido', $request->lugar)
+            ->where('partidos.HoraPartido', $request->hora)
+            ->where('partidos.FechaPartido', $request->fecha)
+            ->exists();
+        if ($obtenerPartido) {
             //return response()->json('el partido ya existen');
-            return back()->whitInput()->with('mesajeErrorMismoPartido','El que partido ya esta registrado');
+            return back()->with('mensajeErrorMismoPartido', 'El partido ya esta registrado en la misma hora,fecha,lugar');
         }*/
 
         //validar la hora del partido que no sean el mismo
-       /*$obtenerPartido2 = DB::table('partidos')
+        $obtenerPartido2 = DB::table('partidos')
             ->where('partidos.LugarPartido', $request->lugar)
             ->where('partidos.FechaPartido', $request->fecha)
-            ->first();
-        $horaPartidoMin = $obtenerPartido2->HoraPartido;
-        $horas = (int)substr($horaPartidoMin, 0, 2);
-        $minutos = (int)substr($horaPartidoMin, 3,6 );
-        $horaActualMax = new DateTime();
-        $horaActualMin = new DateTime();
-        $horaActualMin->setTime($horas, $minutos);
-        $horaActualMax->setTime($horas , $minutos);
-        $horaActualMax->modify('+1 hours');
-        if ($horaActualMin->format('H:i') < $obtenerPartido2->HoraPartido||$horaActualMax->format('H:i')>$obtenerPartido2->HoraPartido) {
-            //return response()->json("la hora no vlaida");
-            return back()->withInput()->with('mensajeErrorHoraMin','la hora y minutos son inavalidos');
-        }*/
+            ->get();
+        //return response()->json($obtenerPartido2);
+        foreach ($obtenerPartido2 as $hora) {
+            if (substr($hora->HoraPartido, 0, 2) == substr($request->hora, 0, 2)) {
+                //return response()->json($hora->HoraPartido);
+                if (!empty($obtenerPartido2)) {
+                    $horaPartidoMin = $hora->HoraPartido;
+                    $horas = (int)substr($horaPartidoMin, 0, 2);
+                    $minutos = (int)substr($horaPartidoMin, 3, 6);
+                    $horaActualMax = new DateTime();
+                    $horaActualMin = new DateTime();
+                    $horaActualMin->setTime($horas, $minutos);
+                    $horaActualMax->setTime($horas, $minutos);
+                    $horaActualMax->modify('+1 hours');
+                    if ($horaActualMin->format('H:i') < $request->hora && $horaActualMax->format('H:i') > $request->hora) {
+                        //return response()->json('hora invalida');
+                        return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos son inavalidos');
+                    } 
+                }
+            }
+        }
+
+
 
         $obtenerPartido = DB::table('partidos')
-        ->where('partidos.LugarPartido',$request->lugar)
-        ->where('partidos.HoraPartido',$request->hora)
-        ->where('partidos.FechaPartido',$request->fecha)
-        ->exists();
+            ->where('partidos.LugarPartido', $request->lugar)
+            ->where('partidos.HoraPartido', $request->hora)
+            ->where('partidos.FechaPartido', $request->fecha)
+            ->exists();
 
         //validar fecha
-        /*$fechaPrevista = $request->fecha;
+        $fechaPrevista = $request->fecha;
         $fechaHoy = Carbon::now();
         if ($fechaHoy > $fechaPrevista) {
             return back()->withInput()->with('mensajeErrorFecha', 'La fecha no esta permitida');
-        }*/
+        }
 
 
         //validar la hora
-        /*$horaMin = new DateTime('2001-01-01');
+        $horaMin = new DateTime('2001-01-01');
         $horaMax = new DateTime('2001-01-01');
-        $horaMin -> setTime(9,00);
-        $horaMax -> setTime(22,00);
+        $horaMin->setTime(9, 00);
+        $horaMax->setTime(22, 00);
         $formatoMin = $horaMin->format('H:i');
         $formatoMax = $horaMax->format('H:i');
         $horaPrevista = $request->hora;
-        if ($formatoMin>$horaPrevista||$formatoMax<$horaPrevista) {
+        if ($formatoMin > $horaPrevista || $formatoMax < $horaPrevista) {
             //return response()->json("la hora es invalida");
             return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
-        }*/
+        }
 
-        /*$nuevoPartido = new Partido;
+        $nuevoPartido = new Partido;
         $nuevoPartido->IdCategoria = 1;
         $nuevoPartido->HoraPartido = $request->hora;
         $nuevoPartido->FechaPartido = $request->fecha;
         $nuevoPartido->LugarPartido = $request->lugar;
         $nuevoPartido->EstadoPartido = 'espera';
-        $nuevoPartido->save();*/
+        $nuevoPartido->save();
 
 
-         $datosEquipoA = new DatoPartido;
-        $datosEquipoA->IdEquipo = 1;
-        $datosEquipoA->IdPartido = 2;
+        $datosEquipoA = new DatoPartido;
+        $datosEquipoA->IdEquipo = $idEquipoA->IdEquipo;
+        $datosEquipoA->IdPartido = $nuevoPartido->IdPartido;
         $datosEquipoA->ScoreEquipo = 0;
         $datosEquipoA->save();
 
         $datosEquipoB = new DatoPartido;
-        $datosEquipoB->IdEquipo = 2;
-        $datosEquipoB->IdPartido = 2;
+        $datosEquipoB->IdEquipo = $idEquipoB->IdEquipo;
+        $datosEquipoB->IdPartido = $nuevoPartido->IdPartido;
         $datosEquipoB->ScoreEquipo = 0;
-        $datosEquipoA->save();
+        $datosEquipoB->save();
 
 
-        //return redirect('/registrarPartidos/create');
+        return redirect('/registrarPartidos/create')->with('mensajeValidoRegistro','Se registro el partido');
         //return response()->json($formatoMin);
     }
 

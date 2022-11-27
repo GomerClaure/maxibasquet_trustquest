@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class DatoPartido extends Model
 {
     use HasFactory;
-    protected $table = "datos_equipo";
+    protected $table = "datos_partidos";
     protected $primaryKey = 'id';
     protected $fillable = ["IdEquipo","IdPartido","ScoreEquipo"];
     
     public function equipo(){
-        return $this->belongsTo(Equipo::class, 'IdEquipo');
+        return $this->hasMany(Equipo::class, 'IdEquipo');
+    }
+    public function partido(){
+        return $this->belongsTo(Partido::class, 'IdPartido');
     }
 }
