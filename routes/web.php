@@ -14,6 +14,7 @@ use App\Http\Controllers\ListaEquiposController;
 use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\EditarJugadorController;
+use App\Http\Controllers\FixturController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
@@ -38,6 +39,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/mostrarFixtur',[FixturController::class,'show']);
 Route::resource('/formulario',FormularioController::class);
 Route::resource('/listaequipos',ListaEquiposController::class);
 Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update']);

@@ -1,4 +1,4 @@
-$listas
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -64,9 +64,9 @@ $listas
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($listas as $lista)
+                                        @foreach ($partidos as $partido)
                                         <tr>
-                                            <td>{{$lista->NombreEquipo}}</td>
+                                            <td>{{$partidos}}</td>
                                             <td ></td>
                                         </tr>
                                         @endforeach
