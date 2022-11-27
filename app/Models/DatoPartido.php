@@ -12,4 +12,7 @@ class DatoPartido extends Model
     protected $primaryKey = 'id';
     protected $fillable = ["IdEquipo","IdPartido","ScoreEquipo"];
     
+    public function equipo(){
+        return $this->belongsTo(Equipo::class, 'IdEquipo');
+    }
 }

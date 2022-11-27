@@ -11,4 +11,8 @@ class Partido extends Model
     protected $table = "partidos";
     protected $primaryKey = 'IdPartido';
     protected $fillable = ["HoraPartido","LugarPartido","FechaPartido","EstadoPartido"];
+
+    public function datosPartido(){
+        return $this->hasMany(DatoPartido::class, 'IdPartido');
+    }
 }

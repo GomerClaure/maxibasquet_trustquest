@@ -9,6 +9,7 @@ use App\Models\Partido;
 use App\Models\Equipo;
 use App\Models\DatoPartido;
 use Carbon\Carbon;
+use DateTime;
 
 class RegistrarPartidosController extends Controller
 {
@@ -126,7 +127,7 @@ class RegistrarPartidosController extends Controller
         }
 
         //validar lugar fecha partidos
-        $obtenerPartido = DB::table('partidos')
+        /*$obtenerPartido = DB::table('partidos')
         ->where('partidos.LugarPartido',$request->lugar)
         ->where('partidos.HoraPartido',$request->hora)
         ->where('partidos.FechaPartido',$request->fecha)
@@ -134,7 +135,31 @@ class RegistrarPartidosController extends Controller
         if($obtenerPartido){
             //return response()->json('el partido ya existen');
             return back()->whitInput()->with('mesajeErrorMismoPartido','El que partido ya esta registrado');
-        }
+        }*/
+
+        //validar la hora del partido que no sean el mismo
+       /*$obtenerPartido2 = DB::table('partidos')
+            ->where('partidos.LugarPartido', $request->lugar)
+            ->where('partidos.FechaPartido', $request->fecha)
+            ->first();
+        $horaPartidoMin = $obtenerPartido2->HoraPartido;
+        $horas = (int)substr($horaPartidoMin, 0, 2);
+        $minutos = (int)substr($horaPartidoMin, 3,6 );
+        $horaActualMax = new DateTime();
+        $horaActualMin = new DateTime();
+        $horaActualMin->setTime($horas, $minutos);
+        $horaActualMax->setTime($horas , $minutos);
+        $horaActualMax->modify('+1 hours');
+        if ($horaActualMin->format('H:i') < $obtenerPartido2->HoraPartido||$horaActualMax->format('H:i')>$obtenerPartido2->HoraPartido) {
+            //return response()->json("la hora no vlaida");
+            return back()->withInput()->with('mensajeErrorHoraMin','la hora y minutos son inavalidos');
+        }*/
+
+        $obtenerPartido = DB::table('partidos')
+        ->where('partidos.LugarPartido',$request->lugar)
+        ->where('partidos.HoraPartido',$request->hora)
+        ->where('partidos.FechaPartido',$request->fecha)
+        ->exists();
 
         //validar fecha
         /*$fechaPrevista = $request->fecha;
@@ -145,23 +170,20 @@ class RegistrarPartidosController extends Controller
 
 
         //validar la hora
-        /*  $hora1 = date('08:00');
-        $hora2 = date('07:00');
-        $hora3 = date('06:00');
-        $hora4 = date('04:00');
-        $hora5 = date('03:00');
-        $hora6 = date('02:00');
-        $hora7 = date('01:00');
-        $hora8 = date('22:00');
-        $hora9 = date('23:00');
-        $horaMax = date('22:00');
-        $horaNul = date('00:00');
+        /*$horaMin = new DateTime('2001-01-01');
+        $horaMax = new DateTime('2001-01-01');
+        $horaMin -> setTime(9,00);
+        $horaMax -> setTime(22,00);
+        $formatoMin = $horaMin->format('H:i');
+        $formatoMax = $horaMax->format('H:i');
         $horaPrevista = $request->hora;
-        if ($horaNul == $horaPrevista || $horaPrevista == $hora1 || $horaPrevista == $hora2 || $horaPrevista == $hora3 || $horaPrevista == $hora4 || $horaPrevista == $hora5 || $horaPrevista == $hora6 || $horaPrevista == $hora7 || $horaPrevista == $hora8 || $horaPrevista == $hora9) {
+        if ($formatoMin>$horaPrevista||$formatoMax<$horaPrevista) {
+            //return response()->json("la hora es invalida");
             return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
         }*/
 
         /*$nuevoPartido = new Partido;
+        $nuevoPartido->IdCategoria = 1;
         $nuevoPartido->HoraPartido = $request->hora;
         $nuevoPartido->FechaPartido = $request->fecha;
         $nuevoPartido->LugarPartido = $request->lugar;
@@ -169,21 +191,21 @@ class RegistrarPartidosController extends Controller
         $nuevoPartido->save();*/
 
 
-        /* $datosEquipoA = new DatoPartido;
-        $datosEquipoA->IdEquipo = $idEquipoA->IdEquipo;
-        $datosEquipoA->IdPartido = $nuevoPartido->IdPartido;
+         $datosEquipoA = new DatoPartido;
+        $datosEquipoA->IdEquipo = 1;
+        $datosEquipoA->IdPartido = 1;
         $datosEquipoA->ScoreEquipo = 0;
         $datosEquipoA->save();
 
         $datosEquipoB = new DatoPartido;
-        $datosEquipoB->IdEquipo = $idEquipoB->IdEquipo;
-        $datosEquipoB->IdPartido = $nuevoPartido->IdPartido;
+        $datosEquipoB->IdEquipo = 2;
+        $datosEquipoB->IdPartido = 1;
         $datosEquipoB->ScoreEquipo = 0;
-        $datosEquipoA->save();*/
+        $datosEquipoA->save();
 
 
         //return redirect('/registrarPartidos/create');
-        return response()->json($request);
+        //return response()->json($formatoMin);
     }
 
     public function create()
