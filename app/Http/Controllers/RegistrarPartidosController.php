@@ -171,8 +171,13 @@ class RegistrarPartidosController extends Controller
             return back()->withInput()->with('mensajeErrorHora', 'La hora no esta permitida');
         }
 
+        $id = DB::table('categorias')
+        ->select('*')
+        ->where('categorias.NombreCategoria',$request->selectCategoria)
+        ->first();
+        //return response()->json($id);
         $nuevoPartido = new Partido;
-        $nuevoPartido->IdCategoria = 1;
+        $nuevoPartido->IdCategoria = $id->IdCategoria;
         $nuevoPartido->HoraPartido = $request->hora;
         $nuevoPartido->FechaPartido = $request->fecha;
         $nuevoPartido->LugarPartido = $request->lugar;
