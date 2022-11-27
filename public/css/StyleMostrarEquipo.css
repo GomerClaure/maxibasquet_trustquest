@@ -8,15 +8,6 @@ html,body{
     color: #e5852a; 
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.card{
-  align-items: center;
-  background-color:#7b7979;
-  padding: auto;
-  color: #ffff;
-  font-size:20px;
-  margin: 10px;
-  flex-direction: row;
-}
 .equipos-card{ 
   display: grid;
   text-align: center; 
@@ -32,9 +23,19 @@ html,body{
     font-size: 14;
     border: #272725;
   } 
-
-
 .col-md-6.imagen{
   display: grid;
   align-content: center;
+}
+.card-title{
+  color: #f8fcff;
+}
+.card{
+  background-color: #272725;
+  align-items: center;
+  padding: auto;
+  color: rgb(255, 248, 248);
+  font-size:20px;
+  margin: 10px;
+  flex-direction: row;
 }

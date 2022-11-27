@@ -123,6 +123,7 @@
                 </div>
             </div>
         </nav>
+    <!--Este es el nav del delegado hacerlo mas bonito-->
     @elseif(auth()->user()->IdRol ==4)
         <nav class="navbar navbar-expand-sm navbar-light">
             <!-- Brand -->
