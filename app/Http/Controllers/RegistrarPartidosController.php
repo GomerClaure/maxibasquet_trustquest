@@ -28,7 +28,7 @@ class RegistrarPartidosController extends Controller
         $fechaActual = date('Y-m-d');
         $anio = date('Y') + 2;
         $fecha = $anio . "-01-01";
-        /*$request->validate(
+        $request->validate(
             [
                 
                 'hora' => 'required',
@@ -36,7 +36,7 @@ class RegistrarPartidosController extends Controller
                 'fecha' => 'required',
             ],
 
-        );*/
+        );
         $categoria = $request->selectCategoria;
         //ids
         $equipoA = $request->selectEquipoA;
