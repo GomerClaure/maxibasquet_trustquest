@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             UsuarioSeeder::class,
             DelegadoSeeder::class,
             JuezSeeder::class,
+            PartidoSeeder::class
         ]);
     }
 }

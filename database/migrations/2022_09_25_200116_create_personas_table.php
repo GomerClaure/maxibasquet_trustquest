@@ -15,7 +15,7 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id("IdPersona");
-            $table->integer("CiPersona")->unique();
+            $table->integer("CiPersona");
             $table->string("NombrePersona",30);
             $table->string("ApellidoPaterno",30);
             $table->string("ApellidoMaterno",30)->nullable();
@@ -25,6 +25,8 @@ class CreatePersonasTable extends Migration
             $table->integer("Edad");
             $table->string("Foto");
             //$table->string("Nacionalidad",25);
+            $table->softDeletes();
+            $table->unique(['CiPersona','deleted_at']);
             $table->timestamps();
         });
     }

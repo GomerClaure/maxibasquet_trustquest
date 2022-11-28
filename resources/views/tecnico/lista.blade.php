@@ -45,7 +45,7 @@
                                     <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm boton "> Volver </a>
                                     
                                     </div>
-                                        <div class="card-body  pt-0 ps-3">
+                                        <div class="card-body  pt-0 ps-3 text-center">
                                             @if(!$tecnicos->isEmpty())
                                             @foreach ($tecnicos as $tecnico)
                                                 <div class="card d-inline-block m-3" style="width: 19rem;">
@@ -59,7 +59,7 @@
                                                     
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
                                                         <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
-                                                        <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btn btn-primary">Detalles</a>
+                                                        <a href="{{url('tecnico'.'/'.$tecnico->IdTecnicos)}}" class="btn btn-primary displayBoton">Detalles</a>
                                                     </div>
                                                 </div>
                                             @endforeach

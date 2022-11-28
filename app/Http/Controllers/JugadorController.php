@@ -39,18 +39,11 @@ class JugadorController extends Controller
                             ->distinct()
                             ->get();
 
-        $arreglo = array();
-        $contador = 0;
-        foreach ($jugadores as $categoria) {
-            $arreglo[$contador] = $categoria->IdCategoria;
-            $contador++;
-        }
-
-        $categorias = DB::table('categorias')
-                        ->select('*')
-                        ->whereIn('IdCategoria',$arreglo)
-                        ->get();
-
+        $categorias = DB::table('categorias_por_equipo')
+                            ->select('*')
+                            ->join('categorias','categorias.IdCategoria','=','categorias_por_equipo.IdCategoria')
+                            ->where('IdEquipo',$id)
+                            ->get();
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
                 ->get();
@@ -169,6 +162,7 @@ class JugadorController extends Controller
                     ->join('categorias','jugadores.IdCategoria','categorias.IdCategoria')
                     ->where('equipos.NombreEquipo','=',$equipo)
                     ->where('categorias.NombreCategoria','=',$categoria)
+                    ->orderBy('personas.NombrePersona')
                     ->get();
 
         $equipos = Equipo::select('NombreEquipo','NombreCategoria')
