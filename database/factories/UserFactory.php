@@ -28,6 +28,11 @@ class UserFactory extends Factory
             'IdRol' => $idRol,
         ]);
     }
+    public function asignarNombre($name){
+        return $this->state([
+            'name' => $name,
+        ]);
+    }
 
     /**
      * Indicate that the model's email address should be unverified.

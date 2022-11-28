@@ -56,25 +56,23 @@
     <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
         <div class="bg-image w-100">
             <div class="mask d-flex align-items-center w-100">
-                <div class="container">
+                <div class="container ">
                     <div class="row justify-content-center">
                         <div class="col-12">
-
-
                             @if($equipo != null)
                             <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                             <h3>Categoria: {{$categoria}}</h3>
-                            <div class="card fondoTabla">
+                            <div class="card fondoTabla ">
                                 <div class="card-header ps-2 py-2 row">
                                     <div class="col-10">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                     </div>
                                     <div class="col-2 d-grid">
-                                        <a type="button" href="{{ url('editarJugadores') }}" class="btn btn-primary"> Volver </a>
+                                        <a type="button" href="{{ url('equipo/delegado') }}" class="btn btn-primary"> Volver </a>
                                     </div>
                                 </div>
 
-                                <div class="card-body  pt-0 ps-3">
+                                <div class="card-body  pt-0 ps-3 text-center">
                                     @if(!$jugadores->isEmpty())
                                     @foreach ($jugadores as $jugador)
                                     <div class="card d-inline-block m-3" style="width: 19rem;">
@@ -88,23 +86,46 @@
 
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
-                                            <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="btn btn-primary">Editar</a>
-                                        </div>
+                                            <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="Boton displayBoton">Editar</a>
+                                            <a href=""class="BotonE BotonRed red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" > Eliminar </a>
+                                                        {{-- Modal --}}
+                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Eliminar Técnico</h1>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
+                                                                        <h4>¿Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?</h4>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
+                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton BotonRed red "> Eliminar </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+    </div>
+
                                     </div>
                                     @endforeach
                                     @else
-
-
-                                    @endif
+                            
+                                    <div class="d-flex justify-content-center">
+                                
+                                    <h3>No se encontraron datos</h3>
                                 </div>
-                            </div>
-                            @else
-                            <div class="d-flex justify-content-center">
-                                <h3>No se encontraron datos</h3>
-                            </div>
+                                
                             @endif
                         </div>
                     </div>
+                    @else
+                                    <div class="d-flex justify-content-center">
+                                        <h3>No se encontraron datos</h3>
+                                    </div>
+                 @endif
                 </div>
             </div>
         </div>

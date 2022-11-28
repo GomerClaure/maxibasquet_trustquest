@@ -19,7 +19,7 @@ class CreateCredencialesTable extends Migration
             $table->string("CodigoQR")->unique();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign("IdPersona")->references("IdPersona")->on('personas');            
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas')->onDelete('cascade');            
 
         });
     }

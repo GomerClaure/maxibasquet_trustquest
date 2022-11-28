@@ -3,10 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>Credeenciales Equipo</title>
-
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleCredenciales.css')}}">
@@ -51,7 +48,7 @@
                                         </a>
                                     
                                     
-                                    @if(!$credencialesJugadores->isEmpty() && !$credencialesTecnicos->isEmpty())
+                                    @if(!$credencialesJugadores->isEmpty() || !$credencialesTecnicos->isEmpty())
                                         <a type="button" href="{{ url('credenciales/pdf/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
                                         Descargar
                                         </a>
@@ -75,37 +72,34 @@
                                                 <div class="accordion-body">
                                                             <div class="row justify-content-center">
                                                             @foreach ($credencialesJugadores as $jugador)
-                                                            <div class="col-4 p-0 mb-3">
-                                                                <div class="card h-100 " >
-                                                                        <div class="card-header">
-                                                                            <h5 class="card-title">Campeonato Maxi-Basquet</h5>
+                                                            <div class="col-6 p-0 mb-3 d-flex justify-content-around">
+                                                                <div class="card card-cred h-100" >
+                                                                        <div class="card-header ">
+                                                                            <h5 class="card-title"> <b> Campeonato Maxi-Basquet</b> </h5>
                                                                         </div>
-                                                                        <div class="card-body">
-                                                                                <div class="d-flex justify-content-center">
-                                                                                    <img class="card-img-top foto img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
-                                                                                </div>
-                                                                                <div class="text-center"><h5><b>Jugador</b></h5></div>
-                                                                                <div>
+                                                                        <div class="card-body ">
+                                                                            
+                                                                                <div class="d-flex justify-content-around">
+                                                                                    <div class="text-center">
+                                                                                        <img class=" card-img-top foto img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                                                        <p><b>Jugador</b></p>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="col-5 m-2">
                                                                                     <p><b>Nombre: </b>{{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}}</p>
+                                                                                    <p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p>
+                                                                                    <p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p>
                                                                                 </div>
-                                                                                <div><p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p> </div>
-                                                                                <div><p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p> </div>
+                                                                                <div class=" " > 
+                                                                                        
+                                                                                        <img class=" card-img-top qr img-fluid" src="{{asset('storage').'/'.$jugador->CodigoQR}}" alt="">
+
+                                                                                </div>
+                                                                                </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4 p-0 me-2 mb-3 " >
-                                                                <div class="card  h-100 credencial ">
-                                                                        <div class="card-header">
-                                                                            <h5 class="card-title">Campeonato Maxi-Basquet</h5>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                                <div class="d-flex justify-content-center">
-                                                                                    <img class="card-img-top qr img-fluid" src="{{asset('storage').'/'.$jugador->CodigoQR}}" alt="">
-                                                                                </div>
-                                                                                <div class="text-center"><h5><b>Escanee el código QR para mayor información</b></h5></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>  
+   
                                                             @endforeach   
                                                             </div>  
                                                         </div>
@@ -124,38 +118,30 @@
                                                             
                                                             <div class="row justify-content-center">
                                                             @foreach ($credencialesTecnicos as $tecnico)
-                                                            <div class="col-4 p-0 mb-3">
-                                                                <div class="card h-100 " >
+                                                            <div class="col-6 p-0 mb-3 d-flex justify-content-around">
+                                                                <div class="card card-cred h-100 " >
                                                                         <div class="card-header">
                                                                             <h5 class="card-title">Campeonato Maxi-Basquet</h5>
                                                                         </div>
                                                                         <div class="card-body">
-                                                                                <div class="d-flex justify-content-center">
-                                                                                    <img class="card-img-top foto img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                                                <div class="d-flex justify-content-around">
+                                                                                    <div class="text-center">
+                                                                                        <img class="card-img-top foto img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                                                        <p><b>{{$tecnico->RolesTecnicos}}</b></p></div>
+                                                                                    <div class="col-5 m-2">
+                                                                                        <p><b>Nombre: </b>{{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}}</p>
+                                                                                        <p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p>
+                                                                                        <p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="">
+                                                                                        <img class="card-img-top qr img-fluid" src="{{asset('storage').'/'.$tecnico->CodigoQR}}" alt="">
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="text-center"><h5><b>{{$tecnico->RolesTecnicos}}</b></h5></div>
-                                                                                <div>
-                                                                                    <p><b>Nombre: </b>{{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}}</p>
-                                                                                </div>
-                                                                                <div><p><b>Equipo: </b> {{$equipo->NombreEquipo}}</p> </div>
-                                                                                <div><p><b>Categoria: </b> {{$equipo->NombreCategoria}}</p> </div>
-                                                                    </div>
+                                                                                
+                                                                            </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4 p-0 me-2 mb-3 " >
-                                                                <div class="card  h-100 credencial ">
-                                                                        <div class="card-header">
-                                                                            <h5 class="card-title">Campeonato Maxi-Basquet</h5>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                                <div class="d-flex justify-content-center">
-                                                                                    <img class="card-img-top qr img-fluid" src="{{asset('storage').'/'.$tecnico->CodigoQR}}" alt="">
-                                                                                </div>
-                                                                                <div class="text-center"><h5><b>Escanee el código QR para mayor información</b></h5></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                                
                                                             @endforeach   
                                                             </div>
                                                         </div>

@@ -22,9 +22,9 @@ class CreateTecnicosTable extends Migration
             $table->string("FotoCarnet");
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign("IdPersona")->references("IdPersona")->on('personas');
-            $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
-            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos');
+            $table->foreign("IdPersona")->references("IdPersona")->on('personas')->onDelete('cascade');
+            $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias')->onDelete('cascade');
+            $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos')->onDelete('cascade');
         });
     }
 
