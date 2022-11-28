@@ -32,6 +32,7 @@ class FormularioController extends Controller
             'aplicaciones.observaciones'
         )
             ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
+            ->orderby('NombreEquipo')
             ->get();
 
         return view("formulario.listaFormulario", compact('aplicaciones'));

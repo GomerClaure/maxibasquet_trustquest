@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Aplicacion;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Models\Jugador;
@@ -203,8 +205,11 @@ class EquipoController extends Controller
         ->where("IdCategoria",$categoria)->delete();
         
         $equipo = Categorias_por_equipo::where("IdEquipo",$id)->get();
+        
         if ($equipo->isEmpty()) {
-            Equipo::where("IdEquipo",$id)->delete();
+           $equi= Equipo::where("IdEquipo",$id)->get();
+           Aplicacion::where('IdAplicacion',$equi[0]->IdAplicacion)->update(['EstadoAplicacion'=>'Eliminado']);
+           Equipo::where("IdEquipo",$id)->delete();
         }
 
         return redirect('/equipo/lista/eliminar')->with('mensaje','Datos del equipo eliminados correctamente'); 
