@@ -20,6 +20,7 @@ class AplicacionController extends Controller
                     ->join('transacciones','aplicaciones.IdAplicacion','=','transacciones.IdAplicacion')
                     ->where("EstadoAplicacion","=","Pendiente")
                     ->orWhere("EstadoAplicacion","=","Aceptado") 
+                    ->orderBy('aplicaciones.NombreEquipo')
                     ->get();
 
         $aplicaciones = $this->ingresarMonto($aplicaciones);

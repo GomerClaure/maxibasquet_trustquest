@@ -23,6 +23,7 @@ class CreateJugadoresTable extends Migration
             $table->string("FotoCarnet");
             $table->string("PosicionJugador");
             $table->integer("NumeroCamiseta");
+            $table->softDeletes();
             $table->timestamps();
           
             $table->foreign("IdPersona")->references("IdPersona")->on('personas')->onDelete('cascade');
