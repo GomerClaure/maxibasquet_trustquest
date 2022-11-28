@@ -124,8 +124,7 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categorriasPorEquipo = ['+30', '+35', '40', '+45', '+50', '55', '60'];
-        // $categoriasGuardadas = Categorias::select("IdCategoria,NombreCategoria")->get();
+        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
         $request->validate(
             [
                 'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
@@ -146,29 +145,25 @@ class FormularioController extends Controller
             $equipo->NombreEquipo = $request->nombreEquipos;
             $equipo->IdAplicacion = $id;
             $equipo->LogoEquipo = 'uploads\logo.jpg';
+           
             $equipo->save();
-            $idEquipo = $equipo->idEquipo;
-            echo $equipo->idEquipo;
+            $idEquipo=$equipo->IdEquipo;
             $categorias = $this->separar($request->categorias);
-            // if (!$categoriasGuardadas -> isEmpty()) {
-            //     $i = 0;
-            //     foreach ($categoriasGuardadas as $categoria) {
-            //         if ($categorias[$i] == $categoria->NombreCategoria) {
-            //             $categoriasEquipo = new Categorias_por_equipo();
-            //             $categoriasEquipo->IdEquipo = $idEquipo;
-            //             $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
-            //             $categoriasEquipo->IdCampeonato = 1;
-            //         }
-            //         $i++;
-            //     }
-            // }
-            for ($i = 0; $i < sizeof($categorias); $i++) {
-                if ($categorias[$i] == $categorriasPorEquipo[$i]) {
-                    $categoriasEquipo = new Categorias_por_equipo();
-                    $categoriasEquipo->IdEquipo = $idEquipo;
-                    $categoriasEquipo->IdCategoria = $i;
-                    $categoriasEquipo->IdCampeonato = 1;
-                }
+            if (!$categoriasGuardadas -> isEmpty()) {
+                
+                foreach ($categoriasGuardadas as $categoria) {
+                    for ($i=0; $i < sizeof($categorias); $i++) { 
+                        if ($categorias[$i] == $categoria->NombreCategoria) {
+                            $categoriasEquipo = new Categorias_por_equipo();
+                            $categoriasEquipo->IdEquipo = $idEquipo;
+                            $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
+                            $categoriasEquipo->IdCampeonato = 1;
+                            $categoriasEquipo;
+                            $categoriasEquipo->save();
+                        }
+                    }
+            
+          }
             }
         }
         $datosApp = Aplicaciones::find($id);
