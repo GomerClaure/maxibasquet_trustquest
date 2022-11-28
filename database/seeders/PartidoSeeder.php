@@ -19,7 +19,7 @@ class PartidoSeeder extends Seeder
             "IdCategoria"=>1,
             'HoraPartido'=>date("09:00"),
             'LugarPartido'=>'Chancha B UMSS',
-            'FechaPartido'=>date("2022-11-24"),
+            'FechaPartido'=>date("2022-12-24"),
             'EstadoPartido'=>'espera',
             'created_at'=>now(),
             'updated_at'=>now()
@@ -40,7 +40,40 @@ class PartidoSeeder extends Seeder
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
+        DB::table("partidos")->insert([
+            "IdCategoria"=>1,
+            'HoraPartido'=>date("11:00"),
+            'LugarPartido'=>'Chancha D UMSS',
+            'FechaPartido'=>date("2022-12-24"),
+            'EstadoPartido'=>'espera',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
 
+        DB::table("datos_partidos")->insert([
+            'IdEquipo'=>1,
+            'IdPartido'=>2,
+            'ScoreEquipo'=>0,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+        DB::table("datos_partidos")->insert([
+            'IdEquipo'=>3,
+            'IdPartido'=>2,
+            'ScoreEquipo'=>0,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+        DB::table("partidos")->insert([
+            "IdCategoria"=>1,
+            'HoraPartido'=>date("09:00"),
+            'LugarPartido'=>'Chancha E UMSS',
+            'FechaPartido'=>date("2022-12-24"),
+            'EstadoPartido'=>'espera',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
 
     }
 }
