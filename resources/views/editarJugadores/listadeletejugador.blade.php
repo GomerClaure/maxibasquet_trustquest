@@ -86,8 +86,26 @@
 
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
-                                            <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="Boton displayBoton">Editar</a>
-                                            
+                                            <a href=""class="BotonE BotonRed red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" > Eliminar</a>
+                                                        {{-- Modal --}}
+                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Eliminar Jugador</h1>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
+                                                                        <h4>¿Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?</h4>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
+                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton BotonRed red "> Eliminar </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
     </div>
 
                                     </div>

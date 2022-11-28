@@ -11,6 +11,17 @@
     background-color: #eb8f32;
     color: white;
 }
+.lista{
+    background-color: rgb(48, 46, 46);
+    margin: auto;
+    text-align: center;
+}
+.tabla{
+    background-color: #b5b5bd;
+    margin-left:20px;
+    margin-right: 20px;
+    padding: 5px;
+}
 .textoPais{
     color: white;
     margin-top: 20px;

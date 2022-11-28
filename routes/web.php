@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 use App\Http\Controllers\JuezController;
+use App\Http\Controllers\DeleteJugadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,10 @@ Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update'])-
 Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado']);
+//5545
+Route::get('/DeleteJugador',[DeleteJugadorController::class,'index'])->middleware(['auth','delegado']);
+Route::get('/DeleteJugador/{equipo}/{categoria}',[DeleteJugadorController::class,'show'])->middleware(['auth','delegado']);
+//454
 Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado'])->middleware(['auth','delegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index'])->middleware(['auth','delegado']);
