@@ -52,7 +52,7 @@ class RegistrarPartidosController extends Controller
             ->first();
 
         //verificar que los equipos no sean los mismos 
-        /*  if ($request->selectEquipoA == $request->selectEquipoB) {
+        if ($request->selectEquipoA == $request->selectEquipoB) {
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
@@ -114,7 +114,7 @@ class RegistrarPartidosController extends Controller
         if ($obtenerPartido) {
             //return response()->json('el partido ya existen');
             return back()->with('mensajeErrorMismoPartido', 'El partido ya esta registrado en la misma hora,fecha,lugar');
-        }*/
+        }
 
         //validar la hora del partido que no sean el mismo
         $obtenerPartido2 = DB::table('partidos')
@@ -137,7 +137,7 @@ class RegistrarPartidosController extends Controller
                     if ($horaActualMin->format('H:i') < $request->hora && $horaActualMax->format('H:i') > $request->hora) {
                         //return response()->json('hora invalida');
                         return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos son inavalidos');
-                    } 
+                    }
                 }
             }
         }
@@ -172,9 +172,9 @@ class RegistrarPartidosController extends Controller
         }
 
         $id = DB::table('categorias')
-        ->select('*')
-        ->where('categorias.NombreCategoria',$request->selectCategoria)
-        ->first();
+            ->select('*')
+            ->where('categorias.NombreCategoria', $request->selectCategoria)
+            ->first();
         //return response()->json($id);
         $nuevoPartido = new Partido;
         $nuevoPartido->IdCategoria = $id->IdCategoria;
@@ -198,7 +198,7 @@ class RegistrarPartidosController extends Controller
         $datosEquipoB->save();
 
 
-        return redirect('/registrarPartidos/create')->with('mensajeValidoRegistro','Se registro el partido');
+        return redirect('/registrarPartidos/create')->with('mensajeValidoRegistro', 'Se registro el partido');
         //return response()->json($formatoMin);
     }
 
