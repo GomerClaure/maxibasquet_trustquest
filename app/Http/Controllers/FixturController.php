@@ -18,7 +18,7 @@ class FixturController extends Controller
         ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
         ->get();
 
-        //return response()->json($partidos[0]->NombreEquipo);
+        //return response()->json($nombres);
         return view("fixtur.mostrar",compact('nombres'));
     }
 }

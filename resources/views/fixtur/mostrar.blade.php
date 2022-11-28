@@ -69,7 +69,9 @@
                                         @for ($i=0;$i<sizeof($nombres);$i++)
                                         <tr>
                                             @if($i+1!=sizeof($nombres))
-                                            <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
+                                                @if($nombres[$i]->NombreEquipo!=$nombres[$i+1]->NombreEquipo)
+                                                <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
+                                                @endif
                                             @endif
                                         </tr>
                                         @endfor
