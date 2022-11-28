@@ -27,4 +27,5 @@ class AplicacionFactory extends Factory
 
         ];
     }
+    
 }
