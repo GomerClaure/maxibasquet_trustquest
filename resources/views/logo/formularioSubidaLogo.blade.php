@@ -40,6 +40,13 @@
     
 </section>
 </div>
+<div>
+    <h4>Pais</h4>
+    <a href="{{url('jugador'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn btn-primary">Registrar Jugador</a>
+    <a href="{{url('tecnico'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn btn-primary">Registrar Tecnico</a>
+
+</div>
+
 <script>
     $(function(){
 
@@ -74,6 +81,5 @@
 
     })
 </script>
-
 @endsection
 </html>

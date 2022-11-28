@@ -1,5 +1,8 @@
-html,body{
+body{
   background:#171f27;
+}
+.card-body{
+  background-color: #5a5a56;
 }
 .tituloEquipos{
   margin-top: 20px;
@@ -27,11 +30,8 @@ html,body{
   display: grid;
   align-content: center;
 }
-.card-title{
-  color: #f8fcff;
-}
 .card{
-  background-color: #272725;
+  background-color: #5a5a56;
   align-items: center;
   padding: auto;
   color: rgb(255, 248, 248);
