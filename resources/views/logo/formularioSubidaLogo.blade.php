@@ -40,11 +40,28 @@
     
 </section>
 </div>
+<div class="botones_jugador">
+    <h4 class="textoPais">Pais:</h4>
+    <a href="{{url('jugador'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Jugador</a>
+    <a href="{{url('tecnico'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Tecnico</a>
+</div>
 <div>
-    <h4>Pais</h4>
-    <a href="{{url('jugador'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn btn-primary">Registrar Jugador</a>
-    <a href="{{url('tecnico'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn btn-primary">Registrar Tecnico</a>
-
+<div class="card-body  pt-0 ps-3 ">
+                                <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                                <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
+                                    <thead>
+                                    <tr>
+                                        <th>Categorias </th>
+                                        <th>Jugadores</th>
+                                        <th>Tecnicos</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
 </div>
 
 <script>

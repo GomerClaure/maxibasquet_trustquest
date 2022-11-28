@@ -11,8 +11,20 @@
     background-color: #eb8f32;
     color: white;
 }
+.textoPais{
+    color: white;
+    margin-top: 20px;
+    margin-left: 50px;
+}
 .btn.botonSubirLogo:first-child:hover{
     background: #fa841a;
+}
+.btn.botoncreate{
+
+    margin: 20px;
+    padding: 10px;
+    background-color: #eb8f32;
+    color: white;
 }
 .error-message{
     color: red;

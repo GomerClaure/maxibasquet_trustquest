@@ -30,4 +30,5 @@ class SubirLogoController extends Controller
         return redirect('subirLogo/'.$id);
         // return $request;
     }
+
 }

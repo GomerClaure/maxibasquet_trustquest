@@ -145,7 +145,7 @@
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
                             </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{url('/subirLogo/1')}}">Mi Equipo</a>
+                            <a class="nav-link active" href="{{url('/subirLogo/')}}">Mi Equipo</a>
                             </li>
                         <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
