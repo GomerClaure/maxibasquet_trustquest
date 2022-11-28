@@ -249,6 +249,7 @@ class JugadorController extends Controller
         //
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -257,6 +258,22 @@ class JugadorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    
+        /*
+        $datosJugador = $jugador[0];
+         
+        
+        $foto = $datosJugador->Foto;
+        $path = '../storage/app/public/'.$foto;
+        $credencial = '../storage/app/public/qrcodes/'.$datosJugador->IdJugador.$datosJugador->CiPersona.'.png';
+        File::delete($path);
+        File::delete($credencial);
+        $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+        $equipo = Equipo::find($datosJugador -> IdEquipo);
+        $categoria = Categoria::find($datosJugador -> IdCategoria);
+        return redirect('jugador/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del jugador eliminados correctamente'); 
+       */ 
+    
     }
 }
