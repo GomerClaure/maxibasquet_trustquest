@@ -65,7 +65,7 @@
                                     <thead>
                                     <tr>
                                         <th>logo del Equipo</th>
-                                        <th>Nombre de Equipo </th>
+                                        <th>Nombre del Equipo </th>
                                         <th>País</th>
                                         <th>Categoria</th>
                                         <th>Eliminar</th>
