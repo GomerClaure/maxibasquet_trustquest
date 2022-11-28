@@ -66,15 +66,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($partidos as $partido)
+                                        @for ($i=0;$i<sizeof($nombres);$i++)
                                         <tr>
-                                            <td>{{$partido->NombreEquipo}}</td>
-                                            <td>{{$partido->FechaPartido}}</td>
-                                            <td>{{$partido->LugarPartido}}</td>
-                                            <td>{{$partido->HoraPartido}}</td>
-
+                                            @if($i+1!=sizeof($nombres))
+                                            <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
+                                            @endif
                                         </tr>
-                                        @endforeach
+                                        @endfor
                                     </tbody>
                                 </table>
                                 </div>
