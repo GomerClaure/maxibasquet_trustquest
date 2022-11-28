@@ -48,7 +48,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h1 class="text-center titulo"> <b>{{$equipo}}</b></h1>
+                                <h1 class="text-center titulo"> <b>{{$equipo}} -- Tecnicos</b></h1>
                                 <h3 class="titulo">Categoria: {{$categoria}}</h3>
                                 <div class="card contenedorCard">
                                     <div class="card-header ps-3 py-2 row">
@@ -74,25 +74,7 @@
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
                                                         <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
                                                         <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar displayBoton ">Editar</a>
-                                                        <a href=""class="Boton red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}" > Eliminar </a>
-                                                        {{-- Modal --}}
-                                                        <div class="modal fade" id="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}" tabindex="-1" aria-labelledby="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}Label" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}Label">Eliminar Técnico</h1>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img class="card-img-top" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
-                                                                        <h4>¿Deseea eliminar los datos de {{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}?</h4>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/tecnico/'.$tecnico->IdTecnicos)}}"class="Boton red"> Eliminar </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                    
                                                     </div>
                                                 </div>
                                             @endforeach
