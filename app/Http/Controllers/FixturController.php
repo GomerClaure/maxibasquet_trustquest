@@ -13,9 +13,12 @@ class FixturController extends Controller
 
     public function show(){
         $partidos = DB::table('partidos')
-        ->select('*')
+        ->select('NombreEquipo','HoraPartido','LugarPartido','FechaPartido')
+        ->join('datos_partidos','partidos.IdPartido','=','datos_partidos.IdPartido')
+        ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
         ->get();
-        //return response()->json($partidos);
+
+        //return response()->json($partidos[0]->NombreEquipo);
         return view("fixtur.mostrar",compact('partidos'));
     }
 }
