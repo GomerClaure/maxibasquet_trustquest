@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 use App\Http\Controllers\JuezController;
+use App\Http\Controllers\RegistrarPlanillaJuegoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +99,4 @@ Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->m
 
 
 //Usuario Anotador-Juez
+Route::get('/registrarJueces/{id}',[RegistrarPlanillaJuegoController::class,'registro'])->middleware(['auth','juez']);

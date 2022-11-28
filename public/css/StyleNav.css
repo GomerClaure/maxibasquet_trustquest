@@ -6,10 +6,10 @@ body,html{
   height: 70px;
   width: 70px;
 }
-nav{
+.menu{
     background-color:  hsl(0, 0%, 78%);
 }
-.nav-link{
+.menu .nav-link{
   height: 60px;
   display: flex;
   align-items: center;
@@ -18,13 +18,13 @@ nav{
   display: inline-block;
   text-align: center;
 }
-.nav-item:hover{
+.menu .nav-item:hover{
   background-color: #eb8f32;
 }
 .dropdown-menu{
   min-width: 100%;
 }
-.dropdown-menu li a{
-  padding: 10px 5px 10px 5px;
+.menu .dropdown-menu  a{
+  padding: 10px 5px 8px 5px;
   font-size: 15px;
 }
