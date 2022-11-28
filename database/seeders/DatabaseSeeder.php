@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\JuecesPorPartido;
 use App\Models\Juez;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,8 @@ class DatabaseSeeder extends Seeder
             UsuarioSeeder::class,
             DelegadoSeeder::class,
             JuezSeeder::class,
+            PartidoSeeder::class,
+            JuecesPorPartidoSeeder::class,
         ]);
     }
 }

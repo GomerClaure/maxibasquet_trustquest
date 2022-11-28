@@ -15,7 +15,6 @@ class JuecesPorPartidoFactory extends Factory
     public function definition()
     {
         return [
-            'IdPartido' => $this->faker->name(),
             'IdJuez' => Juez::factory(),
             'created_at' => now(),
             'updated_at' => now()
