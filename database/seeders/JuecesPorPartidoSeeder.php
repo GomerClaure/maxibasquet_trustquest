@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Juez;
+use Illuminate\Support\Facades\DB;
+use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 
-class JuezSeeder extends Seeder
+class JuecesPorPartidoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +15,6 @@ class JuezSeeder extends Seeder
      */
     public function run()
     {
-        Juez::factory(20)->create();
+        Equipo::factory(10)->create();
     }
 }

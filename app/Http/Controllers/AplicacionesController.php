@@ -94,9 +94,9 @@ class AplicacionesController extends Controller
             $categorias,$formulario[config('constants.PAIS')]);
             // print_r($sePuedeGuardarAplicacion);
             if ($sePuedeGuardarAplicacion) {
-                // $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
-                // $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
-                echo "Siii, se guardará la aplicacion";
+                $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
+                $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
+                // echo "Siii, se guardará la aplicacion";
             }else {
                 throw new Exception('Existe un equipo con la misma categoria', 3);
             }
