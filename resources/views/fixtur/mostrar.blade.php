@@ -71,8 +71,13 @@
                                             @if($i+1!=sizeof($nombres))
                                                 @if($nombres[$i]->NombreEquipo!=$nombres[$i+1]->NombreEquipo)
                                                 <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
+                                                <td>{{$fechas[$i]->FechaPartido}}</td>
+                                                <td>{{$lugares[$i]->LugarPartido}}</td>
+                                                <td>{{$horas[$i]->HoraPartido}}</td>
                                                 @endif
+                                                
                                             @endif
+                                            
                                         </tr>
                                         @endfor
                                     </tbody>
