@@ -27,13 +27,19 @@ class RegistrarPlanillaJuegoController extends Controller
     }
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');
-        // DB::table("jueces_por_partidos")->insert([
-        //     'IdJuez' => $formulario['anotadorPrincipal'],
-        //     'IdPartido'=>$formulario['id'],
-        //     'TipoJuez'=>'primerJuez',
-        //     'created_at'=>now(),
-        //     'updated_at'=>now()
-        // ]);
+        $arrayjuecesrepetidos = array_count_values([$formulario['anotadorPrincipal'],$formulario['anotadorAsistente'],$formulario['cronometrista'],$formulario['apuntador']]);
+        foreach ($arrayjuecesrepetidos as $key => $value) {
+            if ($value >= 2) {
+                return back()->withInput()->with('errorJueces','No puede existir un juez con dos cargos en el partido.');
+            }
+        }
+        DB::table("jueces_por_partidos")->insert([
+            'IdJuez' => $formulario['anotadorPrincipal'],
+            'IdPartido'=>$formulario['id'],
+            'TipoJuez'=>'primerJuez',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
         DB::table("jueces_por_partidos")->insert([
             'IdJuez' => $formulario['anotadorAsistente'],
             'IdPartido'=>$formulario['id'],
@@ -55,21 +61,6 @@ class RegistrarPlanillaJuegoController extends Controller
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
-        // $juecesPorPartido = new JuecesPorPartido();
-        // $juecesPorPartido->IdPartido = $formulario['id'];
-        // $juecesPorPartido->IdJuez = $formulario['anotadorPrincipal'];
-        // $juecesPorPartido->TipoJuez = 'primerJuez';
-        // $juecesPorPartido->save();
-        // $juecesPorPartido->IdJuez = $formulario['anotadorAsistente'];
-        // $juecesPorPartido->TipoJuez = 'segundoJuez';
-        // $juecesPorPartido->save();
-        // $juecesPorPartido->IdJuez = $formulario['cronometrista'];
-        // $juecesPorPartido->TipoJuez = 'cronometrista';
-        // $juecesPorPartido->save();
-        // $juecesPorPartido->IdJuez = $formulario['apuntador'];
-        // $juecesPorPartido->TipoJuez = 'cronometrista';
-        // $juecesPorPartido->save();
-        // return $request;
         return redirect('registroJugadas/'.$request->id);
     }
     public function mostrarRegistroJueces($id)
@@ -90,38 +81,44 @@ class RegistrarPlanillaJuegoController extends Controller
     private function getJuecesValidos($id){
         date_default_timezone_set('America/La_Paz');
         $partido = Partido::find($id);
-        $this->fechaPartidoActual = $partido->FechaPartido;
-        $this->horaPartidoActual = $partido->HoraPartido;
-        $partidosProgramados = Partido::select('partidos.FechaPartido', 'partidos.HoraPartido','jueces_por_partidos.IdJuez')
-                                ->join('jueces_por_partidos','jueces_por_partidos.IdPartido','=','partidos.IdPartido')
-                                ->where(function($query) {
-                                    $query->orWhere('partidos.EstadoPartido','=','espera')
-                                    ->orWhere('partidos.EstadoPartido', '=', 'jugando');
-                                })
-                                ->where(function($query) {
-                                    $query->where('partidos.FechaPartido', '=', $this->fechaPartidoActual)
-                                    ->orWhere('partidos.HoraPartido', '=', $this->horaPartidoActual);
-                                })
-                                ->get();
-        
-        $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno','jueces.IdJuez')
-                            ->join('personas','personas.IdPersona','=','jueces.IdPersona')
-                            ->get();
-        $juecesValidos = array();
-        foreach ($jueces as $key => $juez) {
-            $valido = true;
-            foreach ($partidosProgramados as $key => $partidoProgramado) {
-                if ($juez->IdJuez == $partidoProgramado->IdJuez) {
-                    $valido = false;
-                    break;
-                }
-            }
-            if ($valido) {
-                array_push($juecesValidos,$juez);
-            }
+        if($partido){
+            $this->fechaPartidoActual = $partido->FechaPartido;
+            $this->horaPartidoActual = $partido->HoraPartido;
+            $partidosProgramados = Partido::select('partidos.FechaPartido', 'partidos.HoraPartido','jueces_por_partidos.IdJuez')
+                                    ->join('jueces_por_partidos','jueces_por_partidos.IdPartido','=','partidos.IdPartido')
+                                    ->where(function($query) {
+                                        $query->orWhere('partidos.EstadoPartido','=','espera')
+                                        ->orWhere('partidos.EstadoPartido', '=', 'jugando');
+                                    })
+                                    ->where(function($query) {
+                                        $query->where('partidos.FechaPartido', '=', $this->fechaPartidoActual)
+                                        ->orWhere('partidos.HoraPartido', '=', $this->horaPartidoActual);
+                                    })
+                                    ->get();
             
+            $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno','jueces.IdJuez')
+                                ->join('personas','personas.IdPersona','=','jueces.IdPersona')
+                                ->get();
+            $juecesValidos = array();
+            foreach ($jueces as $key => $juez) {
+                $valido = true;
+                foreach ($partidosProgramados as $key => $partidoProgramado) {
+                    if ($juez->IdJuez == $partidoProgramado->IdJuez) {
+                        $valido = false;
+                        break;
+                    }
+                }
+                if ($valido) {
+                    array_push($juecesValidos,$juez);
+                }
+                
+            }
+            // return $partidosProgramados;
+            return $juecesValidos;
+            
+        }else{
+            return abort(404);
         }
-        // return $partidosProgramados;
-        return $juecesValidos;
+        
     }
 }

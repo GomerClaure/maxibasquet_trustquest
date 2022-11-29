@@ -21,6 +21,12 @@
       <div class="col-3"></div>
       <div class="col pasos">
         <h1 for="Holi">Asignar Jueces</h1>
+        @if (Session::has('errorJueces'))
+            <div class="alert alert-danger alert-dismissible d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <p>{{Session::get('errorJueces')}}</p>
+            </div>
+        @endif
         <form class="formularioRegistro" action="{{route('registrarJueces',['id' => $id])}}" method="POST" enctype="multipart/form-data" novalidate>
           @csrf
           <div class="card login">

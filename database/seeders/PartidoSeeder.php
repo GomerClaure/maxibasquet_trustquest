@@ -18,11 +18,7 @@ class PartidoSeeder extends Seeder
             "IdCategoria"=>1,
             'HoraPartido'=>date("09:00"),
             'LugarPartido'=>'Chancha B UMSS',
-<<<<<<< HEAD
             'FechaPartido'=>date("2022-12-24"),
-=======
-            'FechaPartido'=>date("2022-11-24"),
->>>>>>> Develop
             'EstadoPartido'=>'espera',
             'created_at'=>now(),
             'updated_at'=>now()
@@ -43,7 +39,6 @@ class PartidoSeeder extends Seeder
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
-<<<<<<< HEAD
         DB::table("partidos")->insert([
             "IdCategoria"=>1,
             'HoraPartido'=>date("11:00"),
@@ -78,9 +73,6 @@ class PartidoSeeder extends Seeder
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
-=======
-
->>>>>>> Develop
 
     }
 }
