@@ -28,7 +28,7 @@
     @if (Session::has('mensajeErrorCategoria'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaA')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
     </div>
     @endif
 
@@ -37,7 +37,7 @@
     @if (Session::has('mensajeErrorCantidadJugadores'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCantidadJugadoresA')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCantidadJugadores')}}</h4>
     </div>
     @endif
 
