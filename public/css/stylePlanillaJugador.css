@@ -60,3 +60,9 @@ body{
 .titulo{
     color: white;
 }
+
+.tituloLista{
+    color: #fa841a;
+    font-weight: bold;
+    font-size: 3rem;
+}

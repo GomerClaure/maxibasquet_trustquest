@@ -49,251 +49,37 @@
                 </div>
             @endif
 
-            @if (Session::has('mensajeErrorOrdenIngreso'))
-                <div class="alert alert-warning alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorOrdenIngreso')}}</h4>
-                </div>
-            @endif
+            <h1 class="tituloLista d-flex justify-content-center mt-5">Partidos Del Campeonato Maxi Basquet</h1>
 
-            @if (Session::has('mensajeDatosNoCompletos'))
-                <div class="alert alert-warning alert-dismissible col-10 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeDatosNoCompletos')}}</h4>
-                </div>
-            @endif
-
-            <div class="col-10 p-4 mx-auto contenedorForm" >
-                <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">PLANILLA DE JUGADOR</h1>
-                </div>
-                    
-                    <div class="row">
-                        <h1 class="tituloEquipo">{{$equipoA -> NombreEquipo}}</h1>
-                        <div class="col-4 d-flex justify-content-center border border-dark pt-3">
-                            <h3 class="">Nombre de jugador</h3>
+            <div class="card col-8 row mx-auto mt-5">
+                <!--<div class="card-header ps-3 py-2 row">
+                    <div class="col-10">
+                        <h4 class="text-black card-title"><b>Partidos</b> </h4>
+                    </div>
+                    <div class="col-2 d-grid">
+                        <a type="button" href="{{url('')}}" class="btn"> Volver </a>
+                    </div>
+                </div>-->
+                @for ($i=0;$i<sizeof($datos);$i++)
+                    <div class="card-body border-bottom m-0 col-12 row">
+                        <div class="col-4">
+                            <h2 class="d-flex justify-content-center">{{$datos[$i]->NombreEquipo}}</h2>
                         </div>
-
-                        <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
-                            <h3 class="">Camiseta</h3>
+                        <div class="col-1 mx-auto">
+                            <h2 class="d-flex justify-content-center">VS</h2>
                         </div>
-
-                        <div class="col-7 d-flex  row border border-start-0 border-dark">
-                            <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 2</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 3</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 4</h5>  
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 5</h5>
-                            </div>
+                        <div class="col-4">
+                            <h2 class="d-flex justify-content-center">{{$datos[$i+1]->NombreEquipo}}</h2>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto">Planilla De Jugadores</a>
                         </div>
                     </div>
-                    
-                    @php
-                        $contador = 0;
-                    @endphp
-                    @foreach ($personasA as $persona)
-                        
-                        @php
-                            $jugador=$arregloEquipoA[$contador];
-                            $contador++;
-                        @endphp
-                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$idPlanillaJugador.'/'.$jugador->IdJugador)}}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                                    <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
-                                </div>
-
-                                <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                                    <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
-                                </div>
-
-                                <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
-                            
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @foreach ($faltas as $falta)
-                                        @if ($jugador->IdJugador == $falta->IdJugador)
-                                        <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}" disabled>
-                                                @php
-                                                    $select="selectFalta".$i;
-                                                    $selectTiro = "selectTiroLibre".$i;
-                                                @endphp
-                                                <option value="vacio" {{ $falta->TipoFalta == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="P" {{ $falta->TipoFalta == 'P' ? 'selected' : '' }}>P</option>
-                                                <option value="T" {{ $falta->TipoFalta == 'T' ? 'selected' : '' }}>T</option>
-                                                <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
-                                                <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
-                                            </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" disabled>
-                                                <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ $falta->CantidadTiroLibre == '3' ? 'selected' : '' }}>3</option>
-                                            </select>
-                                        </div>
-                                            @php
-                                                $i++;
-                                            @endphp
-                                        @endif
-
-                                    @endforeach
-                                    @for ($j = $i; $j <= 5 ; $j++)
-                                        <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
-                                                @php
-                                                    $select= $jugador->IdJugador."selectFalta".$j;
-                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
-                                                @endphp
-                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
-                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
-                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
-                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
-                                            </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
-                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
-                                            </select>
-                                        </div>
-                                    @endfor
-                                    <div class="col-2 d-flex justify-content-center">
-                                        <button type="submit" class="botones">Guardar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    @endforeach
                 
-
-
-                    <div class="row mt-5">
-                        <h1 class="tituloEquipo">{{$equipoB -> NombreEquipo}}</h1>
-                        <div class="col-4 d-flex justify-content-center border border-dark pt-3">
-                            <h3 class="">Nombre de jugador</h3>
-                        </div>
-
-                        <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
-                            <h3 class="">Camiseta</h3>
-                        </div>
-
-                        <div class="col-7 d-flex  row border border-start-0 border-dark">
-                            <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
-
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 2</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 3</h5>
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 4</h5>  
-                            </div>
-                            <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 5</h5>
-                            </div>
-                        </div>
-                    </div>
-
                     @php
-                        $contador = 0;
+                        $i++;
                     @endphp
-                    @foreach ($personasB as $persona)
-                        
-                        @php
-                            $jugador=$arregloEquipoB[$contador];
-                            $contador++;
-                        @endphp
-                        <form action="{{ url('/planilla/jugador/'.$idPartido.'/'.$idPlanillaJugador.'/'.$jugador->IdJugador)}}" method="POST">
-                         @csrf
-                            <div class="row">
-                                <div class="col-4 d-flex justify-content-center border border-dark pt-2 pb-2">
-                                    <h5 class="mb-0 nombre">{{$persona->NombrePersona}} {{$persona->ApellidoPaterno}} {{$persona->ApellidoMaterno}}</h5>
-                                </div>
-
-                                <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-2 pb-2">
-                                    <h5 class="mb-0 camiseta">{{$jugador->NumeroCamiseta}}</h5>
-                                </div>
-
-                                <div class="col-7 d-flex justify-content-center row border border-start-0 border-dark pt-2 pb-2">
-
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @foreach ($faltas as $falta)
-                                        @if ($jugador->IdJugador == $falta->IdJugador)
-                                        <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}" disabled>
-                                                @php
-                                                    $select="selectFalta".$i;
-                                                    $selectTiro = "selectTiroLibre".$i;
-                                                @endphp
-                                                <option value="vacio" {{ $falta->TipoFalta == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="P" {{ $falta->TipoFalta == 'P' ? 'selected' : '' }}>P</option>
-                                                <option value="T" {{ $falta->TipoFalta == 'T' ? 'selected' : '' }}>T</option>
-                                                <option value="U" {{ $falta->TipoFalta == 'U' ? 'selected' : '' }}>U</option>
-                                                <option value="D" {{ $falta->TipoFalta == 'D' ? 'selected' : '' }}>D</option>
-                                            </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" disabled>
-                                                <option value="vacio" {{ $falta->CantidadTiroLibre == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="1" {{ $falta->CantidadTiroLibre == '1' ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ $falta->CantidadTiroLibre == '2' ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ $falta->CantidadTiroLibre == '3' ? 'selected' : '' }}>3</option>
-                                            </select>
-                                        </div>
-                                            @php
-                                                $i++;
-                                            @endphp
-                                        @endif
-                                    @endforeach
-                                    @for ($j = $i; $j <= 5 ; $j++)
-                                        <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
-                                                @php
-                                                    $select= $jugador->IdJugador."selectFalta".$j;
-                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
-                                                @endphp
-                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
-                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
-                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
-                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
-                                            </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
-                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
-                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
-                                            </select>
-                                        </div>
-                                    @endfor
-                                    <div class="col-2 d-flex justify-content-center">
-                                        <button type="submit" class="botones">Guardar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    @endforeach
-                    
+                @endfor
             </div>
-    <!--</body>-->
     @endsection
 </html>

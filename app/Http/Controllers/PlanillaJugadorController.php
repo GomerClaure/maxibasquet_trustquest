@@ -19,60 +19,15 @@ class PlanillaJugadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($idPartido)
+    public function index()
     {
-        $idPlanilla = DB::table('planilla_jugadores')
-                        ->select('IdPlanillaJugador')
-                        ->where('IdPartido',$idPartido)
-                        ->get(); 
-                                      
-        $idPlanillaJugador = $idPlanilla[0] -> IdPlanillaJugador;
+        $datos = DB::table('partidos')
+            ->select('NombreEquipo','partidos.IdPartido')
+            ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
+            ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
+            ->get();
 
-        $faltas = DB::table('faltas')
-                        ->select('*')
-                        ->where('IdPlanillaJugador',$idPlanillaJugador)
-                        ->get(); 
-        
-        $idEquipos = DB::table('datos_partidos')
-                        ->select('*')
-                        ->where('IdPartido',$idPartido)
-                        ->get(); 
-
-        $partidos = DB::table('partidos')
-                        ->select('*')
-                        ->where('IdPartido',$idPartido)
-                        ->get(); 
-
-        $arregloEquipoA = DB::table('jugadores')
-                            ->select('*')
-                            ->where('IdEquipo',$idEquipos[0]-> IdEquipo)
-                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
-                            ->get();
-
-        $personasA = array();
-        $contador = 0;
-        foreach ($arregloEquipoA as $jugador){
-            $personasA[$contador] = Persona::find($jugador->IdPersona);
-            $contador++;
-        }
-
-        $arregloEquipoB = DB::table('jugadores')
-                            ->select('*')
-                            ->where('IdEquipo',$idEquipos[1]-> IdEquipo)
-                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
-                            ->get();
-
-        $personasB = array();
-        $contador = 0;
-        foreach ($arregloEquipoB as $jugador){
-            $personasB[$contador] = Persona::find($jugador->IdPersona);
-            $contador++;
-        }
-
-        $equipoA = Equipo::find($idEquipos[0]-> IdEquipo);
-        $equipoB = Equipo::find($idEquipos[1]-> IdEquipo);
-
-        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas','equipoA','equipoB'));
+        return view("planillaJugador.index", compact('datos'));
     }
 
     /**
@@ -82,7 +37,7 @@ class PlanillaJugadorController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -173,9 +128,60 @@ class PlanillaJugadorController extends Controller
      * @param  \App\Models\PlanillaJugador  $planillaJugador
      * @return \Illuminate\Http\Response
      */
-    public function show(PlanillaJugador $planillaJugador)
+    public function show($idPartido)
     {
-        //
+        $idPlanilla = DB::table('planilla_jugadores')
+                        ->select('IdPlanillaJugador')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
+                                      
+        $idPlanillaJugador = $idPlanilla[0] -> IdPlanillaJugador;
+
+        $faltas = DB::table('faltas')
+                        ->select('*')
+                        ->where('IdPlanillaJugador',$idPlanillaJugador)
+                        ->get(); 
+        
+        $idEquipos = DB::table('datos_partidos')
+                        ->select('*')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
+
+        $partidos = DB::table('partidos')
+                        ->select('*')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
+
+        $arregloEquipoA = DB::table('jugadores')
+                            ->select('*')
+                            ->where('IdEquipo',$idEquipos[0]-> IdEquipo)
+                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
+                            ->get();
+
+        $personasA = array();
+        $contador = 0;
+        foreach ($arregloEquipoA as $jugador){
+            $personasA[$contador] = Persona::find($jugador->IdPersona);
+            $contador++;
+        }
+
+        $arregloEquipoB = DB::table('jugadores')
+                            ->select('*')
+                            ->where('IdEquipo',$idEquipos[1]-> IdEquipo)
+                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
+                            ->get();
+
+        $personasB = array();
+        $contador = 0;
+        foreach ($arregloEquipoB as $jugador){
+            $personasB[$contador] = Persona::find($jugador->IdPersona);
+            $contador++;
+        }
+
+        $equipoA = Equipo::find($idEquipos[0]-> IdEquipo);
+        $equipoB = Equipo::find($idEquipos[1]-> IdEquipo);
+
+        return view("planillaJugador.show",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas','equipoA','equipoB'));
     }
 
     /**
