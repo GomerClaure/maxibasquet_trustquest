@@ -82,7 +82,7 @@
                 <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">REGISTRAR JUEZ</h1>
+                        <h1 class="tituloFomulario">REGISTRAR PERSONAL</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
