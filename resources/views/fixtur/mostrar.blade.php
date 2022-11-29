@@ -63,6 +63,7 @@
                                         <th>Fecha</th>
                                         <th>Lugar</th>
                                         <th>Hora</th>
+                                        <th>Estado</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -74,6 +75,7 @@
                                                 <td>{{$fechas[$i]->FechaPartido}}</td>
                                                 <td>{{$lugares[$i]->LugarPartido}}</td>
                                                 <td>{{$horas[$i]->HoraPartido}}</td>
+                                                <td>{{$estados[$i]->EstadoPartido}}</td>
                                                 @endif
                                                 
                                             @endif
