@@ -145,8 +145,13 @@ class FormularioController extends Controller
         $observacion = $datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
         if ($valido == 'Aceptado') {
-
-            /**crear Usuario */
+            $categorias = $this->separar($request->categorias);
+            $guardar = $this->comprobarGuardar($request->nombreEquipos);
+            if($guardar != 0){
+                $this->guardarCategorias($guardar,$categorias);
+            }
+            else{
+                /**crear Usuario */
             $usuario = new User;
             $usuario -> IdRol =  4;
             $usuario -> name = $request -> NombreEncargado;
@@ -162,35 +167,27 @@ class FormularioController extends Controller
                 }
             
             $contrasenia = Str::random(8);
-            $hashed = Hash::make($request -> contrasenia);
+            $hashed = Hash::make($contrasenia);
             $usuario -> password = $hashed;
-            return $usuario;
             $usuario -> save();
-
-
+            
+            /**Guardar delegado */
+            $delegado = new Delegado;
+            $delegado -> IdUsuario = $usuario -> id;
+            $delegado -> FechaRegistroDelegado = now();
+            $delegado -> TelefonoDelegado = $request -> telefono;
+            $delegado ->save();
+            
+            /**Guardar Equipo */
             $equipo = new Equipo;
             $equipo->NombreEquipo = $request->nombreEquipos;
+            $equipo->IdDelegado = $delegado -> IdDelegado;
             $equipo->IdAplicacion = $id;
             $equipo->LogoEquipo = 'uploads\logo.jpg';
            
             $equipo->save();
-            $idEquipo=$equipo->IdEquipo;
-            $categorias = $this->separar($request->categorias);
-            if (!$categoriasGuardadas -> isEmpty()) {
-                
-                foreach ($categoriasGuardadas as $categoria) {
-                    for ($i=0; $i < sizeof($categorias); $i++) { 
-                        if ($categorias[$i] == $categoria->NombreCategoria) {
-                            $categoriasEquipo = new Categorias_por_equipo();
-                            $categoriasEquipo->IdEquipo = $idEquipo;
-                            $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
-                            $categoriasEquipo->IdCampeonato = 1;
-                            $categoriasEquipo;
-                            $categoriasEquipo->save();
-                        }
-                    }
-            
-          }
+            $this->guardarCategorias($equipo -> IdEquipo,$categorias);
+
             }
         }
         $datosApp = Aplicaciones::find($id);
@@ -199,6 +196,43 @@ class FormularioController extends Controller
         $datosApp->save();
 
         return redirect('/formulario');
+    }
+    public function guardarCategorias($id,$categorias){
+        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
+        if (!$categoriasGuardadas -> isEmpty()) {
+                
+            foreach ($categoriasGuardadas as $categoria) {
+                for ($i=0; $i < sizeof($categorias); $i++) { 
+                    if ($categorias[$i] == $categoria->NombreCategoria) {
+                        $categoriasEquipo = new Categorias_por_equipo();
+                        $categoriasEquipo->IdEquipo = $id;
+                        $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
+                        $categoriasEquipo->IdCampeonato = 1;
+                        $categoriasEquipo;
+                        $categoriasEquipo->save();
+                    }
+                }
+        
+            }
+        }
+
+    }
+    /**verifica la existencia de un equipo en la bd, devuelve 0 si no exite equipo sino el id del equipo
+     * 
+     */
+    public function comprobarGuardar($nombreEquipo){
+        $catego = Categorias_por_equipo::select("NombreCategoria" , "equipos.IdEquipo")
+                                            ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
+                                            ->join("equipos","equipos.IdEquipo","=","categorias_por_equipo.IdEquipo")
+                                            ->where("equipos.NombreEquipo",$nombreEquipo)
+                                            ->whereNull("equipos.deleted_at")
+                                            ->get();
+        if (!$catego ->isEmpty() ) {
+            return $catego[0]->IdEquipo;
+        }
+        else{
+            return 0;
+        }
     }
 
     /**

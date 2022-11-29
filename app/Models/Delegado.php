@@ -10,6 +10,6 @@ class Delegado extends Model
     use HasFactory;
     protected $table = "delegados";
     protected $primaryKey = 'IdDelegado';
-    protected $fillable = ["IdPersona","IdUsuario","FechaRegistroDelegados","TelefonoDelegados"];
+    protected $fillable = ["IdUsuario","FechaRegistroDelegado","TelefonoDelegado"];
     public $timestamps = false;
 }
