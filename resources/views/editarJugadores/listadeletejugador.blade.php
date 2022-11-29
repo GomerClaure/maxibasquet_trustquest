@@ -87,21 +87,27 @@
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
                                             <a href=""class="BotonE BotonRed red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" > Eliminar</a>
-                                                        {{-- Modal --}}
-                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
+                                            {{-- Modal --}}
+                                                        <div class="modal fade" id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Eliminar Jugador</h1>
+                                                                        <h1 class="modal-title fs-5" id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}Label">Eliminar Jugador</h1>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
-                                                                        <h4>¿Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?</h4>
+                                                                        <p> <b>¿</b> Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}} <br> 
+                                                                        </p>
                                                                     </div>
-                                                                    <div class="modal-footer">
+                                                                    <form method="POST" action="/jugador/{{$jugador->IdJugador}}">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                      <div class="modal-footer">
                                                                         <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton BotonRed red "> Eliminar </a>
-                                                                    </div>
+                                                                        <input type="submit" class="Boton red" value="Eliminar">  </input>
+                                                                    </div>  
+                                                                    </form>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>

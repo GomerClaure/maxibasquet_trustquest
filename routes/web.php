@@ -84,10 +84,8 @@ Route::patch('/editarJugadores/{id}',[EditarJugadorController::class,'update'])-
 Route::get('/editarJugadores',[EditarJugadorController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{id}/edit',[EditarJugadorController::class,'edit'])->middleware(['auth','delegado']);
 Route::get('/editarJugadores/{equipo}/{categoria}',[EditarJugadorController::class,'show'])->middleware(['auth','delegado']);
-//5545
 Route::get('/DeleteJugador',[DeleteJugadorController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/DeleteJugador/{equipo}/{categoria}',[DeleteJugadorController::class,'show'])->middleware(['auth','delegado']);
-//454
 Route::get('/equipo/delegado',[EquipoController::class,'indexDelegado'])->middleware(['auth','delegado']);
 Route::get('/MostrarJugadores',[MostrarJugadoresController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/MostrarTecnicos',[MostrarTecnicosController::class,'index'])->middleware(['auth','delegado']);
@@ -100,9 +98,4 @@ Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware([
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar'])->middleware(['auth','delegado']);
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
-Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
-
-
-
-
-//Usuario Anotador-Juez
+Route::delete('/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
