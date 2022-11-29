@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Partido;
 use App\Models\Equipo;
 use Carbon\Carbon;
+use App\Models\PlanillaJugador;
 
 class RegistrarPartidosController extends Controller
 {
@@ -137,6 +138,11 @@ class RegistrarPartidosController extends Controller
         $categorias = DB::table('categorias')
             ->select('*')
             ->get();
+
+        $planilla = new PlanillaJugador;
+        $planilla -> IdPartido = $nuevoPartido -> IdPartido;
+        $planilla -> save();
+
         return redirect('registrarPartidos/create');
         // return view('registrarPartido.create', compact('categorias'));
         //return response()->json($request);
@@ -147,6 +153,8 @@ class RegistrarPartidosController extends Controller
         $categorias = DB::table('categorias')
             ->select('*')
             ->get();
+
+        
         return view('registrarPartido.create', compact('categorias'));
     }
 }

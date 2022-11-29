@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 use App\Http\Controllers\JuezController;
+use App\Http\Controllers\PlanillaJugadorController;
 use App\Http\Controllers\DeleteJugadorController;
 
 /*
@@ -46,7 +47,7 @@ Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middlewar
 Route::resource('/formulario',FormularioController::class);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
-Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
+Route::resource('/registrarPartidos',RegistrarPartidosController::class); //->middleware(['auth','admin']);
 
 
 
@@ -98,4 +99,15 @@ Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware([
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar'])->middleware(['auth','delegado']);
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
+//Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
+
+
+
+
+//Usuario Anotador-Juez
+Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
+Route::post('planilla/jugador/{idPartido}/{idPlanillaJugador}/{id}', [PlanillaJugadorController::class,'store']);
+Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'show']);
+
+
 Route::delete('/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
