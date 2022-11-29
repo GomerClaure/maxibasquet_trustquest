@@ -7,14 +7,13 @@ use App\Models\Jugador;
 
 use App\Models\Equipo;
 use App\Models\Categoria;
-use App\Models\Credencial;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 
-class EditarJugadorController extends Controller
+class DeleteJugadorController extends Controller
 {
     public function index()
     {
@@ -53,8 +52,13 @@ class EditarJugadorController extends Controller
         $s = [];
         echo "hola index";
 
-        return view('editarJugadores.equipos', compact('arreglo'));
+        return view('editarJugadores.listadeletejugador', compact('arreglo'));
     }
+
+    /* public function show($id)
+    {
+
+    }*/
 
     public function formatoFecha($jugador)
     {
@@ -99,13 +103,15 @@ class EditarJugadorController extends Controller
             $equipo = null;
             $categoria = null;
         }
-        echo "hola desde lista";
+       
         $deleteJugador=[];
-        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
+        return view('editarJugadores.listadeletejugador', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
     }
 
     public function edit(Request $request, $id)
     {
+        
+
         $tecnicos = DB::table('jugadores')
             ->select('*')
             ->join('personas', 'jugadores.IdPersona', '=', 'personas.IdPersona')
@@ -148,7 +154,7 @@ class EditarJugadorController extends Controller
 
         $request->validate([
             'ci' => 'required|numeric|digits_between:6,9',
-            'nombre' => 'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
+            'nombre' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno' => 'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'fechaNacimiento' => 'required|date|before:' . $fechaActual . '|after:' . $fecha . '|regex:/^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/',
@@ -161,7 +167,7 @@ class EditarJugadorController extends Controller
             'peso' => 'required|numeric|min:1|max:99',
             'fotoCarnet' => 'image',
             'posicion' => 'required',
-            'nCamiseta' => 'required|numeric|min:1|max:99'
+            'nCamiseta' => 'required|numeric|min:0|max:99'
         ]);
 
 
@@ -189,6 +195,7 @@ class EditarJugadorController extends Controller
         $edadReal = date('Y') - $anio;
         $edadActual = $request->edad;
         if ($edadReal != $edadActual) {
+
             return back()->withInput()->with('mensajeErrorEdad', 'La edad no coincide con la fecha de nacimiento');
         }
 
@@ -215,32 +222,61 @@ class EditarJugadorController extends Controller
         }
         $persona->save();
 
-        $cuerpoTecnico = Jugador::find($id);
-        $cuerpoTecnico->IdCategoria = $request->selectCategoria;
-        $cuerpoTecnico->PosicionJugador = $request->selectRol;
+        $jugadorEquipo = Jugador::find($id);
+        $jugadorEquipo->IdCategoria = $request->selectCategoria;
+        $jugadorEquipo->PosicionJugador = $request->posicion;
+        $jugadorEquipo->PesoJugador = $request->peso;
+        $jugadorEquipo->EstaturaJugador = $request->estatura;
+        $jugadorEquipo->NumeroCamiseta = $request->nCamiseta;
         if ($request->hasFile('fotoCarnet')) {
-            $cuerpoTecnico->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
+            $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
         }
-        $cuerpoTecnico->save();
 
-        $equipo = Equipo::find($cuerpoTecnico->IdEquipo);
+        $equipo = Equipo::find($jugadorEquipo->IdEquipo);
         $categoria = Categoria::find($request->selectCategoria);
-        return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
+
+        $numCamiseta = $request->nCamiseta;
+        $consultaCamiseta = DB::table('jugadores')
+            ->select('*')
+            ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $equipo->IdEquipo], ['IdCategoria', $categoria->IdCategoria]])
+            ->get();
+        
+        $consultaCamisetaJugador = Jugador::find($id);    
+        if (!$consultaCamiseta->isEmpty()) {
+
+            if ($consultaCamisetaJugador->NumeroCamiseta == $request->nCamiseta) {
+                $jugadorEquipo->save();
+            } else {
+                return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
+            }
+        }
+
+
+        $jugadorEquipo->save();
+        return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
 
-            public function destroy($id)
-    {  
-        $jugador = Jugador::select()
-                            ->join('personas','personas.IdPersona','jugadores.IdPersona')
-                            ->where('IdJugador',$id)
-                            ->get();
-        $datosJugador = $jugador[0];
-        Jugador::where('IdJugador',$id)->delete();
-        Credencial::where('IdPersona',$datosJugador->IdPersona)->delete();
-        Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+    public function destroy($id)
+    {   
+        $jugador=Jugador::select()
+                          ->join('personas','personas.IdPersona','jugadores.IdPersona')
+                          ->where('IdJugador',$id)
+                          ->get(); 
+        $datosJugador=$jugador[0];
+        $defaultJugador = '../storage/app/public/uploads\persona.jpg';
+        $foto = $datosJugador->Foto;
+        $path = '../storage/app/public/'.$foto;
+        $credencial = '../storage/app/public/qrcodes/'.$datosJugador->IdJugador.$datosJugador->CiPersona.'.png';
+        if ( $defaultJugador != $path) {
+            File::delete($path);
+        }
+        
+        File::delete($credencial);
+        $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador -> IdEquipo);
         $categoria = Categoria::find($datosJugador -> IdCategoria);
-        return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+        return redirect('/delete/jugador/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+
     }
 
 }

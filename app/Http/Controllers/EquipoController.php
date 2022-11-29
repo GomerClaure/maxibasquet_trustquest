@@ -15,7 +15,9 @@ use App\Models\CategoriaEquipo;
 use App\Models\Categorias_por_equipo;
 use App\Models\Credencial;
 use App\Models\Datos_partidos;
+use App\Models\Delegado;
 use App\Models\Tecnico;
+use App\Models\User;
 
 class EquipoController extends Controller
 {
@@ -204,12 +206,17 @@ class EquipoController extends Controller
        Categorias_por_equipo::where("IdEquipo",$id)
         ->where("IdCategoria",$categoria)->delete();
         
+        
         $equipo = Categorias_por_equipo::where("IdEquipo",$id)->get();
         
         if ($equipo->isEmpty()) {
            $equi= Equipo::where("IdEquipo",$id)->get();
            Aplicacion::where('IdAplicacion',$equi[0]->IdAplicacion)->update(['EstadoAplicacion'=>'Eliminado']);
            Equipo::where("IdEquipo",$id)->delete();
+          $delegado = Delegado::where("IdDelegado",$equi[0] -> IdDelegado)->get();
+          Delegado::where("IdDelegado",$delegado[0] -> IdDelegado)->delete();
+          User::where("id",$delegado[0]->IdUsuario)->delete();
+
         }
 
         return redirect('/equipo/lista/eliminar')->with('mensaje','Datos del equipo eliminados correctamente'); 

@@ -8,7 +8,7 @@
 @section('content')
 <div class="container justify-content-center"">
 <section class=" main-title ">
-    <h1 class="display-6 mb-0" >Subir logotipo de equipo</h1>
+    <h1 class="display-6 mb-0" >Mi Equipo</h1>
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">
@@ -18,6 +18,7 @@
         <div class="col-md-6 nombreEquipo">
             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
             <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}" readonly>
+
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -40,6 +41,42 @@
     
 </section>
 </div>
+<div class="botones_jugador">
+    <a href="{{url('jugador'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Jugador</a>
+    <a href="{{url('tecnico'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Tecnico</a>
+</div>
+<div class="tabla">
+<div class="card-body  pt-0 ps-3 ">
+                                <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                                <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
+                                    <thead>
+                                    <tr class="tablasup">
+                                        <th>Categorias </th>
+                                        <th>Jugadores</th>
+                                        <th>Tecnicos</th>
+                                    </tr>
+                                    @foreach ($c as $lista)
+                                        <tr>
+                                            <td class="lista">{{$lista->NombreCategoria}}</td>
+                                            <td class="lista">
+                                            <a href="{{url('editarJugadores'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Editar</a>
+                                            <a href="{{url('DeleteJugador'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
+                                            </td>
+                                            <td class="lista">
+                                            <a href="{{url('tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Editar</a>
+                                            <a href="{{url('eliminar'.'/'.'tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+</div>
+
 <script>
     $(function(){
 
@@ -74,6 +111,5 @@
 
     })
 </script>
-
 @endsection
 </html>
