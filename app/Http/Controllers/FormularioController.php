@@ -10,7 +10,11 @@ use App\Models\Categorias_por_equipo;
 use App\Models\CategoriaEquipo;
 use App\Models\Categorias;
 use App\Models\Equipo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Return_;
 
 class FormularioController extends Controller
@@ -124,7 +128,7 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
+        
         $request->validate(
             [
                 'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
@@ -141,50 +145,94 @@ class FormularioController extends Controller
         $observacion = $datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
         if ($valido == 'Aceptado') {
+            $categorias = $this->separar($request->categorias);
+            $guardar = $this->comprobarGuardar($request->nombreEquipos);
+            if($guardar != 0){
+                $this->guardarCategorias($guardar,$categorias);
+            }
+            else{
+                /**crear Usuario */
+            $usuario = new User;
+            $usuario -> IdRol =  4;
+            $usuario -> name = $request -> NombreEncargado;
+            $usuario -> email = $request -> correoElectronico;
+            
+            $consultaCorreo = DB::table('users')
+                        ->select('email')
+                        ->where('email', $request -> correoElectronico, 1)
+                        ->get();
+            
+            if(!$consultaCorreo ->isEmpty()){
+             return back()->with('mensajeErrorEmail','El correo ya esta registrado');
+                }
+            
+            $contrasenia = Str::random(8);
+            $hashed = Hash::make($contrasenia);
+            $usuario -> password = $hashed;
+            $usuario -> save();
+            
+            /**Guardar delegado */
+            $delegado = new Delegado;
+            $delegado -> IdUsuario = $usuario -> id;
+            $delegado -> FechaRegistroDelegado = now();
+            $delegado -> TelefonoDelegado = $request -> telefono;
+            $delegado ->save();
+            
+            /**Guardar Equipo */
             $equipo = new Equipo;
             $equipo->NombreEquipo = $request->nombreEquipos;
+            $equipo->IdDelegado = $delegado -> IdDelegado;
             $equipo->IdAplicacion = $id;
             $equipo->LogoEquipo = 'uploads\logo.jpg';
            
             $equipo->save();
-            $idEquipo=$equipo->IdEquipo;
-            $categorias = $this->separar($request->categorias);
-            if (!$categoriasGuardadas -> isEmpty()) {
-                
-                foreach ($categoriasGuardadas as $categoria) {
-                    for ($i=0; $i < sizeof($categorias); $i++) { 
-                        if ($categorias[$i] == $categoria->NombreCategoria) {
-                            $categoriasEquipo = new Categorias_por_equipo();
-                            $categoriasEquipo->IdEquipo = $idEquipo;
-                            $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
-                            $categoriasEquipo->IdCampeonato = 1;
-                            $categoriasEquipo;
-                            $categoriasEquipo->save();
-                        }
-                    }
-            
-          }
+            $this->guardarCategorias($equipo -> IdEquipo,$categorias);
+
             }
         }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-        /*$aplicaciones = Aplicacion::select(
-            'aplicaciones.IdAplicacion',
-            'aplicaciones.NombreEquipo',
-            'preinscripciones.Monto',
-            'aplicaciones.EstadoAplicacion',
-            'aplicaciones.Categorias',
-            'aplicaciones.observaciones'
-        )
-            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->get();*/
-        // $aplicaciones = Aplicaciones::all();
-
-        //return view("formulario.listaFormulario", compact('aplicaciones'));
 
         return redirect('/formulario');
+    }
+    public function guardarCategorias($id,$categorias){
+        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
+        if (!$categoriasGuardadas -> isEmpty()) {
+                
+            foreach ($categoriasGuardadas as $categoria) {
+                for ($i=0; $i < sizeof($categorias); $i++) { 
+                    if ($categorias[$i] == $categoria->NombreCategoria) {
+                        $categoriasEquipo = new Categorias_por_equipo();
+                        $categoriasEquipo->IdEquipo = $id;
+                        $categoriasEquipo->IdCategoria = $categoria->IdCategoria;
+                        $categoriasEquipo->IdCampeonato = 1;
+                        $categoriasEquipo;
+                        $categoriasEquipo->save();
+                    }
+                }
+        
+            }
+        }
+
+    }
+    /**verifica la existencia de un equipo en la bd, devuelve 0 si no exite equipo sino el id del equipo
+     * 
+     */
+    public function comprobarGuardar($nombreEquipo){
+        $catego = Categorias_por_equipo::select("NombreCategoria" , "equipos.IdEquipo")
+                                            ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
+                                            ->join("equipos","equipos.IdEquipo","=","categorias_por_equipo.IdEquipo")
+                                            ->where("equipos.NombreEquipo",$nombreEquipo)
+                                            ->whereNull("equipos.deleted_at")
+                                            ->get();
+        if (!$catego ->isEmpty() ) {
+            return $catego[0]->IdEquipo;
+        }
+        else{
+            return 0;
+        }
     }
 
     /**

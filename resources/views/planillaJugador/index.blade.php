@@ -61,7 +61,7 @@
                     </div>
                 </div>-->
                 @for ($i=0;$i<sizeof($datos);$i++)
-                    <div class="card-body border-bottom m-0 col-12 row">
+                    <div class="card-body border-bottom m-0 col-12 row cardLista">
                         <div class="col-4">
                             <h2 class="d-flex justify-content-center">{{$datos[$i]->NombreEquipo}}</h2>
                         </div>
@@ -72,7 +72,7 @@
                             <h2 class="d-flex justify-content-center">{{$datos[$i+1]->NombreEquipo}}</h2>
                         </div>
                         <div class="col-3">
-                            <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto">Planilla De Jugadores</a>
+                            <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-75">Planilla De Jugadores</a>
                         </div>
                     </div>
                 

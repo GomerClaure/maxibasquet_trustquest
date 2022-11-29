@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            TorneoSeeder::class,
+            TorneoSeeder::class, 
+            RolSeeder::class,
             PreinscripcionSeeder::class,
             PaisSeeder::class,
             CategoriaSeeder::class,
@@ -29,7 +30,6 @@ class DatabaseSeeder extends Seeder
             CategoriasPorEquipoSeeder::class,
             JugadorSeeder::class,
             TecnicoSeeder::class,
-            RolSeeder::class,
             UsuarioSeeder::class,
             DelegadoSeeder::class,
             JuezSeeder::class,

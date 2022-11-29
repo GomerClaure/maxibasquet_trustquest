@@ -95,7 +95,6 @@
                                                                         <input type="submit" class="Boton red" value="Eliminar">  </input>
                                                                     </div>  
                                                                     </form>
-                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
