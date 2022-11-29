@@ -8,7 +8,7 @@
 @section('content')
 <div class="container justify-content-center"">
 <section class=" main-title ">
-    <h1 class="display-6 mb-0" >Subir logotipo de equipo</h1>
+    <h1 class="display-6 mb-0" >Mi Equipo</h1>
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">
@@ -18,9 +18,6 @@
         <div class="col-md-6 nombreEquipo">
             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
             <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}" readonly>
-
-            <label for="nombreDeEquipo" class="form-label">Pais de equipo:</label>
-            <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombrePais}}" readonly>
 
         </div>
         <div class="col-md-6">

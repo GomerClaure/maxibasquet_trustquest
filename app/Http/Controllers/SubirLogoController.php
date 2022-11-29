@@ -11,7 +11,7 @@ class SubirLogoController extends Controller
     public function index($id)
     {
         $equipo = Equipo::find($id);
-                         
+                                                  
         //Nombre y Pais de un equipo Categoria
         $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria')
                   ->where('equipos.IdEquipo','=',$id)
@@ -22,8 +22,8 @@ class SubirLogoController extends Controller
                   ->get();
 
                 
-        // echo $equipo;
-    
+        //echo $equipo;
+        
         return view('logo.formularioSubidaLogo',compact('equipo','id','c'));
     }
     public function store(Request $request)

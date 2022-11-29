@@ -96,7 +96,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
-                                                                        <p> <b>¿</b> Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}} <br> 
+                                                                        <p> <b>¿</b> Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?<br> 
                                                                         </p>
                                                                     </div>
                                                                     <form method="POST" action="/jugador/{{$jugador->IdJugador}}">
