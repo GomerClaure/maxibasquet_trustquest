@@ -13,7 +13,7 @@ class SubirLogoController extends Controller
         $equipo = Equipo::find($id);
                                                   
         //Nombre y Pais de un equipo Categoria
-        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria')
+        $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria','equipos.IdDelegado')
                   ->where('equipos.IdEquipo','=',$id)
                   ->join('aplicaciones','equipos.IdAplicacion','=','aplicaciones.IdAplicacion')
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
@@ -21,7 +21,6 @@ class SubirLogoController extends Controller
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
 
-                
         //echo $equipo;
         
         return view('logo.formularioSubidaLogo',compact('equipo','id','c'));
