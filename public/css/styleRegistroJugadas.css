@@ -1,3 +1,4 @@
+
 .seccionNav{
     background-color: aliceblue;
 }
@@ -13,3 +14,19 @@ h1{
     font-weight: bold;
     color: white;
   }
+.btn.siguiente{
+    background: #eb8f32;
+    color: white;
+}
+.btn.prevSig{
+    background: #eb8f32;
+    color: white;
+}
+/* .btn.siguiente:first-child:hover{
+    background: #fa841a;
+    color: white;
+} */
+.btn.prevSig:first-child:hover{
+    background: #fa841a;
+    color: white;
+}

@@ -23,10 +23,10 @@ class RegistrarPlanillaJuegoController extends Controller
     public function registro($id)
     {
         $jueces = $this->getJuecesValidos($id);
-        // return $jueces;
+
         return view('registroJugadas.registroJueces',compact('jueces'));
     }
-    public function getJuecesValidos($id){
+    private function getJuecesValidos($id){
         date_default_timezone_set('America/La_Paz');
         $partido = Partido::find($id);
         $this->fechaPartidoActual = $partido->FechaPartido;

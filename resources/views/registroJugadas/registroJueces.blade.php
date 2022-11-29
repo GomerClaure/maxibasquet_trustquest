@@ -36,9 +36,9 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <label  for="anotadorPrincipal" class="form-label">Anotador Asistente:</label>
+                    <label  for="anotadorAsistente" class="form-label">Anotador Asistente:</label>
                     <div class="input-group col-md-12">
-                      <select name="anotadorPrincipal" class="form-select" id="anotadorPrincipal" value={{ old('anotadorPrincipal') }}>
+                      <select name="anotadorAsistente" class="form-select" id="anotadorAsistente" value={{ old('anotadorAsistente') }}>
                         @foreach ($jueces as $juez)
                             <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
@@ -46,9 +46,9 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <label  for="anotadorPrincipal" class="form-label">Cronometrista:</label>
+                    <label  for="cronometrista" class="form-label">Cronometrista:</label>
                     <div class="input-group col-md-12">
-                      <select name="anotadorPrincipal" class="form-select" id="anotadorPrincipal" value={{ old('anotadorPrincipal') }}>
+                      <select name="cronometrista" class="form-select" id="cronometrista" value={{ old('cronometrista') }}>
                         @foreach ($jueces as $juez)
                             <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
@@ -56,18 +56,27 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <label  for="anotadorPrincipal" class="form-label">Apuntador:</label>
+                    <label  for="apuntador" class="form-label">Apuntador:</label>
                     <div class="input-group col-md-12">
-                      <select name="anotadorPrincipal" class="form-select" id="anotadorPrincipal" value={{ old('anotadorPrincipal') }}>
+                      <select name="apuntador" class="form-select" id="apuntador" value={{ old('apuntador') }}>
                         @foreach ($jueces as $juez)
                             <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn iniciar-sesion">Anterior</button>
-                    <button type="submit" class="btn iniciar-sesion">Siguiente</button>
+                  <div class="col-md-12 d-flex flex-row-reverse mt-4 ">
+                    <div class="botones border border-secondary pt-2 pb-1 pe-2 ps-2">
+                      <div class="d-inline p-2">
+                        <button type="submit" class="btn prevSig">Anterior</button>
+                      </div>
+                      <div class="d-inline p-2">
+                        <button type="submit" class="btn prevSig">Siguiente</button>
+                      </div>
+                    </div>
+                    
+                    
+                    
                   </div>
               </div>
           </div>
