@@ -128,7 +128,7 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
+        
         $request->validate(
             [
                 'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'

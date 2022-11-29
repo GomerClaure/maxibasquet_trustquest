@@ -213,9 +213,9 @@ class EquipoController extends Controller
            $equi= Equipo::where("IdEquipo",$id)->get();
            Aplicacion::where('IdAplicacion',$equi[0]->IdAplicacion)->update(['EstadoAplicacion'=>'Eliminado']);
            Equipo::where("IdEquipo",$id)->delete();
-          $delegado = Delegado::where("IdDelegado",$equi -> IdDelegado)->get();
-          Delegado::where("IdDelegado",$delegado -> IdDelegado)->delete();
-          User::where("IdUsuario",$delegado->IdUsuario)->delete();
+          $delegado = Delegado::where("IdDelegado",$equi[0] -> IdDelegado)->get();
+          Delegado::where("IdDelegado",$delegado[0] -> IdDelegado)->delete();
+          User::where("id",$delegado[0]->IdUsuario)->delete();
 
         }
 
