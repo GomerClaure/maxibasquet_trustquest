@@ -31,16 +31,22 @@ class LoginController extends Controller
         $usuario = User::where('name',$formulario[$this->nombreUsuario]) -> first();
         
         if($usuario){
+            echo 'Entra al login';
             $nomUsuario = $usuario->name;
             $contra = $usuario->password;
+            echo $contra;
             if (Hash::check($formulario[$this->contrasenia], $contra)) {
                 $credentials = $this->getLoginRequest($formulario);
                 // print_r($credentials);
                 $userAuth = Auth::getProvider()->retrieveByCredentials($credentials);
                 Auth::login($userAuth);
-                echo "Las contraseñas coinciden";
+                // echo "Las contraseñas coinciden";
                 return redirect('/home');
-            }  
+            }else{
+                // echo "contraseña incorrecta wey";
+            }
+        }else {
+            // echo "No encuentra al usuarios";
         }
         return back()->withInput()->with('errorLogin','El nombre de usuario o contraseña es incorrecto.');
     }

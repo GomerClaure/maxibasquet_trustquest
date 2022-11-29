@@ -25,6 +25,7 @@ thead th {
 }
 
 .card {
+  border-radius: .0rem;
   background-color: #ABA9A9;
 }
 
@@ -58,33 +59,53 @@ a{
   text-decoration: none;
   
 }
-.navbar{
-  background-color: #2c2a2a;
-}
-.fondoTabla{
-  background-color: #D3D3D3;
-}
-.card-img-top{
-    margin: auto;
-    width: 200px;
-    height: 200px;
-}
-.card-body{
+.formulario{
+    background-color: #b5b5bd;
     color: black;
+}
+.navbar{
+    background-color: #2c2a2a;
 }
 .boton{
   width: 15%;
-  height: 10%;
+}
+.boton{
+    width: 15%;
+    height: 10%;
+  }
+  .displayBoton{
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
+  }
+  .red{
+    background-color: #eb3232 !important;
+    border: none;
+}
+.Boton{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 4px;
+    vertical-align: middle;
 }
 .displayBoton{
-  display: block;
-  margin: auto;
-  margin-top: 0.5rem ;
-  width: 80%;
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
 }
-.btn-primary:hover {
-    
-  background: #fa841a !important;
-  border-color: #eb8f32 !important;
+.red:hover{
+    background: #fa1a1a !important;
+    color: white; 
 }
-
+.Boton:hover{
+    background: #fa841a;
+    color: white; 
+}
+.contenido{
+    font-size: larger;
+}
