@@ -42,7 +42,7 @@ Route::get('/', function () {
 //Usuario Administrador
 Route::get('/aplicaciones',[AplicacionController::class,'index'])->middleware(['auth','admin']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middleware(['auth','admin']);
-Route::resource('/formulario',FormularioController::class)->middleware(['auth','admin']);
+Route::resource('/formulario',FormularioController::class);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
 Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);

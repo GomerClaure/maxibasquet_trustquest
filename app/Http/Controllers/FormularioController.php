@@ -10,7 +10,11 @@ use App\Models\Categorias_por_equipo;
 use App\Models\CategoriaEquipo;
 use App\Models\Categorias;
 use App\Models\Equipo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Return_;
 
 class FormularioController extends Controller
@@ -141,6 +145,29 @@ class FormularioController extends Controller
         $observacion = $datos['observaciones'];
         $valido = $datos['estadoAplicacion'];
         if ($valido == 'Aceptado') {
+
+            /**crear Usuario */
+            $usuario = new User;
+            $usuario -> IdRol =  4;
+            $usuario -> name = $request -> NombreEncargado;
+            $usuario -> email = $request -> correoElectronico;
+            
+            $consultaCorreo = DB::table('users')
+                        ->select('email')
+                        ->where('email', $request -> correoElectronico, 1)
+                        ->get();
+            
+            if(!$consultaCorreo ->isEmpty()){
+             return back()->with('mensajeErrorEmail','El correo ya esta registrado');
+                }
+            
+            $contrasenia = Str::random(8);
+            $hashed = Hash::make($request -> contrasenia);
+            $usuario -> password = $hashed;
+            return $usuario;
+            $usuario -> save();
+
+
             $equipo = new Equipo;
             $equipo->NombreEquipo = $request->nombreEquipos;
             $equipo->IdAplicacion = $id;
@@ -170,19 +197,6 @@ class FormularioController extends Controller
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-        /*$aplicaciones = Aplicacion::select(
-            'aplicaciones.IdAplicacion',
-            'aplicaciones.NombreEquipo',
-            'preinscripciones.Monto',
-            'aplicaciones.EstadoAplicacion',
-            'aplicaciones.Categorias',
-            'aplicaciones.observaciones'
-        )
-            ->join('preinscripciones', 'aplicaciones.IdPreinscripcion', '=', 'preinscripciones.IdPreinscripcion')
-            ->get();*/
-        // $aplicaciones = Aplicaciones::all();
-
-        //return view("formulario.listaFormulario", compact('aplicaciones'));
 
         return redirect('/formulario');
     }
