@@ -33,7 +33,7 @@ class PartidoSeeder extends Seeder
         ]);
 
         DB::table("datos_partidos")->insert([
-            'IdEquipo'=>3,
+            'IdEquipo'=>2,
             'IdPartido'=>1,
             'ScoreEquipo'=>0,
             'created_at'=>now(),
