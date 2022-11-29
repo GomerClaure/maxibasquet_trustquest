@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Aplicacion;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Models\Jugador;
@@ -10,6 +12,10 @@ use App\Models\Aplicaciones;
 use App\Models\Categoria;
 use App\Models\Paises;
 use App\Models\CategoriaEquipo;
+use App\Models\Categorias_por_equipo;
+use App\Models\Credencial;
+use App\Models\Datos_partidos;
+use App\Models\Tecnico;
 
 class EquipoController extends Controller
 {
@@ -25,6 +31,7 @@ class EquipoController extends Controller
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                  ->whereNull('categorias_por_equipo.deleted_at')
                   ->get();
 
         $EquiposDatos=[];
@@ -66,6 +73,7 @@ class EquipoController extends Controller
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                  ->whereNull('categorias_por_equipo.deleted_at')
                   ->get();
 
         $EquiposDatos=[];
@@ -94,7 +102,19 @@ class EquipoController extends Controller
                     return view('equipo.equipoDelegado',compact('arreglo'));
                   //return $arreglo;
     }
-
+    public function listaEquipos(){
+        $equipos = Equipo::select("equipos.NombreEquipo","equipos.IdEquipo","categorias.IdCategoria","NombreCategoria","NombrePais","equipos.LogoEquipo")
+                   ->join("categorias_por_equipo","categorias_por_equipo.IdEquipo","=","equipos.IdEquipo")
+                   ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
+                   ->join("aplicaciones","aplicaciones.IdAplicacion","=","equipos.IdAplicacion")
+                   ->join("paises","paises.IdPais","=","aplicaciones.IdPais")
+                   ->whereNull('categorias_por_equipo.deleted_at')
+                   ->orderBy('equipos.NombreEquipo')
+                   ->orderBy('categorias.NombreCategoria')
+                   ->get();
+        
+        return view('equipo.eliminar',compact('equipos'));
+    }
     public function create()
     {
         //
@@ -148,11 +168,84 @@ class EquipoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Equipo  $equipo
+     * @param  int  $id
+     * @param  int  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipo $equipo)
-    {
-        //
+    public function destroy($id,$categoria)
+    {   $fecha = $this->comprobarPartido($id,$categoria);
+        if ($fecha) {
+            return redirect('/equipo/lista/eliminar')->with('PartidoRegistrado','No se puede eliminar el equipo Existe un partido en espera o en curso'); 
+        }
+        $jugadores = Jugador::select("personas.IdPersona")
+                    ->join("personas","personas.IdPersona","=","jugadores.IdPersona")
+                    ->join("equipos","equipos.IdEquipo","=","jugadores.IdEquipo")
+                    ->join("categorias","categorias.IdCategoria","=","jugadores.IdCategoria")
+                    ->where("jugadores.IdEquipo",$id)
+                    ->where("jugadores.IdCategoria",$categoria)
+                    ->get();
+        
+        foreach ($jugadores as $jugador) {
+          $this->eliminarJugador($jugador->IdPersona); 
+        }
+        
+        $tecnicos = Tecnico::select()
+                    ->join("personas","personas.IdPersona","=","tecnicos.IdPersona")
+                    ->join("equipos","equipos.IdEquipo","=","tecnicos.IdEquipo")
+                    ->join("categorias","categorias.IdCategoria","=","tecnicos.IdCategoria")
+                    ->where("tecnicos.IdEquipo",$id)
+                    ->where("tecnicos.IdCategoria",$categoria)
+                    ->get();
+        
+        foreach ($tecnicos as $tecnico) {
+            $this->eliminarTecnico($tecnico->IdPersona);
+        }
+        
+       Categorias_por_equipo::where("IdEquipo",$id)
+        ->where("IdCategoria",$categoria)->delete();
+        
+        $equipo = Categorias_por_equipo::where("IdEquipo",$id)->get();
+        
+        if ($equipo->isEmpty()) {
+           $equi= Equipo::where("IdEquipo",$id)->get();
+           Aplicacion::where('IdAplicacion',$equi[0]->IdAplicacion)->update(['EstadoAplicacion'=>'Eliminado']);
+           Equipo::where("IdEquipo",$id)->delete();
+        }
+
+        return redirect('/equipo/lista/eliminar')->with('mensaje','Datos del equipo eliminados correctamente'); 
+
+    }
+    /** Eliminar un jugador  por medio de su idPersona */
+    public function eliminarJugador($idPersona){
+        Jugador::where("IdPersona",$idPersona)->delete();
+        Persona::where("IdPersona",$idPersona)->delete();
+        Credencial::where("IdPersona",$idPersona)->delete();
+    }
+    /**Eliminar miembro del cuerpo técnico por medio de su idPersona  */
+    public function eliminarTecnico($idPersona){
+        Tecnico::where("IdPersona",$idPersona)->delete();
+        Persona::where("IdPersona",$idPersona)->delete();
+        Credencial::where("IdPersona",$idPersona)->delete();
+    }
+
+    /**Verificar si existe un partido progamado para un equipo */
+    public function comprobarPartido($idEquipo,$categoria){
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('G:i:s');
+        $partido = Datos_partidos::select()
+                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
+                    ->where("IdEquipo",$idEquipo)
+                    ->where("FechaPartido",">=",$fechaActual)
+                    ->where("partidos.IdCategoria",$categoria)
+                    ->where("EstadoPartido","=","espera")
+                    ->orwhere("EstadoPartido","=","curso")
+                    ->get();
+        if (!$partido->isEmpty()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

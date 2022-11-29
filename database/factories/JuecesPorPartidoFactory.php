@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Persona;
+use App\Models\Juez;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class JuezFactory extends Factory
+class JuecesPorPartidoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,10 +15,15 @@ class JuezFactory extends Factory
     public function definition()
     {
         return [
-            'IdUsuario' => User::factory()->asignarRol(1),
-            'IdPersona'=> Persona::factory(),
+            'IdJuez' => Juez::factory(),
             'created_at' => now(),
             'updated_at' => now()
         ];
+    }
+    public function cargarDatosPartido($idPartido,$tipoJuez){
+        return $this->state([
+            'IdPartido' => $idPartido,
+            'TipoJuez' => $tipoJuez,
+        ]);
     }
 }

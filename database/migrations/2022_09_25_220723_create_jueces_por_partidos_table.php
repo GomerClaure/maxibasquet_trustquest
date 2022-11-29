@@ -14,10 +14,10 @@ class CreateJuecesPorPartidosTable extends Migration
     public function up()
     {
         Schema::create('jueces_por_partidos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements("Id");
             $table->unsignedBigInteger("IdPartido");
             $table->unsignedBigInteger("IdJuez");
-            $table->string("TipoJueces");
+            $table->string("TipoJuez");
             $table->timestamps();
             $table->foreign("IdPartido")->references("IdPartido")->on('partidos');
             $table->foreign("IdJuez")->references("IdJuez")->on('jueces');           
