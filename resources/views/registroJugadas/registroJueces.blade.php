@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Registro Jueces</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{asset('css/styleRegistroJugadas.css')}}">
@@ -21,7 +21,7 @@
       <div class="col-3"></div>
       <div class="col pasos">
         <h1 for="Holi">Asignar Jueces</h1>
-        <form class="formularioLogin" action="{{url('/login')}}" method="POST" enctype="multipart/form-data" novalidate>
+        <form class="formularioRegistro" action="{{route('registrarJueces',['id' => $id])}}" method="POST" enctype="multipart/form-data" novalidate>
           @csrf
           <div class="card login">
               <div class="card-body">
@@ -29,8 +29,8 @@
                     <label  for="anotadorPrincipal" class="form-label">Anotador Principal:</label>
                     <div class="input-group col-md-12">
                       <select name="anotadorPrincipal" class="form-select" id="anotadorPrincipal" value={{ old('anotadorPrincipal') }}>
-                        @foreach ($jueces as $juez)
-                            <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
+                        @foreach ($jueces as $key =>  $juez)
+                            <option value="{{$juez->IdJuez}}">{{($key+1).'.-  '.$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -39,8 +39,8 @@
                     <label  for="anotadorAsistente" class="form-label">Anotador Asistente:</label>
                     <div class="input-group col-md-12">
                       <select name="anotadorAsistente" class="form-select" id="anotadorAsistente" value={{ old('anotadorAsistente') }}>
-                        @foreach ($jueces as $juez)
-                            <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
+                        @foreach ($jueces as $key => $juez)
+                            <option value="{{$juez->IdJuez}}">{{($key+1).'.-  '.$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -49,8 +49,8 @@
                     <label  for="cronometrista" class="form-label">Cronometrista:</label>
                     <div class="input-group col-md-12">
                       <select name="cronometrista" class="form-select" id="cronometrista" value={{ old('cronometrista') }}>
-                        @foreach ($jueces as $juez)
-                            <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
+                        @foreach ($jueces as $key => $juez)
+                            <option value="{{$juez->IdJuez}}">{{($key+1).'.-  '.$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -59,8 +59,8 @@
                     <label  for="apuntador" class="form-label">Apuntador:</label>
                     <div class="input-group col-md-12">
                       <select name="apuntador" class="form-select" id="apuntador" value={{ old('apuntador') }}>
-                        @foreach ($jueces as $juez)
-                            <option >{{$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
+                        @foreach ($jueces as $key => $juez)
+                            <option value="{{$juez->IdJuez}}" >{{($key+1).'.-  '.$juez->NombrePersona.' '.$juez->ApellidoPaterno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -68,7 +68,7 @@
                   <div class="col-md-12 d-flex flex-row-reverse mt-4 ">
                     <div class="botones border border-secondary pt-2 pb-1 pe-2 ps-2">
                       <div class="d-inline p-2">
-                        <button type="submit" class="btn prevSig">Anterior</button>
+                        <button type="" class="btn prevSig">Anterior</button>
                       </div>
                       <div class="d-inline p-2">
                         <button type="submit" class="btn prevSig">Siguiente</button>
