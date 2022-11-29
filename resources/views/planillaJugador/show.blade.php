@@ -65,7 +65,12 @@
 
             <div class="col-10 p-4 mx-auto contenedorForm" >
                 <div class="d-flex justify-content-center mb-4 border-bottom">
+                    <div class="col-8 d-flex justify-content-end">
                         <h1 class="tituloFomulario">PLANILLA DE JUGADOR</h1>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <a type="button" href="{{url('planilla/jugador')}}" class="botones w-50 h-75"> Volver </a>
+                    </div>
                 </div>
                     
                     <div class="row">
