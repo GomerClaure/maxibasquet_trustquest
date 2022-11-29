@@ -109,6 +109,9 @@
                         <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active " href="{{url('/registrarJugadas/')}}">Registro en planilla</a>
+                        </li>
                     </ul>  
                     <ul class="navbar-nav ms-auto logout mb-2">
                         <li class="nav-item dropdown ">

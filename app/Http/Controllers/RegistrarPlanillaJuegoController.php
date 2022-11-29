@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Categoria;
 use App\Models\Juez;
 use App\Models\Partido;
 use Illuminate\Support\Facades\DB;
 use App\Models\JuecesPorPartido;
+use App\Models\Datos_partidos;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 
 class RegistrarPlanillaJuegoController extends Controller
@@ -22,12 +26,35 @@ class RegistrarPlanillaJuegoController extends Controller
         return view('registroJugadas.navegacionRegistro');
     }
 
-    public function mostrarRegistroJugadas(){
-        return view('registroJugadas.registroJugadas');
+    public function mostrarRegistroJugadas($idPartido){
+        date_default_timezone_set('America/La_Paz');
+        $partido = Partido::find($idPartido);
+        $idEquipos = Datos_partidos::select('datos_partidos.IdEquipo')
+                        ->where('datos_partidos.IdPartido','=',$idPartido)
+                        ->get();
+        $equipoA = Equipo::find($idEquipos[0]->IdEquipo);
+        $equipoB = Equipo::find($idEquipos[1]->IdEquipo);
+        $partido = Partido::find($idPartido);
+        $categoria = Categoria::find($partido->IdCategoria);
+        $fechaHoy = date('d-m-Y');
+        $IdJuecesPorPartido = JuecesPorPartido::select('jueces_por_partidos.IdJuez')
+                            ->where('IdPartido',$idPartido)
+                            ->get();
+        $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno')
+                ->join('personas','jueces.IdPersona','=','personas.IdPersona')
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
+                ->get();
+        // return $jueces;
+        return view('registroJugadas.registroJugadas',
+        compact('idEquipos','equipoA','equipoB','categoria','fechaHoy','idPartido','partido','jueces'));
+
     }
 
     // Guardado y registro de jueces
-    
+
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');
         $arrayjuecesrepetidos = array_count_values([$formulario['anotadorPrincipal'],$formulario['anotadorAsistente'],$formulario['cronometrista'],$formulario['apuntador']]);
@@ -66,19 +93,19 @@ class RegistrarPlanillaJuegoController extends Controller
         ]);
         return redirect('registrarJugadas/'.$request->id);
     }
-    public function mostrarRegistroJueces($id)
+    public function mostrarRegistroJueces($idPartido)
     {
-        $juecesPorPartido = JuecesPorPartido::where('IdPartido','=',$id)->get();
+        $juecesPorPartido = JuecesPorPartido::where('IdPartido','=',$idPartido)->get();
         if($juecesPorPartido->isEmpty()){
-            $jueces = $this->getJuecesValidos($id); 
+            $jueces = $this->getJuecesValidos($idPartido); 
             return view('registroJugadas.registroJueces',compact('jueces','id'));
         }else{
-            return redirect('registrarJugadas/'.$id);
+            return redirect('registrarJugadas/'.$idPartido);
         }
     }
-    private function getJuecesValidos($id){
+    private function getJuecesValidos($idPartido){
         date_default_timezone_set('America/La_Paz');
-        $partido = Partido::find($id);
+        $partido = Partido::find($idPartido);
         if($partido){
             $this->fechaPartidoActual = $partido->FechaPartido;
             $this->horaPartidoActual = $partido->HoraPartido;

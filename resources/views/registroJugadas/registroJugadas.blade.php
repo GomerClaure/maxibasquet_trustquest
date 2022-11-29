@@ -22,9 +22,9 @@
                 <div class="row p-2">
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">Equipo A:</label>
+                            <label  for="equipoB" class="form-label">Equipo A:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$equipoA->NombreEquipo}}"  disabled>
                             </div>
                         </div>
                     </div>
@@ -32,32 +32,32 @@
                         <div class="input-group">
                             <label  for="equipoA" class="form-label">Equipo B:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$equipoB->NombreEquipo}}"  disabled>
                             </div>
                         </div>
                         
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">Categoria:</label>
+                            <label  for="categoria" class="form-label">Categoria:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$categoria->NombreCategoria}}"  disabled>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">Nro de Juego:</label>
+                            <label  for="nroDeJuego" class="form-label">Nro de Juego:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$idPartido}}"  disabled>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">Fecha:</label>
+                            <label  for="fecha" class="form-label">Fecha:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$fechaHoy}}"  disabled>
                             </div>
                         </div>
                     </div>
@@ -65,26 +65,26 @@
                 <div class="row p-2">
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">Lugar:</label>
+                            <label  for="lugar" class="form-label">Lugar:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$partido->LugarPartido}}"  disabled>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">1er Juez:</label>
+                            <label  for="juez1" class="form-label">1er Juez:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$jueces[0]->NombrePersona.' '.$jueces[0]->ApellidoPaterno }}"  disabled>
                             </div>
                         </div>
                         
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <label  for="equipoA" class="form-label">2do Juez:</label>
+                            <label  for="juez2" class="form-label">2do Juez:</label>
                             <div class="input-group col-md-12">
-                                <input class="form-control" type="text" value="Equipo A"  disabled>
+                                <input class="form-control" type="text" value="{{$jueces[1]->NombrePersona.' '.$jueces[1]->ApellidoPaterno }}"  disabled>
                             </div>
                         </div>
                     </div>
@@ -118,9 +118,13 @@
                                 </div> 
                                 
                             </div>
-                            <div class="col">
-                                <button type="submit" class="btn guardarP"> Guardar Punto</button>
-                                <button type="" class="btn guardarP"> Finalizar Cuarto</button>
+                            <div class="col text-center">
+                                <div class="d-inline p-2">
+                                    <button type="submit" class="btn guardarP"> Guardar Punto</button>
+                                </div>
+                                <div class="d-inline p-2">
+                                    <button type="" class="btn guardarP"> Finalizar Cuarto</button>
+                                </div>
                             </div>
                     </div>
                 </form>
