@@ -76,7 +76,7 @@ Route::get('jugador/create/{id}', [JugadorController::class,'create'])->middlewa
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
 Route::get('tecnico/create/{id}', [CuerpoTecnicoController::class,'create'])->middleware(['auth','delegado']);
 Route::post('tecnico/create/{id}',  [CuerpoTecnicoController::class, 'store']);
-Route::get('/subirLogo/{id}', [SubirLogoController::class,'index'])->name('subirLogo')->middleware(['auth','delegado']);
+Route::get('/subirLogo', [SubirLogoController::class,'index'])->name('subirLogo')->middleware(['auth','delegado']);
 Route::post('/subirLogo', [SubirLogoController::class,'store'])->name('subirLogo');
 Route::put('/tecnico/{id}/update', [CuerpoTecnicoController::class,'update']);
 Route::get('/tecnico/{id}/edit', [CuerpoTecnicoController::class,'edit'])->middleware(['auth','delegado']);

@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\Delegado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SubirLogoController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        $equipo = Equipo::find($id);
-                                                  
+        $idUsuario = auth()->user()->id;
+        $idDelegado =Delegado::select('delegados.IdDelegado')
+                    ->where('delegados.IdUsuario','=',$idUsuario)
+                    ->get();
+
+        $equipo= Equipo::where('equipos.IdDelegado','=',$idDelegado[0]->IdDelegado)
+                    ->get()[0];
+        $id=$equipo->IdEquipo;                                  
         //Nombre y Pais de un equipo Categoria
         $c=Equipo::select('paises.NombrePais','equipos.NombreEquipo','categorias.NombreCategoria','equipos.IdDelegado')
                   ->where('equipos.IdEquipo','=',$id)
@@ -38,7 +45,7 @@ class SubirLogoController extends Controller
         Storage::disk('public')->delete('/'.($equipo->LogEquipo));
         $equipo->LogoEquipo = $formulario['logotipoDelEquipo'];
         $equipo->save();
-        return redirect('subirLogo/'.$id);
+        return redirect('subirLogo');
         // return $request;
     }
 
