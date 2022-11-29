@@ -22,6 +22,11 @@
     margin-right: 20px;
     padding: 5px;
 }
+.tablasup{
+    background-color: #4a4a4b;
+    color: white;
+    margin: 0px;
+}
 .textoPais{
     color: white;
     margin-top: 20px;
@@ -29,6 +34,12 @@
 }
 .btn.botonSubirLogo:first-child:hover{
     background: #fa841a;
+}
+.btn.botoncreate:first-child:hover{
+    background: #fa841a;
+}
+.botones_jugador{
+    text-align: center;
 }
 .btn.botoncreate{
 

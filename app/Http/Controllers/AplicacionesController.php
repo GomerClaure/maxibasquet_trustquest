@@ -170,7 +170,7 @@ class AplicacionesController extends Controller
                                   ->orWhere('EstadoAplicacion', '=','Aceptado');
                         })
                         ->get();
-        // echo $aplicaciones;
+        // echo $aplicaciones;FCy
         for ($i=0; $i < count($aplicaciones); $i++) { 
             $aplicacion = $aplicaciones[$i];
             $categoriaAplicaciones = $aplicacion->Categorias;

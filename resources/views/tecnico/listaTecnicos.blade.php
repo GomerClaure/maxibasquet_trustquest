@@ -48,7 +48,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h1 class="text-center titulo"> <b>{{$equipo}} --Tecnicos</b></h1>
+                                <h1 class="text-center titulo"> <b>{{$equipo}} -- Cuerpo Tecnico</b></h1>
                                 <h3 class="titulo">Categoria: {{$categoria}}</h3>
                                 <div class="card contenedorCard">
                                     <div class="card-header ps-3 py-2 row">

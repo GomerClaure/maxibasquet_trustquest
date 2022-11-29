@@ -275,7 +275,7 @@ class DeleteJugadorController extends Controller
         $persona = Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador -> IdEquipo);
         $categoria = Categoria::find($datosJugador -> IdCategoria);
-        return redirect('editarJugadores/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+        return redirect('/delete/jugador/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
 
     }
 

@@ -18,6 +18,10 @@
         <div class="col-md-6 nombreEquipo">
             <label for="nombreDeEquipo" class="form-label">Nombre de equipo:</label>
             <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombreEquipo}}" readonly>
+
+            <label for="nombreDeEquipo" class="form-label">Pais de equipo:</label>
+            <input name="nombreDeEquipo" type="text" class="form-control" id="nombreDeEquipo" value="{{ $equipo->NombrePais}}" readonly>
+
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -41,7 +45,6 @@
 </section>
 </div>
 <div class="botones_jugador">
-    <h4 class="textoPais">Pais:</h4>
     <a href="{{url('jugador'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Jugador</a>
     <a href="{{url('tecnico'.'/'.'create'.'/'. $equipo->IdEquipo)}}" type="button" class="btn botoncreate">Registrar Tecnico</a>
 </div>
@@ -50,7 +53,7 @@
                                 <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
                                 <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
                                     <thead>
-                                    <tr>
+                                    <tr class="tablasup">
                                         <th>Categorias </th>
                                         <th>Jugadores</th>
                                         <th>Tecnicos</th>
@@ -64,7 +67,7 @@
                                             </td>
                                             <td class="lista">
                                             <a href="{{url('tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Editar</a>
-                                            <a href="{{url('tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
+                                            <a href="{{url('eliminar'.'/'.'tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
                                             </td>
                                         </tr>
                                         @endforeach
