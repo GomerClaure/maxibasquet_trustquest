@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Partido;
 use App\Models\Equipo;
 use App\Models\DatoPartido;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Redirect;
 
 class RegistrarPartidosController extends Controller
 {
@@ -23,6 +25,7 @@ class RegistrarPartidosController extends Controller
 
     public function store(Request $request)
     {
+        
 
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
@@ -56,6 +59,37 @@ class RegistrarPartidosController extends Controller
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
+        //verificar si el mismo equipo no puede jugar el mismo dia 2 veces A
+        $partido = DB::table('partidos')
+        ->select('FechaPartido','NombreEquipo')
+        ->join('datos_partidos','partidos.IdPartido','=','datos_partidos.IdPartido')
+        ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
+        ->where('equipos.NombreEquipo','=',$equipoA)
+        ->where('partidos.FechaPartido','=',$request->fecha)
+        ->exists()
+        ;
+
+        if($partido){
+            //return response()->json('este equipo no peude jugar dos veces el mismo dia');
+            return back()->withInput()->with('mensajeErrorFechaMisma','El equipo A no puede jugar mas de una ves el mismo dia');
+        }
+
+        //verificar si el mismo equipo no puede jugar el mismo dia 2 veces B
+        $partido = DB::table('partidos')
+        ->select('FechaPartido','NombreEquipo')
+        ->join('datos_partidos','partidos.IdPartido','=','datos_partidos.IdPartido')
+        ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
+        ->where('equipos.NombreEquipo','=',$equipoB)
+        ->where('partidos.FechaPartido','=',$request->fecha)
+        ->exists()
+        ;
+
+        if($partido){
+            //return response()->json($equipoB);
+            return back()->withInput()->with('mensajeErrorFechaMisma','El equipo B no puede jugar mas de una ves el mismo dia');
+
+        }
+
 
         //verificar que los equipos que pertenezcan a la categoria seleccionada
 
@@ -68,7 +102,7 @@ class RegistrarPartidosController extends Controller
             ->where('categorias.NombreCategoria', '=', $categoriaSelecionada)
             ->exists();
         if (!$consultaCatEquipoA) {
-            return back()->withInput()->with('mensajeErrorCategoriaA', 'El Equipo A no pertenece a la categoria');
+            return back()->withInput()->with('mensajeErrorCategoria', 'El Equipo A no pertenece a la categoria');
         }
 
         $consultaCatEquipoB = DB::table('equipos')
@@ -79,7 +113,7 @@ class RegistrarPartidosController extends Controller
             ->where('categorias.NombreCategoria', '=', $categoriaSelecionada)
             ->exists();
         if (!$consultaCatEquipoB) {
-            return back()->withInput()->with('mensajeErrorCategoriaB', 'El Equipo B no pertenece a la categoria');
+            return back()->withInput()->with('mensajeErrorCategoria', 'El Equipo B no pertenece a la categoria');
         }
 
         //valdiar cantidad de jugadores A
@@ -91,7 +125,7 @@ class RegistrarPartidosController extends Controller
 
 
         if (count($jugadores) < 5) {
-            return back()->whithInput()->with('mensajeErrorCantidadJugadoresA', 'El equipo A no cuenta con la cantidad minima de jugadores');
+            return back()->with('mensajeErrorCantidadJugadores', 'El equipo A no cuenta con la cantidad minima de jugadores');
         }
 
         //validar cantidad de jugadores B
@@ -100,9 +134,10 @@ class RegistrarPartidosController extends Controller
             ->where('jugadores.IdEquipo', '=', $idEquipoB->IdEquipo)
             ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
             ->get();
-        if (count($jugadores) < 5) {
-            //return response()->json(count($jugadores));
-            return back()->whithInput()->with('mensajeErrorCantidadJugadoresB', 'El equipo B no cuenta con la cantidad minima de jugadores');
+            $cantidaJugadores = count($jugadores);
+        if ($cantidaJugadores < 5) {
+            //return response()->json($request);
+            return back()->with('mensajeErrorCantidadJugadores', 'El equipo B no cuenta con la cantidad minima de jugadores');
         }
 
         //validar lugar fecha partidos
@@ -141,7 +176,8 @@ class RegistrarPartidosController extends Controller
                 }
             }
         }
-
+        
+        
 
 
         $obtenerPartido = DB::table('partidos')

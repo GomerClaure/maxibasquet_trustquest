@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Preinscripcion</title>
+    <title>Registra Partidos</title>
     <link rel="stylesheet" href="{{asset('css/StyleRegistrarPartidos.css')}}">
 </head>
 
@@ -17,12 +17,6 @@
     $noVadido = "¡No valido!";
     @endphp
 
-    @if (Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
-    </div>
-    @endif
 
     @if (Session::has('mensajeErrorEquipos'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
@@ -31,33 +25,22 @@
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorCategoriaA'))
+    @if (Session::has('mensajeErrorCategoria'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaA')}}</h4>
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorCategoriaB'))
-    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaB')}}</h4>
-    </div>
-    @endif
+   
 
-    @if (Session::has('mensajeErrorCantidadJugadoresA'))
+    @if (Session::has('mensajeErrorCantidadJugadores'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCantidadJugadoresA')}}</h4>
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorCantidadJugadoresB'))
-    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCantidadJugadoresB')}}</h4>
-    </div>
-    @endif
 
     @if (Session::has('mensajeErrorMismoPartido'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
@@ -91,6 +74,13 @@
     <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensajeValidoRegistro')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorFechaMisma'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorFechaMisma')}}</h4>
     </div>
     @endif
 
