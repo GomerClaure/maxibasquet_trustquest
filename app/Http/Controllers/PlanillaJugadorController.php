@@ -6,6 +6,9 @@ use App\Models\PlanillaJugador;
 use App\Models\Persona;
 use App\Models\Jugador;
 use App\Models\Falta;
+use App\Models\Equipo;
+use App\Models\Partido;
+use App\Models\Datos_partidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,17 +25,28 @@ class PlanillaJugadorController extends Controller
                         ->select('IdPlanillaJugador')
                         ->where('IdPartido',$idPartido)
                         ->get(); 
+                                      
         $idPlanillaJugador = $idPlanilla[0] -> IdPlanillaJugador;
 
         $faltas = DB::table('faltas')
                         ->select('*')
                         ->where('IdPlanillaJugador',$idPlanillaJugador)
                         ->get(); 
+        
+        $idEquipos = DB::table('datos_partidos')
+                        ->select('*')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
+
+        $partidos = DB::table('partidos')
+                        ->select('*')
+                        ->where('IdPartido',$idPartido)
+                        ->get(); 
 
         $arregloEquipoA = DB::table('jugadores')
                             ->select('*')
-                            ->where('IdEquipo',1)
-                            ->where('IdCategoria',1)
+                            ->where('IdEquipo',$idEquipos[0]-> IdEquipo)
+                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
                             ->get();
 
         $personasA = array();
@@ -44,8 +58,8 @@ class PlanillaJugadorController extends Controller
 
         $arregloEquipoB = DB::table('jugadores')
                             ->select('*')
-                            ->where('IdEquipo',2)
-                            ->where('IdCategoria',1)
+                            ->where('IdEquipo',$idEquipos[1]-> IdEquipo)
+                            ->where('IdCategoria',$partidos[0]-> IdCategoria)
                             ->get();
 
         $personasB = array();
@@ -55,8 +69,10 @@ class PlanillaJugadorController extends Controller
             $contador++;
         }
 
-        
-        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas'));
+        $equipoA = Equipo::find($idEquipos[0]-> IdEquipo);
+        $equipoB = Equipo::find($idEquipos[1]-> IdEquipo);
+
+        return view("planillaJugador.index",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas','equipoA','equipoB'));
     }
 
     /**

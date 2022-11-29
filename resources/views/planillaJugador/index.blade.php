@@ -69,7 +69,7 @@
                 </div>
                     
                     <div class="row">
-                        <h2 class="">Equipo A</h2>
+                        <h1 class="tituloEquipo">{{$equipoA -> NombreEquipo}}</h1>
                         <div class="col-4 d-flex justify-content-center border border-dark pt-3">
                             <h3 class="">Nombre de jugador</h3>
                         </div>
@@ -183,7 +183,7 @@
 
 
                     <div class="row mt-5">
-                        <h2 class="">Equipo B</h2>
+                        <h1 class="tituloEquipo">{{$equipoB -> NombreEquipo}}</h1>
                         <div class="col-4 d-flex justify-content-center border border-dark pt-3">
                             <h3 class="">Nombre de jugador</h3>
                         </div>
