@@ -25,6 +25,9 @@ class RegistrarPlanillaJuegoController extends Controller
     public function mostrarRegistroJugadas(){
         return view('registroJugadas.registroJugadas');
     }
+
+    // Guardado y registro de jueces
+    
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');
         $arrayjuecesrepetidos = array_count_values([$formulario['anotadorPrincipal'],$formulario['anotadorAsistente'],$formulario['cronometrista'],$formulario['apuntador']]);
@@ -61,16 +64,11 @@ class RegistrarPlanillaJuegoController extends Controller
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
-        return redirect('registroJugadas/'.$request->id);
+        return redirect('registrarJugadas/'.$request->id);
     }
     public function mostrarRegistroJueces($id)
     {
-        // $juecesPorPartido = DB::table('jueces_por_partidos')
-        //     ->where('Id', '1')
-        //     ->get();
         $juecesPorPartido = JuecesPorPartido::where('IdPartido','=',$id)->get();
-        // echo ($juecesPorPartido->isEmpty()) ? 'true' : 'false';
-        // return $juecesPorPartido;
         if($juecesPorPartido->isEmpty()){
             $jueces = $this->getJuecesValidos($id); 
             return view('registroJugadas.registroJueces',compact('jueces','id'));
@@ -113,7 +111,6 @@ class RegistrarPlanillaJuegoController extends Controller
                 }
                 
             }
-            // return $partidosProgramados;
             return $juecesValidos;
             
         }else{

@@ -30,3 +30,32 @@ h1{
     background: #fa841a;
     color: white;
 }
+
+
+/* Css registroJugadas */
+.datosPartido{
+    background-color: aliceblue;
+}
+.btn.iniciarPartido{
+    background: #eb8f32;
+    color: white;
+}
+.btn.iniciarPartido:first-child:hover{
+    background: #fa841a;
+    color: white;
+}
+
+
+
+
+.registroPuntaje{
+    background-color: aliceblue;
+}
+.btn.guardarP{
+    background: #eb8f32;
+    color: white;
+}
+.btn.guardarP:first-child:hover{
+    background: #fa841a;
+    color: white;
+}
