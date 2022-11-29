@@ -43,7 +43,7 @@ class AplicacionesController extends Controller
 
     public function index()
     {
-        $paises = Pais::all();
+        $paises = Pais::select()->orderBy('NombrePais')->get();
         return view('preinscripcion.preinscripcionEquipo', compact('paises'));
     }
 
