@@ -98,9 +98,10 @@ class PlanillaJugadorController extends Controller
             }
             
         }else if($request -> $selectTiroLibre != "vacio"){
-            for($i=2; $i<=5; $i++){
+            for($i=1; $i<=5; $i++){
                 $select = $id.'selectFalta'.$i;
                 $select2 = $id.'selectTiroLibre'.$i;
+
                 if($request -> $select == "vacio" && $request -> $select2 == "vacio"){
                     $selectActual = $id.'selectFalta'.($i-1);
                     $falta = $request -> $selectActual;
@@ -120,20 +121,28 @@ class PlanillaJugadorController extends Controller
                     return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
                 }else if($request -> $select != "vacio" && $request -> $select2 == "vacio"){
                     return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
+                }else if($request -> $select != "vacio" && $request -> $select2 != "vacio"){
+                    $selectActual = $id.'selectFalta'.$i;
+                    $falta = $request -> $selectActual;
+
+                    $selectActual2 = $id.'selectTiroLibre'.$i;
+                    $tiroLibre = $request -> $selectActual2;
+
+                    if($falta != null && $tiroLibre != null){
+                        $faltaJugador = new Falta;
+                        $faltaJugador -> IdJugador = $id;
+                        $faltaJugador -> IdPlanillaJugador = $idPlanillaJugador;
+                        $faltaJugador -> TipoFalta = $falta;
+                        $faltaJugador -> CantidadTiroLibre = $tiroLibre;
+                        $faltaJugador -> save();
+                    }
                 }
             }
         }else{
             return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
         }
 
-        if($falta != "" && $tiroLibre != ""){
-            $faltaJugador = new Falta;
-            $faltaJugador -> IdJugador = $id;
-            $faltaJugador -> IdPlanillaJugador = $idPlanillaJugador;
-            $faltaJugador -> TipoFalta = $falta;
-            $faltaJugador -> CantidadTiroLibre = $tiroLibre;
-            $faltaJugador -> save();
-        }else{
+        if($falta == "" && $tiroLibre == ""){
             return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');
         }
 
