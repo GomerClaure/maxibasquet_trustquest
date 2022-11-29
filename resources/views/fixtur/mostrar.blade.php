@@ -50,7 +50,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
-                                <h3>Fixtur </h3>
+                                <h3>Fixture </h3>
                                 <h5>3er Torneo Internacional de Maxi Basquet</h5>
                             <div class="card">
                             
