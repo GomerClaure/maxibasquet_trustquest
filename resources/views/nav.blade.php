@@ -11,7 +11,7 @@
 </head>
 <body>
     @guest
-        <nav class="navbar navbar-expand-sm navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light menu">
             <!-- Brand -->
             <div class="container-fluid">
                 <img class="logito" src="{{asset('storage').'/'.'img_Home'.'/'.'logo_maxi.png'}}" >
@@ -45,7 +45,7 @@
     @endguest
     @auth
     @if (auth()->user()->IdRol ==3)
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav class="navbar navbar-expand-sm navbar-light menu">
         <!-- Brand -->
         <div class="container-fluid">
             <img class="logito" src="{{asset('storage').'/'.'img_Home'.'/'.'logo_maxi.png'}}" >
@@ -87,7 +87,7 @@
             </div>
       </nav>
     @elseif(auth()->user()->IdRol ==2 || auth()->user()->IdRol ==1)
-        <nav class="navbar navbar-expand-sm navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light menu">
             <!-- Brand -->
             <div class="container-fluid">
                 <img class="logito" src="{{asset('storage').'/'.'img_Home'.'/'.'logo_maxi.png'}}" >
@@ -109,6 +109,9 @@
                         <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active " href="{{url('/planilla/jugador')}}">Registro en planilla</a>
+                        </li>
                     </ul>  
                     <ul class="navbar-nav ms-auto logout mb-2">
                         <li class="nav-item dropdown ">
@@ -125,7 +128,7 @@
         </nav>
     <!--Este es el nav del delegado hacerlo mas bonito-->
     @elseif(auth()->user()->IdRol ==4)
-        <nav class="navbar navbar-expand-sm navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light menu">
             <!-- Brand -->
             <div class="container-fluid">
                 <img class="logito" src="{{asset('storage').'/'.'img_Home'.'/'.'logo_maxi.png'}}" >

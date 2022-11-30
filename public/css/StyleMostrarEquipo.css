@@ -15,6 +15,7 @@ body{
   display: grid;
   text-align: center; 
   justify-content: center;
+  background-color: #171f27 !important;
 }  
 .card-img-top{
     height: 250px;

@@ -45,7 +45,7 @@
             </nav>
         </header>
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
-                <div class="bg-image w-100" >
+        <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -64,6 +64,7 @@
                                         <th>Lugar</th>
                                         <th>Hora</th>
                                         <th>Estado</th>
+                                        <th>Categoria</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -77,7 +78,7 @@
                                                 <td>{{$lugares[$i]->LugarPartido}}</td>
                                                 <td>{{$horas[$i]->HoraPartido}}</td>
                                                 <td>{{$estados[$i]->EstadoPartido}}</td>
-                                              
+                                                <td>{{$categorias[$i]->NombreCategoria}}</td>
                                                 
                                             @endif
                                             
@@ -86,4 +87,11 @@
                                     </tbody>
                                 </table>
                                 </div>
+                              
+
                             </div>
+                        <div class="centro"><a class="btn" href="{{url('home')}}">Atras</a></div>
+        </div>
+                
+     </body>
+</html>

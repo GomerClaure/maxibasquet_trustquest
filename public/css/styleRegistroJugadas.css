@@ -1,0 +1,61 @@
+
+.seccionNav{
+    background-color: aliceblue;
+}
+.col.pasos{
+    margin-top: 3%;
+    /* margin-bottom: 50%; */
+}
+
+
+/* Css registro de jueces */
+
+h1{
+    font-weight: bold;
+    color: white;
+  }
+.btn.siguiente{
+    background: #eb8f32;
+    color: white;
+}
+.btn.prevSig{
+    background: #eb8f32;
+    color: white;
+}
+/* .btn.siguiente:first-child:hover{
+    background: #fa841a;
+    color: white;
+} */
+.btn.prevSig:first-child:hover{
+    background: #fa841a;
+    color: white;
+}
+
+
+/* Css registroJugadas */
+.datosPartido{
+    background-color: aliceblue;
+}
+.btn.iniciarPartido{
+    background: #eb8f32;
+    color: white;
+}
+.btn.iniciarPartido:first-child:hover{
+    background: #fa841a;
+    color: white;
+}
+
+
+
+
+.registroPuntaje{
+    background-color: aliceblue;
+}
+.btn.guardarP{
+    background: #eb8f32;
+    color: white;
+}
+.btn.guardarP:first-child:hover{
+    background: #fa841a;
+    color: white;
+}
