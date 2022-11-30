@@ -27,7 +27,7 @@
                 <p>{{Session::get('errorJueces')}}</p>
             </div>
         @endif
-        <form class="formularioRegistro" action="{{route('registrarJueces',['id' => $id])}}" method="POST" enctype="multipart/form-data" novalidate>
+        <form class="formularioRegistro" action="{{route('registrarJueces',['id' => $idPartido])}}" method="POST" enctype="multipart/form-data" novalidate>
           @csrf
           <div class="card login">
               <div class="card-body">

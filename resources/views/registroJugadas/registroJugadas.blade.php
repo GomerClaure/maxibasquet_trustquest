@@ -142,7 +142,7 @@
                                 <button type="submit" class="btn guardarP"> Guardar Punto</button>
                             </div>
                             <div class="d-inline p-2">
-                                <button type="" class="btn guardarP"> Finalizar Cuarto</button>
+                                <button type="submit" class="btn guardarP" action="{{route('guardarJugada',['idPartido' => $idPartido,'cuarto'=> 2])}}"> Finalizar Cuarto</button>
                             </div>
                         </div>
                 </div>
@@ -167,6 +167,10 @@
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";
     }
+    // function show() {
+
+    // }
+
     function update() {
 				var select = document.getElementById('puntoEquipo');
 				var option = select.options[select.selectedIndex];
@@ -181,6 +185,7 @@
 			}
 
 	update();
+
 </script>
 @endsection
 </html>

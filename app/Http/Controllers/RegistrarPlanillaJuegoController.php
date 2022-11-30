@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\JuecesPorPartido;
 use App\Models\Datos_partidos;
 use App\Models\Equipo;
+use App\Models\Jugada;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,15 @@ class RegistrarPlanillaJuegoController extends Controller
             $idJugador = $formulario['jugadorB'];
         }
     
-        // return $idJugador;
+        $jugada = new Jugada;
+        $jugada -> IdJugador = $idJugador;
+        $jugada -> IdPartido = $idPartido;
+        $jugada -> TipoJugada = $puntuacion;
+        $jugada -> CuartoJugada = 1;
+        $jugada -> HoraJugada = date('H:i');
+        // $jugada -> save();
+        // return back()->withInput();
+        return $request;
     }
 
     public function mostrarDatosPartido($idPartido){
@@ -126,7 +135,7 @@ class RegistrarPlanillaJuegoController extends Controller
         $juecesPorPartido = JuecesPorPartido::where('IdPartido','=',$idPartido)->get();
         if($juecesPorPartido->isEmpty()){
             $jueces = $this->getJuecesValidos($idPartido); 
-            return view('registroJugadas.registroJueces',compact('jueces','id'));
+            return view('registroJugadas.registroJueces',compact('jueces','idPartido'));
         }else{
             return redirect('registrarJugadas/'.$idPartido);
         }
