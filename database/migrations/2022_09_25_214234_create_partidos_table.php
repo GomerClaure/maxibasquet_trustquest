@@ -21,7 +21,7 @@ class CreatePartidosTable extends Migration
             $table->date("FechaPartido");
             $table->enum("EstadoPartido",["curso","finalizado","espera"]);
             $table->timestamps();
-            $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
+            //$table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
         });
     }
 
