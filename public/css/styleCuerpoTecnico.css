@@ -40,3 +40,13 @@ body{
 .navbar a {
     color: black;
 }
+.botonvolver{
+    background: #eb8f32;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    margin-left: 1100px;
+    border-radius: 5px;
+    text-decoration:none;
+
+}

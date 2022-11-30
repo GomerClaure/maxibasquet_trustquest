@@ -10,5 +10,9 @@ class Partido extends Model
     use HasFactory;
     protected $table = "partidos";
     protected $primaryKey = 'IdPartido';
-    protected $fillable = ["HoraPartido","LugarPartido","FechaPartido","EstadoPartido"];
+    protected $fillable = ["HoraPartido","IdCategoria","LugarPartido","FechaPartido","EstadoPartido"];
+
+    public function datosPartido(){
+        return $this->belongsTo(DatoPartido::class, 'IdPartido');
+    }
 }
