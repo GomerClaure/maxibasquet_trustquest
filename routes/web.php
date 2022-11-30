@@ -49,7 +49,7 @@ Route::get('/mostrarFixtur',[FixturController::class,'show']);
 Route::resource('/formulario',FormularioController::class);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
-Route::resource('/registrarPartidos',RegistrarPartidosController::class); //->middleware(['auth','admin']);
+Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
 
 
 
