@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="{{asset('css/StyleSubirLogo.css' )}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
 </head>
-@extends('welcome')
+@extends('nav')
 @section('content')
+<br>
 <div class="container justify-content-center">
 <section class=" main-title ">
     <h1 class="display-6 mb-0" >Mi Equipo</h1>
