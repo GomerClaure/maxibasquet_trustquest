@@ -14,7 +14,7 @@ class CreateCategoriasPorEquipoTable extends Migration
     public function up()
     {
         Schema::create('categorias_por_equipo', function (Blueprint $table) {
-            $table->bigIncrements("Id");
+            $table->id("Id");
             $table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedBigInteger("IdCampeonato");

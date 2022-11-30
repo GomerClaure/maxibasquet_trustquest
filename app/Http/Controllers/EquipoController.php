@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Aplicacion;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Models\Jugador;
@@ -13,7 +15,9 @@ use App\Models\CategoriaEquipo;
 use App\Models\Categorias_por_equipo;
 use App\Models\Credencial;
 use App\Models\Datos_partidos;
+use App\Models\Delegado;
 use App\Models\Tecnico;
+use App\Models\User;
 
 class EquipoController extends Controller
 {
@@ -108,6 +112,7 @@ class EquipoController extends Controller
                    ->join("paises","paises.IdPais","=","aplicaciones.IdPais")
                    ->whereNull('categorias_por_equipo.deleted_at')
                    ->orderBy('equipos.NombreEquipo')
+                   ->orderBy('categorias.NombreCategoria')
                    ->get();
         
         return view('equipo.eliminar',compact('equipos'));
@@ -170,7 +175,7 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id,$categoria)
-    {   $fecha = $this->comprobarPartido($id);
+    {   $fecha = $this->comprobarPartido($id,$categoria);
         if ($fecha) {
             return redirect('/equipo/lista/eliminar')->with('PartidoRegistrado','No se puede eliminar el equipo Existe un partido en espera o en curso'); 
         }
@@ -201,9 +206,17 @@ class EquipoController extends Controller
        Categorias_por_equipo::where("IdEquipo",$id)
         ->where("IdCategoria",$categoria)->delete();
         
+        
         $equipo = Categorias_por_equipo::where("IdEquipo",$id)->get();
+        
         if ($equipo->isEmpty()) {
-            Equipo::where("IdEquipo",$id)->delete();
+           $equi= Equipo::where("IdEquipo",$id)->get();
+           Aplicacion::where('IdAplicacion',$equi[0]->IdAplicacion)->update(['EstadoAplicacion'=>'Eliminado']);
+           Equipo::where("IdEquipo",$id)->delete();
+          $delegado = Delegado::where("IdDelegado",$equi[0] -> IdDelegado)->get();
+          Delegado::where("IdDelegado",$delegado[0] -> IdDelegado)->delete();
+          User::where("id",$delegado[0]->IdUsuario)->delete();
+
         }
 
         return redirect('/equipo/lista/eliminar')->with('mensaje','Datos del equipo eliminados correctamente'); 
@@ -223,7 +236,7 @@ class EquipoController extends Controller
     }
 
     /**Verificar si existe un partido progamado para un equipo */
-    public function comprobarPartido($idEquipo){
+    public function comprobarPartido($idEquipo,$categoria){
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $horaActual = date('G:i:s');
@@ -231,6 +244,7 @@ class EquipoController extends Controller
                     ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
                     ->where("IdEquipo",$idEquipo)
                     ->where("FechaPartido",">=",$fechaActual)
+                    ->where("partidos.IdCategoria",$categoria)
                     ->where("EstadoPartido","=","espera")
                     ->orwhere("EstadoPartido","=","curso")
                     ->get();

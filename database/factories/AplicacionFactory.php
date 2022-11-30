@@ -18,7 +18,7 @@ class AplicacionFactory extends Factory
             'IdPais'=> $this->faker->numberBetween(1,16),
             'NombreUsuario' => $this->faker->name(),
             'CorreoElectronico' => $this->faker->safeEmail(),
-            'NumeroTelefono' => $this->faker->text(8),
+            'NumeroTelefono' => $this->faker->phoneNumber(8),
             'NombreEquipo' => $this->faker->name(8),
             'Categorias' => $this->faker->randomElement(["+30","+30,+50","+35,+40,+45","+50,+55"]),
             'EstadoAplicacion' => $this->faker->randomElement(["Pendiente"]),
@@ -27,4 +27,5 @@ class AplicacionFactory extends Factory
 
         ];
     }
+    
 }

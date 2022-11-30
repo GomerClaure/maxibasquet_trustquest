@@ -11,7 +11,7 @@ class Categorias_por_equipo extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table ="categorias_por_equipo";
-    protected $id = 'Id';
+    protected $primaryKey = 'Id';
     protected $dates =['deleted_at'];
     protected $fillable = ["IdEquipo","IdCategoria","IdCampeonato"];
 
