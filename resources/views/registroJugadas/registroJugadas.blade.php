@@ -90,20 +90,20 @@
                     </div>
                 </div>
                 <div class="col text-center  p-3">
-                    <button class="btn iniciarPartido"> Iniciar partido</button>
+                    <button class="btn iniciarPartido" id="iniciarPartido"> Iniciar partido</button>
                 </div>
                 
             </section>
-            <section class="registroPuntaje border-bottom">
+            <section class="registroPuntaje border-bottom" id="registroPuntaje" style="display: none">
                 <form class="formularioLogin" action="{{url('/login')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="row p-2 pt-4 pb-4">
                             <div class="col">
                                 <div class="input-group">
                                     <label  for="puntoEquipo" class="form-label">Punto para el equipo:</label>
-                                    <select name="puntoEquipo" class="form-select" id="puntoEquipo" value={{ old('puntoEquipo') }}>
-                                        <option value="Equipo A">EquipoA</option>
-                                        <option value="Equipo B">EquipoB</option>
+                                    <select name="puntoEquipo" class="form-select" id="puntoEquipo" onChange="update()" value={{ old('puntoEquipo') }}>
+                                        <option id="eqA" value="{{$equipoA->IdEquipo}}">{{$equipoA->NombreEquipo}}</option>
+                                        <option id="eqB" value="{{$equipoB->IdEquipo}}">{{$equipoB->NombreEquipo}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -118,15 +118,33 @@
                                 </div> 
                                 
                             </div>
-                            <div class="col text-center">
-                                <div class="d-inline p-2">
-                                    <button type="submit" class="btn guardarP"> Guardar Punto</button>
-                                </div>
-                                <div class="d-inline p-2">
-                                    <button type="" class="btn guardarP"> Finalizar Cuarto</button>
+                            <div class="col ">
+                                <div class="input-group">
+                                    <label  for="jugador" class="form-label">Jugador:</label>
+
+                                    <select name="jugadorA" class="form-select" id="jugadorA" style="display: block" value={{ old('jugadorA')}} >
+                                    @foreach ($jugadoresA as $jugadorA)
+                                        <option value="{{$jugadorA->IdJugador}}">{{$jugadorA->NombrePersona.' '.$jugadorA->ApellidoPaterno}}</option>
+                                    @endforeach
+                                    </select>
+                                    <select name="jugadorB" class="form-select" id="jugadorB" style="display: none" value={{ old('jugadorB')}} >
+                                    @foreach ($jugadoresB as $jugadorB)
+                                        <option value="{{$jugadorB->IdJugador}}">{{$jugadorB->NombrePersona.' '.$jugadorB->ApellidoPaterno}}</option>
+                                    @endforeach
+                                    </select>
                                 </div>
                             </div>
                     </div>
+                    <div class="row p-2 pt-4 pb-4">
+                        <div class="col text-center">
+                            <div class="d-inline p-2">
+                                <button type="submit" class="btn guardarP"> Guardar Punto</button>
+                            </div>
+                            <div class="d-inline p-2">
+                                <button type="" class="btn guardarP"> Finalizar Cuarto</button>
+                            </div>
+                        </div>
+                </div>
                 </form>
             </section>
             <section class="mostrarResultado">
@@ -143,6 +161,25 @@
   
   
 </section>
+<script>
+    document.getElementById("iniciarPartido").onclick = function() {
+            document.getElementById("registroPuntaje").style.display = "block";
+            document.getElementById("iniciarPartido").style.display = "none";
+    }
+    function update() {
+				var select = document.getElementById('puntoEquipo');
+				var option = select.options[select.selectedIndex];
+                if (option.id == "eqA") {
+                    document.getElementById("jugadorB").style.display = "none";
+                    document.getElementById("jugadorA").style.display = "block";
+                }
+                if (option.id == "eqB") {
+                    document.getElementById("jugadorA").style.display = "none";
+                    document.getElementById("jugadorB").style.display = "block";
+                }
+			}
 
+	update();
+</script>
 @endsection
 </html>

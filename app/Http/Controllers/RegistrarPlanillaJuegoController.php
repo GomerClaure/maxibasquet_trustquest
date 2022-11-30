@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\JuecesPorPartido;
 use App\Models\Datos_partidos;
 use App\Models\Equipo;
+use App\Models\Jugador;
 use Illuminate\Http\Request;
 
 class RegistrarPlanillaJuegoController extends Controller
@@ -26,7 +27,7 @@ class RegistrarPlanillaJuegoController extends Controller
         return view('registroJugadas.navegacionRegistro');
     }
 
-    public function mostrarRegistroJugadas($idPartido){
+    public function mostrarDatosPartido($idPartido){
         date_default_timezone_set('America/La_Paz');
         $partido = Partido::find($idPartido);
         $idEquipos = Datos_partidos::select('datos_partidos.IdEquipo')
@@ -47,9 +48,22 @@ class RegistrarPlanillaJuegoController extends Controller
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
                 ->get();
-        // return $jueces;
+        $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno')
+                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                    ->where('jugadores.IdEquipo','=',$equipoA->IdEquipo)
+                    ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
+                    ->get();
+        $jugadoresB = Jugador::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno')
+                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                    ->where('jugadores.IdEquipo','=',$equipoB->IdEquipo)
+                    ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
+                    ->get();
+        // $sePuedeRegistrar = false;
+        // return $jugadoresB;
         return view('registroJugadas.registroJugadas',
-        compact('idEquipos','equipoA','equipoB','categoria','fechaHoy','idPartido','partido','jueces'));
+        compact('idEquipos','equipoA',
+        'equipoB','categoria','fechaHoy','idPartido',
+        'partido','jueces','jugadoresA','jugadoresB'));
 
     }
 
