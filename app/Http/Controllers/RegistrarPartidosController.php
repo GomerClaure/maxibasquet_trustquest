@@ -26,15 +26,15 @@ class RegistrarPartidosController extends Controller
 
     public function store(Request $request)
     {
-        
 
-       date_default_timezone_set('America/La_Paz');
+
+        date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $anio = date('Y') + 2;
         $fecha = $anio . "-01-01";
         $request->validate(
             [
-                
+
                 'hora' => 'required',
                 'lugar' => 'required|min:6|regex:/^([A-Z][a-z, ]+)+$/',
                 'fecha' => 'required',
@@ -60,34 +60,42 @@ class RegistrarPartidosController extends Controller
             return back()->withInput()->with('mensajeErrorEquipos', 'Los equipos no pueden ser iguales');
         }
 
+        $id1 = DB::table('categorias')
+            ->select('*')
+            ->where('categorias.NombreCategoria', $request->selectCategoria)
+            ->first();
+        //return response()->json($id1);
         //verificar si el mismo equipo no puede jugar el mismo dia 2 veces A
         $partido = DB::table('partidos')
-        ->select('FechaPartido','NombreEquipo')
-        ->join('datos_partidos','partidos.IdPartido','=','datos_partidos.IdPartido')
-        ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
-        ->where('equipos.NombreEquipo','=',$equipoA)
-        ->where('partidos.FechaPartido','=',$request->fecha)
-        ->exists()
-        ;
+            ->select('FechaPartido', 'NombreEquipo')
+            ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
+            ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
+            ->where('equipos.NombreEquipo', '=', $equipoA)
+            ->where('partidos.FechaPartido', '=', $request->fecha)
+            ->where('partidos.IdCategoria', '=', $id1->IdCategoria)
+            ->exists();
 
-        if($partido){
-            //return response()->json('este equipo no peude jugar dos veces el mismo dia');
-            return back()->withInput()->with('mensajeErrorFechaMisma','El equipo A no puede jugar mas de una ves el mismo dia');
+
+        if ($partido) {
+            //return response()->json($partido1);
+            return back()->withInput()->with('mensajeErrorFechaMisma', 'El equipo A no puede jugar mas de una ves el mismo dia y en la misma categoria');
         }
+
+
 
         //verificar si el mismo equipo no puede jugar el mismo dia 2 veces B
         $partido = DB::table('partidos')
-        ->select('FechaPartido','NombreEquipo')
-        ->join('datos_partidos','partidos.IdPartido','=','datos_partidos.IdPartido')
-        ->join('equipos','datos_partidos.IdEquipo','=','equipos.IdEquipo')
-        ->where('equipos.NombreEquipo','=',$equipoB)
-        ->where('partidos.FechaPartido','=',$request->fecha)
-        ->exists()
-        ;
-
-        if($partido){
+            ->select('*')
+            ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
+            ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
+            ->where('equipos.NombreEquipo', '=', $equipoB)
+            ->where('partidos.FechaPartido', '=', $request->fecha)
+            ->where('partidos.IdCategoria', '=', $id1->IdCategoria)
+            ->exists();
+        // return response()->json($partido);
+        if ($partido) {
             //return response()->json($equipoB);
-           return back()->withInput()->with('mensajeErrorFechaMisma','El equipo B no puede jugar mas de una ves el mismo dia');
+            return back()->withInput()->with('mensajeErrorFechaMisma', 'El equipo B no puede jugar mas de una ves el mismo dia y en la misma categoria');
         }
 
 
@@ -113,7 +121,7 @@ class RegistrarPartidosController extends Controller
             ->where('categorias.NombreCategoria', '=', $categoriaSelecionada)
             ->exists();
         if (!$consultaCatEquipoB) {
-           return back()->withInput()->with('mensajeErrorCategoria', 'El Equipo B no pertenece a la categoria');
+            return back()->withInput()->with('mensajeErrorCategoria', 'El Equipo B no pertenece a la categoria');
         }
 
         //valdiar cantidad de jugadores A
@@ -135,10 +143,10 @@ class RegistrarPartidosController extends Controller
             ->where('jugadores.IdEquipo', '=', $idEquipoB->IdEquipo)
             ->where('jugadores.IdCategoria', '=', $idCategoria->IdCategoria)
             ->get();
-            $cantidaJugadores = count($jugadores);
+        $cantidaJugadores = count($jugadores);
         if ($cantidaJugadores < 5) {
             //return response()->json($request);
-           return back()->withInput()->with('mensajeErrorCantidadJugadores', 'El equipo B no cuenta con la cantidad minima de jugadores');
+            return back()->withInput()->with('mensajeErrorCantidadJugadores', 'El equipo B no cuenta con la cantidad minima de jugadores');
         }
 
         //validar lugar fecha partidos
@@ -172,13 +180,13 @@ class RegistrarPartidosController extends Controller
                     $horaActualMax->modify('+1 hours');
                     if ($horaActualMin->format('H:i') < $request->hora && $horaActualMax->format('H:i') > $request->hora) {
                         //return response()->json('hora invalida');
-                        return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos son inavalidos');
+                        return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos no son inavalidos');
                     }
                 }
             }
         }
-        
-        
+
+
 
 
         $obtenerPartido = DB::table('partidos')
@@ -213,7 +221,7 @@ class RegistrarPartidosController extends Controller
             ->where('categorias.NombreCategoria', $request->selectCategoria)
             ->first();
         //return response()->json($id);
-       $nuevoPartido = new Partido;
+        $nuevoPartido = new Partido;
         $nuevoPartido->IdCategoria = $id->IdCategoria;
         $nuevoPartido->HoraPartido = $request->hora;
         $nuevoPartido->FechaPartido = $request->fecha;
