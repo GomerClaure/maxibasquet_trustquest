@@ -9,6 +9,7 @@ use App\Models\Equipo;
 use App\Models\Categoria;
 use App\Models\Credencial;
 use App\Models\Persona;
+use App\Models\Datos_partidos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -240,7 +241,7 @@ class EditarJugadorController extends Controller
         Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador -> IdEquipo);
         $categoria = Categoria::find($datosJugador -> IdCategoria);
-      
+        $partido = $this->comprobarPartido($equipo -> IdEquipo,$datosJugador->IdCategoria);
         if ($partido) {
             return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del jugador existe un partido en curso o en espera'); 
         }
