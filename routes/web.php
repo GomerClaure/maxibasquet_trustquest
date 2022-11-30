@@ -24,6 +24,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TecnicoQrController;
 use App\Http\Controllers\JuezController;
+use App\Http\Controllers\RegistrarPlanillaJuegoController;
 use App\Http\Controllers\PlanillaJugadorController;
 use App\Http\Controllers\DeleteJugadorController;
 
@@ -107,6 +108,10 @@ Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy
 
 
 //Usuario Anotador-Juez
+Route::get('/registrarJugadas/{id}',[RegistrarPlanillaJuegoController::class,'mostrarDatosPartido'])->middleware(['auth','juez']);
+Route::post('/guardarJugada',[RegistrarPlanillaJuegoController::class,'guardarDatosJuego'])->middleware(['auth','juez'])->name('guardarJugada');
+Route::get('/registrarJueces/{id}',[RegistrarPlanillaJuegoController::class,'mostrarRegistroJueces'])->middleware(['auth','juez']);
+Route::post('/registrarJueces',[RegistrarPlanillaJuegoController::class,'guardarRegistroJueces'])->middleware(['auth','juez'])->name('registrarJueces');
 Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
 Route::post('planilla/jugador/{idPartido}/{idPlanillaJugador}/{id}', [PlanillaJugadorController::class,'store']);
 Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'show']);
