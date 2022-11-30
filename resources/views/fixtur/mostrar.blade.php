@@ -69,7 +69,7 @@
                                     <tbody>
                                         @for ($i=0;$i<sizeof($nombres);$i=$i+2)
                                         <tr>
-                                        {{$i}}
+                                        
                                             @if($i+1!=sizeof($nombres))
                                                 
                                                 <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
