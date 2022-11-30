@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegistroMail;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
 use App\Models\Aplicaciones;
@@ -14,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Return_;
 
@@ -166,7 +168,7 @@ class FormularioController extends Controller
              return back()->with('mensajeErrorEmail','El correo ya esta registrado');
                 }
             
-            $contrasenia = "password";
+            $contrasenia = Str::random(8);
             $hashed = Hash::make($contrasenia);
             $usuario -> password = $hashed;
             $usuario -> save();
@@ -187,14 +189,14 @@ class FormularioController extends Controller
            
             $equipo->save();
             $this->guardarCategorias($equipo -> IdEquipo,$categorias);
-
+            $this->sendEmail( $usuario -> name,$usuario -> email,$contrasenia, $equipo->NombreEquipo);
             }
         }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-
+        
         return redirect('/formulario');
     }
     public function guardarCategorias($id,$categorias){
@@ -234,6 +236,16 @@ class FormularioController extends Controller
             return 0;
         }
     }
+
+    public function sendEmail($usuario,$correo,$contrasenia,$equipo){
+        $details =[
+            'title' =>"Correo de confirmación de registro",
+             'body' => "Se registro al equipo ".$equipo . "en el torneo Maxi Basquet 2022",
+             'usuraio' => $usuario,
+             'contrasenia' => $contrasenia
+        ];
+        $mail = Mail::to($correo)->send(new RegistroMail($details));
+        return $mail;}
 
     /**
      * Remove the specified resource from storage.
