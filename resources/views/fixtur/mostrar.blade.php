@@ -90,7 +90,7 @@
                               
 
                             </div>
-                        <div class="centro"><button class="btn">Atras</button></div>
+                        <div class="centro"><a class="btn" href="{{url('home')}}">Atras</a></div>
         </div>
                 
      </body>
