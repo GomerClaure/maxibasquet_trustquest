@@ -67,16 +67,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i=0;$i<sizeof($nombres);$i++)
+                                        @for ($i=0;$i<sizeof($nombres);$i=$i+2)
                                         <tr>
                                             @if($i+1!=sizeof($nombres))
-                                                @if($nombres[$i]->NombreEquipo!=$nombres[$i+1]->NombreEquipo)
+                                                
                                                 <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
                                                 <td>{{$fechas[$i]->FechaPartido}}</td>
                                                 <td>{{$lugares[$i]->LugarPartido}}</td>
                                                 <td>{{$horas[$i]->HoraPartido}}</td>
                                                 <td>{{$estados[$i]->EstadoPartido}}</td>
-                                                @endif
+                                              
                                                 
                                             @endif
                                             
