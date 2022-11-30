@@ -101,7 +101,7 @@ Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'li
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
 Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','delegado']);
 Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','delegado']);
-//Route::get('/delete/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
+
 
 
 

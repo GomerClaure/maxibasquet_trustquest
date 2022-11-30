@@ -99,7 +99,7 @@ class EditarJugadorController extends Controller
             $equipo = null;
             $categoria = null;
         }
-        echo "hola desde lista";
+       
         $deleteJugador=[];
         return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
     }
