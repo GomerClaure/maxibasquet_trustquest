@@ -18,7 +18,7 @@ class PartidoSeeder extends Seeder
             "IdCategoria"=>1,
             'HoraPartido'=>date("09:00"),
             'LugarPartido'=>'Chancha B UMSS',
-            'FechaPartido'=>date("2022-12-24"),
+            'FechaPartido'=>date("2022-12-30"),
             'EstadoPartido'=>'espera',
             'created_at'=>now(),
             'updated_at'=>now()
@@ -51,7 +51,7 @@ class PartidoSeeder extends Seeder
             "IdCategoria"=>1,
             'HoraPartido'=>date("11:00"),
             'LugarPartido'=>'Chancha D UMSS',
-            'FechaPartido'=>date("2022-12-24"),
+            'FechaPartido'=>date("2022-12-22"),
             'EstadoPartido'=>'espera',
             'created_at'=>now(),
             'updated_at'=>now()
