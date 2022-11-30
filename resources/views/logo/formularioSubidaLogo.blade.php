@@ -64,7 +64,7 @@
                                             </td>
                                             <td class="lista">
                                             <a href="{{url('tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Editar</a>
-                                            <a href="{{url('eliminar'.'/'.'tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
+                                            <a href="{{url('eliminar'.'/'.'tecnicos'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate">Eliminar</a>
                                             </td>
                                         </tr>
                                         @endforeach
