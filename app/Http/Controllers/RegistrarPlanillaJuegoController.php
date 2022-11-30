@@ -26,6 +26,21 @@ class RegistrarPlanillaJuegoController extends Controller
     {
         return view('registroJugadas.navegacionRegistro');
     }
+    public function guardarDatosJuego(Request $request){
+        $formulario = request()->except('_token');
+        $puntoEquipo = explode(' ', $formulario['puntoEquipo']);
+        $nomEquipo = $puntoEquipo[0];
+        $idEquipo = $puntoEquipo[1];
+        $puntuacion = $formulario['puntacion'];
+        $idPartido = $formulario['idPartido'];
+        if ($nomEquipo == 'A') {
+            $idJugador = $formulario['jugadorA'];
+        }elseif ($nomEquipo == 'B') {
+            $idJugador = $formulario['jugadorB'];
+        }
+    
+        // return $idJugador;
+    }
 
     public function mostrarDatosPartido($idPartido){
         date_default_timezone_set('America/La_Paz');
@@ -64,7 +79,6 @@ class RegistrarPlanillaJuegoController extends Controller
         compact('idEquipos','equipoA',
         'equipoB','categoria','fechaHoy','idPartido',
         'partido','jueces','jugadoresA','jugadoresB'));
-
     }
 
     // Guardado y registro de jueces
