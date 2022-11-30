@@ -17,11 +17,13 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger("IdRol");
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
+            $table->unique(['email','deleted_at']);
             $table->foreign("IdRol")->references("IdRol")->on('roles');
         });
     }

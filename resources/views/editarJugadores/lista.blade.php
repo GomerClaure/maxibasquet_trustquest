@@ -7,17 +7,6 @@
 
     <title>Equipos Jugadores</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/StyleListaJugadores.css')}}">
@@ -87,26 +76,7 @@
                                             <h5>{{$jugador->NombrePersona}} </h5>
                                             <h6>{{$jugador->ApellidoPaterno}}</h6>
                                             <a href="{{ url('/editarJugadores/'.$jugador->IdJugador.'/edit') }}" class="Boton displayBoton">Editar</a>
-                                            <a href=""class="BotonE BotonRed red displayBoton " data-bs-toggle="modal" data-bs-target="#{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" > Eliminar </a>
-                                                        {{-- Modal --}}
-                                                        <div class="modal fade"  id="{{$jugador->ApellidoPaterno}}{{$jugador->IdJugador}}" tabindex="-1" aria-labelledby="modalImgJugadorLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="modalImgJugadorLabel">Eliminar Técnico</h1>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img class="card-img-top" src="{{asset('storage').'/'.$jugador->Foto}}" alt="Foto del jugador">
-                                                                        <h4>¿Deseea eliminar los datos de {{$jugador->NombrePersona}} {{$jugador->ApellidoPaterno}} {{$jugador->ApellidoMaterno}}?</h4>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <a href="{{url('/delete/jugador/'.$jugador->IdJugador)}}"class="Boton BotonRed red "> Eliminar </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
+                                            
     </div>
 
                                     </div>

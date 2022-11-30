@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\JuecesPorPartido;
 use App\Models\Juez;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            TorneoSeeder::class,
+            TorneoSeeder::class, 
+            RolSeeder::class,
             PreinscripcionSeeder::class,
             PaisSeeder::class,
             CategoriaSeeder::class,
@@ -28,10 +30,11 @@ class DatabaseSeeder extends Seeder
             CategoriasPorEquipoSeeder::class,
             JugadorSeeder::class,
             TecnicoSeeder::class,
-            RolSeeder::class,
             UsuarioSeeder::class,
             DelegadoSeeder::class,
             JuezSeeder::class,
+            PartidoSeeder::class,
+            JuecesPorPartidoSeeder::class,
         ]);
     }
 }

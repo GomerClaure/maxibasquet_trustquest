@@ -10,6 +10,7 @@ use App\Models\Partido;
 use App\Models\Equipo;
 use App\Models\DatoPartido;
 use Carbon\Carbon;
+use App\Models\PlanillaJugador;
 use DateTime;
 use Illuminate\Support\Facades\Redirect;
 
@@ -228,6 +229,17 @@ class RegistrarPartidosController extends Controller
         $nuevoPartido->EstadoPartido = 'espera';
         $nuevoPartido->save();
 
+        $categorias = DB::table('categorias')
+            ->select('*')
+            ->get();
+
+        $planilla = new PlanillaJugador;
+        $planilla -> IdPartido = $nuevoPartido -> IdPartido;
+        $planilla -> save();
+
+       // return redirect('registrarPartidos/create');
+        // return view('registrarPartido.create', compact('categorias'));
+        //return response()->json($request);
 
         $datosEquipoA = new DatoPartido;
         $datosEquipoA->IdEquipo = $idEquipoA->IdEquipo;

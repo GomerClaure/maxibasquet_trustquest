@@ -5,63 +5,26 @@ body,html{
 .logito{
   height: 70px;
   width: 70px;
-  /* margin: 10px; */
 }
-.card{
-  align-items: center;
-  background-color:#7b7979;
-  padding: auto;
-  color: #ffff;
-  font-size:20px;
-  margin: 10px;
-  flex-direction: row;
-}
-.btn{
-  background-color: #fca311;
-  font-size: 14;
-  border: #272725;
-} 
-.menu{
-    /* display: flex;
-    list-style: none; */
-    /* padding: 0; */
+nav{
     background-color:  hsl(0, 0%, 78%);
-    /* width:100%; */
-    /* max-width: 1800px; */
-    /* margin: auto; */
-  }
-  .menu li a{
-    text-decoration: none;
-    color: #171f27;
-    padding: 20px;
-    display: block;
-  }
-  .rutas li{
-    display: inline-block;
-    text-align: center;
-  }
-  .menu li a:hover{
-    background-color: #eb8f32;
-  }
-
-.nav-item.dropdown{
-  margin-right: 3%;
-  text-align: center
+}
+.nav-link{
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.rutas li{
+  display: inline-block;
+  text-align: center;
+}
+.nav-item:hover{
+  background-color: #eb8f32;
 }
 .dropdown-menu{
   min-width: 100%;
-  font-size: 15px;
-  text-align: center;
-  background-color:  hsl(0, 0%, 78%);
 }
 .dropdown-menu li a{
   padding: 10px 5px 10px 5px;
   font-size: 15px;
-  color: #171f27;
-}
-.dropdown-menu li a:hover{
-  background-color: hsl(0, 1%, 81%);
-}
-.dropdown-menu:hover{
-  background-color: hsl(0, 1%, 81%);
 }

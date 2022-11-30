@@ -16,7 +16,7 @@ class JuezFactory extends Factory
     public function definition()
     {
         return [
-            'IdUsuario' => User::factory()->asignarRol(5),
+            'IdUsuario' => User::factory()->asignarRol(1),
             'IdPersona'=> Persona::factory(),
             'created_at' => now(),
             'updated_at' => now()

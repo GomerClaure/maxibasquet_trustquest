@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Credencial;
+use App\Models\Datos_partidos;
 use App\Models\Equipo;
 use App\Models\Tecnico;
 use App\Models\Persona;
@@ -53,6 +55,7 @@ class TecnicoController extends Controller
                     ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
                     ->where('equipos.NombreEquipo','=',$equipo)
                     ->where('categorias.NombreCategoria','=',$categoria)
+                    ->orderBy('personas.NombrePersona')
                     ->get();
         
         $equipos = Equipo::select('NombreEquipo','NombreCategoria')
@@ -69,6 +72,35 @@ class TecnicoController extends Controller
             $categoria = null;
         }
         return view('tecnico.lista',compact('tecnicos','equipo','categoria'));
+    }
+
+    /** Lista de tecnicos para eliminar */
+    public function listaEliminar($equipo,$categoria)
+    {
+        $tecnicos = Tecnico::select('personas.NombrePersona','personas.ApellidoPaterno',
+                    'personas.ApellidoMaterno','personas.CiPersona','tecnicos.RolesTecnicos','tecnicos.IdTecnicos','personas.Foto')
+                    ->join('personas','tecnicos.IdPersona','=','personas.IdPersona')
+                    ->join('equipos','tecnicos.IdEquipo','=','equipos.IdEquipo')
+                    ->join('categorias','tecnicos.IdCategoria','categorias.IdCategoria')
+                    ->where('equipos.NombreEquipo','=',$equipo)
+                    ->where('categorias.NombreCategoria','=',$categoria)
+                    ->orderBy('personas.NombrePersona')
+                    ->get();
+        
+        $equipos = Equipo::select('NombreEquipo','NombreCategoria')
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
+                            ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                            ->where('equipos.NombreEquipo','=',$equipo)
+                            ->where('categorias.NombreCategoria','=',$categoria)
+                            ->get();
+        if(! $equipos->isEmpty()){
+            $equipo = $equipos[0]->NombreEquipo;
+            $categoria = $equipos[0]->NombreCategoria;
+        }else{
+            $equipo = null;
+            $categoria = null;
+        }
+        return view('tecnico.eliminar',compact('tecnicos','equipo','categoria'));
     }
     /**
      * Display the specified resource.
@@ -140,24 +172,44 @@ class TecnicoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   $defaulpersona = '../storage/app/public/uploads\persona.jpg';
+    {  date_default_timezone_set('America/La_Paz');
+        
         $tecnico = Tecnico::select()
                             ->join('personas','personas.IdPersona','tecnicos.IdPersona')
                             ->where('IdTecnicos',$id)
                             ->get();
         $datosTecnico = $tecnico[0];
-         
-        
-        $foto = $datosTecnico->Foto;
-        $path = '../storage/app/public/'.$foto;
-        $credencial = '../storage/app/public/qrcodes/'.$datosTecnico->IdTecnicos.$datosTecnico->CiPersona.'.png';
-        if($path != $defaulpersona){
-            File::delete($path);
-        }
-        File::delete($credencial);
-        $persona = Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
         $equipo = Equipo::find($datosTecnico -> IdEquipo);
         $categoria = Categoria::find($datosTecnico -> IdCategoria);
-        return redirect('tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
+        $partido = $this->comprobarPartido($equipo -> IdEquipo,$datosTecnico->IdCategoria);
+        if ($partido) {
+            return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del tecnico existe un partido en curso o en espera'); 
+        }
+        Tecnico::where('IdTecnicos',$id)->delete();
+        Credencial::where('IdPersona',$datosTecnico->IdPersona)->delete();
+        Persona::where('IdPersona',$datosTecnico->IdPersona)->delete();
+       
+        return redirect('eliminar/tecnico/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del técnico eliminados correctamente'); 
+    }
+
+    /**Verificar si existe un partido progamado para un equipo */
+    public function comprobarPartido($idEquipo, $categoria ){
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('G:i:s');
+        $partido = Datos_partidos::select()
+                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
+                    ->where("IdEquipo",$idEquipo)
+                    ->where("partidos.IdCategoria",$categoria)
+                    ->where("FechaPartido",">=",$fechaActual)
+                    ->where("EstadoPartido","=","espera")
+                    ->orwhere("EstadoPartido","=","curso")
+                    ->get();
+        if (!$partido->isEmpty()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
