@@ -155,6 +155,7 @@
                         <li class="nav-item dropdown ">
                             <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ auth()->user()->name }}
+                            
                             </a>
                             <div class="dropdown-menu">
                             <a class="dropdown-item" href="/logout">Log Out</a>

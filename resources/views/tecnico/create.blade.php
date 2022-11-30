@@ -28,6 +28,7 @@
     </head>
     <body class="antialiased">
         <header >
+        <a type="button" href="{{ url('subirLogo') }}" class="botonvolver"> Volver </a>
             <!-- Grey with black text
             <nav class="navbar navbar-expand-sm navbar-light">
                 <ul class="navbar-nav">
