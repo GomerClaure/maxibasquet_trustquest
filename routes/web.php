@@ -15,6 +15,7 @@ use App\Http\Controllers\SubirLogoController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\EditarJugadorController;
 use App\Http\Controllers\RegistrarPartidosController;
+use App\Http\Controllers\FixturController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\JugadorQrController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,7 @@ Route::get('/', function () {
 //Usuario Administrador
 Route::get('/aplicaciones',[AplicacionController::class,'index'])->middleware(['auth','admin']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middleware(['auth','admin']);
+Route::get('/mostrarFixtur',[FixturController::class,'show']);
 Route::resource('/formulario',FormularioController::class);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
