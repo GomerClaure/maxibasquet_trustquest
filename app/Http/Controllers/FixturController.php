@@ -15,7 +15,7 @@ class FixturController extends Controller
     public function show()
     {
         $nombres = DB::table('partidos')
-            ->select('NombreEquipo','FechaPartido')
+            ->select('NombreEquipo')
             ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
             ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
             ->orderBy('FechaPartido')
