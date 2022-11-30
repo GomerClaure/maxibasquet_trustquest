@@ -154,9 +154,9 @@ class FormularioController extends Controller
                 /**crear Usuario */
             $usuario = new User;
             $usuario -> IdRol =  4;
-            $usuario -> name = $request -> NombreEncargado;
+            $nombre = $request -> NombreEncargado;
+            $usuario -> name = preg_replace('([^A-Za-z0-9])', '',$nombre);
             $usuario -> email = $request -> correoElectronico;
-            
             $consultaCorreo = DB::table('users')
                         ->select('email')
                         ->where('email', $request -> correoElectronico, 1)
@@ -166,7 +166,7 @@ class FormularioController extends Controller
              return back()->with('mensajeErrorEmail','El correo ya esta registrado');
                 }
             
-            $contrasenia = Str::random(8);
+            $contrasenia = "password";
             $hashed = Hash::make($contrasenia);
             $usuario -> password = $hashed;
             $usuario -> save();
