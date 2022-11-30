@@ -51,7 +51,7 @@
 
             <h1 class="tituloLista d-flex justify-content-center mt-5">Partidos Del Campeonato Maxi Basquet</h1>
 
-            <div class="card col-8 row mx-auto mt-5">
+            <div class="card col-10 row mx-auto mt-5">
                 <!--<div class="card-header ps-3 py-2 row">
                     <div class="col-10">
                         <h4 class="text-black card-title"><b>Partidos</b> </h4>
@@ -71,8 +71,9 @@
                         <div class="col-4">
                             <h2 class="d-flex justify-content-center">{{$datos[$i+1]->NombreEquipo}}</h2>
                         </div>
-                        <div class="col-3">
-                            <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-75">Planilla De Jugadores</a>
+                        <div class="col-3 row">
+                            <a href="{{url('registrarJueces/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-100 col-4 me-1">Planilla</a>
+                            <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-100 col-7">Planilla De Jugadores</a>
                         </div>
                     </div>
                 
