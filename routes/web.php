@@ -97,7 +97,7 @@ Route::get('/credenciales/generar/{equipo}/{categoria}',[CredencialController::c
 Route::get('/credenciales/pdf/{equipo}/{categoria}',[CredencialController::class,'credencialesPdf'])->middleware(['auth','delegado']);
 Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
-Route::get('eliminar/tecnicos/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar'])->middleware(['auth','delegado']);
+Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar'])->middleware(['auth','delegado']);
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
 Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','delegado']);
 Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','delegado']);
