@@ -6,6 +6,9 @@
     padding-top: 2.5%;
     padding-bottom: 2.5%;
 }
+.fondo{
+    background-color: #171f27
+}
 .btn.botonSubirLogo{
     margin-top: 2.5%;
     background-color: #eb8f32;
@@ -17,13 +20,13 @@
     text-align: center;
 }
 .tabla{
-    background-color: #b5b5bd;
+    background-color: #b5b5bd !important;
     margin-left:20px;
     margin-right: 20px;
     padding: 5px;
 }
 .tablasup{
-    background-color: #4a4a4b;
+    background-color: #4a4a4b !important;
     color: white;
     margin: 0px;
 }
@@ -32,11 +35,13 @@
     margin-top: 20px;
     margin-left: 50px;
 }
-.btn.botonSubirLogo:first-child:hover{
-    background: #fa841a;
+.btn.botonSubirLogo:hover{
+    background: #fa841a !important;
+    color: white !important;
 }
-.btn.botoncreate:first-child:hover{
-    background: #fa841a;
+.btn.botoncreate:hover{
+    background: #fa841a !important;
+    color: white !important;
 }
 .botones_jugador{
     text-align: center;
@@ -47,6 +52,7 @@
     padding: 10px;
     background-color: #eb8f32;
     color: white;
+    
 }
 .error-message{
     color: red;
