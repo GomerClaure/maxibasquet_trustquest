@@ -6,6 +6,9 @@ body{
 .intro {
   height: 100%;
 }
+.blanco{
+  color:white;
+}
 .fondo{
   background-color: #D9D9D9;
 }
@@ -26,7 +29,7 @@ thead th {
 
 .card {
   border-radius: .0rem;
-  background-color: #ABA9A9;
+  background-color: #ABA9A9 !important;
 }
 
 .table-scroll {
@@ -62,9 +65,6 @@ a{
 .formulario{
     background-color: #b5b5bd;
     color: black;
-}
-.navbar{
-    background-color: #2c2a2a;
 }
 .boton{
   width: 15%;

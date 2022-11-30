@@ -48,7 +48,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h1 class="text-center titulo"> <b>{{$equipo}}</b></h1>
+                                <h1 class="text-center titulo"> <b>{{$equipo}} -- Cuerpo Tecnico</b></h1>
                                 <h3 class="titulo">Categoria: {{$categoria}}</h3>
                                 <div class="card contenedorCard">
                                     <div class="card-header ps-3 py-2 row">
@@ -56,7 +56,7 @@
                                             <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         </div>
                                         <div class="col-2 d-grid">
-                                            <a type="button" href="{{url('equipo/delegado')}}" class="btn"> Volver </a>
+                                            <a type="button" href="{{url('subirLogo')}}" class="btn"> Volver </a>
                                         </div>
                                     </div>
                                     <div class="card-body  pt-0 ps-3">

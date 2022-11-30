@@ -9,7 +9,7 @@ body{
 
 .botones{
     display: flex;
-    width: 50%;
+    width: 100%;
     text-decoration: none;
     color: white;
     background: #eb8f32;
@@ -17,6 +17,8 @@ body{
     border-radius: 8px;
     margin: 0% 1%;
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .botones:hover{
@@ -40,13 +42,32 @@ body{
 .navbar a {
     color: black;
 }
-.botonvolver{
-    background: #eb8f32;
-    color: white;
-    padding: 10px;
-    margin: 20px;
-    margin-left: 1100px;
-    border-radius: 5px;
-    text-decoration:none;
 
+.nombre{
+    display: flex;
+    align-items: center;
+}
+
+.camiseta{
+    display: flex;
+    align-items: center;
+}
+
+.tituloEquipo{
+    color: white;
+    font-weight: bold;
+}
+
+.titulo{
+    color: white;
+}
+
+.tituloLista{
+    color: #fa841a;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.cardLista{
+    background: #b5b5bd;
 }

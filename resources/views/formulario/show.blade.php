@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre del encargado:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->NombreUsuario}}">
+                            <input class="form-control" id="inputPassword4" value="{{$datos->NombreUsuario}}" name="NombreEncargado">
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Correo Electronico:</label>
-                            <input class="form-control" id="inputPassword4" value="{{$datos->CorreoElectronico}}">
+                            <input class="form-control" id="inputPassword4" value="{{$datos->CorreoElectronico}}" name="correoElectronico">
                         </div>
                         <div class="col-md-6">
                             <label for="pais" class="form-label">Pais:</label>
@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Telefono de contacto:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="specificSizeInputGroupUsername" value="{{$datos->NumeroTelefono}}">
+                                <input type="text" class="form-control" id="specificSizeInputGroupUsername" value="{{$datos->NumeroTelefono}}" name="telefono">
                             </div>
                         </div>
                     </div>

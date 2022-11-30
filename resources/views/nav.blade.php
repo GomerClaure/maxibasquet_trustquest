@@ -110,7 +110,7 @@
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{url('/registrarJugadas/')}}">Registro en planilla</a>
+                            <a class="nav-link active " href="{{url('/planilla/jugador')}}">Registro en planilla</a>
                         </li>
                     </ul>  
                     <ul class="navbar-nav ms-auto logout mb-2">
@@ -126,6 +126,7 @@
                 </div>
             </div>
         </nav>
+    <!--Este es el nav del delegado hacerlo mas bonito-->
     @elseif(auth()->user()->IdRol ==4)
         <nav class="navbar navbar-expand-sm navbar-light menu">
             <!-- Brand -->
@@ -147,6 +148,9 @@
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
                             </li>
                         <li class="nav-item">
+                            <a class="nav-link active" href="{{url('/subirLogo')}}">Mi Equipo</a>
+                            </li>
+                        <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
                     </ul>  
@@ -154,6 +158,7 @@
                         <li class="nav-item dropdown ">
                             <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ auth()->user()->name }}
+                            
                             </a>
                             <div class="dropdown-menu">
                             <a class="dropdown-item" href="/logout">Log Out</a>

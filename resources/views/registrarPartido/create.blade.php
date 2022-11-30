@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Preinscripcion</title>
+    <title>Registra Partidos</title>
     <link rel="stylesheet" href="{{asset('css/StyleRegistrarPartidos.css')}}">
 </head>
 
@@ -17,19 +17,6 @@
     $noVadido = "¡No valido!";
     @endphp
 
-    @if (Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
-    </div>
-    @endif
-
-    @if (Session::has('mensajeErrorEquipoA'))
-    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoA')}}</h4>
-    </div>
-    @endif
 
     @if (Session::has('mensajeErrorEquipos'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
@@ -38,24 +25,34 @@
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorEquipoB'))
+    @if (Session::has('mensajeErrorCategoria'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorEquipoB')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoria')}}</h4>
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorCategoriaB'))
+   
+
+    @if (Session::has('mensajeErrorCantidadJugadores'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaB')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCantidadJugadores')}}</h4>
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorCategoriaA'))
+
+    @if (Session::has('mensajeErrorMismoPartido'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorCategoriaA')}}</h4>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorMismoPartido')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorHoraMin'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorHoraMin')}}</h4>
     </div>
     @endif
 
@@ -66,19 +63,27 @@
     </div>
     @endif
 
-    @if (Session::has('mensajeErrorFechaLimite'))
-    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorFechaLimite')}}</h4>
-    </div>
-    @endif
-
     @if (Session::has('mensajeErrorHora'))
     <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorHora')}}</h4>
     </div>
     @endif
+
+    @if (Session::has('mensajeValidoRegistro'))
+    <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensajeValidoRegistro')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeErrorFechaMisma'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeErrorFechaMisma')}}</h4>
+    </div>
+    @endif
+
 
     <div>
         <div class="container justify-content-center"">
@@ -95,17 +100,19 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre de equipo A</label>
-                            <input class="form-control" id="inputEmail4" name="equipoA" value="{{old('equipoA')}}">
-                            @error('equipoA')
-                            <p class="error-message">{{ $message }}</p>
-                            @enderror
+                            <select class="form-select" id="selectEquipoA" name="selectEquipoA" value="{{ old('selectEquipoA') }}">
+                                @foreach ($equipos as $equipo)
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipoA') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Nombre de Equipo B</label>
-                            <input class="form-control" id="inputPassword4" name="equipoB" value="{{ old('equipoB') }}">
-                            @error('equipoB')
-                            <p class="error-message">{{ $message }}</p>
-                            @enderror
+                            <select class="form-select" id="selectEquipoB" name="selectEquipoB" value="{{ old('selectEquipoB') }}">
+                                @foreach ($equipos as $equipo)
+                                <option value="{{$equipo->NombreEquipo}}" {{ old('selectEquipoB') == "$equipo->NombreEquipo" ? 'selected' : '' }}>{{$equipo->NombreEquipo}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -114,7 +121,7 @@
                             <div>
                                 <select class="form-select" id="selectCategoria" name="selectCategoria" value="{{ old('selectCategoria') }}">
                                     @foreach ($categorias as $categoria)
-                                    <option value="{{$categoria->IdCategoria}}" {{ old('selectCategoria') == "$categoria->IdCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
+                                    <option value="{{$categoria->NombreCategoria}}" {{ old('selectCategoria') == "$categoria->NombreCategoria" ? 'selected' : '' }}>{{$categoria->NombreCategoria}}</option>
                                     @endforeach
                                 </select>
                             </div>
