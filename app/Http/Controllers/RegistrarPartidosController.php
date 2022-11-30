@@ -179,7 +179,7 @@ class RegistrarPartidosController extends Controller
                     $horaActualMax->modify('+1 hours');
                     if ($horaActualMin->format('H:i') < $request->hora && $horaActualMax->format('H:i') > $request->hora) {
                         //return response()->json('hora invalida');
-                        return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos no son inavalidos');
+                        return back()->withInput()->with('mensajeErrorHoraMin', 'la hora y minutos no son validos');
                     }
                 }
             }
