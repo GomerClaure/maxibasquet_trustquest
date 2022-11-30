@@ -240,7 +240,35 @@ class EditarJugadorController extends Controller
         Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador -> IdEquipo);
         $categoria = Categoria::find($datosJugador -> IdCategoria);
+      
+        if ($partido) {
+            return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del jugador existe un partido en curso o en espera'); 
+        }
+
+        Jugador::where('IdJugador',$id)->delete();
+        Credencial::where('IdPersona',$datosJugador->IdPersona)->delete();
+        Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+
         return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+    }
+    public function comprobarPartido($idEquipo, $categoria ){
+        date_default_timezone_set('America/La_Paz');
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('G:i:s');
+        $partido = Datos_partidos::select()
+                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
+                    ->where("IdEquipo",$idEquipo)
+                    ->where("partidos.IdCategoria",$categoria)
+                    ->where("FechaPartido",">=",$fechaActual)
+                    ->where("EstadoPartido","=","espera")
+                    ->orwhere("EstadoPartido","=","curso")
+                    ->get();
+        if (!$partido->isEmpty()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
