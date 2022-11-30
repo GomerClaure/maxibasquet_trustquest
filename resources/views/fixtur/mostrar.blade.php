@@ -64,6 +64,7 @@
                                         <th>Lugar</th>
                                         <th>Hora</th>
                                         <th>Estado</th>
+                                        <th>Categoria</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,7 +77,7 @@
                                                 <td>{{$lugares[$i]->LugarPartido}}</td>
                                                 <td>{{$horas[$i]->HoraPartido}}</td>
                                                 <td>{{$estados[$i]->EstadoPartido}}</td>
-                                              
+                                                <td>{{$categorias[$i]->NombreCategoria}}</td>
                                                 
                                             @endif
                                             
