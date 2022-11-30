@@ -45,7 +45,7 @@
             </nav>
         </header>
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
-                <div class="bg-image w-100" >
+        <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -85,4 +85,11 @@
                                     </tbody>
                                 </table>
                                 </div>
+                              
+
                             </div>
+                        <div class="centro"><button class="btn">Atras</button></div>
+        </div>
+                
+     </body>
+</html>
