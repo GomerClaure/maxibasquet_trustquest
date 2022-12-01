@@ -14,10 +14,11 @@ class CreateCategoriasPorEquipoTable extends Migration
     public function up()
     {
         Schema::create('categorias_por_equipo', function (Blueprint $table) {
-            $table->bigIncrements("Id");
+            $table->id("Id");
             $table->unsignedBigInteger("IdEquipo");
             $table->unsignedBigInteger("IdCategoria");
             $table->unsignedBigInteger("IdCampeonato");
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("IdCategoria")->references("IdCategoria")->on('categorias');
             $table->foreign("IdEquipo")->references("IdEquipo")->on('equipos'); 

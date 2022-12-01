@@ -29,7 +29,7 @@ class JugadorFactory extends Factory
             'IdPersona' => Persona::factory(),
             //'PesoJugador' => $this->faker->randomFloat(2,80,150),
             'PesoJugador' => $this->faker->numberBetween(1,99),
-            'EstaturaJugador' => $this->faker->randomFloat(2,1,2),
+            'EstaturaJugador' => $this->faker->randomElement([1.77,2.11,1.35,1.78,1.98]),
             'FotoCarnet' => 'uploads\carnet.jpg',
             'PosicionJugador' => $this->faker->randomElement(["BASE","ESCOLTA","ALERO","ALA-PIVOT","PIVOT"]),
             'NumeroCamiseta' => $this->faker->numberBetween(0,99),

@@ -1,0 +1,111 @@
+html,
+body{
+  background-color: #171f27;
+  color:white;
+}
+.intro {
+  height: 100%;
+}
+.blanco{
+  color:white;
+}
+.fondo{
+  background-color: #D9D9D9;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn:first-child:hover{
+  background: #fa841a;
+  border-color: #eb8f32;
+}
+
+thead th {
+  color: black;
+}
+
+.card {
+  border-radius: .0rem;
+  background-color: #ABA9A9 !important;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+ 
+  
+}
+
+.table{
+    border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+.btn{
+  background-color: #eb8f32;
+  font-size: 14;
+  border-color: #eb8f32;
+}
+a{
+  color: white;
+  text-decoration: none;
+  
+}
+.formulario{
+    background-color: #b5b5bd;
+    color: black;
+}
+.boton{
+  width: 15%;
+}
+.boton{
+    width: 15%;
+    height: 10%;
+  }
+  .displayBoton{
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
+  }
+  .red{
+    background-color: #eb3232 !important;
+    border: none;
+}
+.Boton{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.displayBoton{
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
+}
+.red:hover{
+    background: #fa1a1a !important;
+    color: white; 
+}
+.Boton:hover{
+    background: #fa841a;
+    color: white; 
+}
+.contenido{
+    font-size: larger;
+}

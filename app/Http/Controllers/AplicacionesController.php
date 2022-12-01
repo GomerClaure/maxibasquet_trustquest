@@ -43,7 +43,7 @@ class AplicacionesController extends Controller
 
     public function index()
     {
-        $paises = Pais::all();
+        $paises = Pais::select()->orderBy('NombrePais')->get();
         return view('preinscripcion.preinscripcionEquipo', compact('paises'));
     }
 
@@ -94,9 +94,9 @@ class AplicacionesController extends Controller
             $categorias,$formulario[config('constants.PAIS')]);
             // print_r($sePuedeGuardarAplicacion);
             if ($sePuedeGuardarAplicacion) {
-                // $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
-                // $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
-                echo "Siii, se guardará la aplicacion";
+                $this->guardarAplicacion($aplicacionPreinscripcion, $pais, $formulario);
+                $this->guardarTransaccion($transaccion, $aplicacionPreinscripcion->IdAplicacion, $formulario);
+                // echo "Siii, se guardará la aplicacion";
             }else {
                 throw new Exception('Existe un equipo con la misma categoria', 3);
             }
@@ -170,7 +170,7 @@ class AplicacionesController extends Controller
                                   ->orWhere('EstadoAplicacion', '=','Aceptado');
                         })
                         ->get();
-        // echo $aplicaciones;
+        // echo $aplicaciones;FCy
         for ($i=0; $i < count($aplicaciones); $i++) { 
             $aplicacion = $aplicaciones[$i];
             $categoriaAplicaciones = $aplicacion->Categorias;

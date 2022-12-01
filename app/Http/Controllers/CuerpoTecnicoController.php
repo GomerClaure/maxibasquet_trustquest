@@ -11,6 +11,7 @@ use App\Models\Pais;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CuerpoTecnicoController extends Controller
 {
@@ -30,7 +31,7 @@ class CuerpoTecnicoController extends Controller
                     ->where('categorias.NombreCategoria','=',$categoria)
                     ->orderBy('IdTecnicos', 'asc')
                     ->get();
-
+        
         $equipos = Equipo::select('NombreEquipo','NombreCategoria')
                             ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','equipos.IdEquipo')
                             ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
@@ -60,18 +61,11 @@ class CuerpoTecnicoController extends Controller
                             ->distinct()
                             ->get();
 
-        $arreglo = array();
-        $contador = 0;
-        foreach ($cuerpoTecnico as $categoria) {
-            $arreglo[$contador] = $categoria->IdCategoria;
-            $contador++;
-        }
-
-        $categorias = DB::table('categorias')
-                        ->select('*')
-                        ->whereIn('IdCategoria',$arreglo)
-                        ->get();
-
+        $categorias = DB::table('categorias_por_equipo')
+                            ->select('*')
+                            ->join('categorias','categorias.IdCategoria','=','categorias_por_equipo.IdCategoria')
+                            ->where('IdEquipo',$id)
+                            ->get();
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
                 ->get();
@@ -93,7 +87,8 @@ class CuerpoTecnicoController extends Controller
         $fecha = $anio."-01-01";
 
         $request -> validate([
-            'ci'=>'required|numeric|digits_between:6,9',
+            'ci'=>['required','numeric','digits_between:6,9',Rule::unique('personas','CiPersona')->
+            where(function($query){return $query->whereNull('deleted_at'); })],
             'nombre'=>'required|min:3|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoPaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
             'apellidoMaterno'=>'required|min:2|regex:/^([A-Z][a-z, ]+)+$/',
@@ -114,6 +109,7 @@ class CuerpoTecnicoController extends Controller
         $consulta2 = DB::table('personas')
                         ->select('CiPersona')
                         ->where('CiPersona', $carnetId, 1)
+                        ->whereNull('deleted_at')
                         ->get();
         //return $consulta2;
         if(!$consulta2 ->isEmpty()){

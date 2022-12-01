@@ -17,7 +17,7 @@ class CreateJugadasTable extends Migration
             $table->id("IdJugada");
             $table->unsignedBigInteger("IdJugador");
             $table->unsignedBigInteger("IdPartido");
-            $table->string("TipoJugada");
+            $table->integer("TipoJugada");
             $table->integer("CuartoJugada");
             $table->time("HoraJugada");
             $table->timestamps();

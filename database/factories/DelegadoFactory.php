@@ -18,7 +18,7 @@ class DelegadoFactory extends Factory
     {
         return [
             'IdUsuario' => User::factory()->asignarRol(4),
-            'IdPersona'=> Persona::factory(),
+           // 'IdPersona'=> Persona::factory(),
             'FechaRegistroDelegado' => now(),
             'TelefonoDelegado' => $this->faker->phoneNumber(8),
             'created_at' => now(),

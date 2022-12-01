@@ -76,6 +76,12 @@ a{
   width: 15%;
   height: 10%;
 }
+.displayBoton{
+  display: block;
+  margin: auto;
+  margin-top: 0.5rem ;
+  width: 80%;
+}
 .btn-primary:hover {
     
   background: #fa841a !important;

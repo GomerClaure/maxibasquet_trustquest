@@ -10,7 +10,7 @@ body{
   background-color: #eb8f32;
 }
 .BotonRed{
-   background-color: red;
+   background-color: red !important;
 }
 .fondo{
   background-color: #D9D9D9;

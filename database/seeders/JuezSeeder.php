@@ -14,6 +14,6 @@ class JuezSeeder extends Seeder
      */
     public function run()
     {
-        Juez::factory(5)->create();
+        Juez::factory(20)->create();
     }
 }
