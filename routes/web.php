@@ -67,7 +67,7 @@ Route::get('historia',[HistoriaController::class,'index']);
 Route::resource('/listaequipos',ListaEquiposController::class);
 Route::get('login',[LoginController::class,'index'])->name('login')->middleware(['login']);
 Route::post('login',[LoginController::class,'verificarInicioSesion']);
-
+Route::get('/jugadores',[JugadorController::class,'lista']);
 
 Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
 
