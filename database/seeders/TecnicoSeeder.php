@@ -17,7 +17,7 @@ class TecnicoSeeder extends Seeder
         Tecnico::factory(5)->asignarEquipoCategoria(1,3)->create();
         Tecnico::factory(5)->asignarEquipoCategoria(2,3)->create();
         Tecnico::factory(5)->asignarEquipoCategoria(3,3)->create();
-        Tecnico::factory(5)->asignarEquipoCategoria(4,3)->create();
+        Tecnico::factory(5)->asignarEquipoCategoria(4,7)->create();
         Tecnico::factory(5)->asignarEquipoCategoria(5,3)->create();
     }
 }

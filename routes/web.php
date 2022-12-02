@@ -68,7 +68,7 @@ Route::resource('/listaequipos',ListaEquiposController::class);
 Route::get('login',[LoginController::class,'index'])->name('login')->middleware(['login']);
 Route::post('login',[LoginController::class,'verificarInicioSesion']);
 
-
+Route::get('/tecnicos',[TecnicoController::class,'lista']);
 Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
 
 
