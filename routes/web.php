@@ -49,9 +49,6 @@ Route::resource('/formulario',FormularioController::class);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
 Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
-
-
-
 //Cualquier persona
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
@@ -65,12 +62,7 @@ Route::get('historia',[HistoriaController::class,'index']);
 Route::resource('/listaequipos',ListaEquiposController::class);
 Route::get('login',[LoginController::class,'index'])->name('login')->middleware(['login']);
 Route::post('login',[LoginController::class,'verificarInicioSesion']);
-
-
 Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
-
-
-
 //Usuario Delegado
 Route::get('jugador/create/{id}', [JugadorController::class,'create'])->middleware(['auth','delegado']);
 Route::post('jugador/create/{id}',  [JugadorController::class, 'store']);
@@ -101,10 +93,6 @@ Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(
 Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','admin']);
 Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','admin']);
 
-
-
-
-
 //Usuario Anotador-Juez
 Route::get('/registrarJugadas/{id}',[RegistrarPlanillaJuegoController::class,'mostrarDatosPartido'])->middleware(['auth','juez']);
 Route::post('/guardarJugada',[RegistrarPlanillaJuegoController::class,'guardarDatosJuego'])->middleware(['auth','juez'])->name('guardarJugada');
@@ -113,6 +101,4 @@ Route::post('/registrarJueces',[RegistrarPlanillaJuegoController::class,'guardar
 Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
 Route::post('planilla/jugador/{idPartido}/{idPlanillaJugador}/{id}', [PlanillaJugadorController::class,'store']);
 Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'show']);
-
-
 Route::delete('/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
