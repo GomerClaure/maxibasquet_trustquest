@@ -46,8 +46,7 @@ Route::get('/', function () {
 //Usuario Administrador
 Route::get('/aplicaciones',[AplicacionController::class,'index'])->middleware(['auth','admin']);
 Route::get('/aplicaciones/{id}',[AplicacionController::class,'show'])->middleware(['auth','admin']);
-Route::get('/mostrarFixtur',[FixturController::class,'show']);
-Route::resource('/formulario',FormularioController::class);
+Route::resource('/formulario',FormularioController::class)->middleware(['auth','admin']);
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
 Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
@@ -65,11 +64,11 @@ Route::get('/jugador/{id}',[JugadorController::class,'show']);
 Route::get('/home',[HomeController::class,'index'])->name('home');
 Route::get('historia',[HistoriaController::class,'index']);
 Route::resource('/listaequipos',ListaEquiposController::class);
-Route::get('login',[LoginController::class,'index'])->name('login')->middleware(['login']);
-Route::post('login',[LoginController::class,'verificarInicioSesion']);
+Route::get('/login',[LoginController::class,'index'])->name('login')->middleware(['login']);
+Route::post('/login',[LoginController::class,'verificarInicioSesion']);
+Route::get('/mostrarFixtur',[FixturController::class,'show']);
 
-
-Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
+Route::get('/logout',[LogoutController::class,'logout'])->middleware(['auth']);
 
 
 

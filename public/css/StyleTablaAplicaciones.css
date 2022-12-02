@@ -24,8 +24,8 @@ thead th {
   color: black;
 }
 
-.card {
-  background-color: #ABA9A9;
+.contenedor {
+  background-color: #ABA9A9 !important;
 }
 
 .table-scroll {
@@ -53,11 +53,18 @@ thead {
   font-size: 14;
   border-color: #eb8f32;
 }
-a{
-  color: white;
+
+.boton{
+  color: white ;
   text-decoration: none;
-  
+  background: #eb8f32;
 }
+
+.boton:hover{
+  color: white;
+  background: #fc7e0f;
+}
+ 
 .navbar{
   background-color: #2c2a2a;
 }

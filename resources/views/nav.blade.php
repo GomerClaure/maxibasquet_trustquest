@@ -20,17 +20,17 @@
                 </button>
                 <div class="navbar-collapse collapse" id="collapseNavbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                         <a class="nav-link active" href="{{url('/home')}}">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                         <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
                         <!-- Dropdown -->
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
                             </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
                     </ul>  
@@ -145,10 +145,10 @@
                 <div class="navbar-collapse collapse" id="collapseNavbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <a class="nav-link active" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link active" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
+                            <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
                         <!-- Dropdown -->
                         <li class="nav-item">
@@ -168,7 +168,7 @@
                             
                             </a>
                             <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/logout">Log Out</a>
+                                <a class="dropdown-item" href="{{url('/logout')}}">Log Out</a>
                             </div>
                         </li>
                     </ul>
