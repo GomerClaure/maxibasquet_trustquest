@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{{asset('css/StyleRegistrarPartidos.css')}}">
 </head>
 
-<body class="background-color">
+@extends('nav')
+    @section('content')
+
     @php
     $vadido = "¡Valido!";
     $noVadido = "¡No valido!";
@@ -85,7 +87,7 @@
     @endif
 
 
-    <div>
+    <div class="mt-5">
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
             <h1 class="display-6 mb-0 color-letras">Registro de Partidos</h1>
@@ -164,13 +166,13 @@
                     </div>
 
 
-                    <div class="col-md-12 text-center margen">
-                        <button type="submit" class="boton-color btn btn-primary">Registrar</button>
-                        <input type="button" class="boton-color btn btn-primary" value="Cancelar">
+                    <div class="col-md-12 text-center margen row mx-auto">
+                        <button type="submit" class="botones col-5 mx-auto">Registrar</button>
+                        <a href="{{url('/home')}}" class="botones col-5 mx-auto">Cancelar</a>
                     </div>
                 </form>
             </section>
         </div>
-</body>
+@endsection
 
 </html>

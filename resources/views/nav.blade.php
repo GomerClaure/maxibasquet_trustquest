@@ -70,6 +70,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active " href="{{url('/registrarPartidos/create')}}">Crear Partido</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " href="{{url('/juez/create')}}">Registrar Personal</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                     </li>
                 </ul>  
