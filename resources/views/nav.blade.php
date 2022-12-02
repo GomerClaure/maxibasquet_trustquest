@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>MaxiBasquet</title>
     <link rel="stylesheet" href="{{asset('css/StyleNav.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    
 </head>
 <body>
     @guest
@@ -69,6 +69,7 @@
                         <a class="dropdown-item" href="{{url('/formulario')}}" >Validar Preinscripciones</a>
                         </div>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link active " href="{{url('/registrarPartidos/create')}}">Crear Partido</a>
                     </li>
@@ -187,5 +188,6 @@
             {{-- @include('flash-message') --}}
             @yield('content')
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
