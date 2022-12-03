@@ -14,7 +14,7 @@
         <div class="row-1">
         </div>
         <div class="row t-5">
-            <div class="col-3"></div>
+            <div class="col-2"></div>
             <div class="col seccionLogin">
                 
                 <svg class="icoLogin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -76,7 +76,7 @@
                         </div>
                     </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-2"></div>
         </div>
         
         

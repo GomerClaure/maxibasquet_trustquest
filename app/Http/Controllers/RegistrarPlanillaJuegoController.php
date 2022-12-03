@@ -46,7 +46,7 @@ class RegistrarPlanillaJuegoController extends Controller
         $jugada -> TipoJugada = $puntuacion;
         $jugada -> CuartoJugada = 1;
         $jugada -> HoraJugada = date('H:i');
-        // $jugada -> save();
+        $jugada -> save();
         $puntaje = 1;
         return back()->withInput()->with(['puntaje' => $puntaje]);
         // return $request;

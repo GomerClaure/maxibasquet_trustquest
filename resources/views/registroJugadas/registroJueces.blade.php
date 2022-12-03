@@ -18,7 +18,7 @@
   <div class="row-1">
   </div>
   <div class="row t-5">
-      <div class="col-3"></div>
+      <div class="col-2"></div>
       <div class="col pasos">
         <h1 for="Holi">Asignar Jueces</h1>
         @if (Session::has('errorJueces'))
@@ -88,7 +88,7 @@
           </div>
         </form>
       </div>
-      <div class="col-3 "></div>
+      <div class="col-2 "></div>
   </div>
   
   
