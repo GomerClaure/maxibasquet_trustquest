@@ -9,11 +9,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Preinscripcion</title>
     <link rel="stylesheet" href="{{asset('css/StyleFormularioShow.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
+@extends('nav')
+@section('content')
 <body class="background-color">
 
-    <div>
+    <div class="mt-5">
         <div class="container justify-content-center"">
 		<section class=" main-title text-center">
             <h1 class="display-6 mb-0 color-letras">Formulario de preinscripción de equipos</h1>
@@ -100,21 +103,22 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12 text-center margen">
-                        <a type="button" class="boton-color btn btn-primary" href="/formulario">Atras</a>
+                    <div class="col-md-12 text-center margen row justify-content-center mt-3 mb-4">
+                        <a type="button" class="boton-color botones col-2" href="/formulario">Atras</a>
                         @if($datos->EstadoAplicacion == 'Pendiente')
-                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="aceptado" value="Aceptado">
-                        <input type="submit" class="boton-color btn btn-primary" name="estadoAplicacion" id="rechazado" value="Rechazado">
+                        <input type="submit" class="boton-color botones col-2" name="estadoAplicacion" id="aceptado" value="Aceptado">
+                        <input type="submit" class="boton-color botones col-2" name="estadoAplicacion" id="rechazado" value="Rechazado">
                         @else
-                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="aceptado" value="Aceptado">
-                        <input type="submit" class="boton-color btn btn-primary mause-nulo" name="estadoAplicacion" id="rechazado" value="Rechazado">
+                        <input type="submit" class="boton-color botones col-2 mause-nulo" name="estadoAplicacion" id="aceptado" value="Aceptado">
+                        <input type="submit" class="boton-color botones col-2 mause-nulo" name="estadoAplicacion" id="rechazado" value="Rechazado">
                         @endif
                     </div>
                 </form>
             </section>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
+@endsection
 </html>
 @else
 <h1>no existe formulario</h1>
