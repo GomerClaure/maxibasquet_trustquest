@@ -39,9 +39,7 @@ use App\Http\Controllers\DeleteJugadorController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'])->name('home');
 
 //Usuario Administrador
 Route::get('/aplicaciones',[AplicacionController::class,'index'])->middleware(['auth','admin']);
@@ -50,9 +48,6 @@ Route::resource('/formulario',FormularioController::class)->middleware(['auth','
 Route::get('juez/create',[JuezController::class,'create'])->middleware(['auth','admin']);
 Route::post('juez/create',[JuezController::class,'store']);
 Route::resource('/registrarPartidos',RegistrarPartidosController::class)->middleware(['auth','admin']);
-
-
-
 //Cualquier persona
 Route::get('/preinscripcion', [AplicacionesController::class,'index'])->name('preinscripcion');
 Route::post('/aplicacionPreinscripcion', [AplicacionesController::class,'store'])->name('aplicacion');
@@ -102,10 +97,6 @@ Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(
 Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','admin']);
 Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','admin']);
 
-
-
-
-
 //Usuario Anotador-Juez
 Route::get('/registrarJugadas/{id}',[RegistrarPlanillaJuegoController::class,'mostrarDatosPartido'])->middleware(['auth','juez']);
 Route::post('/guardarJugada',[RegistrarPlanillaJuegoController::class,'guardarDatosJuego'])->middleware(['auth','juez'])->name('guardarJugada');
@@ -114,6 +105,4 @@ Route::post('/registrarJueces',[RegistrarPlanillaJuegoController::class,'guardar
 Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
 Route::post('planilla/jugador/{idPartido}/{idPlanillaJugador}/{id}', [PlanillaJugadorController::class,'store']);
 Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'show']);
-
-
 Route::delete('/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
