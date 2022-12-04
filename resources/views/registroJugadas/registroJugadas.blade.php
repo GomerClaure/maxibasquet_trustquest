@@ -149,7 +149,74 @@
                 </form>
             </section>
             <section class="mostrarResultado">
-
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla1 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla2 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla3 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach 
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla4 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach 
+                        </table>
+                    </div>
+                    
+                </div>
+                
             </section>
             <section class="resumen">
 
@@ -165,6 +232,7 @@
 <script>
     var cuarto = {{ session('cuarto') }}
     console.log(cuarto);
+    console.log({{$jugadas}});
     
     if(cuarto == undefined){
             cuarto = {{$cuarto}};

@@ -34,9 +34,7 @@ class RegistrarPlanillaJuegoController extends Controller
         $idPartido = $formulario['idPartido'];
         $accion = $formulario["accionBoton"];
         $cuarto = $this->getCuartoJugado($idPartido);
-        if ($accion == 'IniciarPartido') {
-            
-        }elseif($accion == 'GuardarPunto'){
+        if($accion == 'GuardarPunto'){
             if ($cuarto == 0) {
                 $planilla = new Planilla();
                 $planilla->IdPartido = $idPartido;
@@ -48,16 +46,19 @@ class RegistrarPlanillaJuegoController extends Controller
             $puntoEquipo = explode(' ', $formulario['puntoEquipo']);
             $nomEquipo = $puntoEquipo[0];
             $idEquipo = $puntoEquipo[1];
+            
             $puntuacion = $formulario['puntacion'];
             if ($nomEquipo == 'A') {
+                $charEquipo = 'A';
                 $idJugador = $formulario['jugadorA'];
             }elseif ($nomEquipo == 'B') {
+                $charEquipo = 'B';
                 $idJugador = $formulario['jugadorB'];
             }
-        
             $jugada = new Jugada;
             $jugada -> IdJugador = $idJugador;
             $jugada -> IdPartido = $idPartido;
+            $jugada -> Equipo = $charEquipo;
             $jugada -> TipoJugada = $puntuacion;
             $jugada -> CuartoJugada = $cuarto;
             $jugada -> HoraJugada = date('H:i');
@@ -83,11 +84,10 @@ class RegistrarPlanillaJuegoController extends Controller
             }else{
                 return "Finalizo el partido señores";
             }
-            
-            
         }
         return back()->withInput()->with(['cuarto' => $cuarto]);
         // return $request;
+        // return range(0,39);
     }
 
     public function mostrarDatosPartido($idPartido){
@@ -124,13 +124,26 @@ class RegistrarPlanillaJuegoController extends Controller
                     ->where('jugadores.IdEquipo','=',$equipoB->IdEquipo)
                     ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
                     ->get();
-        // $sePuedeRegistrar = false;
-        // return $jugadoresB;
+        $registroTabla1 = range(1,40);
+        $registroTabla2 = range(41,80);
+        $registroTabla3 = range(81,120);
+        $registroTabla4 = range(121,160);
+        $jugadas = $this->getJugadas($idPartido);
         return view('registroJugadas.registroJugadas',
         compact('idEquipos','equipoA','cuarto',
         'equipoB','categoria','fechaHoy','idPartido',
-        'partido','jueces','jugadoresA','jugadoresB'));
-        return $cuarto;
+        'partido','jueces','jugadoresA','jugadoresB','jugadas',
+        'registroTabla1','registroTabla2','registroTabla3','registroTabla4'));
+        // return $cuarto;
+    }
+
+    public function getJugadas($idPartido){
+        $jugadas = Jugada::select('jugadores.NumeroCamiseta','jugadas.CuartoJugada',
+                                        'jugadas.TipoJugada','jugadas.HoraJugada','jugadas.Equipo')
+                            ->join('jugadores','jugadas.IdJugador','=','jugadores.IdJugador')
+                            ->where('jugadas.IdPartido','=',$idPartido)
+                            ->get();
+        return $jugadas;
     }
 
     public function getCuartoJugado($idPartido)

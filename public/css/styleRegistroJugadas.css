@@ -59,3 +59,16 @@ h1{
     background: #fa841a;
     color: white;
 }
+
+
+.mostrarResultado{
+    background-color: aliceblue;
+}
+td{
+    text-align: center;
+    /* min-width: 100%;
+    min-height: 100%;
+    padding: 0; */
+    /* width: 25%;
+    height: 43px; */
+}
