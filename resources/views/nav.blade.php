@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>MaxiBasquet</title>
+    <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
+    <link rel="stylesheet" href="{{asset('css/StyleListaTecnicos.css')}}">
     <link rel="stylesheet" href="{{asset('css/StyleNav.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -25,6 +27,9 @@
                         </li>
                         <li class="nav-item">
                         <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
                         </li>
                         <!-- Dropdown -->
                         <li class="nav-item">
@@ -59,6 +64,9 @@
                     </li>
                     <li class="nav-item">
                     <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
                     </li>
                     <!-- Dropdown -->
                     <li class="nav-item dropdown ">
@@ -102,6 +110,9 @@
                         <li class="nav-item">
                         <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                        </li>
                         <!-- Dropdown -->
                         <li class="nav-item">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
@@ -143,6 +154,9 @@
                         <li class="nav-item">
                         <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                        </li>
                         <!-- Dropdown -->
                         <li class="nav-item">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
@@ -181,5 +195,29 @@
             {{-- @include('flash-message') --}}
             @yield('content')
     </main>
+    <br><br><section class="">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #444b52;">
+    <!-- Grid container -->
+    <div class="container p-2 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Campeonato Maxi Basquet</span>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>
 </body>
 </html>
