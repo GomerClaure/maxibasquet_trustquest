@@ -232,7 +232,20 @@
 <script>
     var cuarto = {{ session('cuarto') }}
     console.log(cuarto);
-    console.log({{$jugadas}});
+    var posA = 1;
+    var posB = 1;
+    var jugadas = {!!$jugadas!!};
+    jugadas.forEach(jugada => {
+        if(jugada["Equipo"] == "A"){
+            document.getElementById("colA"+posA).innerHTML =jugada["NumeroCamiseta"];
+            posA++;
+        }else{
+            document.getElementById("colB"+posB).innerHTML =jugada["NumeroCamiseta"];
+            posB++;
+        }
+        
+    });
+    console.log(jugadas);
     
     if(cuarto == undefined){
             cuarto = {{$cuarto}};
