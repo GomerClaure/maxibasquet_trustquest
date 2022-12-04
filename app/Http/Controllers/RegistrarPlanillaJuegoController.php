@@ -47,8 +47,9 @@ class RegistrarPlanillaJuegoController extends Controller
         $jugada -> CuartoJugada = 1;
         $jugada -> HoraJugada = date('H:i');
         // $jugada -> save();
-        // return back()->withInput();
-        return $request;
+        $puntaje = 1;
+        return back()->withInput()->with(['puntaje' => $puntaje]);
+        // return $request;
     }
 
     public function mostrarDatosPartido($idPartido){
@@ -72,32 +73,37 @@ class RegistrarPlanillaJuegoController extends Controller
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
                 ->get();
-        $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno')
+        $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
+                    'personas.ApellidoPaterno')
                     ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
                     ->where('jugadores.IdEquipo','=',$equipoA->IdEquipo)
                     ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
                     ->get();
-        $jugadoresB = Jugador::select('jugadores.IdJugador','personas.NombrePersona','personas.ApellidoPaterno')
+        $jugadoresB = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
+                    'personas.ApellidoPaterno')
                     ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
                     ->where('jugadores.IdEquipo','=',$equipoB->IdEquipo)
                     ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
                     ->get();
         // $sePuedeRegistrar = false;
         // return $jugadoresB;
+        $puntaje = 0;
         return view('registroJugadas.registroJugadas',
-        compact('idEquipos','equipoA',
+        compact('idEquipos','equipoA','puntaje',
         'equipoB','categoria','fechaHoy','idPartido',
-        'partido','jueces','jugadoresA','jugadoresB'));
+        'partido','jueces','jugadoresA','jugadoresB'))->with('puntaje',$puntaje);
     }
 
     // Guardado y registro de jueces
 
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');
-        $arrayjuecesrepetidos = array_count_values([$formulario['anotadorPrincipal'],$formulario['anotadorAsistente'],$formulario['cronometrista'],$formulario['apuntador']]);
+        $arrayjuecesrepetidos = array_count_values([$formulario['anotadorPrincipal'],
+            $formulario['anotadorAsistente'],$formulario['cronometrista'],$formulario['apuntador']]);
         foreach ($arrayjuecesrepetidos as $key => $value) {
             if ($value >= 2) {
-                return back()->withInput()->with('errorJueces','No puede existir un juez con dos cargos en el partido.');
+                return back()->withInput()->with('errorJueces',
+                'No puede existir un juez con dos cargos en el partido.');
             }
         }
         DB::table("jueces_por_partidos")->insert([

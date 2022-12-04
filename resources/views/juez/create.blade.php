@@ -23,29 +23,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <link rel="stylesheet" href="{{asset('css/styleCuerpoTecnico.css')}}">
+        <link rel="stylesheet" href="{{asset('css/styleRegistrarJuez.css')}}">
 
     </head>
-    <body class="antialiased">
-        <header >
-            <!-- Grey with black text
-            <nav class="navbar navbar-expand-sm navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-            </nav>-->
-        </header>
+    @extends('nav')
+        @section('content')
             @php
                 $vadido = "¡Valido!";
                 $noVadido = "¡No valido!";
@@ -82,7 +64,7 @@
                 <form action="{{ url('/juez/create')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="d-flex justify-content-center mb-4 border-bottom">
-                        <h1 class="tituloFomulario">REGISTRAR JUEZ</h1>
+                        <h1 class="tituloFomulario">REGISTRAR PERSONAL</h1>
                     </div>
                     <div class="row">
                         <div class="col-4" id="columna1">
@@ -209,8 +191,10 @@
 
                     <div class="d-flex justify-content-center mt-4 mb-4">
                         <button type="submit" class="botones">Registrar</button>
+                        <a href="{{url('/home')}}" class="botones">Cancelar</a>
                     </div>
                 </form>
             </div>
-    </body>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    @endsection
 </html>

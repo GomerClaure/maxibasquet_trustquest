@@ -49,11 +49,25 @@ thead {
     background-color: #D3D3D3;
     
 }
-.btn{
-  background-color: #eb8f32;
-  font-size: 14;
-  border-color: #eb8f32;
+
+.boton{
+  display: flex;
+  width: 40%;
+  text-decoration: none;
+  color: white;
+  background: #eb8f32;
+  padding: 5px;
+  border-radius: 8px;
+  margin: 0% 1%;
+  justify-content: center;
+  border: 0px;
 }
+
+.boton:hover{
+  background: #fa841a;
+  color: white;
+}
+
 a{
   color: white;
   text-decoration: none;

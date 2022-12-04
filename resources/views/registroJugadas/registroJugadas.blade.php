@@ -163,9 +163,16 @@
   
 </section>
 <script>
-    document.getElementById("iniciarPartido").onclick = function() {
+    var puntaje = {{ session('puntaje') }}     
+    console.log(puntaje);
+    if(puntaje != undefined){
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";
+    }else{
+        document.getElementById("iniciarPartido").onclick = function() {
+            document.getElementById("registroPuntaje").style.display = "block";
+            document.getElementById("iniciarPartido").style.display = "none";
+        }
     }
     // function show() {
 

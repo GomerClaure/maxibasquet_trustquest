@@ -108,3 +108,17 @@ tbody{
   font-size: 14;
   border-color: #eb8f32;
 }
+.card{
+  background-color: #5a5a56;
+  align-items: center;
+  padding: auto;
+  color: rgb(255, 248, 248);
+  font-size:20px;
+  margin: 10px;
+  flex-direction: row;
+}
+.btn{
+  background-color: #fca311;
+  font-size: 14;
+  border: #272725;
+} 

@@ -148,7 +148,7 @@ class CredencialController extends Controller
      */
     public function qr($id,$ci,$id2){
         QrCode::format('png')->size(250)->margin(0)
-                ->generate('http://127.0.0.1:8000/jugadorqr/'.$id,
+                ->generate('http://trust.tis.cs.umss.edu.bo/jugadorqr/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
        $credencial = Credencial::where('IdPersona',$id2)->get();
        if($credencial -> isEmpty()){
@@ -168,7 +168,7 @@ class CredencialController extends Controller
      */
     public function qrtecnico($id,$ci,$id2){
         QrCode::format('png')->size(250)->margin(0)
-                ->generate('http://127.0.0.1:8000/tecnicoqr/'.$id,
+                ->generate('http://trust.tis.cs.umss.edu.bo/tecnicoqr/'.$id,
                 '../storage/app/public/qrcodes/'.$id.$ci.'.png');
        $credencial = Credencial::where('IdPersona',$id2)->get();
        if($credencial -> isEmpty()){

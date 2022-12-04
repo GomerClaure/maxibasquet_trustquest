@@ -23,35 +23,18 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleAplicacion.css')}}">
     </head>
-    <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm  navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    @extends('nav')
+    @section('content')
     
         <body >
        
         @if( $aplicacion != null)
-		<section class=" main-title text-center">
+		<section class=" main-title text-center mt-3">
 
-            <h1 class="display-6 mb-0" ><b>
+            <h1 class="display-6 mb-0 text-white" ><b>
                 Datos de preinscripción de equipos
             </b> </h1>
-            <b><p>3er Torneo Internacional de Maxi Basquet</p></b>
+            <b><p class="text-white">3er Torneo Internacional de Maxi Basquet</p></b>
             <div >
             <div class="container justify-content-center">
             
@@ -60,10 +43,11 @@
             <section class="container pb-5 pt-3">
                 <div class="row g-3 "  >
                     <div class=" row pb-3 mb-4 registro-aplicacion formulario border-top border-5 border-success mause-nulo">
-                        <div class="d-flex flex-row-reverse py-2">
-                        <a type="button" href="{{ url('aplicaciones') }}" class="btn btn-primary btn-sm boton "> Volver </a>
+                        <div class="d-flex justify-content-between mt-3">
+                            <h5 class=""><b>Datos del Equipo</b> </h5>
+                            <a type="button" href="{{ url('aplicaciones') }}" class="btn-sm boton mb-1"> Volver </a>
                         </div>
-                        <h5><b>Datos del Equipo</b> </h5>
+                        
                         <hr>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label"><b>Nombre de equipo:</b> </label>
@@ -134,7 +118,9 @@
         @else
         <h1>No encontrado</h1>
         @endif
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
+    @endsection
 
 
 </html>
