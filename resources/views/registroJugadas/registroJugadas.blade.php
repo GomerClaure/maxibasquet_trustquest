@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col text-center  p-3">
-                        <button class="btn iniciarPartido" id="iniciarPartido"> Iniciar partido</button>
+                        <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" value="IniciarPartido" > Iniciar partido</button>
                     </div>
                 </div>
             </section>
@@ -139,10 +139,10 @@
                     <div class="row p-2 pt-4 pb-4">
                         <div class="col text-center">
                             <div class="d-inline p-2">
-                                <button type="submit" class="btn guardarP"> Guardar Punto</button>
+                                <button name="accionBoton" type="submit" class="btn guardarP" value="GuardarPunto"> Guardar Punto</button>
                             </div>
                             <div class="d-inline p-2">
-                                <button type="submit" class="btn guardarP" action="{{route('guardarJugada',['idPartido' => $idPartido,'cuarto'=> 2])}}"> Finalizar Cuarto</button>
+                                <button name="accionBoton" type="submit" class="btn guardarP" value="FinalizarCuarto" > Finalizar Cuarto</button>
                             </div>
                         </div>
                 </div>
@@ -163,9 +163,14 @@
   
 </section>
 <script>
-    var puntaje = {{ session('puntaje') }}     
-    console.log(puntaje);
-    if(puntaje != undefined){
+    var cuarto = {{ session('cuarto') }}
+    console.log(cuarto);
+    
+    if(cuarto == undefined){
+            cuarto = {{$cuarto}};
+    }
+    console.log(cuarto);
+    if(cuarto != 0){
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";
     }else{
