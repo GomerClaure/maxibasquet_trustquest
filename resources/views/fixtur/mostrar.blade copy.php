@@ -59,8 +59,12 @@
                                 <table class="table table-striped table-borderless border-dark  mb-0 text-center align-middle">
                                     <thead>
                                     <tr>
-                                        <th>Partidos </th>
-                                        
+                                        <th>Nombre de Equipo </th>
+                                        <th>Fecha</th>
+                                        <th>Lugar</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                        <th>Categoria</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -68,22 +72,12 @@
                                         <tr>
                                             @if($i+1!=sizeof($nombres))
                                                 
-                                                <td>
-                                                <div class="card">
-                                                    <div class="card-header">{{$nombres[$i]->NombreEquipo}}
-                                                            VS 
-                                                        {{$nombres[$i+1]->NombreEquipo}}
-                                                    </div>
-                                                    <div class="card-body">
-                                                        Fecha:{{$fechas[$i]->FechaPartido}}
-                                                        Lugar:{{$lugares[$i]->LugarPartido}}
-                                                        Hora:{{$horas[$i]->HoraPartido}}
-                                                        Estado:{{$estados[$i]->EstadoPartido}}
-                                                        Categoria:{{$categorias[$i]->NombreCategoria}}
-                                                    </div>
-                                                </div>
-                                                </td>
-                                                
+                                                <td>{{$nombres[$i]->NombreEquipo}} vs {{$nombres[$i+1]->NombreEquipo}}</td>
+                                                <td>{{$fechas[$i]->FechaPartido}}</td>
+                                                <td>{{$lugares[$i]->LugarPartido}}</td>
+                                                <td>{{$horas[$i]->HoraPartido}}</td>
+                                                <td>{{$estados[$i]->EstadoPartido}}</td>
+                                                <td>{{$categorias[$i]->NombreCategoria}}</td>
                                                 
                                             @endif
                                             
