@@ -26,6 +26,12 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/tecnicos')}}">Técnicos</a>
+                        </li>
                         <!-- Dropdown -->
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
@@ -59,6 +65,12 @@
                     </li>
                     <li class="nav-item ms-3">
                         <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/tecnicos')}}">Técnicos</a>
                     </li>
                     <!-- Dropdown -->
                     <li class="nav-item dropdown ms-3">
@@ -109,6 +121,12 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/tecnicos')}}">Técnicos</a>
+                        </li>
                         <!-- Dropdown -->
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
@@ -150,6 +168,12 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{{url('/tecnicos')}}">Técnicos</a>
+                        </li>
                         <!-- Dropdown -->
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
@@ -188,6 +212,29 @@
             {{-- @include('flash-message') --}}
             @yield('content')
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+   <br><br> 
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #444b52;">
+    <!-- Grid container -->
+    <div class="container p-2 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Campeonato Maxi Basquet</span>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

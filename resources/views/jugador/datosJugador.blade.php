@@ -8,26 +8,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
     </head>
-    <body>
-    <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    @extends('nav') 
+    @section('content')
+    <body class="bodyJ">
         <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
                 <div class="">
@@ -41,14 +24,14 @@
 
                         </div>
                         <div class="col">
-                        <div class="card ">
-                            <div class="card-body  pt-3 ps-3 ">
+                        <div class="card cardJ ">
+                            <div class="card-body  pt-3 ps-3 card-bodyJ">
                                 <div class="d-flex justify-content-end pb-2">
-                                <a type="button" href="{{ url('jugadores'.'/'.$jugador[0]->NombreEquipo.'/'.$jugador[0]->NombreCategoria)}}" class="btn btn-primary btn-sm boton "> Volver </a>
+                                <a type="button" href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-primary btn-sm botonj "> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">
-                                        <div class="card">
+                                        <div class="card border-0 cardJ">
 
                                                 @foreach ($jugador as $jug)
                                                 <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
@@ -58,7 +41,7 @@
                                     </div>
                                     <div class="col">
                                         @foreach ($jugador as $jug)
-                                        <div class="jugador"> <p> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
+                                        <div class="jugadorJ"> <p class="pJ"> <b>{{$jug->NombreEquipo}} {{$jug->NombreCategoria}} | {{$jug->PosicionJugador}}</b></p> </div>
                                         <div>
                                             <h4 class="transformacion2"> <b>{{$jug->NombrePersona}}</b></h4>
                                         </div>
@@ -66,35 +49,35 @@
                                             <h4 class="transformacion2"><b>{{$jug->ApellidoPaterno}}</b></h4>
                                         </div>
                                         <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                            <table class=" table  mb-0 text-center  d-flex justify-content-center">
+                                            <table class=" table table-striped table-borderless border-dark  mb-0 text-center align-middle">
 
                                                 <tbody  >
                                                     <tr>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Altura</b></p> </div>
-                                                            <div><p>{{$jug->EstaturaJugador}} m</p></div>
+                                                            <div> <p class="pJ" ><b>Altura</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->EstaturaJugador}} m</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Peso</b></p> </div>
-                                                            <div><p>{{$jug->PesoJugador}} kg</p></div>
+                                                            <div> <p class="pJ"><b>Peso</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->PesoJugador}} kg</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$jug->NacionalidadPersona}}</p></div>
+                                                            <div> <p class="pJ"><b>Nacionalidad</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->NacionalidadPersona}}</p></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Edad</b></p> </div>
-                                                            <div><p>{{$jug->Edad}}</p></div>
+                                                            <div> <p class="pJ"><b>Edad</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->Edad}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Nacimiento</b></p> </div>
-                                                            <div><p>{{$jug->FechaNacimiento}}</p></div>
+                                                            <div> <p class="pJ"><b>Nacimiento</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->FechaNacimiento}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Camiseta</b></p> </div>
-                                                            <div><p>{{$jug->NumeroCamiseta}}</p></div>
+                                                            <div> <p class="pJ"><b>Camiseta</b></p> </div>
+                                                            <div><p class="pJ">{{$jug->NumeroCamiseta}}</p></div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -115,6 +98,8 @@
             </div>
 
         </div>
+        @endsection
 
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

@@ -8,26 +8,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleDatosJugador.css')}}">
     </head>
-    <body>
-    <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    <body class="bodyJ">
+    @extends('nav') 
+    @section('content')
         <div class="relative  items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
                 <div class="">
@@ -41,19 +24,19 @@
 
                         </div>
                         <div class="col">
-                        <div class="card ">
-                            <div class="card-body  pt-3 ps-3 ">
+                        <div class="card cardJ">
+                            <div class="card-body pt-3 ps-3 card-bodyJ">
                                 <div class="d-flex justify-content-end pb-2">
-                                <a type="button" href="{{ url('tecnicos'.'/'.$tecnico->NombreEquipo.'/'.$tecnico->NombreCategoria)}}" class="btn btn-primary btn-sm boton"> Volver </a>
+                                <a type="button" href="{{ redirect()->back()->getTargetUrl()}}" class="btn btn-primary btn-sm botonj"> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">
-                                        <div class="card">
-                                                <img class="card-img-top"src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                        <div class="card border-0 cardJ">
+                                                <img class="card-img-top card-img-topJ"src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="jugador"> <p> <b>{{$tecnico->NombreEquipo}} {{$tecnico->NombreCategoria}} | {{$tecnico->RolesTecnicos}}</b></p> </div>
+                                        <div class="jugadorJ"> <p class="pJ"> <b>{{$tecnico->NombreEquipo}} {{$tecnico->NombreCategoria}} | {{$tecnico->RolesTecnicos}}</b></p> </div>
                                         <div>
                                             <h4 class="transformacion2"> <b>{{$tecnico->NombrePersona}}</b></h4>
                                         </div>
@@ -61,21 +44,21 @@
                                             <h4 class="transformacion2"><b>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</b></h4>
                                         </div>
                                         <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                            <table class=" table  mb-0 text-center  d-flex justify-content-center">
+                                            <table class=" table table-striped table-borderless border-dark  mb-0 text-center align-middle">
 
                                                 <tbody  >
                                                     <tr>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Edad</b></p> </div>
-                                                            <div><p>{{$tecnico->Edad}}</p></div>
+                                                            <div> <p class="pJ"><b>Edad</b></p> </div>
+                                                            <div><p class="pJ">{{$tecnico->Edad}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Nacimiento</b></p> </div>
-                                                            <div><p>{{$tecnico->FechaNacimiento}}</p></div>
+                                                            <div> <p class="pJ"><b>Nacimiento</b></p> </div>
+                                                            <div><p class="pJ">{{$tecnico->FechaNacimiento}}</p></div>
                                                         </td>
                                                         <td class="border border-dark">
-                                                            <div> <p><b>Nacionalidad</b></p> </div>
-                                                            <div><p>{{$tecnico->NacionalidadPersona}}</p></div>
+                                                            <div> <p class="pJ"><b>Nacionalidad</b></p> </div>
+                                                            <div><p class="pJ">{{$tecnico->NacionalidadPersona}}</p></div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -97,4 +80,8 @@
         </div>
 
     </body>
+    <br><br>
+    @endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>
