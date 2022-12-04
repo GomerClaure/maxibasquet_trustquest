@@ -17,7 +17,7 @@
   <h1 class="tituloEquipos">Equipos Campeonato Maxi Basquet</h1>
 <div class="equipos-card">
 @foreach($arreglo as $copia)
-<div class="card" style="width: 4 0rem;">
+<div class="card cardEquipo" style="width: 4 0rem;">
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 imagen">
