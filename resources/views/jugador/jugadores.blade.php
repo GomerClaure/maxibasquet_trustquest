@@ -23,17 +23,17 @@
                                
                                 <h2 class="text-center"> <b> Liga Maxi Basquet -- Jugadores</b></h2>
                                 
-                                <div class="card fondoTabla">
+                                <div class="card fondoTabla cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                     </div>
-                                        <div class="card-body  pt-0 ps-3">
+                                        <div class="card-body  pt-0 ps-3 card-bodyJ">
                                             @if(!$jugadores->isEmpty())
                                             @foreach ($jugadores as $jugador)
-                                                <div class="card d-inline-block m-3" style="width: 19rem;">
-                                                    <div class="card-body text-center">
+                                                <div class="card d-inline-block m-3 cardJ" style="width: 19rem;">
+                                                    <div class="card-body text-center card-bodyJ">
                                                         <div class="d-flex justify-content-center">
-                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                        <img class="card-img-top img-fluid card-img-topJ" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
                                                         </div>
                                                     
                                                         <h4>{{$jugador->NombrePersona}} </h4>

@@ -24,14 +24,14 @@
 
                         </div>
                         <div class="col">
-                        <div class="card ">
-                            <div class="card-body  pt-3 ps-3 ">
+                        <div class="card cardJ ">
+                            <div class="card-body  pt-3 ps-3 card-bodyJ">
                                 <div class="d-flex justify-content-end pb-2">
                                 <a type="button" href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-primary btn-sm botonj "> Volver </a>
                                 </div>
                                 <div class="row ">
                                     <div class="col-4 ">
-                                        <div class="card border-0">
+                                        <div class="card border-0 cardJ">
 
                                                 @foreach ($jugador as $jug)
                                                 <img class="card-img-top"src="{{asset('storage').'/'.$jug->Foto}}" alt="">
@@ -49,7 +49,7 @@
                                             <h4 class="transformacion2"><b>{{$jug->ApellidoPaterno}}</b></h4>
                                         </div>
                                         <div class=" table-responsive table-scroll rounded-0  w-75 " data-mdb-perfect-scrollbar="true" style="position: relative; ">
-                                            <table class=" table  mb-0 text-center  d-flex justify-content-center">
+                                            <table class=" table table-striped table-borderless border-dark  mb-0 text-center align-middle">
 
                                                 <tbody  >
                                                     <tr>

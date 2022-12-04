@@ -20,7 +20,7 @@
                                 @if($equipo != null)
                                 <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
-                                <div class="card fondoTabla">
+                                <div class="card fondoTabla cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         <a type="button" href="{{ url('Equipo') }}" class="btn btn-primary btn-sm Jboton btnj"> Volver </a>
@@ -29,16 +29,16 @@
                                         
                                         
                                     </div>
-                                        <div class="card-body  pt-0 ps-3">
+                                        <div class="card-body  pt-0 ps-3 card-bodyJ">
                                             @if(!$jugadores->isEmpty())
                                             @foreach ($jugadores as $jugador)
-                                                <div class="card d-inline-block m-3" style="width: 19rem;">
+                                                <div class="card d-inline-block m-3 cardJ" style="width: 19rem;">
                                                 <div class="card-header">
                                                     <h5 class="card-title">{{$jugador->PosicionJugador}} #{{$jugador->NumeroCamiseta}}</h5>
                                                 </div>
-                                                    <div class="card-body text-center">
+                                                    <div class="card-body text-center card-bodyJ">
                                                         <div class="d-flex justify-content-center">
-                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                        <img class="card-img-top img-fluid card-img-topJ" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
                                                         </div>
                                                     
                                                         <h5>{{$jugador->NombrePersona}} </h5>
