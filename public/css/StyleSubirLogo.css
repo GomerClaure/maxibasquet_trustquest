@@ -65,3 +65,15 @@
     display: grid;
     align-content: center;
 }
+.btn.red{
+    margin: 20px;
+    padding: 10px;
+    background-color: red !important;
+    border: none;
+    color: white !important;
+
+ }
+.btn.red:hover{
+    background: #fa1a1a !important;
+    color: white; 
+}

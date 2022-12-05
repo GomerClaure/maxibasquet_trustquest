@@ -1,7 +1,37 @@
 body{
     background: #171f27;
 }
-
+.boton{
+    width: 15%;
+    height: 10%;
+  }
+  .displayBoton{
+    display: block;
+    margin: auto;
+    margin-top: 0.5rem ;
+    width: 80%;
+  }
+  .red{
+    background-color: red !important;
+    border: none;
+}
+.Boton{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.red:hover{
+    background: #fa1a1a !important;
+    color: white; 
+}
+.Boton:hover{
+    background: #fa841a;
+    color: white; 
+}
 .titulo{
     font-weight: bold;
     color: white;
@@ -58,8 +88,8 @@ body{
   font-size: 1.25rem;
 }
 
-.card-img-top{
-    margin: auto;
-    width: 200px;
-    height: 200px;
+.tituloJ{
+    text-align: center;
+    color: #e5852a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

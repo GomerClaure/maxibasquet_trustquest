@@ -62,12 +62,11 @@ Route::resource('/listaequipos',ListaEquiposController::class);
 Route::get('/login',[LoginController::class,'index'])->name('login')->middleware(['login']);
 Route::post('/login',[LoginController::class,'verificarInicioSesion']);
 Route::get('/mostrarFixtur',[FixturController::class,'show']);
-
 Route::get('/tecnicos',[TecnicoController::class,'lista']);
 Route::get('/jugadores',[JugadorController::class,'lista']);
-
 Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
-
+Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','admin']);
+Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','admin']);
 
 
 //Usuario Delegado
@@ -97,8 +96,7 @@ Route::get('/jugadorqr/{id}',[JugadorQrController::class,'index'])->middleware([
 Route::get('/tecnicoqr/{id}',[TecnicoQrController::class,'index'])->middleware(['auth','delegado']);
 Route::get('eliminar/tecnico/{equipo}/{categoria}',[TecnicoController::class,'listaEliminar'])->middleware(['auth','delegado']);
 Route::delete('/tecnico/{id}',[TecnicoController::class,'destroy'])->middleware(['auth','delegado']);
-Route::get('/equipo/lista/eliminar',[EquipoController::class,'listaEquipos'])->middleware(['auth','admin']);
-Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy'])->middleware(['auth','admin']);
+
 
 //Usuario Anotador-Juez
 Route::get('/registrarJugadas/{id}',[RegistrarPlanillaJuegoController::class,'mostrarDatosPartido'])->middleware(['auth','juez']);

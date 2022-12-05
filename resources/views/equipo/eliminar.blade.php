@@ -11,26 +11,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleEliminarEquipos.css')}}">
     </head>
-    <body class="antialiased">
-    <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    @extends('nav') 
+    @section('content')
+    <body class="antialiased bodyJ">
+    
         @php
             $vadido = "¡Valido!";
             $noVadido = "¡No valido!";
@@ -53,8 +37,8 @@
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
-                                <h3>Equipos Inscritos</h3>
-                                <h5>3er Torneo Internacional de Maxi Basquet</h5>
+                                <h3 class="tituloJ">Equipos Inscritos</h3>
+                                <h5 class="tituloJ">3er Torneo Internacional de Maxi Basquet</h5>
                             <div class="card">
                                 <div class="ps-3 py-2">
                                     <h4>Lista Detallada</h4>
@@ -122,4 +106,6 @@
 
 
     </body>
+    @endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

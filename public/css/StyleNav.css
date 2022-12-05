@@ -28,8 +28,6 @@ body,html{
   padding: 10px 5px 8px 5px;
   font-size: 15px;
 }
-<<<<<<< HEAD
-=======
 .bodyJ{
   background-color: #171f27;
   color:white;
@@ -89,7 +87,7 @@ tbody{
   margin-top: 0.5rem ;
   width: 80%;
 }
-.btnj-primary:hover {
+.btnj:hover {
     
   background: #fa841a !important;
   border-color: #eb8f32 !important;
@@ -108,6 +106,7 @@ tbody{
 .btnj{
   background-color: #eb8f32 !important;
   font-size: 14;
+  color:white;
   border-color: #eb8f32 !important;
 }
 .cardEquipo{
@@ -119,7 +118,6 @@ tbody{
   margin: 10px;
   flex-direction: row;
 }
->>>>>>> Develop
 .btn{
   background-color: #fca311;
   font-size: 14;
