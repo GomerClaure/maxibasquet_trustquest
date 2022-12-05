@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/StyleNav.css')}}">
     
 </head>
+
 <body>
     @guest
         <nav class="navbar navbar-expand-sm navbar-light menu">
@@ -177,11 +178,16 @@
                         <!-- Dropdown -->
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
-                        </li>
-                        <li class="nav-item ms-3">
+                            </li> 
+                        <li class="nav-item">
                             <a class="nav-link active" href="{{url('/subirLogo')}}">Mi Equipo</a>
-                            </li>
-                        <li class="nav-item ms-3">
+                        </li>
+                        <!--hacer esto de los delegados usando un controller para el navegador-->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{url('/mostrar')}}">Credenciales</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
                     </ul>  
