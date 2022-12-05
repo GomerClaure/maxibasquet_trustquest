@@ -67,9 +67,10 @@ body,html{
 }
 
 .card1{
-  align-items: center;
-  margin: 10px;
+  align-content: center;
+  margin: 30px;
   color: #ffff;
+  max-width: 600px;
 }
 
 .intro {
@@ -124,7 +125,9 @@ thead {
 }
 
 .ancho{
-  background-color: #171f27;
+  margin: auto;
+ color: black;
+  background-color: wheat;
 }
 
 .cuadricula{
