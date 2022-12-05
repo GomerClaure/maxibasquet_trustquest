@@ -7,60 +7,34 @@ body{
     color: white;
 }
 
-.btn{
-    background: #eb8f32;
+.boton{
+    display: flex;
+    width: 50%;
+    text-decoration: none;
     color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 8px;
+    margin: 0% 1%;
+    justify-content: center;
+}
+
+.boton:hover{
+  background: #fa841a;
+  color: white;
+}
+
+.btnVolver{
+    width: 100%;
 }
 
 .btnEditar{
-   display: inline-block;
-    text-decoration: none;
-    color: white;
-    background: #eb8f32;
-    padding: 1%;
-    border-radius: 4px;
-    vertical-align: middle;
-}
-.red{
-    background-color: #eb3232 !important;
-    border: none;
-}
-.Boton{
-    display: inline-block;
-    text-decoration: none;
-    color: white;
-    background: #eb8f32;
-    padding: 1%;
-    border-radius: 4px;
-    vertical-align: middle;
-}
-.displayBoton{
-    display: block;
     margin: auto;
-    margin-top: 0.5rem ;
     width: 80%;
-}
-.red:hover{
-    background: #fa1a1a !important;
-    color: white; 
-}
-.Boton:hover{
-    background: #fa841a;
-    color: white; 
-}
-.btn:first-child:hover{
-    background: #fa841a;
-    background-color: #fa841a;
-    color: white;
-}
-
-.btnEditar:hover{
-    background: #fa841a;
-    color: white;
 }
 
 .contenedorCard{
-    background: #b5b5bd;
+    background: #b5b5bd !important;
     margin-top: 1%;
 }
 

@@ -28,6 +28,8 @@ body,html{
   padding: 10px 5px 8px 5px;
   font-size: 15px;
 }
+<<<<<<< HEAD
+=======
 .bodyJ{
   background-color: #171f27;
   color:white;
@@ -117,6 +119,7 @@ tbody{
   margin: 10px;
   flex-direction: row;
 }
+>>>>>>> Develop
 .btn{
   background-color: #fca311;
   font-size: 14;

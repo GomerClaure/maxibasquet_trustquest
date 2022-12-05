@@ -7,15 +7,21 @@ body{
     color: white;
 }
 
-.btnFomulario{
+.boton{
+    display: flex;
     width: 50%;
-    margin-top: 2%;
-    background: #eb8f32;
+    text-decoration: none;
     color: white;
+    background: #eb8f32;
+    padding: 1%;
+    border-radius: 8px;
+    margin: 0% 1%;
+    justify-content: center;
 }
 
-.btn:first-child:hover{
-    background: #fa841a;
+.boton:hover{
+  background: #fa841a;
+  color: white;
 }
 
 .error-message{
@@ -33,13 +39,4 @@ body{
 
 .navbar a {
     color: black;
-}
-.boton{
-    background: #eb8f32;
-    color: white;
-    padding: 10px;
-    margin: 20px;
-    margin-left: 1100px;
-    border-radius: 5px;
-    text-decoration:none;
 }
