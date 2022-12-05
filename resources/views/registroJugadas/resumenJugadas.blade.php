@@ -22,6 +22,160 @@
       <div class="col pasos">
         <h1 for="">Resumen de Jugadas</h1>
         <div class="row">
+            <section class="resumenPartido p-3">
+                <div class="row">
+                    {{-- <div>
+                        <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje Final:</label>
+                    </div> --}}
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Cronometrista:</label>
+                            </div>
+                            <div class="input-group col">
+                                <input class="form-control cuartos" type="text" value="Ricardo Vivaldi"  disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Apuntador:</label>
+                            </div>
+                            <div class="input-group col">
+                                <input class="form-control cuartos" type="text" value="Jose Carlos"  disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div>
+                            <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje por periodo:</label>
+                        </div>
+                        <div class="col  border-end border-dark">
+                            <div>
+                                <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo A:</label>
+                            </div>
+                            <div class="row  ps-4 pe-3 ">
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">1er cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">2do cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">3er cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">4to cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col">
+                            <div>
+                                <label class="form-label tituloPuntajeEquipoB">Equipo B:</label>
+                            </div>
+                            <div class="row  ps-4 pe-3 ">
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">1er cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">2do cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">3er cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-2 row ">
+                                    <div class="col text-center">
+                                        <label  for="anotadorAsistente" class="form-label">4to cuarto:</label>
+                                    </div>
+                                    <div class="input-group col">
+                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                    </div>
+                                    
+                                </div>
+                            </div>  
+                        </div>
+                    
+                </div>
+                <div class="row">
+                    <div>
+                        <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje Final:</label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo A:</label>
+                            </div>
+                            <div class="input-group col">
+                                <input class="form-control cuartos" type="text" value="120"  disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo B:</label>
+                            </div>
+                            <div class="input-group col">
+                                <input class="form-control cuartos" type="text" value="120"  disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo Vencedor:</label>
+                    </div>
+                    <div class="input-group col">
+                        <input class="form-control cuartos" type="text" value="Bernie Wuckert"  disabled>
+                    </div>
+                </div>
+                
+            </section>
             <section class="mostrarResultado mb-5">
                 <div class="row">
                     <div class="col">
@@ -90,10 +244,10 @@
                     </div>
                     
                 </div>
+                <div class="row">
+                    <a href="{{url('planilla/jugador/')}}" class="btn iniciarPartido">FinalizarPartido</a>
+                </div>
                 
-            </section>
-            <section class="resumen">
-
             </section>
         </div>
        
