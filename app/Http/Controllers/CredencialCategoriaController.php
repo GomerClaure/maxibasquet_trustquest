@@ -28,6 +28,7 @@ class CredencialCategoriaController extends Controller
 
         $NomCategorias=[];
         $NomEquipo=$equipo->NombreEquipo;
+        $LogoEquipo=$equipo->LogoEquipo;
 
           foreach($idcategoria as $ca){
               $cat=$ca["IdCategoria"];
@@ -39,7 +40,7 @@ class CredencialCategoriaController extends Controller
             
       //$NomCategorias=json_encode($NomCategorias);
 
-    return view('MostrarCredenciales.credencialmostrar',compact('NomCategorias','NomEquipo'));
+    return view('MostrarCredenciales.credencialmostrar',compact('NomCategorias','NomEquipo','LogoEquipo'));
       //return $NomEquipo;
     }
 }

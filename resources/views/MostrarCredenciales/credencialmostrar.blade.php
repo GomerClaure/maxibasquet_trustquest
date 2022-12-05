@@ -8,6 +8,10 @@
 @extends('nav') 
 @section('content')
 <br>
+<h1 class="TituloEquipo">{{$NomEquipo}}</h1>
+<div class="containex">
+    <img class="cardLogoE"src="{{asset('storage').'/'.$LogoEquipo}}" alt="" >
+</div>
 <div class="botonesCat">
 @foreach($NomCategorias as $categorias)
     <a type="button" class="botone" href="/credenciales/{{$NomEquipo}}/{{$categorias[0]->NombreCategoria}}"> Categoria: {{$categorias[0]->NombreCategoria}} </a>
@@ -15,3 +19,4 @@
 @endforeach
 </div>
 @endsection
+</html>

@@ -20,9 +20,9 @@
                             <div class="col-12">
                                 @if($equipo != null)
                                 <h2 class="text-center tituloJ"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
+                                <a type="button" href="{{ url('/mostrar') }}" class="btn btn-primary"> Volver </a>
                                 <h3>Categoria: {{$equipo->NombreCategoria}}</h3>
                                 <div class="d-flex justify-content-between pb-2">
-                                    
                                             <a type="button" href="{{ url('credenciales/generar/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm  btnj">
                                         @if($credencialesJugadores->isEmpty() && $credencialesTecnicos->isEmpty())
                                             Generar Credenciales 
@@ -147,6 +147,7 @@
             </div>
         </div>
     </body>
+    <br><br><br><br><br><br><br><br>
     @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

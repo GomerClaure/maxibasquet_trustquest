@@ -220,7 +220,8 @@
     </main>
    <br><br>
   <!-- Footer -->
-  <footer class="text-center text-white" style="background-color: #444b52;">
+</body>
+<footer class="text-center text-white" style="background-color: #444b52;">
     <!-- Grid container -->
     <div class="container p-2 pb-0">
       <!-- Section: CTA -->
@@ -240,7 +241,5 @@
     </div>
     <!-- Copyright -->
   </footer>
-  <!-- Footer -->
-</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>
