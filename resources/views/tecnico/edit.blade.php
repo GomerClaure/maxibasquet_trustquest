@@ -26,26 +26,9 @@
         <link rel="stylesheet" href="{{asset('css/styleCuerpoTecnico.css')}}">
 
     </head>
+    @extends('nav')
+    @section('content')
     <body class="antialiased">
-        <header >
-            <!-- Grey with black text
-            <nav class="navbar navbar-expand-sm navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-            </nav>-->
-        </header>
             @php
                 $vadido = "¡Valido!";
                 $noVadido = "¡No valido!";
@@ -213,8 +196,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex mx-auto mt-4 mb-4 col-6">
-                            <button type="submit" class="botones btnFomulario">Actualizar</button>
+                    <div class="d-flex mx-auto mt-4 mb-4 col-8">
+                            <button type="submit" class="boton">Actualizar</button>
 
                             @php
                                 $categoriaActual="";
@@ -224,10 +207,12 @@
                                     }
                                 }
                             @endphp
-                            <a href="{{url('tecnico/'.$equipo->NombreEquipo.'/'.$categoriaActual)}}" class="botones btnCancelar">Cancelar</a>
+                            <a href="{{url('tecnico/'.$equipo->NombreEquipo.'/'.$categoriaActual)}}" class="boton">Cancelar</a>
 
                     </div>
                 </form>
             </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    @endsection
 </html>

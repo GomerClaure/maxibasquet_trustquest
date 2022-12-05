@@ -9,26 +9,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleListaCuerpoTecnico.css')}}">
     </head>
+    @extends('nav')
+    @section('content')
     <body class="">
-        <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
 
         @php
             $vadido = "¡Valido!";
@@ -56,7 +39,7 @@
                                             <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         </div>
                                         <div class="col-2 d-grid">
-                                            <a type="button" href="{{url('subirLogo')}}" class="btn"> Volver </a>
+                                            <a type="button" href="{{url('subirLogo')}}" class="boton btnVolver"> Volver </a>
                                         </div>
                                     </div>
                                     <div class="card-body  pt-0 ps-3">
@@ -74,7 +57,7 @@
 
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
                                                         <h6>{{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}}</h6>
-                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="btnEditar">Editar</a>
+                                                        <a href="{{url('tecnico/'.$tecnico->IdTecnicos.'/edit')}}" class="boton btnEditar">Editar</a>
                                                     
                                                     </div>
                                                 </div> 
@@ -99,4 +82,6 @@
             </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    @endsection
 </html>

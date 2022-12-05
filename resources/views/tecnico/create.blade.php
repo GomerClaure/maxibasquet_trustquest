@@ -26,27 +26,9 @@
         <link rel="stylesheet" href="{{asset('css/styleCuerpoTecnico.css')}}">
 
     </head>
+    @extends('nav')
+    @section('content')
     <body class="antialiased">
-        <header >
-        <a type="button" href="{{ url('subirLogo') }}" class="botonvolver"> Volver </a>
-            <!-- Grey with black text
-            <nav class="navbar navbar-expand-sm navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-            </nav>-->
-        </header>
             @php
                 $vadido = "¡Valido!";
                 $noVadido = "¡No valido!";
@@ -205,10 +187,13 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mt-4 mb-4">
-                        <button type="submit" class="botones">Inscribir</button>
+                    <div class="d-flex justify-content-center mt-4 mb-4 col-8 mx-auto">
+                        <button type="submit" class="boton">Inscribir</button>
+                        <a type="button" href="{{ url('subirLogo') }}" class="boton"> Cancelar </a>
                     </div>
                 </form>
             </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    @endsection
 </html>

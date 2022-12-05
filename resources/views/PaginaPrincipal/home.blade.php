@@ -88,29 +88,6 @@ Fecha definitiva: desde el 24 de junio al 3 de julio de 2022.</p>
 </div>
 <img class="notas" src="{{asset('storage').'/'.'img_Home'.'/'.'2_2_12.jpg'}}">
 </div>
-<br><br><section class="">
-  <!-- Footer -->
-  <footer class="text-center text-white" style="background-color: #444b52;">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: CTA -->
-      <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Campeonato Maxi Basquet</span>
-        </p>
-      </section>
-      <!-- Section: CTA -->
-    </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
-</section>
 @endsection
 </html>

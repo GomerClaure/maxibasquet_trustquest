@@ -104,7 +104,7 @@
                                                                     {{ method_field('DELETE') }}
                                                                       <div class="modal-footer">
                                                                         <a type="button" class="Boton" data-bs-dismiss="modal">Cancelar</a>
-                                                                        <input type="submit" class="Boton red" value="Eliminar">  </input>
+                                                                        <input type="submit" class="Boton BotonRed" value="Eliminar">  </input>
                                                                     </div>  
                                                                     </form>
                                                                     
