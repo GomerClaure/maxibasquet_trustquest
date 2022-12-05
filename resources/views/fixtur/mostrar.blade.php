@@ -68,18 +68,32 @@
                                         <tr>
                                             @if($i+1!=sizeof($nombres))
                                                 
-                                                <td>
-                                                <div class="card">
-                                                    <div class="card-header">{{$nombres[$i]->NombreEquipo}}
+                                                <td >
+                                                <div class="card ancho ">
+                                                    <div class="card-header">
+                                                        <h5 class="card-header">
+                                                        {{$nombres[$i]->NombreEquipo}}
                                                             VS 
                                                         {{$nombres[$i+1]->NombreEquipo}}
+                                                        </h5>
                                                     </div>
-                                                    <div class="card-body">
-                                                        Fecha:{{$fechas[$i]->FechaPartido}}
-                                                        Lugar:{{$lugares[$i]->LugarPartido}}
-                                                        Hora:{{$horas[$i]->HoraPartido}}
-                                                        Estado:{{$estados[$i]->EstadoPartido}}
-                                                        Categoria:{{$categorias[$i]->NombreCategoria}}
+                                                    <div class="card-body cuadricula">
+                                                        <div class="linea">
+                                                             Fecha:{{$fechas[$i]->FechaPartido}}
+                                                        </div> 
+                                                        <div class="linea">
+                                                             Lugar:{{$lugares[$i]->LugarPartido}}
+                                                        </div>
+                                                        <div class="linea">
+                                                            Hora:{{$horas[$i]->HoraPartido}}
+                                                        </div>   
+                                                        <div class="linea">
+                                                            Estado:{{$estados[$i]->EstadoPartido}}
+                                                        </div>   
+                                                        <div class="linea">
+                                                            Categoria:{{$categorias[$i]->NombreCategoria}}
+                                                        </div>   
+                                                        
                                                     </div>
                                                 </div>
                                                 </td>

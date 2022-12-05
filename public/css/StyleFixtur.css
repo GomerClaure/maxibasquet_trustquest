@@ -61,7 +61,25 @@ thead {
  text-align: center;
 }
 
+.ancho{
+  max-width: 500px;
+  align-items: center;
+  margin: auto;
+}
 
+.cuadricula{
+  border: solid;
+  padding: 30px;
+}
+
+.linea{
+  border: solid;
+  padding: 8px;
+}
+
+.color{
+  color: aqua;
+}
 
 a{
   color: white;
