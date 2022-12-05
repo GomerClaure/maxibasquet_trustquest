@@ -29,16 +29,61 @@ class RegistrarPlanillaJuegoController extends Controller
     {
         return view('registroJugadas.navegacionRegistro');
     }
-
+    // Mostrar resumen del partido------------------------------------------------------------------------------
     public function mostrarResumen($idPartido){
+        $IdJuecesPorPartido = JuecesPorPartido::select('jueces_por_partidos.IdJuez')
+                            ->where('IdPartido',$idPartido)
+                            ->get();
+        $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno')
+                ->join('personas','jueces.IdPersona','=','personas.IdPersona')
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
+                ->get();
+        $partido = Partido::find($idPartido);
+        $idEquipos = Datos_partidos::select('datos_partidos.IdEquipo')
+                        ->where('datos_partidos.IdPartido','=',$idPartido)
+                        ->get();
+        $equipoA = Equipo::find($idEquipos[0]->IdEquipo);
+        $equipoB = Equipo::find($idEquipos[1]->IdEquipo);
+        $jugadasCuartos = $this->getCuartosAnotados($idPartido);
+        $jugadasEquipoA = $jugadasCuartos[0];
+        $equipoA -> Equipo = "A";
+        $equipoB -> Equipo = "B";
+        $jugadasEquipoB = $jugadasCuartos[1];
+        $totalA = array_sum($jugadasEquipoA);
+        $totalB = array_sum($jugadasEquipoB);
         $registroTabla1 = range(1,40);
         $registroTabla2 = range(41,80);
         $registroTabla3 = range(81,120);
         $registroTabla4 = range(121,160);
+        $ganador = $totalA>$totalB?$equipoA:$equipoB;
         $jugadas = $this->getJugadas($idPartido);
         return view('registroJugadas.resumenJugadas',
-        compact('jugadas','registroTabla1',
+        compact('jugadas','registroTabla1','jueces','jugadasEquipoA','jugadasEquipoB','totalA','totalB','ganador',
         'registroTabla2','registroTabla3','registroTabla4'));
+        // return $ganador;
+    }
+
+    public function getCuartosAnotados($idPartido)
+    {
+        $jugadas = Jugada::select('jugadas.CuartoJugada','jugadas.TipoJugada','jugadas.Equipo')
+                            ->where('jugadas.IdPartido','=',$idPartido)
+                            ->get();
+        $jugadasA = [0,0,0,0];
+        $jugadasB = [0,0,0,0];
+        foreach ($jugadas as $key => $jugada) {
+            $punto = 0;
+            $cuarto = $jugada->CuartoJugada;
+            $punto = $jugada->TipoJugada;
+            if ($jugada->Equipo == "A") {
+                $jugadasA[$cuarto-1] = $punto + $jugadasA[$cuarto-1];
+            }else{
+                $jugadasB[$cuarto-1] = $punto + $jugadasB[$cuarto-1];
+            }
+        }
+        return [$jugadasA,$jugadasB];
     }
 
     // Guardado de datos de juego------------------------------------------------------------------------------
@@ -124,8 +169,8 @@ class RegistrarPlanillaJuegoController extends Controller
                 ->join('personas','jueces.IdPersona','=','personas.IdPersona')
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
                 ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
                 ->get();
         $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
                     'personas.ApellidoPaterno')
@@ -211,7 +256,7 @@ class RegistrarPlanillaJuegoController extends Controller
         // return $cuartos;
     }
 
-    // Guardado y registro de jueces
+    // Guardado y registro de jueces------------------------------------------------------------------------------
 
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');

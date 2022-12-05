@@ -23,7 +23,7 @@
         <h1 for="">Resumen de Jugadas</h1>
         <div class="row">
             <section class="resumenPartido p-3">
-                <div class="row">
+                <div class="row pb-3 border-bottom border-dark">
                     {{-- <div>
                         <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje Final:</label>
                     </div> --}}
@@ -33,7 +33,7 @@
                                 <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Cronometrista:</label>
                             </div>
                             <div class="input-group col">
-                                <input class="form-control cuartos" type="text" value="Ricardo Vivaldi"  disabled>
+                                <input class="form-control cuartos" type="text" value="{{$jueces[0]->NombrePersona.' '.$jueces[0]->ApellidoPaterno }}" disabled>
                             </div>
                         </div>
                     </div>
@@ -43,12 +43,12 @@
                                 <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Apuntador:</label>
                             </div>
                             <div class="input-group col">
-                                <input class="form-control cuartos" type="text" value="Jose Carlos"  disabled>
+                                <input class="form-control cuartos" type="text" value="{{$jueces[1]->NombrePersona.' '.$jueces[1]->ApellidoPaterno }}"   disabled>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-3 border-bottom border-dark">
                         <div>
                             <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje por periodo:</label>
                         </div>
@@ -62,7 +62,7 @@
                                         <label  for="anotadorAsistente" class="form-label">1er cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoA[0]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -71,7 +71,7 @@
                                         <label  for="anotadorAsistente" class="form-label">2do cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoA[1]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -80,7 +80,7 @@
                                         <label  for="anotadorAsistente" class="form-label">3er cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoA[2]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -89,7 +89,7 @@
                                         <label  for="anotadorAsistente" class="form-label">4to cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoA[3]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -106,7 +106,7 @@
                                         <label  for="anotadorAsistente" class="form-label">1er cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoB[0]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -115,7 +115,7 @@
                                         <label  for="anotadorAsistente" class="form-label">2do cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoB[1]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -124,7 +124,7 @@
                                         <label  for="anotadorAsistente" class="form-label">3er cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoB[2]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -133,7 +133,7 @@
                                         <label  for="anotadorAsistente" class="form-label">4to cuarto:</label>
                                     </div>
                                     <div class="input-group col">
-                                        <input class="form-control cuartos" type="text" value="120"  disabled>
+                                        <input class="form-control cuartos" type="text" value="{{$jugadasEquipoB[3]}}"  disabled>
                                     </div>
                                     
                                 </div>
@@ -141,7 +141,7 @@
                         </div>
                     
                 </div>
-                <div class="row">
+                <div class="row pb-3 pt-3 border-bottom border-dark">
                     <div>
                         <label  for="anotadorAsistente" class="form-labe tituloPuntaje">Puntaje Final:</label>
                     </div>
@@ -151,7 +151,7 @@
                                 <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo A:</label>
                             </div>
                             <div class="input-group col">
-                                <input class="form-control cuartos" type="text" value="120"  disabled>
+                                <input class="form-control cuartos" type="text" value="{{$totalA}}"  disabled>
                             </div>
                         </div>
                     </div>
@@ -161,17 +161,18 @@
                                 <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo B:</label>
                             </div>
                             <div class="input-group col">
-                                <input class="form-control cuartos" type="text" value="120"  disabled>
+                                <input class="form-control cuartos" type="text" value="{{$totalB}}"  disabled>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-3 pt-3">
                     <div class="col">
                         <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo Vencedor:</label>
+                        <label  for="anotadorAsistente" class="form-labe tituloPuntajeEquipoA">Equipo {{$ganador->Equipo}}</label>
                     </div>
                     <div class="input-group col">
-                        <input class="form-control cuartos" type="text" value="Bernie Wuckert"  disabled>
+                        <input class="form-control cuartos" type="text" value="{{$ganador->NombreEquipo}}"  disabled>
                     </div>
                 </div>
                 
@@ -244,8 +245,11 @@
                     </div>
                     
                 </div>
-                <div class="row">
-                    <a href="{{url('planilla/jugador/')}}" class="btn iniciarPartido">FinalizarPartido</a>
+                <div class="row pb-3">
+                    <div class="text-center">
+                        <a href="{{url('/home')}}" class="btn iniciarPartido">Salir del resumen</a>
+                    </div>
+                    
                 </div>
                 
             </section>
