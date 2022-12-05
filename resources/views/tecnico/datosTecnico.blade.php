@@ -17,7 +17,7 @@
                     <div class="mask d-flex  align-items-center w-100">
                     <div class="container  ">
                         <div class="d-flex justify-content-center ">
-                            <h3> <b> DATOS DE PERSONAL TÉCNICO</b> </h3>
+                            <h3 class="titJ"> <b> DATOS DE PERSONAL TÉCNICO</b> </h3>
                         </div>
                         <div class="row">
                         <div class="col-2">

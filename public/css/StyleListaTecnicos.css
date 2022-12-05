@@ -73,3 +73,8 @@ a{
   border-color: #eb8f32 !important;
 }
 
+.tituloJ{
+    text-align: center;
+    color: #e5852a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

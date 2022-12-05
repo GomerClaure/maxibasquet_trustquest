@@ -20,8 +20,8 @@
                     <div class="container">
                         <div class="row justify-content-center">
                         <div class="col-12">
-                                <h3 class="text-white">Equipos Preinscritos</h3>
-                                <h5 class="text-white">3er Torneo Internacional de Maxi Basquet</h5>
+                                <h3 class="titJ">Equipos Preinscritos</h3>
+                                <h5 class="titJ">3er Torneo Internacional de Maxi Basquet</h5>
                             <div class="card contenedor">
                                 <div class="ps-3 py-2">
                                     <h4>Lista Detallada</h4>

@@ -21,7 +21,7 @@
                             <div class="col-12">
                                     
                                
-                                <h2 class="text-center"> <b> Liga Maxi Basquet -- Jugadores</b></h2>
+                                <h2 class="text-center tituloJ  "> <b> Liga Maxi Basquet -- Jugadores</b></h2>
                                 
                                 <div class="card fondoTabla cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">

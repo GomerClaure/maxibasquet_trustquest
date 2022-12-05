@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="{{asset('css/StyleListaTecnicos.css')}}">
     </head>
     <body class="antialiased bodyJ">
-    
+    @extends('nav')
+    @section('content')
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
                 <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
@@ -19,7 +20,7 @@
                             <div class="col-12">
                                 
                                 @if($equipo != null)
-                                <h2 class="text-center"> <b>{{$equipo}} --Cuerpo Técnico</b></h2>
+                                <h2 class="text-center tituloJ"> <b>{{$equipo}} --Cuerpo Técnico</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
                                 <div class="card fondoTabla cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
@@ -56,7 +57,9 @@
                                 @else
                                     <div class="d-flex justify-content-center">
                                         <h3>No se encontraron datos</h3>
+                                        
                                     </div>
+
                                 @endif
                             </div>
                         </div>
@@ -64,5 +67,8 @@
                 </div>
             </div>
         </div>
+        
     </body>
+    @endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

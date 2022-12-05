@@ -212,7 +212,7 @@
             {{-- @include('flash-message') --}}
             @yield('content')
     </main>
-   <br><br> 
+   <br><br>
   <!-- Footer -->
   <footer class="text-center text-white" style="background-color: #444b52;">
     <!-- Grid container -->

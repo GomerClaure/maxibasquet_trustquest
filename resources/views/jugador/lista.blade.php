@@ -18,7 +18,7 @@
                             <div class="col-12">
                                     
                                 @if($equipo != null)
-                                <h2 class="text-center"> <b>{{$equipo}} -- Jugadores</b></h2>
+                                <h2 class="text-center tituloJ"> <b>{{$equipo}} -- Jugadores</b></h2>
                                 <h3>Categoria: {{$categoria}}</h3>
                                 <div class="card fondoTabla cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
@@ -49,7 +49,7 @@
                                             @endforeach
                                             @else
                                             <div class="d-flex justify-content-center">
-                                                 <h3>No se encontro personal tecnico registrado</h3>
+                                                 <h3>No se encontraron jugadores registrado</h3>
                                             </div>
                                             
                                             @endif
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+
     </body>
     @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>

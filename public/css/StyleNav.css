@@ -104,9 +104,9 @@ tbody{
   color: black;
 }
 .btnj{
-  background-color: #eb8f32;
+  background-color: #eb8f32 !important;
   font-size: 14;
-  border-color: #eb8f32;
+  border-color: #eb8f32 !important;
 }
 .cardEquipo{
   background-color: #5a5a56;
@@ -122,3 +122,14 @@ tbody{
   font-size: 14;
   border: #272725;
 } 
+html{
+  height: 100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+footer{
+  margin-top: auto;
+}
