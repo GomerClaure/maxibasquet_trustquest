@@ -230,12 +230,17 @@
   
 </section>
 <script>
-    var cuarto = {{ session('cuarto') }}
+    var cuarto = {{$cuarto}}
     console.log(cuarto);
     var posA = 1;
     var posB = 1;
-    var jugadas = {!!$jugadas!!};
+    var jugadas = {!!$jugadas!!}
+
+    console.log(cuarto);
+    console.log(jugadas);
+
     jugadas.forEach(jugada => {
+        console.log("a");
         if(jugada["Equipo"] == "A"){
             document.getElementById("colA"+posA).innerHTML =jugada["NumeroCamiseta"];
             posA++;
@@ -245,12 +250,6 @@
         }
         
     });
-    console.log(jugadas);
-    
-    if(cuarto == undefined){
-            cuarto = {{$cuarto}};
-    }
-    console.log(cuarto);
     if(cuarto != 0){
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";

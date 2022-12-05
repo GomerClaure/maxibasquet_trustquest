@@ -30,6 +30,7 @@ class RegistrarPlanillaJuegoController extends Controller
         return view('registroJugadas.navegacionRegistro');
     }
     public function guardarDatosJuego(Request $request){
+        date_default_timezone_set('America/La_Paz');
         $formulario = request()->except('_token');
         $idPartido = $formulario['idPartido'];
         $accion = $formulario["accionBoton"];
@@ -61,7 +62,7 @@ class RegistrarPlanillaJuegoController extends Controller
             $jugada -> Equipo = $charEquipo;
             $jugada -> TipoJugada = $puntuacion;
             $jugada -> CuartoJugada = $cuarto;
-            $jugada -> HoraJugada = date('H:i');
+            $jugada -> HoraJugada = date('H:i:s');
             $jugada -> save();
         }elseif($accion == 'FinalizarCuarto'){
             if($cuarto <4){
@@ -85,9 +86,10 @@ class RegistrarPlanillaJuegoController extends Controller
                 return "Finalizo el partido señores";
             }
         }
-        return back()->withInput()->with(['cuarto' => $cuarto]);
+        $jugadas = $this->getJugadas($idPartido);
+        return back()->withInput()->with(compact('cuarto','jugadas'));
         // return $request;
-        // return range(0,39);
+        // return $jugadas;
     }
 
     public function mostrarDatosPartido($idPartido){
@@ -134,6 +136,7 @@ class RegistrarPlanillaJuegoController extends Controller
         'equipoB','categoria','fechaHoy','idPartido',
         'partido','jueces','jugadoresA','jugadoresB','jugadas',
         'registroTabla1','registroTabla2','registroTabla3','registroTabla4'));
+        // return json_encode($jugadas);
         // return $cuarto;
     }
 
@@ -143,8 +146,39 @@ class RegistrarPlanillaJuegoController extends Controller
                             ->join('jugadores','jugadas.IdJugador','=','jugadores.IdJugador')
                             ->where('jugadas.IdPartido','=',$idPartido)
                             ->get();
-        return $jugadas;
+        $jugadas = $this->ordenarQuickSort($jugadas);
+        // $jugadasMayorAMenor = array_reverse($jugadas);
+        return json_encode($jugadas);
     }
+    function ordenarQuickSort($arreglo){
+        // print_r($arreglo);
+        $arrIzq = [];
+        $arrDer = [];
+        $result = [];
+        if (count($arreglo) ==0) {
+            return [];
+        }else{
+            $primerElemento = $arreglo[0];
+            $horaElemento = $primerElemento->HoraJugada; 
+            // echo $horaElemento;
+            // echo "  ";
+            for ($i=1; $i < count($arreglo); $i++) { 
+                $elemento = $arreglo[$i];
+                $horaAct = $elemento->HoraJugada;
+                if ($horaAct<$horaElemento) {
+                    array_push($arrIzq,$elemento);
+                    // echo $horaAct." Es menor que ".$horaElemento;
+                }else{
+                    array_push($arrDer,$elemento);
+                    // echo $horaAct." Es mayor que ".$horaElemento;
+                }
+                // echo "  ";
+            }
+            $result = array_merge($this->ordenarQuickSort($arrIzq), [$primerElemento]);
+            $result = array_merge($result, $this->ordenarQuickSort($arrDer));
+        }
+        return $result;
+	}
 
     public function getCuartoJugado($idPartido)
     {
