@@ -10,7 +10,7 @@
 <br>
 <div class="container justify-content-center">
 <section class=" main-title ">
-    <h1 class="display-6 mb-0" >Mi Equipo</h1>
+    <h1 class="display-6 mb-0" >MaxiBasquet</h1>
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">

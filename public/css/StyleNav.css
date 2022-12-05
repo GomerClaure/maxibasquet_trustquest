@@ -133,7 +133,27 @@ tbody{
   color: white;
   border-radius: 5px;
 } 
+.cardLogoE{
+  margin: 0;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.containex{
+  height: 400px;
+  position: relative;
+}
 .botonesCat{
     text-align: center;
-    margin: 120px;
+    margin-left: 15px;
+    margin-top: 5px;
+    display: inline-flex;
+}
+.TituloEquipo{
+  text-align: center;
+  color: white;
 }
