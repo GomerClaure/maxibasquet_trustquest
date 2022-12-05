@@ -212,4 +212,13 @@ class TecnicoController extends Controller
             return false;
         }
     }
+    public function lista(){
+        $tecnicos = Tecnico::select()
+                    ->join('personas','personas.IdPersona','tecnicos.IdPersona')
+                    ->orderby('personas.NombrePersona')
+                    ->orderby('personas.ApellidoPaterno')
+                    ->get();
+        return view('tecnico.tecnicos',compact('tecnicos'));
+    }
+
 }

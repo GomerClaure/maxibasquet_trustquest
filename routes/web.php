@@ -63,7 +63,10 @@ Route::get('/login',[LoginController::class,'index'])->name('login')->middleware
 Route::post('/login',[LoginController::class,'verificarInicioSesion']);
 Route::get('/mostrarFixtur',[FixturController::class,'show']);
 
-Route::get('/logout',[LogoutController::class,'logout'])->middleware(['auth']);
+Route::get('/tecnicos',[TecnicoController::class,'lista']);
+Route::get('/jugadores',[JugadorController::class,'lista']);
+
+Route::get('logout',[LogoutController::class,'logout'])->middleware(['auth']);
 
 
 

@@ -318,4 +318,6 @@ class CuerpoTecnicoController extends Controller
     {
         //
     }
+
+    
 }

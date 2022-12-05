@@ -17,7 +17,7 @@
   <h1 class="tituloEquipos">Equipos Campeonato Maxi Basquet</h1>
 <div class="equipos-card">
 @foreach($arreglo as $copia)
-<div class="card" style="width: 4 0rem;">
+<div class="card cardEquipo" style="width: 4 0rem;">
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 imagen">
@@ -37,28 +37,7 @@
 </div>
 @endforeach
 </div>
-<br>
-<footer class="text-center text-white" style="background-color: #444b52;">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: CTA -->
-      <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Campeonato Maxi Basquet</span>
-        </p>
-      </section>
-      <!-- Section: CTA -->
-    </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">TrustQuest.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>
