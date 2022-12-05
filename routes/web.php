@@ -27,6 +27,7 @@ use App\Http\Controllers\JuezController;
 use App\Http\Controllers\RegistrarPlanillaJuegoController;
 use App\Http\Controllers\PlanillaJugadorController;
 use App\Http\Controllers\DeleteJugadorController;
+use App\Http\Controllers\CredencialCategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,3 +103,7 @@ Route::get('planilla/jugador', [PlanillaJugadorController::class,'index']);
 Route::post('planilla/jugador/{idPartido}/{idPlanillaJugador}/{id}', [PlanillaJugadorController::class,'store']);
 Route::get('planilla/jugador/{idPartido}', [PlanillaJugadorController::class,'show']);
 Route::delete('/jugador/{id}',[EditarJugadorController::class,'destroy'])->middleware(['auth','delegado']);
+
+
+
+Route::get('/mostrar',[CredencialCategoriaController::class,'Datos']);

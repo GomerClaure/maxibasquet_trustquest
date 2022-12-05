@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/StyleNav.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
     @guest
         <nav class="navbar navbar-expand-sm navbar-light menu">
@@ -146,10 +147,15 @@
                         <!-- Dropdown -->
                         <li class="nav-item">
                             <a class="nav-link active" href="{{url('/preinscripcion')}}">Preinscripcion</a>
-                            </li>
+                            </li> 
                         <li class="nav-item">
                             <a class="nav-link active" href="{{url('/subirLogo')}}">Mi Equipo</a>
-                            </li>
+                        </li>
+                        <!--hacer esto de los delegados usando un controller para el navegador-->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{url('/mostrar')}}">Credenciales</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>

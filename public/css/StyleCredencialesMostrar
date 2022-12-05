@@ -1,0 +1,14 @@
+html,
+body{
+  background-color: #171f27; 
+  color:white;
+}
+.botone{
+  background-color: #eb8f32;
+  border-color: #eb8f32;
+  text-decoration: none;
+} 
+.botonesCat{
+    text-align: center;
+    margin: 120px;
+}

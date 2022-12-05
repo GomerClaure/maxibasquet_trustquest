@@ -42,3 +42,17 @@ body,html{
   font-size: 14;
   border: #272725;
 } 
+
+.botone{
+  background-color: #eb8f32;
+  border-color: #eb8f32;
+  text-decoration: none;
+  padding: 20px;
+  margin: 5px;
+  color: white;
+  border-radius: 5px;
+} 
+.botonesCat{
+    text-align: center;
+    margin: 120px;
+}
