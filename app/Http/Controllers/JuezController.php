@@ -33,7 +33,10 @@ class JuezController extends Controller
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
                 ->get();
-        $roles = Rol::all();
+        
+        $roles = array();        
+        $roles[0] = Rol::find(3);
+        $roles[1] = Rol::find(5);
 
         return view('juez.create',compact('paises','roles'));
     }

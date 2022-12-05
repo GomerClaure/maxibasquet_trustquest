@@ -11,6 +11,7 @@ body{
 }
 .BotonRed{
    background-color: red !important;
+   border: none;
 }
 .fondo{
   background-color: #D9D9D9;

@@ -28,7 +28,88 @@ body,html{
   padding: 10px 5px 8px 5px;
   font-size: 15px;
 }
-.card{
+.bodyJ{
+  background-color: #171f27;
+  color:white;
+}
+.pJ{
+    font-size:large;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  color: black;
+}
+
+.cardJ {
+  background-color: #ABA9A9;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+}
+tbody{
+    background-color: #D3D3D3;
+}
+.table{
+    border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+.jugadorJ{
+  color: black;
+}
+.botonj{
+  width: 20%;
+  height: 10%;
+}
+.Jboton{
+  width: 15%;
+  height: 10%;
+}
+.displayBotonJ{
+  display: block;
+  margin: auto;
+  margin-top: 0.5rem ;
+  width: 80%;
+}
+.btnj:hover {
+    
+  background: #fa841a !important;
+  border-color: #eb8f32 !important;
+}
+.fondoTabla{
+  background-color: #D3D3D3;
+}
+.card-img-topJ{
+    margin: auto;
+    width: 200px;
+    height: 200px;
+}
+.card-bodyJ{
+  color: black;
+}
+.btnj{
+  background-color: #eb8f32 !important;
+  font-size: 14;
+  color:white;
+  border-color: #eb8f32 !important;
+}
+.cardEquipo{
   background-color: #5a5a56;
   align-items: center;
   padding: auto;
@@ -42,3 +123,14 @@ body,html{
   font-size: 14;
   border: #272725;
 } 
+html{
+  height: 100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+footer{
+  margin-top: auto;
+}

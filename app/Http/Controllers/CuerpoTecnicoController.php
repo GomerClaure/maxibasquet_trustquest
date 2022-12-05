@@ -208,7 +208,6 @@ class CuerpoTecnicoController extends Controller
         $paises = DB::table('paises')
                 ->orderBy('NombrePais', 'asc')
                 ->get();
-        echo $equipo;
         return view('tecnico.edit',compact('categorias','tecnico','equipo','paises'));
     }
 
@@ -319,4 +318,6 @@ class CuerpoTecnicoController extends Controller
     {
         //
     }
+
+    
 }

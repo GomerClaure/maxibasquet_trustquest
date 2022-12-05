@@ -8,26 +8,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleCredenciales.css')}}">
     </head>
-    <body class="antialiased">
-    <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    @extends('nav')
+    @section('content')
+    <body class="antialiased bodyJ">
+   
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
                 <div class="bg-image w-100" >
                     <div class="mask d-flex align-items-center w-100">
@@ -35,11 +19,11 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h2 class="text-center"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
+                                <h2 class="text-center tituloJ"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
                                 <h3>Categoria: {{$equipo->NombreCategoria}}</h3>
                                 <div class="d-flex justify-content-between pb-2">
                                     
-                                            <a type="button" href="{{ url('credenciales/generar/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
+                                            <a type="button" href="{{ url('credenciales/generar/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm  btnj">
                                         @if($credencialesJugadores->isEmpty() && $credencialesTecnicos->isEmpty())
                                             Generar Credenciales 
                                         @else
@@ -49,17 +33,17 @@
                                     
                                     
                                     @if(!$credencialesJugadores->isEmpty() || !$credencialesTecnicos->isEmpty())
-                                        <a type="button" href="{{ url('credenciales/pdf/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm ">
+                                        <a type="button" href="{{ url('credenciales/pdf/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm btnj">
                                         Descargar
                                         </a>
                                     @endif
                                 </div>
                                
-                                <div class="card fondoTabla">
+                                <div class="card fondoTabla ">
                                     <div class="card-header ps-3 py-2">
                                         <h4 class="text-black card-title"><b>Lista de Credenciales</b> </h4>
                                     </div>
-                                        <div class="card-body  pt-0 ps-3">
+                                        <div class="card-body  pt-0 ps-3 ">
                                             <div class="accordion mt-2" id="accordionPanelsStayOpenExample">
                                                 @if(!$credencialesJugadores->isEmpty())
                                                 <div class="accordion-item">
@@ -73,15 +57,15 @@
                                                             <div class="row justify-content-center">
                                                             @foreach ($credencialesJugadores as $jugador)
                                                             <div class="col-6 p-0 mb-3 d-flex justify-content-around">
-                                                                <div class="card card-cred h-100" >
+                                                                <div class="card card-cred h-100 cardJ " >
                                                                         <div class="card-header ">
                                                                             <h5 class="card-title"> <b> Campeonato Maxi-Basquet</b> </h5>
                                                                         </div>
-                                                                        <div class="card-body ">
+                                                                        <div class="card-body card-bodyJ">
                                                                             
                                                                                 <div class="d-flex justify-content-around">
                                                                                     <div class="text-center">
-                                                                                        <img class=" card-img-top foto img-fluid" src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
+                                                                                        <img class=" card-img-top foto img-fluid " src="{{asset('storage').'/'.$jugador->Foto}}" alt="">
                                                                                         <p><b>Jugador</b></p>
                                                                                     </div>
                                                                                     
@@ -92,7 +76,7 @@
                                                                                 </div>
                                                                                 <div class=" " > 
                                                                                         
-                                                                                        <img class=" card-img-top qr img-fluid" src="{{asset('storage').'/'.$jugador->CodigoQR}}" alt="">
+                                                                                        <img class=" card-img-top qr img-fluid " src="{{asset('storage').'/'.$jugador->CodigoQR}}" alt="">
 
                                                                                 </div>
                                                                                 </div>
@@ -119,14 +103,14 @@
                                                             <div class="row justify-content-center">
                                                             @foreach ($credencialesTecnicos as $tecnico)
                                                             <div class="col-6 p-0 mb-3 d-flex justify-content-around">
-                                                                <div class="card card-cred h-100 " >
+                                                                <div class="card card-cred h-100 cardJ " >
                                                                         <div class="card-header">
                                                                             <h5 class="card-title">Campeonato Maxi-Basquet</h5>
                                                                         </div>
-                                                                        <div class="card-body">
+                                                                        <div class="card-body card-bodyJ">
                                                                                 <div class="d-flex justify-content-around">
                                                                                     <div class="text-center">
-                                                                                        <img class="card-img-top foto img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                                                        <img class="card-img-top foto img-fluid " src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
                                                                                         <p><b>{{$tecnico->RolesTecnicos}}</b></p></div>
                                                                                     <div class="col-5 m-2">
                                                                                         <p><b>Nombre: </b>{{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}}</p>
@@ -135,7 +119,7 @@
                                                                                     </div>
                                                                                     
                                                                                     <div class="">
-                                                                                        <img class="card-img-top qr img-fluid" src="{{asset('storage').'/'.$tecnico->CodigoQR}}" alt="">
+                                                                                        <img class="card-img-top qr img-fluid " src="{{asset('storage').'/'.$tecnico->CodigoQR}}" alt="">
                                                                                     </div>
                                                                                 </div>
                                                                                 
@@ -163,4 +147,6 @@
             </div>
         </div>
     </body>
+    @endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>

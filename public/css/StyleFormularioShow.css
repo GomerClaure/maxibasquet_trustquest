@@ -29,3 +29,21 @@ textarea {
 .error-message{
     color: red;
 }
+
+.botones{
+  display: flex;
+  width: 40%;
+  text-decoration: none;
+  color: white;
+  background: #eb8f32;
+  padding: 5px;
+  border-radius: 8px;
+  margin: 0% 1%;
+  justify-content: center;
+  border: 0px;
+}
+
+.botones:hover{
+  background: #fa841a;
+  color: white;
+}

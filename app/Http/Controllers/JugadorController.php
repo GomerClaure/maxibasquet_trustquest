@@ -270,4 +270,12 @@ class JugadorController extends Controller
        */ 
     
     }
+    public function lista(){
+        $jugadores = Jugador::select()
+                    ->join('personas','jugadores.IdPersona','personas.IdPersona')
+                    ->orderby('personas.NombrePersona')
+                    ->orderby('personas.ApellidoPaterno')
+                    ->get();
+        return view('jugador.jugadores',compact('jugadores'));
+    }
 }

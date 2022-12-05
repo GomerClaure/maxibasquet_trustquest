@@ -7,9 +7,9 @@ body{
     color: white;
 }
 
-.boton{
+.botones{
     display: flex;
-    width: 50%;
+    width: 30%;
     text-decoration: none;
     color: white;
     background: #eb8f32;
@@ -19,9 +19,9 @@ body{
     justify-content: center;
 }
 
-.boton:hover{
-  background: #fa841a;
-  color: white;
+.botones:hover{
+    background: #fa841a;
+    color: white;
 }
 
 .error-message{
@@ -39,4 +39,14 @@ body{
 
 .navbar a {
     color: black;
+}
+.botonvolver{
+    background: #eb8f32;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    margin-left: 1100px;
+    border-radius: 5px;
+    text-decoration:none;
+
 }

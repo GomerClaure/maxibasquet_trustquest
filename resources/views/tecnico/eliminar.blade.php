@@ -9,27 +9,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleListaCuerpoTecnico.css')}}">
     </head>
-    <body class="">
-        <header >
-            <!-- Grey with black text -->
-            <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#"></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
+    @extends('nav')
+    @section('content')
+    <body class="bodyJ">
         @php
             $vadido = "¡Valido!";
             $noVadido = "¡No valido!";
@@ -53,28 +35,28 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 @if($equipo != null)
-                                <h1 class="text-center titulo"> <b>{{$equipo}} -- Cuerpo Técnico</b></h1>
+                                <h1 class="text-center tituloJ"> <b>{{$equipo}} -- Cuerpo Técnico</b></h1>
                                 <h3 class="titulo">Categoria: {{$categoria}}</h3>
-                                <div class="card contenedorCard">
+                                <div class="card contenedorCard cardJ">
                                     <div class="card-header ps-3 py-2 row">
                                         <div class="col-10">
                                             <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                         </div>
                                         <div class="col-2 d-grid">
-                                            <a type="button" href="{{url('subirLogo')}}" class="btn"> Volver </a>
+                                            <a type="button" href="{{url('subirLogo')}}" class="btn  btnj "> Volver </a>
                                         </div>
                                     </div>
-                                    <div class="card-body  pt-0 ps-3">
+                                    <div class="card-body  pt-0 ps-3 text-center card-bodyJ ">
                                             @if(!$tecnicos->isEmpty())
                                             @foreach ($tecnicos as $tecnico)
                                             
-                                               <div class="card tarjeta d-inline-block m-3" style="width: 19rem;">
+                                               <div class="card tarjeta d-inline-block m-3 cardJ" style="width: 19rem;">
                                                     <div class="card-header cardHeader">
                                                         <h5 class="card-title">{{$tecnico->RolesTecnicos}}</h5>
                                                     </div>
-                                                    <div class="card-body cardBody">
+                                                    <div class="card-body cardBody card-bodyJ">
                                                         <div class="d-flex justify-content-center">
-                                                        <img class="card-img-top img-fluid" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
+                                                        <img class="card-img-top img-fluid card-img-topJ" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="">
                                                         </div>
 
                                                         <h5>{{$tecnico->NombrePersona}} </h5>
@@ -88,7 +70,7 @@
                                                                         <h1 class="modal-title fs-5" id="{{$tecnico->ApellidoPaterno}}{{$tecnico->IdTecnicos}}Label">Eliminar Técnico</h1>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <img class="card-img-top" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
+                                                                        <img class="card-img-top img-fluid card-img-topJ" src="{{asset('storage').'/'.$tecnico->Foto}}" alt="Foto del jugador">
                                                                         <p> <b>¿</b> Deseea eliminar los datos de {{$tecnico->NombrePersona}} {{$tecnico->ApellidoPaterno}} {{$tecnico->ApellidoMaterno}} <br> 
                                                                         con <b>CI: {{$tecnico->CiPersona}}?</b>   </p>
                                                                     </div>
@@ -126,4 +108,6 @@
             </div>
         </div>
     </body>
+    @endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>
