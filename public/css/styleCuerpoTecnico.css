@@ -7,7 +7,7 @@ body{
     color: white;
 }
 
-.botones{
+.boton{
     display: flex;
     width: 50%;
     text-decoration: none;
@@ -19,7 +19,7 @@ body{
     justify-content: center;
 }
 
-.botones:hover{
+.boton:hover{
     background: #fa841a;
     color: white;
 }
@@ -29,7 +29,7 @@ body{
 }
 
 .contenedorForm{
-    background: #b5b5bd;
+    background: #b5b5bd !important;
     margin-top: 1%;
 }
 
