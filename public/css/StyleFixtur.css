@@ -62,9 +62,7 @@ thead {
 }
 
 .ancho{
-  max-width: 500px;
-  align-items: center;
-  margin: auto;
+  background-color: #171f27;
 }
 
 .cuadricula{
@@ -77,16 +75,11 @@ thead {
   padding: 8px;
 }
 
-.color{
-  color: aqua;
-}
 
 a{
   color: white;
   text-decoration: none;
   
 }
-.navbar{
-  background-color: #2c2a2a;
-}
+
 

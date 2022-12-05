@@ -65,3 +65,86 @@ body,html{
 .dropdown-menu:hover{
   background-color: hsl(0, 1%, 81%);
 }
+
+.card1{
+  align-items: center;
+  margin: 10px;
+  color: #ffff;
+}
+
+.intro {
+  height: 100%;
+}
+.fondo{
+  background-color: #D9D9D9;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn:first-child:hover{
+  background: #fa841a;
+  border-color: #eb8f32;
+}
+
+thead th {
+  color: black;
+}
+
+
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+ 
+  
+}
+
+.table{
+    border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+
+
+
+
+.centro{
+ text-align: center;
+}
+
+.ancho{
+  background-color: #171f27;
+}
+
+.cuadricula{
+  border: solid;
+  margin: 5px 5px;
+  padding: 4px;
+}
+
+.linea{
+  border: solid;
+  padding: 8px;
+}
+
+
+a{
+  color: white;
+  text-decoration: none;
+  
+}
+
+.color{
+  color: white;
+}
