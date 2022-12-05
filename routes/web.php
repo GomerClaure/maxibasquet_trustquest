@@ -108,6 +108,7 @@ Route::delete('/equipo/lista/{id}/{categoria}',[EquipoController::class,'destroy
 
 
 //Usuario Anotador-Juez
+Route::get('/mostrarResumen/{id}',[RegistrarPlanillaJuegoController::class,'mostrarResumen'])->middleware(['auth','juez']);
 Route::get('/registrarJugadas/{id}',[RegistrarPlanillaJuegoController::class,'mostrarDatosPartido'])->middleware(['auth','juez']);
 Route::post('/guardarJugada',[RegistrarPlanillaJuegoController::class,'guardarDatosJuego'])->middleware(['auth','juez'])->name('guardarJugada');
 Route::get('/registrarJueces/{id}',[RegistrarPlanillaJuegoController::class,'mostrarRegistroJueces'])->middleware(['auth','juez']);

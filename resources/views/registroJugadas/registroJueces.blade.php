@@ -74,7 +74,7 @@
                   <div class="col-md-12 d-flex flex-row-reverse mt-4 ">
                     <div class="botones border border-secondary pt-2 pb-1 pe-2 ps-2">
                       <div class="d-inline p-2">
-                        <button type="" class="btn prevSig">Anterior</button>
+                        <a href="{{url('planilla/jugador/')}}" class="btn prevSig">Volver</a>
                       </div>
                       <div class="d-inline p-2">
                         <button type="submit" class="btn prevSig">Siguiente</button>

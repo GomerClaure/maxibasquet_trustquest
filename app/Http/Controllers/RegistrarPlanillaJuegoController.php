@@ -29,6 +29,19 @@ class RegistrarPlanillaJuegoController extends Controller
     {
         return view('registroJugadas.navegacionRegistro');
     }
+
+    public function mostrarResumen($idPartido){
+        $registroTabla1 = range(1,40);
+        $registroTabla2 = range(41,80);
+        $registroTabla3 = range(81,120);
+        $registroTabla4 = range(121,160);
+        $jugadas = $this->getJugadas($idPartido);
+        return view('registroJugadas.resumenJugadas',
+        compact('jugadas','registroTabla1',
+        'registroTabla2','registroTabla3','registroTabla4'));
+    }
+
+    // Guardado de datos de juego------------------------------------------------------------------------------
     public function guardarDatosJuego(Request $request){
         date_default_timezone_set('America/La_Paz');
         $formulario = request()->except('_token');
@@ -83,7 +96,7 @@ class RegistrarPlanillaJuegoController extends Controller
                 $planilla = Planilla::where('planillas.IdPartido','=',$idPartido)
                         ->update([$campoActualizar => true]);
             }else{
-                return "Finalizo el partido señores";
+                return redirect('mostrarResumen/'.$idPartido);
             }
         }
         $jugadas = $this->getJugadas($idPartido);
@@ -151,7 +164,6 @@ class RegistrarPlanillaJuegoController extends Controller
         return json_encode($jugadas);
     }
     function ordenarQuickSort($arreglo){
-        // print_r($arreglo);
         $arrIzq = [];
         $arrDer = [];
         $result = [];

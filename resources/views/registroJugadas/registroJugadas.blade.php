@@ -23,6 +23,9 @@
         <h1 for="">Planilla De Jugadas</h1>
         <div class="row">
             <section class="datosPartido">
+                <div class="col p-3 ">
+                    <a href="{{url('planilla/jugador/')}}" class="btn iniciarPartido">Volver</a>
+                </div>
                 <div class="border-bottom border-dark">
                     <div class="row p-2">
                         <div class="col">
