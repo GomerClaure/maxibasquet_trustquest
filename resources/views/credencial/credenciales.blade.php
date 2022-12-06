@@ -20,7 +20,6 @@
                             <div class="col-12">
                                 @if($equipo != null)
                                 <h2 class="text-center tituloJ"> <b>{{$equipo->NombreEquipo}} -- Credenciales</b></h2>
-                                <a type="button" href="{{ url('/mostrar') }}" class="btn btn-primary"> Volver </a>
                                 <h3>Categoria: {{$equipo->NombreCategoria}}</h3>
                                 <div class="d-flex justify-content-between pb-2">
                                             <a type="button" href="{{ url('credenciales/generar/'.$equipo->NombreEquipo.'/'.$equipo->NombreCategoria)}}" class="btn btn-primary btn-sm  btnj">
@@ -40,8 +39,12 @@
                                 </div>
                                
                                 <div class="card fondoTabla ">
-                                    <div class="card-header ps-3 py-2">
+                                    <div class="card-header ps-3 py-2 d-flex justify-content-between mt-3">
                                         <h4 class="text-black card-title"><b>Lista de Credenciales</b> </h4>
+                                        
+                                            <a type="button" href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-primary btn-sm bot "> Volver </a>
+
+                                        
                                     </div>
                                         <div class="card-body  pt-0 ps-3 ">
                                             <div class="accordion mt-2" id="accordionPanelsStayOpenExample">

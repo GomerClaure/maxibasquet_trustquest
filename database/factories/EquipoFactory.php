@@ -26,6 +26,7 @@ class EquipoFactory extends Factory
 
         
     }
+    // public function agregarDelegado
 
 
 }

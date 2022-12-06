@@ -4,9 +4,13 @@
   <title>Registro Jugadas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="{{asset('css/styleRegistroJugadas.css')}}"></head>
-<body>@extends('nav')
-@section('content')
+
+{{-- @extends('nav') --}}
+<body>
+    
 <div class="container">
   
 </div>
@@ -19,6 +23,9 @@
         <h1 for="">Planilla De Jugadas</h1>
         <div class="row">
             <section class="datosPartido">
+                <div class="col p-3 ">
+                    <a href="{{url('planilla/jugador/')}}" class="btn iniciarPartido">Volver</a>
+                </div>
                 <div class="border-bottom border-dark">
                     <div class="row p-2">
                         <div class="col">
@@ -91,7 +98,7 @@
                         </div>
                     </div>
                     <div class="col text-center  p-3">
-                        <button class="btn iniciarPartido" id="iniciarPartido"> Iniciar partido</button>
+                        <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" value="IniciarPartido" > Iniciar partido</button>
                     </div>
                 </div>
             </section>
@@ -139,17 +146,84 @@
                     <div class="row p-2 pt-4 pb-4">
                         <div class="col text-center">
                             <div class="d-inline p-2">
-                                <button type="submit" class="btn guardarP"> Guardar Punto</button>
+                                <button name="accionBoton" type="submit" class="btn guardarP" value="GuardarPunto"> Guardar Punto</button>
                             </div>
                             <div class="d-inline p-2">
-                                <button type="submit" class="btn guardarP" action="{{route('guardarJugada',['idPartido' => $idPartido,'cuarto'=> 2])}}"> Finalizar Cuarto</button>
+                                <button name="accionBoton" type="submit" class="btn guardarP" value="FinalizarCuarto" > Finalizar Cuarto</button>
                             </div>
                         </div>
                 </div>
                 </form>
             </section>
-            <section class="mostrarResultado">
-
+            <section class="mostrarResultado mb-5">
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla1 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla2 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla3 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach 
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-bordered border-secondary table-sm">
+                            <tr>
+                             <th colspan="2">A</th>
+                             <th colspan="2">B</th>
+                            </tr>
+                            @foreach($registroTabla4 as $registro)
+                                <tr>
+                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
+                                    <td>{{$registro}}</td>
+                                    <td>{{$registro}}</td>
+                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
+                                </tr>
+                            @endforeach 
+                        </table>
+                    </div>
+                    
+                </div>
+                
             </section>
             <section class="resumen">
 
@@ -163,9 +237,56 @@
   
 </section>
 <script>
-    var puntaje = {{ session('puntaje') }}     
-    console.log(puntaje);
-    if(puntaje != undefined){
+    var cuarto = {{$cuarto}}
+    console.log(cuarto);
+    var posA = 0;
+    var posB = 0;
+    var jugadas = {!!$jugadas!!}
+
+    console.log(cuarto);
+    console.log(jugadas);
+
+    jugadas.forEach(jugada => {
+        console.log("a");
+        if(jugada["Equipo"] == "A"){
+            var posDestino = (posA+jugada["TipoJugada"]);
+            while(posA < posDestino){
+                posA++;
+                var colA = document.getElementById("colA"+posA);
+                if (posA == posDestino) {
+                    colA.innerHTML =jugada["NumeroCamiseta"];
+                }
+                if(jugada["CuartoJugada"]==1 || jugada["CuartoJugada"]==3){
+                    colA.style.borderColor = "red";
+                    colA.style.background ="#FFA07A";
+                }
+                if(jugada["CuartoJugada"]==2 || jugada["CuartoJugada"]==4){
+                    colA.style.borderColor = "#1F618D";
+                    colA.style.background ="#7FB3D5";
+                }
+            }
+        }else{
+            var posDestino = (posB+jugada["TipoJugada"]);
+            while(posB < posDestino){
+                posB++;
+                var colB = document.getElementById("colB"+posB);
+                if (posB == posDestino) {
+                    colB.innerHTML =jugada["NumeroCamiseta"];
+                }
+                if(jugada["CuartoJugada"]==1 || jugada["CuartoJugada"]==3){
+                    colB.style.borderColor = "red";
+                    colB.style.background ="#FFA07A";
+                }
+                if(jugada["CuartoJugada"]==2 || jugada["CuartoJugada"]==4){
+                    colB.style.borderColor = "#1F618D";
+                    colB.style.background ="#7FB3D5";
+                }
+            }
+            
+        }
+        
+    });
+    if(cuarto != 0){
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";
     }else{
@@ -194,5 +315,5 @@
 	update();
 
 </script>
-@endsection
+</body>
 </html>

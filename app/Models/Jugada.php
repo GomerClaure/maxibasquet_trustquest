@@ -10,5 +10,5 @@ class Jugada extends Model
     use HasFactory;
     protected $table = "jugadas";
     protected $primaryKey = 'IdJugada';
-    protected $fillable = ["IdJugador","IdPartido","TipoJugada","CuartoJugada","HoraJugada"];
+    protected $fillable = ["IdJugador","IdPartido","TipoJugada","Equipo","CuartoJugada","HoraJugada"];
 }

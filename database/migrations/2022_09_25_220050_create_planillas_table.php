@@ -16,6 +16,11 @@ class CreatePlanillasTable extends Migration
         Schema::create('planillas', function (Blueprint $table) {
             $table->id("IdPlanilla");
             $table->unsignedBigInteger("IdPartido");
+            $table->date("InicioLlenado")->nullable();
+            $table->boolean('PrimerCuartoJugado')->nullable();
+            $table->boolean('SegundoCuartoJugado')->nullable();
+            $table->boolean('TercerCuartoJugado')->nullable();
+            $table->boolean('CuartoCuartoJugado')->nullable();
             $table->text("observaciones")->nullable();
             $table->timestamps();
             $table->foreign("IdPartido")->references("IdPartido")->on('partidos');            
