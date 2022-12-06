@@ -90,6 +90,9 @@
                         <a class="nav-link active " href="{{url('/juez/create')}}">Registrar Personal</a>
                     </li>
                     <li class="nav-item ms-3">
+                        <a class="nav-link active " href="{{url('/equipo/lista/eliminar')}}">Eliminar Equipo</a>
+                    </li>
+                    <li class="nav-item ms-3">
                         <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                     </li>
                 </ul>  
