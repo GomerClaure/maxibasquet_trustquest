@@ -99,3 +99,9 @@ a{
     color: #e5852a; 
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+.bot{
+  width: 8%;
+  height: 18%;
+  text-align: center;
+  background-color: #eb8f32 !important; 
+}
