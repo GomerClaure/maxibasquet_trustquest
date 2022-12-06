@@ -78,8 +78,8 @@
             </div>
             <div class="col-2"></div>
         </div>
-        
-        
     </section>
+    <br>
+    <br>
 @endsection
 </html>

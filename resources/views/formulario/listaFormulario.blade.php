@@ -22,30 +22,13 @@
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
+    
     <link rel="stylesheet" href="{{asset('css/StyleFormulario.css')}}">
+    <link rel="stylesheet" href="{{asset('css/StyleTablaAplicaciones.css')}}">
 </head>
-
+@extends('nav')
+@section('content')
 <body class="antialiased background-color">
-    <header>
-        <!-- Grey with black text -->
-        <nav class="navbar navbar-expand-sm navbar-light color-navegador">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#"></a>
-                </li>
-            </ul>
-        </nav>
-    </header>
     <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
         <div class="bg-image w-100">
             <div class="mask d-flex align-items-center w-100">
@@ -54,7 +37,7 @@
                         <div class="col-12">
                             <h3 class="color-letras">Equipos Preinscritos</h3>
                             <h5 class="color-letras">3er Torneo Internacional de Maxi Basquet</h5>
-                            <div class="card">
+                            <div class="card contenedor">
                                 <div class="ps-3 py-2">
                                     <h4>Lista Detallada</h4>
                                 </div>
@@ -76,7 +59,7 @@
                                                     <td>{{$aplicacion->observaciones}} </td>
                                                     <td>{{$aplicacion->EstadoAplicacion}}</td>
                                                     <td class="d-grid gap-2">
-                                                        <a type="button" class="boton-color btn-sm rounded-0" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
+                                                        <a type="button" class="boton-color btn-sm rounded-0 boton" href="{{url('formulario'.'/'.$aplicacion->IdAplicacion)}}">Detalles</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -91,5 +74,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+@endsection
 </html>

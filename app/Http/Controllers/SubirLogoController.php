@@ -27,9 +27,7 @@ class SubirLogoController extends Controller
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                   ->get();
-
         //echo $equipo;
-        
         return view('logo.formularioSubidaLogo',compact('equipo','id','c'));
     }
     public function store(Request $request)

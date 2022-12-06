@@ -28,3 +28,143 @@ body,html{
   padding: 10px 5px 8px 5px;
   font-size: 15px;
 }
+.bodyJ{
+  background-color: #171f27;
+  color:white;
+}
+.pJ{
+    font-size:large;
+}
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  color: black;
+}
+
+.cardJ {
+  background-color: #ABA9A9;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+  background-color: #7B7979;
+}
+tbody{
+    background-color: #D3D3D3;
+}
+.table{
+    border-radius: 0;
+    background-color: #D3D3D3;
+    
+}
+.jugadorJ{
+  color: black;
+}
+.botonj{
+  width: 20%;
+  height: 10%;
+}
+.Jboton{
+  width: 15%;
+  height: 10%;
+}
+.displayBotonJ{
+  display: block;
+  margin: auto;
+  margin-top: 0.5rem ;
+  width: 80%;
+}
+.btnj:hover {
+    
+  background: #fa841a !important;
+  border-color: #eb8f32 !important;
+}
+.fondoTabla{
+  background-color: #D3D3D3;
+}
+.card-img-topJ{
+    margin: auto;
+    width: 200px;
+    height: 200px;
+}
+.card-bodyJ{
+  color: black;
+}
+.btnj{
+  background-color: #eb8f32 !important;
+  font-size: 14;
+  color:white;
+  border-color: #eb8f32 !important;
+}
+.cardEquipo{
+  background-color: #5a5a56;
+  align-items: center;
+  padding: auto;
+  color: rgb(255, 248, 248);
+  font-size:20px;
+  margin: 10px;
+  flex-direction: row;
+}
+.btn{
+  background-color: #fca311;
+  font-size: 14;
+  border: #272725;
+} 
+
+.botone{
+  background-color: #eb8f32;
+  border-color: #eb8f32;
+  text-decoration: none;
+  padding: 20px;
+  margin: 5px;
+  color: white;
+  border-radius: 5px;
+} 
+.cardLogoE{
+  margin: 0;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.containex{
+  height: 400px;
+  position: relative;
+}
+.botonesCat{
+    text-align: center;
+    margin-left: 15px;
+    margin-top: 5px;
+    display: inline-flex;
+}
+.TituloEquipo{
+  text-align: center;
+  color: white;
+}
+html{
+  height: 100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+footer{
+  margin-top: auto;
+}

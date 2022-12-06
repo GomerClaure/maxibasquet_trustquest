@@ -10,7 +10,7 @@
 <br>
 <div class="container justify-content-center">
 <section class=" main-title ">
-    <h1 class="display-6 mb-0" >Mi Equipo</h1>
+    <h1 class="display-6 mb-0" >MaxiBasquet</h1>
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">
@@ -70,11 +70,11 @@
                                                                 <td class="lista">{{$lista->NombreCategoria}}</td>
                                                                 <td class="lista">
                                                                 <a href="{{url('editarJugadores'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate w-25">Editar</a>
-                                                                <a href="{{url('DeleteJugador'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate w-25">Eliminar</a>
+                                                                <a href="{{url('DeleteJugador'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn   w-25 red">Eliminar</a>
                                                                 </td>
                                                                 <td class="lista">
                                                                 <a href="{{url('tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate w-25">Editar</a>
-                                                                <a href="{{url('eliminar'.'/'.'tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate w-25 ">Eliminar</a>
+                                                                <a href="{{url('eliminar'.'/'.'tecnico'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn   w-25 red ">Eliminar</a>
                                                                 </td>
                                                             </tr>
                                                             @endforeach
