@@ -63,7 +63,7 @@
                 </div>
             @endif
 
-            <div class="col-10 p-4 mx-auto contenedorForm" >
+            <div class="col-11 p-4 mx-auto contenedorForm" >
                 <div class="d-flex justify-content-center mb-4 border-bottom">
                     <div class="col-8 d-flex justify-content-end">
                         <h1 class="tituloFomulario">PLANILLA DE JUGADOR</h1>
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
-                            <h3 class="">Camiseta</h3>
+                            <h3 class="">N°</h3>
                         </div>
 
                         <div class="col-7 d-flex  row border border-start-0 border-dark">
@@ -194,7 +194,7 @@
                         </div>
 
                         <div class="col-1 d-flex justify-content-center border border border-start-0 border-dark pt-3">
-                            <h3 class="">Camiseta</h3>
+                            <h3 class="">N°</h3>
                         </div>
 
                         <div class="col-7 d-flex  row border border-start-0 border-dark">
