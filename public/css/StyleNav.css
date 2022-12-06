@@ -157,3 +157,14 @@ tbody{
   text-align: center;
   color: white;
 }
+html{
+  height: 100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+footer{
+  margin-top: auto;
+}
