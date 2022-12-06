@@ -42,7 +42,7 @@
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between mt-3">
                                         <h4 class="text-black card-title"><b>Lista de Credenciales</b> </h4>
                                         
-                                            <a type="button" href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-primary btn-sm bot "> Volver </a>
+                                            <a type="button" href="{{ url('/subirLogo') }}" class="btn btn-primary btn-sm bot "> Volver </a>
 
                                         
                                     </div>
@@ -150,7 +150,7 @@
             </div>
         </div>
     </body>
-    <br><br><br><br><br><br><br><br>
-    @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    @endsection
+    
 </html>

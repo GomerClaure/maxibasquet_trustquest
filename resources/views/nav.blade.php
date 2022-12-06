@@ -40,6 +40,9 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                         </li>
+                        <li class="nav-item ms-3">
+                            <a class="nav-link active " href="{{url('/mostrarFixtur')}}">Fixture</a>
+                        </li>
                     </ul>  
                     <ul class="navbar-nav ms-auto logout mb-2">
                         <li class="nav-item me-4">
@@ -64,8 +67,12 @@
                     <li class="nav-item ms-3">
                         <a class="nav-link active" href="{{url('/home')}}">Home</a>
                     </li>
-                    <li class="nav-item ms-3">
-                        <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Equipos</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{url('/Equipo')}}">Ver Equipos</a>
+                            <a class="dropdown-item" href="{{url('/equipo/lista/eliminar')}}" >Eliminar Equipo</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
@@ -90,11 +97,12 @@
                         <a class="nav-link active " href="{{url('/juez/create')}}">Registrar Personal</a>
                     </li>
                     <li class="nav-item ms-3">
-                        <a class="nav-link active " href="{{url('/equipo/lista/eliminar')}}">Eliminar Equipo</a>
-                    </li>
-                    <li class="nav-item ms-3">
                         <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
                     </li>
+                    <li class="nav-item ms-3">
+                            <a class="nav-link active " href="{{url('/mostrarFixtur')}}">Fixture</a>
+                    </li>
+                    
                 </ul>  
                 <ul class="navbar-nav ms-auto logout mb-2">
                     <li class="nav-item dropdown me-3">
@@ -137,6 +145,9 @@
                             </li>
                         <li class="nav-item ms-3">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="nav-link active " href="{{url('/mostrarFixtur')}}">Fixture</a>
                         </li>
                         <li class="nav-item ms-3">
                             <a class="nav-link active " href="{{url('/planilla/jugador')}}">Registro en planilla</a>
@@ -186,12 +197,12 @@
                             <a class="nav-link active" href="{{url('/subirLogo')}}">Mi Equipo</a>
                         </li>
                         <!--hacer esto de los delegados usando un controller para el navegador-->
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{url('/mostrar')}}">Credenciales</a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link active " href="{{url('/historia')}}">Historia</a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="nav-link active " href="{{url('/mostrarFixtur')}}">Fixture</a>
                         </li>
                     </ul>  
                     <ul class="navbar-nav ms-auto logout mb-2">

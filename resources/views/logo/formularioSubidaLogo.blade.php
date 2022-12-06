@@ -51,7 +51,7 @@
     <div class="mask d-flex align-items-center ">
         <div class="container">
             <div class="row d-flex justify-content-center fondo">
-                <div class="col-10">
+                <div class="col-12">
             <div class="card tabla  ">
                             <div class="card-body  pt-0  ">
                                 <div class="table-responsive table-scroll rounded-0" data-mdb-perfect-scrollbar="true" style="position: relative; ">
@@ -59,6 +59,7 @@
                                                         <thead class="tablasup">
                                                         <tr >
                                                             <th>Categorias </th>
+                                                            <th>Credenciales</th>
                                                             <th>Jugadores</th>
                                                             <th>Tecnicos</th>
                                                         </tr>
@@ -68,6 +69,9 @@
                                                         @foreach ($c as $lista)
                                                             <tr>
                                                                 <td class="lista">{{$lista->NombreCategoria}}</td>
+                                                                <td class="lista">
+                                                                <a href="{{url('credenciales'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate ">Credenciales</a>
+                                                                </td>
                                                                 <td class="lista">
                                                                 <a href="{{url('editarJugadores'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn botoncreate w-25">Editar</a>
                                                                 <a href="{{url('DeleteJugador'.'/'.$lista->NombreEquipo.'/'.$lista->NombreCategoria)}}" type="button" class="btn   w-25 red">Eliminar</a>
