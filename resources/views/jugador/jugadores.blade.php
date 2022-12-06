@@ -23,7 +23,7 @@
                                
                                 <h2 class="text-center tituloJ  "> <b> Jugadores</b></h2>
                                 
-                                <div class="card fondoTabla cardJ">
+                                <div class="card fondoTabla text-center cardJ">
                                     <div class="card-header ps-3 py-2 d-flex justify-content-between">
                                         <h4 class="text-black card-title"><b>Integrantes</b> </h4>
                                     </div>
