@@ -10,7 +10,7 @@ h1{
 }
 
 .seccionNav{
-    background-color: aliceblue;
+    background-color: #b5b5bd;
 }
 .col.pasos{
     margin-top: 3%;
@@ -18,10 +18,12 @@ h1{
 
 
 /* Css registro de jueces */
-
+.card.jueces{
+    background: #b5b5bd;
+}
 h1{
     font-weight: bold;
-    color: white;
+    /* color: white; */
   }
 .btn.siguiente{
     background: #eb8f32;
@@ -39,7 +41,7 @@ h1{
 
 /* Css registroJugadas */
 .datosPartido{
-    background-color: aliceblue;
+    background-color: #b5b5bd;
 }
 .btn.iniciarPartido{
     background: #eb8f32;
@@ -54,7 +56,7 @@ h1{
 
 
 .registroPuntaje{
-    background-color: aliceblue;
+    background-color: #b5b5bd;
 }
 .btn.guardarP{
     background: #eb8f32;
@@ -67,7 +69,7 @@ h1{
 
 
 .mostrarResultado{
-    background-color: aliceblue;
+    background-color: #b5b5bd;
 }
 td{
     text-align: center;
@@ -76,7 +78,7 @@ td{
 /* Resumen de registro de jugadas */
 
 .resumenPartido{
-    background-color: aliceblue; 
+    background-color: #b5b5bd; 
 }
 
 .form-control.cuartos{

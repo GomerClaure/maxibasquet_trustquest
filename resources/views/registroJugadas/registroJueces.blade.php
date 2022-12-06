@@ -29,7 +29,7 @@
         @endif
         <form class="formularioRegistro" action="{{route('registrarJueces',['id' => $idPartido])}}" method="POST" enctype="multipart/form-data" novalidate>
           @csrf
-          <div class="card login">
+          <div class="card jueces">
               <div class="card-body">
                   <div class="input-group">
                     <label  for="anotadorPrincipal" class="form-label">Anotador Principal:</label>
