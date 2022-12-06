@@ -48,9 +48,11 @@
                                                 <div class="card1 ancho ">
                                                     <div class="card-header">
                                                         <h5 class="card-header">
+                                                            <img src="{{asset('storage').'/'.$logos[$i]->LogoEquipo}}" height="23" width="23">
                                                         {{$nombres[$i]->NombreEquipo}}
                                                             VS 
                                                         {{$nombres[$i+1]->NombreEquipo}}
+                                                        <img src="{{asset('storage').'/'.$logos[$i+1]->LogoEquipo}}" height="23" width="23">
                                                         </h5>
                                                     </div>
                                                     <div class="card-body cuadricula">

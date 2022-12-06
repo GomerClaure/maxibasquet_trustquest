@@ -56,7 +56,15 @@ class FixturController extends Controller
             ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
             ->orderBy('FechaPartido')
             ->get();
-        //return response()->json($categorias);
-        return view("fixtur.mostrar", compact('nombres', 'fechas', 'lugares', 'horas', 'estados','categorias'));
+        
+        $logos = DB::table('partidos')
+            ->select('LogoEquipo', 'FechaPartido')
+            ->join('categorias','partidos.IdCategoria','=','categorias.IdCategoria')
+            ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
+            ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
+            ->orderBy('FechaPartido')
+            ->get();
+        //return response()->json($logos);
+        return view("fixtur.mostrar", compact('nombres', 'fechas', 'lugares', 'horas', 'estados','categorias','logos'));
     }
 }
