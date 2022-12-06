@@ -1,10 +1,19 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #171f27;
+  }
+
+h1{
+    text-align: center;
+    font-size: 45px;
+    color: #e5852a !important;
+}
 
 .seccionNav{
     background-color: aliceblue;
 }
 .col.pasos{
     margin-top: 3%;
-    /* margin-bottom: 50%; */
 }
 
 
@@ -22,10 +31,6 @@ h1{
     background: #eb8f32;
     color: white;
 }
-/* .btn.siguiente:first-child:hover{
-    background: #fa841a;
-    color: white;
-} */
 .btn.prevSig:first-child:hover{
     background: #fa841a;
     color: white;
@@ -58,4 +63,22 @@ h1{
 .btn.guardarP:first-child:hover{
     background: #fa841a;
     color: white;
+}
+
+
+.mostrarResultado{
+    background-color: aliceblue;
+}
+td{
+    text-align: center;
+}
+
+/* Resumen de registro de jugadas */
+
+.resumenPartido{
+    background-color: aliceblue; 
+}
+
+.form-control.cuartos{
+    min-width: 30px;
 }

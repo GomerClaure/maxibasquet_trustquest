@@ -11,7 +11,9 @@ use App\Models\Datos_partidos;
 use App\Models\Equipo;
 use App\Models\Jugada;
 use App\Models\Jugador;
+use App\Models\Planilla;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Echo_;
 
 class RegistrarPlanillaJuegoController extends Controller
 {
@@ -27,74 +29,247 @@ class RegistrarPlanillaJuegoController extends Controller
     {
         return view('registroJugadas.navegacionRegistro');
     }
-    public function guardarDatosJuego(Request $request){
-        $formulario = request()->except('_token');
-        $puntoEquipo = explode(' ', $formulario['puntoEquipo']);
-        $nomEquipo = $puntoEquipo[0];
-        $idEquipo = $puntoEquipo[1];
-        $puntuacion = $formulario['puntacion'];
-        $idPartido = $formulario['idPartido'];
-        if ($nomEquipo == 'A') {
-            $idJugador = $formulario['jugadorA'];
-        }elseif ($nomEquipo == 'B') {
-            $idJugador = $formulario['jugadorB'];
-        }
-    
-        $jugada = new Jugada;
-        $jugada -> IdJugador = $idJugador;
-        $jugada -> IdPartido = $idPartido;
-        $jugada -> TipoJugada = $puntuacion;
-        $jugada -> CuartoJugada = 1;
-        $jugada -> HoraJugada = date('H:i');
-        // $jugada -> save();
-        $puntaje = 1;
-        return back()->withInput()->with(['puntaje' => $puntaje]);
-        // return $request;
-    }
-
-    public function mostrarDatosPartido($idPartido){
-        date_default_timezone_set('America/La_Paz');
+    // Mostrar resumen del partido------------------------------------------------------------------------------
+    public function mostrarResumen($idPartido){
+        $IdJuecesPorPartido = JuecesPorPartido::select('jueces_por_partidos.IdJuez')
+                            ->where('IdPartido',$idPartido)
+                            ->get();
+        $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno')
+                ->join('personas','jueces.IdPersona','=','personas.IdPersona')
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
+                // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
+                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
+                ->get();
         $partido = Partido::find($idPartido);
         $idEquipos = Datos_partidos::select('datos_partidos.IdEquipo')
                         ->where('datos_partidos.IdPartido','=',$idPartido)
                         ->get();
         $equipoA = Equipo::find($idEquipos[0]->IdEquipo);
         $equipoB = Equipo::find($idEquipos[1]->IdEquipo);
-        $partido = Partido::find($idPartido);
-        $categoria = Categoria::find($partido->IdCategoria);
-        $fechaHoy = date('d-m-Y');
-        $IdJuecesPorPartido = JuecesPorPartido::select('jueces_por_partidos.IdJuez')
-                            ->where('IdPartido',$idPartido)
-                            ->get();
-        $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno')
-                ->join('personas','jueces.IdPersona','=','personas.IdPersona')
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
-                ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
-                ->get();
-        $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
-                    'personas.ApellidoPaterno')
-                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
-                    ->where('jugadores.IdEquipo','=',$equipoA->IdEquipo)
-                    ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
-                    ->get();
-        $jugadoresB = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
-                    'personas.ApellidoPaterno')
-                    ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
-                    ->where('jugadores.IdEquipo','=',$equipoB->IdEquipo)
-                    ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
-                    ->get();
-        // $sePuedeRegistrar = false;
-        // return $jugadoresB;
-        $puntaje = 0;
-        return view('registroJugadas.registroJugadas',
-        compact('idEquipos','equipoA','puntaje',
-        'equipoB','categoria','fechaHoy','idPartido',
-        'partido','jueces','jugadoresA','jugadoresB'))->with('puntaje',$puntaje);
+        $jugadasCuartos = $this->getCuartosAnotados($idPartido);
+        $jugadasEquipoA = $jugadasCuartos[0];
+        $equipoA -> Equipo = "A";
+        $equipoB -> Equipo = "B";
+        $jugadasEquipoB = $jugadasCuartos[1];
+        $totalA = array_sum($jugadasEquipoA);
+        $totalB = array_sum($jugadasEquipoB);
+        $registroTabla1 = range(1,40);
+        $registroTabla2 = range(41,80);
+        $registroTabla3 = range(81,120);
+        $registroTabla4 = range(121,160);
+        $ganador = $totalA>$totalB?$equipoA:$equipoB;
+        $jugadas = $this->getJugadas($idPartido);
+        return view('registroJugadas.resumenJugadas',
+        compact('jugadas','registroTabla1','jueces','jugadasEquipoA','jugadasEquipoB','totalA','totalB','ganador',
+        'registroTabla2','registroTabla3','registroTabla4'));
+        // return $ganador;
     }
 
-    // Guardado y registro de jueces
+    public function getCuartosAnotados($idPartido)
+    {
+        $jugadas = Jugada::select('jugadas.CuartoJugada','jugadas.TipoJugada','jugadas.Equipo')
+                            ->where('jugadas.IdPartido','=',$idPartido)
+                            ->get();
+        $jugadasA = [0,0,0,0];
+        $jugadasB = [0,0,0,0];
+        foreach ($jugadas as $key => $jugada) {
+            $punto = 0;
+            $cuarto = $jugada->CuartoJugada;
+            $punto = $jugada->TipoJugada;
+            if ($jugada->Equipo == "A") {
+                $jugadasA[$cuarto-1] = $punto + $jugadasA[$cuarto-1];
+            }else{
+                $jugadasB[$cuarto-1] = $punto + $jugadasB[$cuarto-1];
+            }
+        }
+        return [$jugadasA,$jugadasB];
+    }
+
+    // Guardado de datos de juego------------------------------------------------------------------------------
+    public function guardarDatosJuego(Request $request){
+        
+        date_default_timezone_set('America/La_Paz');
+        $formulario = request()->except('_token');
+        $idPartido = $formulario['idPartido'];
+        $partido = Partido::find($idPartido);
+        if ($partido->EstadoPartido == "finalizado") {
+            return redirect('mostrarResumen/'.$idPartido);
+        }else{
+            $accion = $formulario["accionBoton"];
+            $cuarto = $this->getCuartoJugado($idPartido);
+            if($accion == 'GuardarPunto'){
+                if ($cuarto == 0) {
+                    $planilla = new Planilla();
+                    $planilla->IdPartido = $idPartido;
+                    $planilla->PrimerCuartoJugado = true;
+                    $planilla->InicioLlenado = now();
+                    $planilla->save();
+                    $cuarto = 1;
+                }
+                $puntoEquipo = explode(' ', $formulario['puntoEquipo']);
+                $nomEquipo = $puntoEquipo[0];
+                $idEquipo = $puntoEquipo[1];
+                
+                $puntuacion = $formulario['puntacion'];
+                if ($nomEquipo == 'A') {
+                    $charEquipo = 'A';
+                    $idJugador = $formulario['jugadorA'];
+                }elseif ($nomEquipo == 'B') {
+                    $charEquipo = 'B';
+                    $idJugador = $formulario['jugadorB'];
+                }
+                $jugada = new Jugada;
+                $jugada -> IdJugador = $idJugador;
+                $jugada -> IdPartido = $idPartido;
+                $jugada -> Equipo = $charEquipo;
+                $jugada -> TipoJugada = $puntuacion;
+                $jugada -> CuartoJugada = $cuarto;
+                $jugada -> HoraJugada = date('H:i:s');
+                $jugada -> save();
+            }elseif($accion == 'FinalizarCuarto'){
+                if($cuarto <4){
+                    switch ($cuarto) {
+                        case 0:
+                            return back()->withInput()->with(['cuarto' => $cuarto]);
+                            break;
+                        case 1:
+                            $campoActualizar = "SegundoCuartoJugado";
+                            break;
+                        case 2:
+                            $campoActualizar = "TercerCuartoJugado";
+                            break;
+                        case 3:
+                            $campoActualizar = "CuartoCuartoJugado";
+                            break;
+                    }
+                    $planilla = Planilla::where('planillas.IdPartido','=',$idPartido)
+                            ->update([$campoActualizar => true]);
+                }else{
+                    Partido::where('partidos.IdPartido','=',$idPartido)
+                    ->update(['EstadoPartido' => 'finalizado']);
+                    return redirect('mostrarResumen/'.$idPartido);
+                }
+            }
+            $jugadas = $this->getJugadas($idPartido);
+            return back()->withInput()->with(compact('cuarto','jugadas'));
+        }
+        // return $request;
+        // return $jugadas;
+    }
+
+    public function mostrarDatosPartido($idPartido){
+        $cuarto = $this->getCuartoJugado($idPartido); 
+        date_default_timezone_set('America/La_Paz');
+        $partido = Partido::find($idPartido);
+        if ($partido->EstadoPartido == "finalizado") {
+            return redirect('mostrarResumen/'.$idPartido);
+        }else{
+            $idEquipos = Datos_partidos::select('datos_partidos.IdEquipo')
+                        ->where('datos_partidos.IdPartido','=',$idPartido)
+                        ->get();
+            $equipoA = Equipo::find($idEquipos[0]->IdEquipo);
+            $equipoB = Equipo::find($idEquipos[1]->IdEquipo);
+            $partido = Partido::find($idPartido);
+            $categoria = Categoria::find($partido->IdCategoria);
+            $fechaHoy = date('d-m-Y');
+            $IdJuecesPorPartido = JuecesPorPartido::select('jueces_por_partidos.IdJuez')
+                                ->where('IdPartido',$idPartido)
+                                ->get();
+            $jueces = Juez::select('personas.NombrePersona','personas.ApellidoPaterno')
+                    ->join('personas','jueces.IdPersona','=','personas.IdPersona')
+                    ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[0]->IdJuez)
+                    ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[1]->IdJuez)
+                    // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[2]->IdJuez)
+                    // ->orWhere('jueces.IdJuez',$IdJuecesPorPartido[3]->IdJuez)
+                    ->get();
+            $jugadoresA = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
+                        'personas.ApellidoPaterno')
+                        ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                        ->where('jugadores.IdEquipo','=',$equipoA->IdEquipo)
+                        ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
+                        ->get();
+            $jugadoresB = Jugador::select('jugadores.IdJugador','personas.NombrePersona',
+                        'personas.ApellidoPaterno')
+                        ->join('personas','jugadores.IdPersona','=','personas.IdPersona')
+                        ->where('jugadores.IdEquipo','=',$equipoB->IdEquipo)
+                        ->where('jugadores.IdCategoria','=',$partido->IdCategoria)
+                        ->get();
+            $registroTabla1 = range(1,40);
+            $registroTabla2 = range(41,80);
+            $registroTabla3 = range(81,120);
+            $registroTabla4 = range(121,160);
+            $jugadas = $this->getJugadas($idPartido);
+            return view('registroJugadas.registroJugadas',
+            compact('idEquipos','equipoA','cuarto',
+            'equipoB','categoria','fechaHoy','idPartido',
+            'partido','jueces','jugadoresA','jugadoresB','jugadas',
+            'registroTabla1','registroTabla2','registroTabla3','registroTabla4'));
+        }
+        
+        // return json_encode($jugadas);
+        // return $cuarto;
+    }
+
+    public function getJugadas($idPartido){
+        $jugadas = Jugada::select('jugadores.NumeroCamiseta','jugadas.CuartoJugada',
+                                        'jugadas.TipoJugada','jugadas.HoraJugada','jugadas.Equipo')
+                            ->join('jugadores','jugadas.IdJugador','=','jugadores.IdJugador')
+                            ->where('jugadas.IdPartido','=',$idPartido)
+                            ->get();
+        $jugadas = $this->ordenarQuickSort($jugadas);
+        // $jugadasMayorAMenor = array_reverse($jugadas);
+        return json_encode($jugadas);
+    }
+    function ordenarQuickSort($arreglo){
+        $arrIzq = [];
+        $arrDer = [];
+        $result = [];
+        if (count($arreglo) ==0) {
+            return [];
+        }else{
+            $primerElemento = $arreglo[0];
+            $horaElemento = $primerElemento->HoraJugada; 
+            // echo $horaElemento;
+            // echo "  ";
+            for ($i=1; $i < count($arreglo); $i++) { 
+                $elemento = $arreglo[$i];
+                $horaAct = $elemento->HoraJugada;
+                if ($horaAct<$horaElemento) {
+                    array_push($arrIzq,$elemento);
+                    // echo $horaAct." Es menor que ".$horaElemento;
+                }else{
+                    array_push($arrDer,$elemento);
+                    // echo $horaAct." Es mayor que ".$horaElemento;
+                }
+                // echo "  ";
+            }
+            $result = array_merge($this->ordenarQuickSort($arrIzq), [$primerElemento]);
+            $result = array_merge($result, $this->ordenarQuickSort($arrDer));
+        }
+        return $result;
+	}
+
+    public function getCuartoJugado($idPartido)
+    {
+        $cuartos = Planilla::select('planillas.PrimerCuartoJugado','planillas.SegundoCuartoJugado',
+                                        'planillas.TercerCuartoJugado','planillas.CuartoCuartoJugado')
+                            ->where('planillas.IdPartido','=',$idPartido)
+                            ->get();
+        if ($cuartos->isEmpty()) {
+            $numCuarto = 0;
+        }else{
+            $numCuarto = 0;
+            if($cuartos[0]->PrimerCuartoJugado){$numCuarto++;}
+            if($cuartos[0]->SegundoCuartoJugado){$numCuarto++;}
+            if($cuartos[0]->TercerCuartoJugado){$numCuarto++;}
+            if($cuartos[0]->CuartoCuartoJugado){$numCuarto++;}
+        }
+        return $numCuarto;
+        // return $cuartos;
+    }
+
+    // Guardado y registro de jueces------------------------------------------------------------------------------
 
     public function guardarRegistroJueces(Request $request){
         $formulario = request()->except('_token');

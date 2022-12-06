@@ -17,7 +17,7 @@ class Juez
     public function handle(Request $request, Closure $next)
     {
         $idRol = auth()->user()->IdRol;
-        if ($idRol==1 || $idRol==2) {
+        if ($idRol==1 || $idRol==2 || $idRol==5) {
             return $next($request);
         }
         return abort(404);
