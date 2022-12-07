@@ -216,15 +216,30 @@ class EditarJugadorController extends Controller
         }
         $persona->save();
 
-        $cuerpoTecnico = Jugador::find($id);
-        $cuerpoTecnico->IdCategoria = $request->selectCategoria;
-        $cuerpoTecnico->PosicionJugador = $request->selectRol;
-        if ($request->hasFile('fotoCarnet')) {
-            $cuerpoTecnico->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
-        }
-        $cuerpoTecnico->save();
+        
+        $jugadorEquipo = Jugador::find($id);
+        
+        $jugadorEquipo->IdCategoria = $request->selectCategoria;
+        
+        $jugadorEquipo->PosicionJugador = $request->posicion;
+        
 
-        $equipo = Equipo::find($cuerpoTecnico->IdEquipo);
+        $jugadorEquipo->PesoJugador = $request->peso;
+
+        $jugadorEquipo->EstaturaJugador = $request->estatura;
+
+        $jugadorEquipo->NumeroCamiseta = $request->nCamiseta;
+
+
+        if ($request->hasFile('fotoCarnet')) {
+
+            $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
+
+        }
+
+
+        $equipo = Equipo::find($jugadorEquipo->IdEquipo);
+
         $categoria = Categoria::find($request->selectCategoria);
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
     }
