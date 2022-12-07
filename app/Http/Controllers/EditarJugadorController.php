@@ -216,37 +216,61 @@ class EditarJugadorController extends Controller
         }
         $persona->save();
 
+        
         $jugadorEquipo = Jugador::find($id);
+        
         $jugadorEquipo->IdCategoria = $request->selectCategoria;
+        
         $jugadorEquipo->PosicionJugador = $request->posicion;
+        
+
         $jugadorEquipo->PesoJugador = $request->peso;
+
         $jugadorEquipo->EstaturaJugador = $request->estatura;
+
         $jugadorEquipo->NumeroCamiseta = $request->nCamiseta;
+
+
         if ($request->hasFile('fotoCarnet')) {
+
             $jugadorEquipo->FotoCarnet = $request->file('fotoCarnet')->store('uploads', 'public');
+
         }
 
+
         $equipo = Equipo::find($jugadorEquipo->IdEquipo);
+
         $categoria = Categoria::find($request->selectCategoria);
 
         $numCamiseta = $request->nCamiseta;
+
         $consultaCamiseta = DB::table('jugadores')
             ->select('*')
             ->where([['NumeroCamiseta', $numCamiseta], ['IdEquipo', $equipo->IdEquipo], ['IdCategoria', $categoria->IdCategoria]])
             ->get();
         
-        $consultaCamisetaJugador = Jugador::find($id);    
+
+            $consultaCamisetaJugador = Jugador::find($id);    
         if (!$consultaCamiseta->isEmpty()) {
 
+
             if ($consultaCamisetaJugador->NumeroCamiseta == $request->nCamiseta) {
+            
                 $jugadorEquipo->save();
+            
             } else {
+            
                 return back()->withInput()->with('mensajeErrorCamiseta', 'El numero de camiseta ya esta registrado en la categoria');
+            
             }
         }
 
 
+
+        
         $jugadorEquipo->save();
+        
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
+    
     }
 }
