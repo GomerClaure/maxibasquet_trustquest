@@ -100,9 +100,9 @@ class EditarJugadorController extends Controller
             $equipo = null;
             $categoria = null;
         }
-       
-        $deleteJugador=[];
-        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria','deleteJugador'));
+
+        $deleteJugador = [];
+        return view('editarJugadores.lista', compact('jugadores', 'equipo', 'categoria', 'deleteJugador'));
     }
 
     public function edit(Request $request, $id)
@@ -229,47 +229,50 @@ class EditarJugadorController extends Controller
         return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
     }
 
-            public function destroy($id)
-    {  
+    
+    
+    
+    
+    public function destroy($id)
+    {
         $jugador = Jugador::select()
-                            ->join('personas','personas.IdPersona','jugadores.IdPersona')
-                            ->where('IdJugador',$id)
-                            ->get();
+            ->join('personas', 'personas.IdPersona', 'jugadores.IdPersona')
+            ->where('IdJugador', $id)
+            ->get();
         $datosJugador = $jugador[0];
-        Jugador::where('IdJugador',$id)->delete();
-        Credencial::where('IdPersona',$datosJugador->IdPersona)->delete();
-        Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
-        $equipo = Equipo::find($datosJugador -> IdEquipo);
-        $categoria = Categoria::find($datosJugador -> IdCategoria);
-        $partido = $this->comprobarPartido($equipo -> IdEquipo,$datosJugador->IdCategoria);
+        Jugador::where('IdJugador', $id)->delete();
+        Credencial::where('IdPersona', $datosJugador->IdPersona)->delete();
+        Persona::where('IdPersona', $datosJugador->IdPersona)->delete();
+        $equipo = Equipo::find($datosJugador->IdEquipo);
+        $categoria = Categoria::find($datosJugador->IdCategoria);
+        $partido = $this->comprobarPartido($equipo->IdEquipo, $datosJugador->IdCategoria);
         if ($partido) {
-            return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('PartidoRegistrado','No se puede eliminar los datos del jugador existe un partido en curso o en espera'); 
+            return redirect('DeleteJugador' . '/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('PartidoRegistrado', 'No se puede eliminar los datos del jugador existe un partido en curso o en espera');
         }
 
-        Jugador::where('IdJugador',$id)->delete();
-        Credencial::where('IdPersona',$datosJugador->IdPersona)->delete();
-        Persona::where('IdPersona',$datosJugador->IdPersona)->delete();
+        Jugador::where('IdJugador', $id)->delete();
+        Credencial::where('IdPersona', $datosJugador->IdPersona)->delete();
+        Persona::where('IdPersona', $datosJugador->IdPersona)->delete();
 
-        return redirect('DeleteJugador'.'/'.$equipo->NombreEquipo.'/'.$categoria->NombreCategoria)->with('mensaje','Datos del Jugador eliminados correctamente'); 
+        return redirect('DeleteJugador' . '/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Datos del Jugador eliminados correctamente');
     }
-    public function comprobarPartido($idEquipo, $categoria ){
+    public function comprobarPartido($idEquipo, $categoria)
+    {
         date_default_timezone_set('America/La_Paz');
         $fechaActual = date('Y-m-d');
         $horaActual = date('G:i:s');
         $partido = Datos_partidos::select()
-                    ->join("partidos","partidos.IdPartido","=","datos_partidos.IdPartido")
-                    ->where("IdEquipo",$idEquipo)
-                    ->where("partidos.IdCategoria",$categoria)
-                    ->where("FechaPartido",">=",$fechaActual)
-                    ->where("EstadoPartido","=","espera")
-                    ->orwhere("EstadoPartido","=","curso")
-                    ->get();
+            ->join("partidos", "partidos.IdPartido", "=", "datos_partidos.IdPartido")
+            ->where("IdEquipo", $idEquipo)
+            ->where("partidos.IdCategoria", $categoria)
+            ->where("FechaPartido", ">=", $fechaActual)
+            ->where("EstadoPartido", "=", "espera")
+            ->orwhere("EstadoPartido", "=", "curso")
+            ->get();
         if (!$partido->isEmpty()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-
 }
