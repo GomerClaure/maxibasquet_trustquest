@@ -20,7 +20,7 @@
   <div class="row t-5">
       <div class="col-1"></div>
       <div class="col pasos">
-        <h1 for="">Planilla De Jugadas</h1>
+        <h1 for="">Planilla de Jugadas</h1>
         <div class="row">
             <section class="datosPartido">
                 <div class="col p-3 ">
