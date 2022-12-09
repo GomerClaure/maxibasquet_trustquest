@@ -28,6 +28,24 @@
 </head>
 @extends('nav')
 @section('content')
+    @php
+    $vadido = "¡Valido!";
+    $noVadido = "¡No valido!";
+    @endphp
+
+    @if (Session::has('mensaje'))
+    <div class="alert alert-success alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
+    </div>
+    @endif
+
+    @if (Session::has('mensajeRechazado'))
+    <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('mensajeRechazado')}}</h4>
+    </div>
+    @endif
 <body class="antialiased background-color">
     <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">
         <div class="bg-image w-100">

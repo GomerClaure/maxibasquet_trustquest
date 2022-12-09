@@ -36,7 +36,7 @@ class RegistrarPartidosController extends Controller
             [
 
                 'hora' => 'required',
-                'lugar' => 'required|min:6|regex:/^([A-Z][a-z, ]+)+$/',
+                'lugar' => 'required|min:6|regex:/^([a-z, ,0-9]+)+$/',
                 'fecha' => 'required',
             ],
 

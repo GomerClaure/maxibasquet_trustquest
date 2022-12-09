@@ -106,7 +106,7 @@ class FormularioController extends Controller
             $datos = null;
         }
 
-       
+
 
         return (view('formulario.show', compact('datos')));
     }
@@ -131,7 +131,7 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate(
             [
                 'observaciones' => 'required|regex:/^([a-zA-Z][a-z, ]+)+$/'
@@ -150,68 +150,69 @@ class FormularioController extends Controller
         if ($valido == 'Aceptado') {
             $categorias = $this->separar($request->categorias);
             $guardar = $this->comprobarGuardar($request->nombreEquipos);
-            if($guardar != 0){
-                $this->guardarCategorias($guardar,$categorias);
-            }
-            else{
+            if ($guardar != 0) {
+                $this->guardarCategorias($guardar, $categorias);
+            } else {
                 /**crear Usuario */
-            $usuario = new User;
-            $usuario -> IdRol =  4;
-            $nombre = $request -> NombreEncargado;
-            $tranformado = preg_replace('([^A-Za-z0-9])', '',$nombre);
-            if (strlen($tranformado) > 15) {
-                $tranformado = substr($tranformado,0,15);
-            }
-            $usuario -> name = $tranformado;
-            $usuario -> email = $request -> correoElectronico;
-            $consultaCorreo = DB::table('users')
-                        ->select('email')
-                        ->where('email', $request -> correoElectronico, 1)
-                        ->get();
-            
-            if(!$consultaCorreo ->isEmpty()){
-             return back()->with('mensajeErrorEmail','El correo ya esta registrado');
+                $usuario = new User;
+                $usuario->IdRol =  4;
+                $nombre = $request->NombreEncargado;
+                $tranformado = preg_replace('([^A-Za-z0-9])', '', $nombre);
+                if (strlen($tranformado) > 15) {
+                    $tranformado = substr($tranformado, 0, 15);
                 }
-            
-            $contrasenia = Str::random(8);
-            $hashed = Hash::make($contrasenia);
-            $usuario -> password = $hashed;
-            $usuario -> save();
-            
-            /**Guardar delegado */
-            $delegado = new Delegado;
-            $delegado -> IdUsuario = $usuario -> id;
-            $delegado -> FechaRegistroDelegado = now();
-            $delegado -> TelefonoDelegado = $request -> telefono;
-            $delegado ->save();
-            
-            /**Guardar Equipo */
-            $equipo = new Equipo;
-            $equipo->NombreEquipo = $request->nombreEquipos;
-            $equipo->IdDelegado = $delegado -> IdDelegado;
-            $equipo->IdAplicacion = $id;
-            $equipo->LogoEquipo = 'uploads\logo.jpg';
-           
-            $equipo->save();
-            $this->guardarCategorias($equipo -> IdEquipo,$categorias);
-            $this->sendEmail( $usuario -> name,$usuario -> email,$contrasenia, $equipo->NombreEquipo);
+                $usuario->name = $tranformado;
+                $usuario->email = $request->correoElectronico;
+                $consultaCorreo = DB::table('users')
+                    ->select('email')
+                    ->where('email', $request->correoElectronico, 1)
+                    ->get();
+
+                if (!$consultaCorreo->isEmpty()) {
+                    return back()->with('mensajeErrorEmail', 'El correo ya esta registrado');
+                }
+
+                $contrasenia = Str::random(8);
+                $hashed = Hash::make($contrasenia);
+                $usuario->password = $hashed;
+                $usuario->save();
+
+                /**Guardar delegado */
+                $delegado = new Delegado;
+                $delegado->IdUsuario = $usuario->id;
+                $delegado->FechaRegistroDelegado = now();
+                $delegado->TelefonoDelegado = $request->telefono;
+                $delegado->save();
+
+                /**Guardar Equipo */
+                $equipo = new Equipo;
+                $equipo->NombreEquipo = $request->nombreEquipos;
+                $equipo->IdDelegado = $delegado->IdDelegado;
+                $equipo->IdAplicacion = $id;
+                $equipo->LogoEquipo = 'uploads\logo.jpg';
+
+                $equipo->save();
+                $this->guardarCategorias($equipo->IdEquipo, $categorias);
+                $this->sendEmail($usuario->name, $usuario->email, $contrasenia, $equipo->NombreEquipo);
             }
+            return redirect('/formulario')->with('mensaje', 'Se acepto el formulario');
         }
         $datosApp = Aplicaciones::find($id);
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-        if($valido == "Rechazado"){
-            $this->sendEmailRechazo($request->nombreEquipos,$request -> correoElectronico,$observacion);
+        if ($valido == "Rechazado") {
+            $this->sendEmailRechazo($request->nombreEquipos, $request->correoElectronico, $observacion);
+            return redirect('/formulario')->with('mensajeRechazado', 'Se rechazo el formulario');
         }
-        return redirect('/formulario');
     }
-    public function guardarCategorias($id,$categorias){
-        $categoriasGuardadas = Categorias::select("IdCategoria","NombreCategoria")->get();
-        if (!$categoriasGuardadas -> isEmpty()) {
-                
+    public function guardarCategorias($id, $categorias)
+    {
+        $categoriasGuardadas = Categorias::select("IdCategoria", "NombreCategoria")->get();
+        if (!$categoriasGuardadas->isEmpty()) {
+
             foreach ($categoriasGuardadas as $categoria) {
-                for ($i=0; $i < sizeof($categorias); $i++) { 
+                for ($i = 0; $i < sizeof($categorias); $i++) {
                     if ($categorias[$i] == $categoria->NombreCategoria) {
                         $categoriasEquipo = new Categorias_por_equipo();
                         $categoriasEquipo->IdEquipo = $id;
@@ -221,48 +222,50 @@ class FormularioController extends Controller
                         $categoriasEquipo->save();
                     }
                 }
-        
             }
         }
-
     }
     /**verifica la existencia de un equipo en la bd, devuelve 0 si no exite equipo sino el id del equipo
      * 
      */
-    public function comprobarGuardar($nombreEquipo){
-        $catego = Categorias_por_equipo::select("NombreCategoria" , "equipos.IdEquipo")
-                                            ->join("categorias","categorias_por_equipo.IdCategoria","=","categorias.IdCategoria")
-                                            ->join("equipos","equipos.IdEquipo","=","categorias_por_equipo.IdEquipo")
-                                            ->where("equipos.NombreEquipo",$nombreEquipo)
-                                            ->whereNull("equipos.deleted_at")
-                                            ->get();
-        if (!$catego ->isEmpty() ) {
+    public function comprobarGuardar($nombreEquipo)
+    {
+        $catego = Categorias_por_equipo::select("NombreCategoria", "equipos.IdEquipo")
+            ->join("categorias", "categorias_por_equipo.IdCategoria", "=", "categorias.IdCategoria")
+            ->join("equipos", "equipos.IdEquipo", "=", "categorias_por_equipo.IdEquipo")
+            ->where("equipos.NombreEquipo", $nombreEquipo)
+            ->whereNull("equipos.deleted_at")
+            ->get();
+        if (!$catego->isEmpty()) {
             return $catego[0]->IdEquipo;
-        }
-        else{
+        } else {
             return 0;
         }
     }
     /**Manda los detalles para armar el correo de confirmacion de registro */
-    public function sendEmail($usuario,$correo,$contrasenia,$equipo){
-        $details =[
-            'title' =>"Correo de confirmación de registro",
-             'body' => "Se registro al equipo ".$equipo . " en el torneo Maxi Basquet 2022",
-             'usuraio' => $usuario,
-             'contrasenia' => $contrasenia
+    public function sendEmail($usuario, $correo, $contrasenia, $equipo)
+    {
+        $details = [
+            'title' => "Correo de confirmación de registro",
+            'body' => "Se registro al equipo " . $equipo . " en el torneo Maxi Basquet 2022",
+            'usuraio' => $usuario,
+            'contrasenia' => $contrasenia
         ];
         $mail = Mail::to($correo)->send(new RegistroMail($details));
-        return $mail;}
+        return $mail;
+    }
     /** Manda los detalles para armar el correo de rechazo de registro */
-    public function sendEmailRechazo($equipo,$correo,$contenido){
-            $details =[
-                'title' =>"Correo de rechazo de registro",
-                 'body' => "Se encontraron errores en el registro del equipo ".$equipo . " en el torneo Maxi Basquet 2022",
-                 'contenido' => $contenido,
-                 
-            ];
-            $mail = Mail::to($correo)->send(new RechazoMail($details));
-            return $mail;}
+    public function sendEmailRechazo($equipo, $correo, $contenido)
+    {
+        $details = [
+            'title' => "Correo de rechazo de registro",
+            'body' => "Se encontraron errores en el registro del equipo " . $equipo . " en el torneo Maxi Basquet 2022",
+            'contenido' => $contenido,
+
+        ];
+        $mail = Mail::to($correo)->send(new RechazoMail($details));
+        return $mail;
+    }
 
     /**
      * Remove the specified resource from storage.
