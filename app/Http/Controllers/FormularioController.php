@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RechazoMail;
 use App\Mail\RegistroMail;
 use App\Models\Delegado;
 use App\Models\Aplicacion;
@@ -133,7 +134,7 @@ class FormularioController extends Controller
         
         $request->validate(
             [
-                'observaciones' => 'required|regex:/^([a-z][a-z, ]+)+$/'
+                'observaciones' => 'required|regex:/^([a-zA-Z][a-z, ]+)+$/'
             ],
             [
                 'observaciones.required' => 'por favor llene este campo',
@@ -157,7 +158,11 @@ class FormularioController extends Controller
             $usuario = new User;
             $usuario -> IdRol =  4;
             $nombre = $request -> NombreEncargado;
-            $usuario -> name = preg_replace('([^A-Za-z0-9])', '',$nombre);
+            $tranformado = preg_replace('([^A-Za-z0-9])', '',$nombre);
+            if (strlen($tranformado) > 15) {
+                $tranformado = substr($tranformado,0,15);
+            }
+            $usuario -> name = $tranformado;
             $usuario -> email = $request -> correoElectronico;
             $consultaCorreo = DB::table('users')
                         ->select('email')
@@ -196,7 +201,9 @@ class FormularioController extends Controller
         $datosApp->EstadoAplicacion = $valido;
         $datosApp->observaciones = $observacion;
         $datosApp->save();
-        
+        if($valido == "Rechazado"){
+            $this->sendEmailRechazo($request->nombreEquipos,$request -> correoElectronico,$observacion);
+        }
         return redirect('/formulario');
     }
     public function guardarCategorias($id,$categorias){
@@ -236,16 +243,26 @@ class FormularioController extends Controller
             return 0;
         }
     }
-
+    /**Manda los detalles para armar el correo de confirmacion de registro */
     public function sendEmail($usuario,$correo,$contrasenia,$equipo){
         $details =[
             'title' =>"Correo de confirmación de registro",
-             'body' => "Se registro al equipo ".$equipo . "en el torneo Maxi Basquet 2022",
+             'body' => "Se registro al equipo ".$equipo . " en el torneo Maxi Basquet 2022",
              'usuraio' => $usuario,
              'contrasenia' => $contrasenia
         ];
         $mail = Mail::to($correo)->send(new RegistroMail($details));
         return $mail;}
+    /** Manda los detalles para armar el correo de rechazo de registro */
+    public function sendEmailRechazo($equipo,$correo,$contenido){
+            $details =[
+                'title' =>"Correo de rechazo de registro",
+                 'body' => "Se encontraron errores en el registro del equipo ".$equipo . " en el torneo Maxi Basquet 2022",
+                 'contenido' => $contenido,
+                 
+            ];
+            $mail = Mail::to($correo)->send(new RechazoMail($details));
+            return $mail;}
 
     /**
      * Remove the specified resource from storage.
