@@ -251,7 +251,7 @@ class FormularioController extends Controller
              'usuraio' => $usuario,
              'contrasenia' => $contrasenia
         ];
-        $mail = Mail::to("jhosmanbarbery@gmail.com")->send(new RegistroMail($details));
+        $mail = Mail::to($correo)->send(new RegistroMail($details));
         return $mail;}
     /** Manda los detalles para armar el correo de rechazo de registro */
     public function sendEmailRechazo($equipo,$correo,$contenido){
@@ -261,7 +261,7 @@ class FormularioController extends Controller
                  'contenido' => $contenido,
                  
             ];
-            $mail = Mail::to("jhosmanbarbery@gmail.com")->send(new RechazoMail($details));
+            $mail = Mail::to($correo)->send(new RechazoMail($details));
             return $mail;}
 
     /**
