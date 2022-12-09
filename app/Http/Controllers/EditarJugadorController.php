@@ -162,7 +162,7 @@ class EditarJugadorController extends Controller
             'peso' => 'required|numeric|min:1|max:99',
             'fotoCarnet' => 'image',
             'posicion' => 'required',
-            'nCamiseta' => 'required|numeric|min:1|max:99'
+            'nCamiseta' => 'required|numeric|min:0|max:99'
         ]);
 
 
@@ -182,7 +182,7 @@ class EditarJugadorController extends Controller
         $jugador = $jugadores[0];
 
         if (!$consulta2->isEmpty() && $request->ci != $jugador->CiPersona) {
-            return back()->withInput()->with('mensajeErrorExiste', 'El Ci esta registrado');
+            return back()->withInput()->with('mensajeErrorExiste', 'El CI esta registrado');
         }
 
         $fecha = $request->fechaNacimiento;
@@ -237,11 +237,11 @@ class EditarJugadorController extends Controller
 
         }
 
-
+        $jugadorEquipo->save();
         $equipo = Equipo::find($jugadorEquipo->IdEquipo);
 
         $categoria = Categoria::find($request->selectCategoria);
-        return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se inscribio al tecnico correctamente');
+        return redirect('editarJugadores/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('mensaje', 'Se actualizo correctamente');
     }
 
     
