@@ -195,14 +195,19 @@ class FormularioController extends Controller
                 $this->guardarCategorias($equipo->IdEquipo, $categorias);
                 $this->sendEmail($usuario->name, $usuario->email, $contrasenia, $equipo->NombreEquipo);
             }
+            $datosApp = Aplicaciones::find($id);
+            $datosApp->EstadoAplicacion = $valido;
+            $datosApp->observaciones = $observacion;
+            $datosApp->save();
             return redirect('/formulario')->with('mensaje', 'Se acepto el formulario');
         }
-        $datosApp = Aplicaciones::find($id);
-        $datosApp->EstadoAplicacion = $valido;
-        $datosApp->observaciones = $observacion;
-        $datosApp->save();
+
         if ($valido == "Rechazado") {
             $this->sendEmailRechazo($request->nombreEquipos, $request->correoElectronico, $observacion);
+            $datosApp = Aplicaciones::find($id);
+            $datosApp->EstadoAplicacion = $valido;
+            $datosApp->observaciones = $observacion;
+            $datosApp->save();
             return redirect('/formulario')->with('mensajeRechazado', 'Se rechazo el formulario');
         }
     }
