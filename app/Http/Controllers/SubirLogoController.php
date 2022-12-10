@@ -26,6 +26,7 @@ class SubirLogoController extends Controller
                   ->join('paises','aplicaciones.IdPais','=','paises.IdPais')
                   ->join('categorias_por_equipo','equipos.IdEquipo','=','categorias_por_equipo.IdEquipo')
                   ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
+                  ->wherenull('categorias_por_equipo.deleted_at')
                   ->get();
         //echo $equipo;
         return view('logo.formularioSubidaLogo',compact('equipo','id','c'));
