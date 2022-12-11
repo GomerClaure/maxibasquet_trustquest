@@ -76,10 +76,10 @@ class JugadorController extends Controller
             'fotoJugador'=>'required|image|dimensions:width=472, height=472',
             'selectCategoria'=>'required',
             'estatura'=>'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
-            'peso'=>'required|numeric|min:1|max:99',
+            'peso'=>'required|numeric|min:1|max:180',
             'fotoCarnet'=>'required|image',
             'selectPosicion'=>'required',
-            'nCamiseta'=>'required|numeric|min:1|max:99'
+            'nCamiseta'=>'required|numeric|min:0|max:99'
         ]);
 
         $imagenJucador = $request->file('fotoJugador')->store('uploads','public');
