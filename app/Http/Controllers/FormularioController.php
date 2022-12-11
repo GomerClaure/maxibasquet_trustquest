@@ -166,6 +166,7 @@ class FormularioController extends Controller
                 $consultaCorreo = DB::table('users')
                     ->select('email')
                     ->where('email', $request->correoElectronico, 1)
+                    ->wherenull('deleted_at')
                     ->get();
 
                 if (!$consultaCorreo->isEmpty()) {
