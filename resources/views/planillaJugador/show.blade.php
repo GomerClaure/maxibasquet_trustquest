@@ -156,9 +156,35 @@
                                         @endif
 
                                     @endforeach
+
+                                    @if ($i<=5)
+                                    <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}">
+                                                @php
+                                                    $select= $jugador->IdJugador."selectFalta".$i;
+                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$i;
+                                                @endphp
+                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}">
+                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                    </div>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                    @endif
+
                                     @for ($j = $i; $j <= 5 ; $j++)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}" disabled>
                                                 @php
                                                     $select= $jugador->IdJugador."selectFalta".$j;
                                                     $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
@@ -169,7 +195,7 @@
                                                 <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" disabled>
                                                 <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
@@ -269,9 +295,35 @@
                                             @endphp
                                         @endif
                                     @endforeach
+
+                                    @if ($i<=5)
+                                    <div class="col-2 d-flex justify-content-center ">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$i}}" name="{{$jugador->IdJugador}}selectFalta{{$i}}">
+                                                @php
+                                                    $select= $jugador->IdJugador."selectFalta".$i;
+                                                    $selectTiro = $jugador->IdJugador."selectTiroLibre".$i;
+                                                @endphp
+                                                <option value="vacio" {{ old($select) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="P" {{ old($select) == 'P' ? 'selected' : '' }}>P</option>
+                                                <option value="T" {{ old($select) == 'T' ? 'selected' : '' }}>T</option>
+                                                <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
+                                                <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
+                                            </select>
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$i}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$i}}">
+                                                <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
+                                                <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ old($selectTiro) == '3' ? 'selected' : '' }}>3</option>
+                                            </select>
+                                    </div>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                    @endif
+
                                     @for ($j = $i; $j <= 5 ; $j++)
                                         <div class="col-2 d-flex justify-content-center ">
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectFalta{{$j}}" name="{{$jugador->IdJugador}}selectFalta{{$j}}" disabled>
                                                 @php
                                                     $select= $jugador->IdJugador."selectFalta".$j;
                                                     $selectTiro = $jugador->IdJugador."selectTiroLibre".$j;
@@ -282,7 +334,7 @@
                                                 <option value="U" {{ old($select) == 'U' ? 'selected' : '' }}>U</option>
                                                 <option value="D" {{ old($select) == 'D' ? 'selected' : '' }}>D</option>
                                             </select>
-                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}">
+                                            <select class="form-select" id="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" name="{{$jugador->IdJugador}}selectTiroLibre{{$j}}" disabled>
                                                 <option value="vacio" {{ old($selectTiro) == 'vacio' ? 'selected' : '' }}></option>
                                                 <option value="1" {{ old($selectTiro) == '1' ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ old($selectTiro) == '2' ? 'selected' : '' }}>2</option>

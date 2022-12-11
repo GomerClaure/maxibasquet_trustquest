@@ -47,79 +47,40 @@ class PlanillaJugadorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $idPartido, $idPlanillaJugador, $id)
-    {
-        $falta = "";
-        $tiroLibre = "";
+    {   
+        for($i=1;$i<=5;$i++){
+                $planillaJugador = DB::table('faltas')
+                                ->select('*')
+                                ->where('IdJugador',$id)
+                                ->where('IdPlanillaJugador',$idPlanillaJugador)
+                                ->get(); 
 
-        $selectFalta = $id.'selectFalta1';
-        $selectTiroLibre = $id.'selectTiroLibre1';
-
-        if($request -> $selectFalta == "vacio"){
-            if($request -> $selectTiroLibre == "vacio"){
-                for($j=2; $j<=5; $j++){
-                    $select = $id.'selectFalta'.$j;
-                    $select2 = $id.'selectTiroLibre'.$j;
-                    if($request -> $select != "vacio" || $request -> $select2 != "vacio"){
-                        return back()->withInput()->with('mensajeErrorOrdenIngreso','Las faltas no fueron ingresadas en orden');
-                    }
-                }
-                return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');  
-            }else{
-                return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
-            }
-            
-        }else if($request -> $selectTiroLibre != "vacio"){
-            for($i=1; $i<=5; $i++){
-                $select = $id.'selectFalta'.$i;
-                $select2 = $id.'selectTiroLibre'.$i;
-
-                if($request -> $select == "vacio" && $request -> $select2 == "vacio"){
-                    $selectActual = $id.'selectFalta'.($i-1);
-                    $falta = $request -> $selectActual;
-
-                    $selectActual2 = $id.'selectTiroLibre'.($i-1);
-                    $tiroLibre = $request -> $selectActual2;
+                if($planillaJugador->count() < $i){
+                    $selectActualFalta = $id.'selectFalta'.($i);
+                    $selectActualTiro = $id.'selectTiroLibre'.($i);
                     
-                    for($j=$i+1; $j<=5; $j++){
-                        $select = $id.'selectFalta'.$j; 
-                        $select2 = $id.'selectTiroLibre'.$j;
-                        if($request -> $select != "vacio" || $request -> $select2 != "vacio"){
-                            return back()->withInput()->with('mensajeErrorOrdenIngreso','Las faltas no fueron ingresadas en orden');
-                        }
-                    }
-                    $i=6;
-                }else if($request -> $select == "vacio" && $request -> $select2 != "vacio"){
-                    return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
-                }else if($request -> $select != "vacio" && $request -> $select2 == "vacio"){
-                    return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
-                }else if($request -> $select != "vacio" && $request -> $select2 != "vacio"){
-                    $selectActual = $id.'selectFalta'.$i;
-                    $falta = $request -> $selectActual;
-
-                    $selectActual2 = $id.'selectTiroLibre'.$i;
-                    $tiroLibre = $request -> $selectActual2;
-
-                    if($falta != null && $tiroLibre != null){
+                    if($request -> $selectActualFalta == "vacio" && $request -> $selectActualTiro == "vacio"){
+                        return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');
+                    }else if($request -> $selectActualFalta != "vacio" && $request -> $selectActualTiro == "vacio" || 
+                                $request -> $selectActualFalta == "vacio" && $request -> $selectActualTiro != "vacio"){
+                        return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
+                    }else if($request -> $selectActualFalta != "vacio" && $request -> $selectActualTiro != "vacio"){
                         $faltaJugador = new Falta;
                         $faltaJugador -> IdJugador = $id;
                         $faltaJugador -> IdPlanillaJugador = $idPlanillaJugador;
-                        $faltaJugador -> TipoFalta = $falta;
-                        $faltaJugador -> CantidadTiroLibre = $tiroLibre;
+                        $faltaJugador -> TipoFalta = $request -> $selectActualFalta;
+                        $faltaJugador -> CantidadTiroLibre = $request -> $selectActualTiro;
                         $faltaJugador -> save();
+
+                        return redirect('planilla/jugador/'.$idPartido)->with('mensaje','Informacion guardado correctamente');
                     }
                 }
-            }
-        }else{
-            return back()->withInput()->with('mensajeDatosNoCompletos','Los datos de la falta no estan completas');
+
+                if($i == 5){
+                    return redirect('planilla/jugador/'.$idPartido);
+                }
+                
         }
-
-        if($falta == "" && $tiroLibre == ""){
-            return back()->withInput()->with('mensajeNingunDato','No se agrego ningun dato');
-        }
-
-        
-
-        return redirect('planilla/jugador/'.$idPartido)->with('mensaje','Informacion guardado correctamente');
     }
 
     /**
