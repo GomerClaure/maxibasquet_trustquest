@@ -37,6 +37,7 @@ class CuerpoTecnicoController extends Controller
                             ->join('categorias','categorias_por_equipo.IdCategoria','=','categorias.IdCategoria')
                             ->where('equipos.NombreEquipo','=',$equipo)
                             ->where('categorias.NombreCategoria','=',$categoria)
+                            ->whereNull('categorias_por_equipo.deleted_at')
                             ->get();
         if(! $equipos->isEmpty()){
             $equipo = $equipos[0]->NombreEquipo;
@@ -64,7 +65,8 @@ class CuerpoTecnicoController extends Controller
         $categorias = DB::table('categorias_por_equipo')
                             ->select('*')
                             ->join('categorias','categorias.IdCategoria','=','categorias_por_equipo.IdCategoria')
-                            ->where('IdEquipo',$id)
+                            ->whereNull('categorias_por_equipo.deleted_at')
+                            ->where('IdEquipo',$id)                        
                             ->get();
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
@@ -186,8 +188,10 @@ class CuerpoTecnicoController extends Controller
 
         $tecnico = $tecnicos[0];
         $cuerpoTecnico = DB::table('tecnicos')
-                            ->select('IdCategoria')
-                            ->where('IdEquipo',$tecnico->IdEquipo)
+                            ->select('categorias_por_equipo.IdCategoria')
+                            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','=','tecnicos.IdEquipo')
+                            ->whereNull('categorias_por_equipo.deleted_at')
+                            ->where('tecnicos.IdEquipo',$tecnico->IdEquipo)
                             ->distinct()
                             ->get();
 

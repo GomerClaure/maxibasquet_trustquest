@@ -27,6 +27,9 @@ body{
     font-size: 14;
     border: #272725;
   } 
+.btn:hover{
+    background-color: #f89b06 !important;
+}
 .col-md-6.imagen{
   display: grid;
   align-content: center;
