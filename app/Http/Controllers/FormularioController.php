@@ -134,7 +134,7 @@ class FormularioController extends Controller
 
         $request->validate(
             [
-                'observaciones' => 'required|regex:/^([a-zA-Z][a-z, ]+)+$/'
+                'observaciones' => 'required|regex:/^([a-zA-Z][a-z, ,.,áéíóú]+)+$/'
             ],
             [
                 'observaciones.required' => 'por favor llene este campo',

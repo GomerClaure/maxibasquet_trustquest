@@ -159,7 +159,7 @@ class EditarJugadorController extends Controller
             'fotoJugador' => 'image|dimensions:width=472, height=472',
             'selectCategoria' => 'required',
             'estatura' => 'required|regex:/^[1-2]{1}[.][0-9]{2}$/',
-            'peso' => 'required|numeric|min:1|max:99',
+            'peso' => 'required|numeric|min:1|max:180',
             'fotoCarnet' => 'image',
             'posicion' => 'required',
             'nCamiseta' => 'required|numeric|min:0|max:99'
