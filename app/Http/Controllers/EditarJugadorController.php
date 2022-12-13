@@ -29,6 +29,7 @@ class EditarJugadorController extends Controller
             ->join('paises', 'aplicaciones.IdPais', '=', 'paises.IdPais')
             ->join('categorias_por_equipo', 'equipos.IdEquipo', '=', 'categorias_por_equipo.IdEquipo')
             ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
+            ->whereNull('categorias_por_equipo.deleted_at')
             ->get();
 
         $EquiposDatos = [];
@@ -92,6 +93,7 @@ class EditarJugadorController extends Controller
             ->join('categorias', 'categorias_por_equipo.IdCategoria', '=', 'categorias.IdCategoria')
             ->where('equipos.NombreEquipo', '=', $equipo)
             ->where('categorias.NombreCategoria', '=', $categoria)
+            ->whereNull('categorias_por_equipo.deleted_at')
             ->get();
         if (!$equipos->isEmpty()) {
             $equipo = $equipos[0]->NombreEquipo;
@@ -115,11 +117,12 @@ class EditarJugadorController extends Controller
 
         $datos = $tecnicos[0];
         $cuerpoTecnico = DB::table('jugadores')
-            ->select('IdCategoria')
-            ->where('IdEquipo', $datos->IdEquipo)
+            ->select('categorias_por_equipo.IdCategoria')
+            ->join('categorias_por_equipo','categorias_por_equipo.IdEquipo','=','jugadores.IdEquipo')
+            ->whereNull('categorias_por_equipo.deleted_at')
+            ->where('jugadores.IdEquipo', $datos->IdEquipo)
             ->distinct()
             ->get();
-
         $arreglo = array();
         $contador = 0;
         foreach ($cuerpoTecnico as $categoria) {
@@ -130,6 +133,7 @@ class EditarJugadorController extends Controller
         $categorias = DB::table('categorias')
             ->select('*')
             ->whereIn('IdCategoria', $arreglo)
+
             ->get();
 
         $equipo = Equipo::find($datos->IdEquipo);

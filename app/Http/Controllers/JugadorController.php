@@ -43,6 +43,7 @@ class JugadorController extends Controller
                             ->select('*')
                             ->join('categorias','categorias.IdCategoria','=','categorias_por_equipo.IdCategoria')
                             ->where('IdEquipo',$id)
+                            ->whereNull('categorias_por_equipo.deleted_at')
                             ->get();
         $paises = DB::table('paises')
                 ->orderBy('Nacionalidad', 'asc')
