@@ -28,24 +28,8 @@
                 </div>
                 <div class="border-bottom border-dark">
                     <div class="row p-2">
-                        <div class="col">
-                            <div class="input-group">
-                                <label  for="equipoB" class="form-label">Equipo A:</label>
-                                <div class="input-group col-md-12">
-                                    <input class="form-control" type="text" value="{{$equipoA->NombreEquipo}}"  disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group">
-                                <label  for="equipoA" class="form-label">Equipo B:</label>
-                                <div class="input-group col-md-12">
-                                    <input class="form-control" type="text" value="{{$equipoB->NombreEquipo}}"  disabled>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="col">
+                        {{-- <div class="col-1"></div> --}}
+                        <div class="col-md-2">
                             <div class="input-group">
                                 <label  for="categoria" class="form-label">Categoria:</label>
                                 <div class="input-group col-md-12">
@@ -53,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-2">
                             <div class="input-group">
                                 <label  for="nroDeJuego" class="form-label">Nro de Juego:</label>
                                 <div class="input-group col-md-12">
@@ -61,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-2">
                             <div class="input-group">
                                 <label  for="fecha" class="form-label">Fecha:</label>
                                 <div class="input-group col-md-12">
@@ -69,8 +53,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <label  for="lugar" class="form-label">Lugar:</label>
+                                <div class="input-group col-md-12">
+                                    <input class="form-control" type="text" value="{{$partido->LugarPartido}}"  disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <label  for="juez1" class="form-label">1er Juez:</label>
+                                <div class="input-group col-md-12">
+                                    <input class="form-control" type="text" value="{{$jueces[0]->NombrePersona.' '.$jueces[0]->ApellidoPaterno }}"  disabled>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <label  for="juez2" class="form-label">2do Juez:</label>
+                                <div class="input-group col-md-12">
+                                    <input class="form-control" type="text" value="{{$jueces[1]->NombrePersona.' '.$jueces[1]->ApellidoPaterno }}"  disabled>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="col-1"></div> --}}
                     </div>
-                    <div class="row p-2">
+                    {{-- <div class="row p-2">
                         <div class="col">
                             <div class="input-group">
                                 <label  for="lugar" class="form-label">Lugar:</label>
@@ -96,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col text-center  p-3">
                         <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" value="IniciarPartido" > Iniciar partido</button>
                     </div>
@@ -106,6 +116,34 @@
                 <form class="formularioJugada" action="{{route('guardarJugada',['idPartido' => $idPartido])}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="row p-2 pt-4 pb-4">
+                        <div>
+                            <label  for="puntoEquipo" class="form-label">Registro de jugadas:</label>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="input-group">
+                                    <label  for="equipoB" class="form-label">Equipo A:</label>
+                                    <div class="input-group col-md-12">
+                                        <input class="form-control" type="text" value="{{$equipoA->NombreEquipo}}"  disabled>
+                                    </div>
+                                </div>
+                               <div class="col">
+                                @foreach ($jugadoresA as $jugadorA)
+                                        <label value="{{$jugadorA->IdJugador}}">{{$jugadorA->NombrePersona.' '.$jugadorA->ApellidoPaterno}}</option>
+                                @endforeach
+                                </div> 
+                            </div>
+                           
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label  for="equipoA" class="form-label">Equipo B:</label>
+                                <div class="input-group col-md-12">
+                                    <input class="form-control" type="text" value="{{$equipoB->NombreEquipo}}"  disabled>
+                                </div>
+                            </div>
+                            
+                        </div>
                             <div class="col">
                                 <div class="input-group">
                                     <label  for="puntoEquipo" class="form-label">Punto para el equipo:</label>
