@@ -106,7 +106,7 @@ class AplicacionesController extends Controller
             return back()->withError($th->getMessage())->withInput();
         }
 
-        return redirect()->route('preinscripcion');
+        return redirect()->route('preinscripcion')->with('preinscripcioncorrecta','Se realizó tu preinscripcion correctamente');
     }
     // para eliminar una preinscripcion
     public function destroy()
