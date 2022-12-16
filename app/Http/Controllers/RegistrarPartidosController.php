@@ -234,10 +234,10 @@ class RegistrarPartidosController extends Controller
             ->get();
 
         $planilla = new PlanillaJugador;
-        $planilla -> IdPartido = $nuevoPartido -> IdPartido;
-        $planilla -> save();
+        $planilla->IdPartido = $nuevoPartido->IdPartido;
+        $planilla->save();
 
-       // return redirect('registrarPartidos/create');
+        // return redirect('registrarPartidos/create');
         // return view('registrarPartido.create', compact('categorias'));
         //return response()->json($request);
 
@@ -263,6 +263,7 @@ class RegistrarPartidosController extends Controller
         $equipos = DB::table('equipos')
             ->select('NombreEquipo')
             ->orderBy('NombreEquipo', 'ASC')
+            ->whereNull('equipos.deleted_at')
             ->get();
 
         $categorias = DB::table('categorias')

@@ -24,9 +24,13 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link active" href="{{url('/home')}}">Home</a>
                         </li>
-                        <li class="nav-item ms-3">
-                            <a class="nav-link active" href="{{url('/Equipo')}}">Equipos</a>
-                        </li>
+                        <li class="nav-item dropdown ms-3">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Equipos</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{url('/Equipo')}}">Ver Equipos</a>
+                            <a class="dropdown-item" href="{{url('/listaequipos')}}" >Lista Equipo</a>
+                        </div>
+                    </li>
                         <li class="nav-item">
                         <a class="nav-link active" href="{{url('/jugadores')}}">Jugadores</a>
                         </li>
