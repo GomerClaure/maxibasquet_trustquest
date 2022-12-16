@@ -19,6 +19,12 @@
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error')  }}</div>
                 @endif
+                @if (Session::has('preinscripcioncorrecta'))
+                    <div class="alert alert-success alert-dismissible d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <h4>{{Session::get('preinscripcioncorrecta')}}</h4>
+                    </div>
+                @endif
                 <form class="g-3" action="{{route('aplicacion')}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="row pb-3 mb-4 registro-datos ">
@@ -76,14 +82,14 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="correoElectronico" class="form-label">Correo Electronico:</label>
+                            <label for="correoElectronico" class="form-label">Correo Electrónico:</label>
                             <input name="{{config('constants.CORREO_ELECTRONICO')}}" type="text" class="form-control" id="correoElectronico" value={{ old(config('constants.CORREO_ELECTRONICO')) }}>
                             @error(config('constants.CORREO_ELECTRONICO'))
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label  for="pais" class="form-label">Pais:</label>
+                            <label  for="pais" class="form-label">País:</label>
                             <select name="pais" class="form-select" id="pais" value={{ old('pais') }}>
                             @foreach ($paises as $pais)
                                 <option >{{$pais->NombrePais}}</option>

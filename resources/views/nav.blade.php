@@ -121,7 +121,7 @@
             </div>
             </div>
       </nav>
-    @elseif(auth()->user()->IdRol ==2 || auth()->user()->IdRol ==1)
+    @elseif(auth()->user()->IdRol ==2 || auth()->user()->IdRol ==1 || auth()->user()->IdRol ==5)
         <nav class="navbar navbar-expand-sm navbar-light menu">
             <!-- Brand -->
             <div class="container-fluid">
