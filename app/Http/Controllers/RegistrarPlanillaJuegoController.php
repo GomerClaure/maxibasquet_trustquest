@@ -96,7 +96,12 @@ class RegistrarPlanillaJuegoController extends Controller
         if ($partido->EstadoPartido == "finalizado") {
             return redirect('mostrarResumen/'.$idPartido);
         }else{
-            $accion = $formulario["accionBoton"];
+            try {
+                $accion = $formulario["accionBoton"];
+            } catch (\Throwable $th) {
+                $accion = 'GuardarPunto';
+            }
+            
             $cuarto = $this->getCuartoJugado($idPartido);
             if($accion == 'GuardarPunto'){
                 if ($cuarto == 0) {
@@ -107,17 +112,15 @@ class RegistrarPlanillaJuegoController extends Controller
                     $planilla->save();
                     $cuarto = 1;
                 }
-                $puntoEquipo = explode(' ', $formulario['puntoEquipo']);
+                $puntoEquipo = explode(' ', $formulario['GuardarPunto']);
                 $nomEquipo = $puntoEquipo[0];
                 $idEquipo = $puntoEquipo[1];
-                
-                $puntuacion = $formulario['puntacion'];
+                $idJugador = $puntoEquipo[2];
+                $puntuacion = $puntoEquipo[3];
                 if ($nomEquipo == 'A') {
                     $charEquipo = 'A';
-                    $idJugador = $formulario['jugadorA'];
                 }elseif ($nomEquipo == 'B') {
                     $charEquipo = 'B';
-                    $idJugador = $formulario['jugadorB'];
                 }
                 $jugada = new Jugada;
                 $jugada -> IdJugador = $idJugador;
