@@ -1,4 +1,3 @@
-$listas
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -24,6 +23,8 @@ $listas
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="{{asset('css/StyleListaEquipos.css')}}">
     </head>
+    @extends('nav')
+    @section('content')
     <body class="antialiased">
     <header >
             <!-- Grey with black text -->
@@ -86,4 +87,5 @@ $listas
 
 
     </body>
+    @endsection
 </html>
