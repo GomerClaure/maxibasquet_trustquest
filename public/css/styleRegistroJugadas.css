@@ -13,7 +13,7 @@ h1{
     background-color: #b5b5bd;
 }
 .col.pasos{
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 
@@ -62,13 +62,21 @@ h1{
     background: #eb8f32;
     color: white;
 }
-.btn.guardarP:first-child:hover{
+.btn.guardarP:hover{
     background: #fa841a;
     color: white;
 }
 
+.btn.guardarP2{
+    background: #eb8f32 !important;
+    color: #FFF !important;
+}
 
-.mostrarResultado{
+.btn.guardarP2:first-child:hover{
+    background: #fa841a !;
+    color: white;
+}
+table{
     background-color: #b5b5bd;
 }
 td{

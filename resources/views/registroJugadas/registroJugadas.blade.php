@@ -23,10 +23,10 @@
         <h1 for="">Planilla de Jugadas</h1>
         <div class="row">
             <section class="datosPartido">
-                <div class="col p-3 ">
+                <div class="col p-3 pb-1 pt-1 border-bottom border-dark border-opacity-50">
                     <a href="{{url('planilla/jugador/')}}" class="btn iniciarPartido">Volver</a>
                 </div>
-                <div class="border-bottom border-dark">
+                <div class="border-bottom border-dark border-opacity-50">
                     <div class="row p-2">
                         {{-- <div class="col-1"></div> --}}
                         <div class="col-md-2">
@@ -78,36 +78,8 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-1"></div> --}}
                     </div>
-                    {{-- <div class="row p-2">
-                        <div class="col">
-                            <div class="input-group">
-                                <label  for="lugar" class="form-label">Lugar:</label>
-                                <div class="input-group col-md-12">
-                                    <input class="form-control" type="text" value="{{$partido->LugarPartido}}"  disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group">
-                                <label  for="juez1" class="form-label">1er Juez:</label>
-                                <div class="input-group col-md-12">
-                                    <input class="form-control" type="text" value="{{$jueces[0]->NombrePersona.' '.$jueces[0]->ApellidoPaterno }}"  disabled>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="col">
-                            <div class="input-group">
-                                <label  for="juez2" class="form-label">2do Juez:</label>
-                                <div class="input-group col-md-12">
-                                    <input class="form-control" type="text" value="{{$jueces[1]->NombrePersona.' '.$jueces[1]->ApellidoPaterno }}"  disabled>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="col text-center  p-3">
+                    <div class="col text-center  p-2">
                         <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" value="IniciarPartido" > Iniciar partido</button>
                     </div>
                 </div>
@@ -115,7 +87,7 @@
             <section class="registroPuntaje border-bottom" id="registroPuntaje" style="display: none">
                 <form class="formularioJugada" action="{{route('guardarJugada',['idPartido' => $idPartido])}}" method="POST" enctype="multipart/form-data" novalidate>
                     @csrf
-                    <div class="row p-2 pt-4 pb-3">
+                    <div class="row p-2 pt-2 pb-3">
                         <div>
                             <label  for="puntoEquipo" class="form-label">Registro de jugadas:</label>
                         </div>
@@ -142,15 +114,9 @@
                                                 <label value="{{$jugadorA->IdJugador}}">{{$jugadorA->NombrePersona.' '.$jugadorA->ApellidoPaterno}}</label>
                                             </div>
                                             <div class="col ">
-                                                <div class="d-inline  p-2 border-end border-dark border-opacity-25">
                                                     <button name="GuardarPunto" type="submit" id="1p" class="btn guardarP m-2" value="{{'A '.$equipoA->IdEquipo.' '.$jugadorA->IdJugador.' 1'}}">1 Punto</button>
-                                                </div>
-                                                <div class="d-inline p-2 border-end border-dark border-opacity-25">
                                                     <button name="GuardarPunto" type="submit" id="2p" class="btn guardarP m-2" value="{{'A '.$equipoA->IdEquipo.' '.$jugadorA->IdJugador.' 2'}}">2 Puntos</button>
-                                                </div>
-                                                <div class="d-inline p-2">
                                                     <button name="GuardarPunto" type="submit" id="3p" class="btn guardarP m-2" value="{{'A '.$equipoA->IdEquipo.' '.$jugadorA->IdJugador.' 3'}}">3 Puntos</button>
-                                                </div> 
                                             </div>
                                         </div>
                                     @endforeach 
@@ -180,15 +146,9 @@
                                             <label value="{{$jugadorB->IdJugador}}">{{$jugadorB->NombrePersona.' '.$jugadorB->ApellidoPaterno}}</label>
                                         </div>
                                         <div class="col ">
-                                            <div class="d-inline  p-2 border-end border-dark border-opacity-25">
                                                 <button name="GuardarPunto" type="submit" class="btn guardarP m-2" value="{{'B '.$equipoB->IdEquipo.' '.$jugadorB->IdJugador.' 1'}}">1 Punto</button>
-                                            </div>
-                                            <div class="d-inline p-2 border-end border-dark border-opacity-25">
                                                 <button name="GuardarPunto" type="submit" class="btn guardarP m-2" value="{{'B '.$equipoB->IdEquipo.' '.$jugadorB->IdJugador.' 2'}}">2 Puntos</button>
-                                            </div>
-                                            <div class="d-inline p-2">
                                                 <button name="GuardarPunto" type="submit" class="btn guardarP m-2" value="{{'B '.$equipoB->IdEquipo.' '.$jugadorB->IdJugador.' 3'}}">3 Puntos</button>
-                                            </div> 
                                         </div>
                                     </div>
                                 @endforeach 
@@ -204,76 +164,7 @@
                 </div>
                 </form>
             </section>
-            <section class="mostrarResultado mb-5">
-                <div class="row">
-                    <div class="col">
-                        <table class="table table-bordered border-secondary table-sm">
-                            <tr>
-                             <th colspan="2">A</th>
-                             <th colspan="2">B</th>
-                            </tr>
-                            @foreach($registroTabla1 as $registro)
-                                <tr>
-                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
-                                    <td>{{$registro}}</td>
-                                    <td>{{$registro}}</td>
-                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                    <div class="col">
-                        <table class="table table-bordered border-secondary table-sm">
-                            <tr>
-                             <th colspan="2">A</th>
-                             <th colspan="2">B</th>
-                            </tr>
-                            @foreach($registroTabla2 as $registro)
-                                <tr>
-                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
-                                    <td>{{$registro}}</td>
-                                    <td>{{$registro}}</td>
-                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                    <div class="col">
-                        <table class="table table-bordered border-secondary table-sm">
-                            <tr>
-                             <th colspan="2">A</th>
-                             <th colspan="2">B</th>
-                            </tr>
-                            @foreach($registroTabla3 as $registro)
-                                <tr>
-                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
-                                    <td>{{$registro}}</td>
-                                    <td>{{$registro}}</td>
-                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
-                                </tr>
-                            @endforeach 
-                        </table>
-                    </div>
-                    <div class="col">
-                        <table class="table table-bordered border-secondary table-sm">
-                            <tr>
-                             <th colspan="2">A</th>
-                             <th colspan="2">B</th>
-                            </tr>
-                            @foreach($registroTabla4 as $registro)
-                                <tr>
-                                    <td id="{{'colA'.$registro}}">&nbsp;</td>
-                                    <td>{{$registro}}</td>
-                                    <td>{{$registro}}</td>
-                                    <td id="{{'colB'.$registro}}">&nbsp;</td>
-                                </tr>
-                            @endforeach 
-                        </table>
-                    </div>
-                    
-                </div>
-                
-            </section>
+           
             <section class="resumen">
 
             </section>
@@ -284,6 +175,119 @@
   </div>
   
   
+</section>
+<section class="mostrarResultado mb-5" style="max-width:100%;">
+    <div class="container">
+        <div class="row mb-2 mt-2" style="overflow-x: auto;">
+            <table class="table table-bordered border-secondary table-sm ms-2">
+                <tr>
+                    <th rowspan="2">A</th>
+                    @foreach($registroTabla1 as $registro)
+                        <td id="{{'colA'.$registro}}">&nbsp;</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla1 as $registro)
+                        <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    <th rowspan="2">B</th>
+                    @foreach($registroTabla1 as $registro)
+                    <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla1 as $registro)
+                        <td id="{{'colB'.$registro}}">&nbsp;</td>
+                    @endforeach
+                </tr>
+            </table>
+        </div>
+        <div class="row mb-2 mt-2" style="overflow-x: auto;">
+            <table class="table table-bordered border-secondary table-sm ms-2">
+                <tr>
+                    <th rowspan="2">A</th>
+                    @foreach($registroTabla2 as $registro)
+                        <td id="{{'colA'.$registro}}">&nbsp;</td>
+                            
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla2 as $registro)
+                        <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    <th rowspan="2">B</th>
+                    @foreach($registroTabla2 as $registro)
+                    <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla2 as $registro)
+                        <td id="{{'colB'.$registro}}">&nbsp;</td>
+                    @endforeach
+                </tr>
+            </table>
+        </div>
+        <div class="row mb-2 mt-2" style="overflow-x: auto;">
+            <table class="table table-bordered border-secondary table-sm ms-2">
+                <tr>
+                    <th rowspan="2">A</th>
+                    @foreach($registroTabla3 as $registro)
+                        <td id="{{'colA'.$registro}}">&nbsp;</td>
+                            
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla3 as $registro)
+                        <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    <th rowspan="2">B</th>
+                    @foreach($registroTabla3 as $registro)
+                    <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla3 as $registro)
+                        <td id="{{'colB'.$registro}}">&nbsp;</td>
+                    @endforeach
+                </tr>
+            </table>
+        </div>
+        <div class="row mb-2 mt-2" style="overflow-x: auto;">
+            <table class="table table-bordered border-secondary table-sm ms-2">
+                <tr>
+                    <th rowspan="2">A</th>
+                    @foreach($registroTabla4 as $registro)
+                        <td id="{{'colA'.$registro}}">&nbsp;</td>
+                            
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla4 as $registro)
+                        <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    <th rowspan="2">B</th>
+                    @foreach($registroTabla4 as $registro)
+                    <td>{{$registro}}</td>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($registroTabla4 as $registro)
+                        <td id="{{'colB'.$registro}}">&nbsp;</td>
+                    @endforeach
+                </tr>
+            </table>
+        </div>
+    
+    </div>
+    
 </section>
 <script>
     var cuarto = {{$cuarto}}
