@@ -117,6 +117,7 @@ class PlanillaJugadorController extends Controller
                             ->select('*')
                             ->where('IdEquipo',$idEquipos[0]-> IdEquipo)
                             ->where('IdCategoria',$partidos[0]-> IdCategoria)
+                            ->whereNull('deleted_at')
                             ->get();
 
         $personasA = array();
@@ -125,11 +126,12 @@ class PlanillaJugadorController extends Controller
             $personasA[$contador] = Persona::find($jugador->IdPersona);
             $contador++;
         }
-
+        //return response()->json($personasA);
         $arregloEquipoB = DB::table('jugadores')
                             ->select('*')
                             ->where('IdEquipo',$idEquipos[1]-> IdEquipo)
                             ->where('IdCategoria',$partidos[0]-> IdCategoria)
+                            ->whereNull('deleted_at')
                             ->get();
 
         $personasB = array();
@@ -141,7 +143,7 @@ class PlanillaJugadorController extends Controller
 
         $equipoA = Equipo::find($idEquipos[0]-> IdEquipo);
         $equipoB = Equipo::find($idEquipos[1]-> IdEquipo);
-
+        //return response()->json($arregloEquipoA);
         return view("planillaJugador.show",compact('arregloEquipoA','personasA','arregloEquipoB','personasB','idPartido','idPlanillaJugador','faltas','equipoA','equipoB'));
     }
 
