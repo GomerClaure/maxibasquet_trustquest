@@ -22,7 +22,7 @@ class PlanillaJugadorController extends Controller
     public function index()
     {
         $datos = DB::table('partidos')
-            ->select('NombreEquipo','partidos.IdPartido')
+            ->select('NombreEquipo','partidos.IdPartido','EstadoPartido')
             ->join('datos_partidos', 'partidos.IdPartido', '=', 'datos_partidos.IdPartido')
             ->join('equipos', 'datos_partidos.IdEquipo', '=', 'equipos.IdEquipo')
             ->get();
