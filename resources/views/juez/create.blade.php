@@ -181,7 +181,7 @@
                     <div class="row">
 
                         <div class="form-group mb-6 col-6">
-                            <label for="" class="form-label">Foto del juez (Resolucion 472x472):</label>
+                            <label for="" class="form-label">Foto del personal (Resolucion 472x472):</label>
                             <input type="file" class="form-control" id="foto" name="foto" accept="image/*" value="{{ old('foto') }}">
                             @error('foto')
                                 <p class="error-message">{{ $message }}</p>
