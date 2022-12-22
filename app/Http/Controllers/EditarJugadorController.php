@@ -254,14 +254,12 @@ class EditarJugadorController extends Controller
     
     public function destroy($id)
     {
+        date_default_timezone_set('America/La_Paz');
         $jugador = Jugador::select()
             ->join('personas', 'personas.IdPersona', 'jugadores.IdPersona')
             ->where('IdJugador', $id)
             ->get();
         $datosJugador = $jugador[0];
-        Jugador::where('IdJugador', $id)->delete();
-        Credencial::where('IdPersona', $datosJugador->IdPersona)->delete();
-        Persona::where('IdPersona', $datosJugador->IdPersona)->delete();
         $equipo = Equipo::find($datosJugador->IdEquipo);
         $categoria = Categoria::find($datosJugador->IdCategoria);
         $partido = $this->comprobarPartido($equipo->IdEquipo, $datosJugador->IdCategoria);

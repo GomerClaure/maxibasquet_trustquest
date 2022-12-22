@@ -6,16 +6,16 @@ body,html{
     margin: 20px;
 }
 .convocatoria{
-    
+
     text-align: center;
 }
 .carousel{
     margin: 50px;
-    padding: 50px;
+    padding: 60px;
 }
 .imgh{
     height: 300px ;
-    width: 600px;
+    width: 500px;
 }
 .imgconv{
     height: 500px ;
@@ -24,8 +24,7 @@ body,html{
     padding: 15px;
 }
 .noticias{
-    display: inline-flex;
-    flex-direction: row;
+    display: flex;
     margin: 15px;
     margin-left: 25px;
 }
