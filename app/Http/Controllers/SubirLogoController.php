@@ -44,7 +44,7 @@ class SubirLogoController extends Controller
         Storage::disk('public')->delete('/'.($equipo->LogEquipo));
         $equipo->LogoEquipo = $formulario['logotipoDelEquipo'];
         $equipo->save();
-        return redirect('subirLogo');
+        return redirect('subirLogo')->with('logoSubido','Se actualizo el logo correctamente');
         // return $request;
     }
 

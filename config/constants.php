@@ -1,11 +1,11 @@
 <?php return [ 'NOMBRE_EQUIPO' => 'nombreDeEquipo',
                'NOMBRE_ENCARGADO' =>'nombreDelEncargado',
                'CATEGORIAS' => 'option',
-               'CORREO_ELECTRONICO' => 'correoElectronico',
+               'CORREO_ELECTRONICO' => 'correoElectrónico',
                'TELEFONO_CONTACTO' => 'telefonoDeContacto',
                'DATOS_PAGO' => 'numeroDeComprobanteDePago',
                'MONTO_PAGAR' => 'montoPagado',
                'NUM_CUENTA' => 'numeroDeCuenta',
-               'FEC_DEPOSITO' => 'fechaDeDeposito',
+               'FEC_DEPOSITO' => 'fechaDeDepósito',
                'VAUCHER_PAGO' => 'vaucherDePago',
-               'PAIS' => 'pais' ];
+               'PAIS' => 'país' ];

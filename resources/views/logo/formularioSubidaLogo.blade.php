@@ -4,6 +4,7 @@
     <title>Mi Equipo</title>
     <link rel="stylesheet" href="{{asset('css/StyleSubirLogo.css' )}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 @extends('nav') 
 @section('content')
@@ -14,6 +15,12 @@
     <p>3er Torneo Internacional de Maxi Basquet</p>
 </section>
 <section class="form mx-5">
+    @if (Session::has('logoSubido'))
+        <div class="alert alert-success alert-dismissible d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <h4>{{Session::get('logoSubido')}}</h4>
+        </div>
+    @endif
     <form action="{{route('subirLogo', ['idEquipo' => $equipo->IdEquipo])}}" method="post" enctype="multipart/form-data" id="form">
         @csrf
     <div class="row">
@@ -107,7 +114,7 @@
             var img_holder = $('.img-holder');
             var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
 
-            if(extension == 'jpeg' || extension == 'jpg' || extension == 'png'){
+            if(extension == 'jpeg' || extension == 'jpg' || extension == 'png' || extension == 'webp'){
                  if(typeof(FileReader) != 'undefined'){
                       img_holder.empty();
                       var reader = new FileReader();
