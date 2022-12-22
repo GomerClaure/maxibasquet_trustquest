@@ -73,9 +73,9 @@
                         </div>
                         <div class="col-3 row">
                             <a href="{{url('registrarJueces/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-100 col-4 me-1">Planilla</a>
-                            @if($datos[$i]->EstadoPartido == "finalizado")
+                            @if($datos[$i]->EstadoPartido == "finalizado" || $datos[$i]->EstadoPartido == "espera")
                             <a href="#" class="botones d-flex mx-auto h-100 col-7">Planilla De Jugadores</a>
-                            @elseif($datos[$i]->EstadoPartido == "espera")
+                            @elseif($datos[$i]->EstadoPartido == "curso")
                             <a href="{{url('planilla/jugador/'.$datos[$i] -> IdPartido)}}" class="botones d-flex mx-auto h-100 col-7">Planilla De Jugadores</a>
                             @endif
                         </div>
