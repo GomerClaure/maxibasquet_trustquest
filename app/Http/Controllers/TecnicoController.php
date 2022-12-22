@@ -173,7 +173,7 @@ class TecnicoController extends Controller
      */
     public function destroy($id)
     {  date_default_timezone_set('America/La_Paz');
-        
+         
         $tecnico = Tecnico::select()
                             ->join('personas','personas.IdPersona','tecnicos.IdPersona')
                             ->where('IdTecnicos',$id)

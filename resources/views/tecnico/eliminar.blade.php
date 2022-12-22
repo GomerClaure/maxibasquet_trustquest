@@ -21,11 +21,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <h4><strong>{{$vadido}}</strong>{{" "}}{{Session::get('mensaje')}}</h4>
             </div>
-        @endif
+        @endif 
         @if (Session::has('PartidoRegistrado'))
             <div class="alert alert-warning alert-dismissible col-8 d-flex justify-content-center mt-3 mx-auto pt-2 pb-2">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('PartidoRegistrado')}}</h4>
+                <h4><strong>{{$noVadido}}</strong>{{" "}}{{Session::get('PartidoRegistrado')}}</h4> 
             </div>
         @endif
         <div class="relative  items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-0 ">

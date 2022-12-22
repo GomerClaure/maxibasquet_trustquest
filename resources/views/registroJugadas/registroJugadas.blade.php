@@ -79,9 +79,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col text-center  p-2">
-                        <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" value="IniciarPartido" > Iniciar partido</button>
-                    </div>
+                    
+                        <form class="formularioJugada" action="{{route('guardarJugada',['idPartido' => $idPartido])}}" method="POST" enctype="multipart/form-data" novalidate>
+                            @csrf
+                            <div class="col text-center  p-2">
+                                <button name="accionBoton" class="btn iniciarPartido" id="iniciarPartido" type="submit" value="IniciarPartido" > Iniciar partido</button>
+                            </div>
+                        </form>                        
                 </div>
             </section>
             <section class="registroPuntaje border-bottom" id="registroPuntaje" style="display: none">
@@ -342,15 +346,7 @@
     if(cuarto != 0){
             document.getElementById("registroPuntaje").style.display = "block";
             document.getElementById("iniciarPartido").style.display = "none";
-    }else{
-        document.getElementById("iniciarPartido").onclick = function() {
-            document.getElementById("registroPuntaje").style.display = "block";
-            document.getElementById("iniciarPartido").style.display = "none";
-        }
     }
-    // function show() {
-
-    // }
 
     function update() {
 				var select = document.getElementById('puntoEquipo');

@@ -103,15 +103,16 @@ class RegistrarPlanillaJuegoController extends Controller
             }
             
             $cuarto = $this->getCuartoJugado($idPartido);
+            if ($accion == 'IniciarPartido') {
+                $planilla = new Planilla();
+                $planilla->IdPartido = $idPartido;
+                $planilla->PrimerCuartoJugado = true;
+                $planilla->InicioLlenado = now();
+                $planilla->save();
+                Partido::where('partidos.IdPartido','=',$idPartido)
+                    ->update(['EstadoPartido' => 'curso']);
+            }
             if($accion == 'GuardarPunto'){
-                if ($cuarto == 0) {
-                    $planilla = new Planilla();
-                    $planilla->IdPartido = $idPartido;
-                    $planilla->PrimerCuartoJugado = true;
-                    $planilla->InicioLlenado = now();
-                    $planilla->save();
-                    $cuarto = 1;
-                }
                 $puntoEquipo = explode(' ', $formulario['GuardarPunto']);
                 $nomEquipo = $puntoEquipo[0];
                 $idEquipo = $puntoEquipo[1];
@@ -334,7 +335,7 @@ class RegistrarPlanillaJuegoController extends Controller
                                     ->join('jueces_por_partidos','jueces_por_partidos.IdPartido','=','partidos.IdPartido')
                                     ->where(function($query) {
                                         $query->orWhere('partidos.EstadoPartido','=','espera')
-                                        ->orWhere('partidos.EstadoPartido', '=', 'jugando');
+                                        ->orWhere('partidos.EstadoPartido', '=', 'curso');
                                     })
                                     ->where(function($query) {
                                         $query->where('partidos.FechaPartido', '=', $this->fechaPartidoActual)
