@@ -79,10 +79,30 @@ class JuezController extends Controller
             return back()->withInput()->with('mensajeErrorExiste','El Ci esta registrado');
         }
 
-        $fecha = $request -> fechaNacimiento;
-        $anio = substr($fecha, 0, 4);
-        $edadReal = date('Y')-$anio;
         $edadActual = $request -> edad;
+        $fecha = $request -> fechaNacimiento;
+
+        $anio = substr($fecha, 0, 4);
+        $anioActual = date('Y');
+
+        $mes = substr($fecha, 5, 2);
+        $mesActual = date('m');
+
+        $dia = substr($fecha, 8, 2);
+        $diaActual = date('d');
+
+        if($mes < $mesActual){
+            $edadReal = $anioActual-$anio;
+        }else if($mes > $mesActual){
+            $edadReal = ($anioActual-$anio)-1;
+        }else if($mes == $mesActual){
+            if($dia <= $diaActual){
+                $edadReal = $anioActual-$anio;
+            }else if( $dia > $diaActual){
+                $edadReal = ($anioActual-$anio)-1;
+            }
+        }
+
         if($edadReal != $edadActual){
             return back()->withInput()->with('mensajeErrorEdad','La edad no coincide con la fecha de nacimiento');
         }
