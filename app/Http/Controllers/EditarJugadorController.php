@@ -266,7 +266,6 @@ class EditarJugadorController extends Controller
         if ($partido) {
             return redirect('DeleteJugador' . '/' . $equipo->NombreEquipo . '/' . $categoria->NombreCategoria)->with('PartidoRegistrado', 'No se puede eliminar los datos del jugador existe un partido en curso o en espera');
         }
-
         Jugador::where('IdJugador', $id)->delete();
         Credencial::where('IdPersona', $datosJugador->IdPersona)->delete();
         Persona::where('IdPersona', $datosJugador->IdPersona)->delete();
