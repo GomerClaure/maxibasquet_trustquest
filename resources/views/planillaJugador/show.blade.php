@@ -65,10 +65,10 @@
 
             <div class="col-11 p-4 mx-auto contenedorForm" >
                 <div class="d-flex justify-content-center mb-4 border-bottom">
-                    <div class="col-8 d-flex justify-content-end">
+                    <div class="col-9 d-flex justify-content-end">
                         <h1 class="tituloFomulario">PLANILLA DE JUGADOR</h1>
                     </div>
-                    <div class="col-4 d-flex justify-content-end">
+                    <div class="col-3 d-flex justify-content-end">
                         <a type="button" href="{{url('planilla/jugador')}}" class="botones w-50 h-75"> Volver </a>
                     </div>
                 </div>
@@ -87,19 +87,19 @@
                             <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
 
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
+                                <h5 class="numeroFalta">Numero 1</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 2</h5>
+                                <h5 class="numeroFalta">Numero 2</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 3</h5>
+                                <h5 class="numeroFalta">Numero 3</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 4</h5>  
+                                <h5 class="numeroFalta">Numero 4</h5>  
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 5</h5>
+                                <h5 class="numeroFalta">Numero 5</h5>
                             </div>
                         </div>
                     </div>
@@ -227,19 +227,19 @@
                             <h3 class="d-flex justify-content-center border-bottom border-dark">Faltas</h3>
 
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 1</h5>
+                                <h5 class="numeroFalta">Numero 1</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 2</h5>
+                                <h5 class="numeroFalta">Numero 2</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 3</h5>
+                                <h5 class="numeroFalta">Numero 3</h5>
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 4</h5>  
+                                <h5 class="numeroFalta">Numero 4</h5>  
                             </div>
                             <div class="col-2 d-flex justify-content-center ">
-                                <h5 class="">Numero 5</h5>
+                                <h5 class="numeroFalta">Numero 5</h5>
                             </div>
                         </div>
                     </div>
